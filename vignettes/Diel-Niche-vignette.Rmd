@@ -1,0 +1,129 @@
+---
+title: "Diel-Niche-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Diel-Niche-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introducion
+The Diel.Niche R pacakge is setup to evaluate how animals use the three fundamental light periods of twilight (dawn & dusk), daytime, and nighttime. First, we need to install and load the library
+```{r package}
+#devtools::install_github("diel-project/Diel-Niche-Modeling",ref="main")
+
+library(Diel.Niche)
+```
+
+To learn some basic information about the diel hypotheses you can call
+```{r hyp}
+  what.hyp()
+```
+
+If you just need to remember the names of the hypotheses you can call
+```{r hyp2}
+  what.hyp("?")
+```
+
+Lastly, a description for a specific hypothesis can also be called
+```{r hyp3}
+  what.hyp("D.max")
+```
+
+# Simulate Data
+To simulate data based on a diel hypotheses, we need define a hypothesis using it's coded name. Pick a hypothesis to simulate data from  
+```{r sim1}
+  hyp=c("N.th")
+```
+
+Next, we need to setup the multinomial inequality constraints for the models. We could use the defaults as,
+
+```{r sim2}
+    diel.setup=diel.ineq()
+```
+or for the specified model, we could set up the lower threshold value as
+```{r sim3}
+  #The first element is the lower threshold relevant to the   threshold models and the second element is the most likely value, which is not relevent for the model chossen.
+    diel.setup=diel.ineq(xi.N=c(0.7,0.9))
+```
+
+Then we simulate data as
+```{r sim4}
+  set.seed(45451)
+  sim.dat=sim.diel(n.sim=1,n.sample=100,
+                   hyp,diel.setup)
+  y=sim.dat$y
+  y
+```
+
+# Setup hypothesis set and fit models
+
+You can setup your own model set or use pre-defined model sets as
+```{r hyp.set}
+  hyp.set = c("D.max","N.max") #manual
+  hyp.set=hyp.sets("hyp.max") #pre-defined
+```
+
+
+All models are fit using MCMC, which require setting up input values
+```{r MCMC}
+ n.mcmc=2000 #number of MCMC iterations
+ n.cpu=1     #Number of processors to use or number of chains
+ burnin=1000 #burn-in period to discard from n.mcmc
+```
+
+Lastly, we fit our models  
+```{r fit}
+  out=diel.hypotheses.func(diel.setup=diel.setup,y=y,
+                           hyp.set=hyp.set,
+                           n.mcmc=n.mcmc,
+                           n.cpu=n.cpu,
+                           burnin=burnin)
+```
+
+You can discover the available outputs as
+
+```{r results}
+attributes(out)
+
+?diel.hypotheses.func
+```
+
+# Plotting
+
+We can plot our most supported models posterior probability distribution a number of ways. Using ggplo2 and bayesplot:
+
+```{r plot}
+library(bayesplot)
+library(ggplot2)
+
+posteriors=coda::as.mcmc(out$most.supported.model)
+
+plot_title <- ggtitle("Posterior distributions",
+                      "with medians and 80% intervals")
+mcmc_areas(posteriors, prob = 0.8) + plot_title+ 
+  geom_vline(xintercept=sim.dat$p, linetype="dashed", 
+                color = c("red","green","purple"), size=1)
+
+```
+
+Another way to examine our hypothesis to plot the theoretical niche space for the hypothesis along with the postesterior samples.
+
+```{r 3dplot}
+diel.plot(hyp=out$model.ms,
+          diel.setup=diel.setup,
+          posteriors=out$most.supported.model)
+```
+
+If you are using RStudio and no figure is opening
+
+Tools-->Global Options-->Advanced-->Rengering Engine
+Choose "Desktop OpenGL{}
+restart RStudio completely

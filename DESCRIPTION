@@ -15,5 +15,10 @@ Authors@R:
 RoxygenNote: 7.2.0
 LazyData: true
 Encoding: UTF-8
+License: GPL-3
 Depends: 
     R (>= 4.2)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
