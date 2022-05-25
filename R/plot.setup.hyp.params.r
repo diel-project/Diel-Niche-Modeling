@@ -1,0 +1,38 @@
+plot.setup.hyp.params=function(diel.setup,index.models){
+
+#load possible probabilities generated
+#load("p.plotting.combs")
+
+  
+#Loop through hypotheses and get many sample points  
+plot.points=vector("list",length(index.models))
+ for(i in 1:length(index.models)){
+
+  A=diel.setup[[index.models[i]]][[2]]
+  b=diel.setup[[index.models[i]]][[3]]
+  
+ #Find all A %*% theta combinations
+ p.ineq= apply(p.options2,2,FUN=function(x){A%*%x})  
+ #find if that is <= b
+ p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+
+ index=which(p.ineq.logical)
+
+ #These are the combinations of p's that match the constraints
+  p.plot=t(p.options2[,index])
+  
+  #now add back in the third prob
+  p.plot=cbind(p.plot,1-apply(p.plot,1,sum))
+  colnames(p.plot)=c("p.crep","p.day","p.night")
+  head(p.plot)
+  
+  #make sure there are not mistakes
+  index.remove=which(p.plot[,3]<0 | p.plot[,3]>1)
+  if(length(index.remove)>0){p.plot=p.plot[-index.remove,]}
+  
+  plot.points[[i]]=p.plot
+  
+ }
+  plot.points
+  
+}
