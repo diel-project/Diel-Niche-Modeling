@@ -4,7 +4,7 @@
 \alias{hyp.sets}
 \title{Hypothesis Sets}
 \usage{
-hyp.sets(hyp.in)
+hyp.sets(hyp.in = NULL)
 }
 \arguments{
 \item{hyp.in, }{hypothesis code name to use}

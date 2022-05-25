@@ -13,7 +13,8 @@
 
 #Need to create a call to provide a description of each hypothesis.
 
-hyp.sets=function(hyp.in){
+hyp.sets=function(hyp.in=NULL){
+
   hyp.set=vector("list",9)
   hyp.set[[1]]=c("D.th","N.th","CR.th","EC.th")     #General Hypotheses
   hyp.set[[2]]=c("D.max","N.max","CR.max")          #General Hypotheses
@@ -29,7 +30,10 @@ hyp.sets=function(hyp.in){
   names(hyp.set)=c("hyp.th","hyp.max","hyp.var",
                     "hyp.Ps.th","hyp.Ps.max","hyp.Ps.var",
                     "hyp.th.Ps.th","hyp.max.Ps.max","hyp.var.Ps.var")
-
+if(!is.null(hyp.in)){ 
 #match the model set called for and return it
   hyp.set[[match(hyp.in,names(hyp.set))]]
+}else{
+  cat("Names of Hypotheses Sets: \n",names(hyp.set),sep="  ")
+}  
 }
