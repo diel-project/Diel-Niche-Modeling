@@ -19,16 +19,16 @@ library(Diel.Niche)
   what.hyp("?")
 
 #Description for a specific hypothesis
-  what.hyp("D.th")
+  what.hyp("D.max")
 
 #Pick a hypothesis to simulate data from  
-  hyp=c("D.th")
+  hyp=c("N.max")
 
 #Setup inequalities using default values  
   diel.setup=diel.ineq()
 
 #simulate a single dataset of 100
-  set.seed(45454)
+  set.seed(45451)
   sim.dat=sim.diel(n.sim=1,n.sample=100,
                    hyp,diel.setup)
 
@@ -39,7 +39,7 @@ library(Diel.Niche)
   hyp.sets()
   
 #Choose hypotheses sets  
-  hyp.set=hyp.sets("hyp.th")
+  hyp.set=hyp.sets("hyp.max")
   
 #Specify mcmc inputs
  n.mcmc=2000 #number of MCMC iterations
@@ -52,7 +52,9 @@ library(Diel.Niche)
                            n.mcmc=n.mcmc,
                            n.cpu=n.cpu,
                            burnin=burnin)
-#attributes output
+
+out$bf.final
+  #attributes output
 attributes(out)
 
 #can be understood here
@@ -69,7 +71,7 @@ posteriors=coda::as.mcmc(out$most.supported.model)
 plot_title <- ggtitle("Posterior distributions",
                       "with medians and 80% intervals")
 mcmc_areas(posteriors, prob = 0.8) + plot_title+ 
-  geom_vline(xintercept=prob.select, linetype="dashed", 
+  geom_vline(xintercept=sim.dat$p, linetype="dashed", 
                 color = c("red","green","purple"), size=1)
 
 
