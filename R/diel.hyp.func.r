@@ -1,6 +1,7 @@
 #' Diel Modeling 
 #'
-#' Diel Model Hypotheses Evaluation and Parameter Estimation
+#' Diel model hypotheses evaluation and parameter estimation.
+#' This is essentially a wrapper function for functions provided by the package ‘multinomineq’.
 #' @param diel.setup A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
 #' @param y Vector of frequencies in order of twilight, day, night.
 #' @param hyp.set Vector of diel hypotheses names representing hypotheses set or individual hypotheses.

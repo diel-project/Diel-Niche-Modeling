@@ -34,7 +34,8 @@ A list of outputs
 \item{model.ms}{Posterior distributions of the most supported model}
 }
 \description{
-Diel Model Hypotheses Evaluation and Parameter Estimation
+Diel model hypotheses evaluation and parameter estimation.
+This is essentially a wrapper function for functions provided by the package ‘multinomineq’.
 }
 \examples{
 diel.hypotheses.func(diel.setup=diel.setup,y=y,hyp.set=hyp.set,
