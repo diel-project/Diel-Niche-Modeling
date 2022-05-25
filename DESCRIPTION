@@ -4,5 +4,6 @@ Title: Diel niche modeing via multinomial inequalities
 Version: 0.0.1.0
 RoxygenNote: 7.2.0
 LazyData: true
+Encoding: UTF-8
 Depends: 
     R (>= 2.10)
