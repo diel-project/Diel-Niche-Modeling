@@ -31,7 +31,7 @@
 #' @export
 
 diel.hypotheses.func=function(diel.setup,y,hyp.set,
-                              n.mcmc,n.cpu,burnin,cath.avail){
+                              n.mcmc,n.cpu,burnin){
 
 
 #These are the list items of A and b that need to be fit based on hyp.set
