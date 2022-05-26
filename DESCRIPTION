@@ -30,14 +30,14 @@ LazyData: true
 Encoding: UTF-8
 License: GPL-3
 Depends: 
-    R (>= 4.2)
+    R (>= 3.4)
 Imports:
-    MASS, 
-    coda, 
-    multinomineq, 
-    plotly, 
-    retry
+    MASS (>= 7.3-56), 
+    coda (>= 0.19-4), 
+    multinomineq (>= 0.2.3), 
+    retry (>= 0.1.0)
 Suggests: 
-    knitr,
-    rmarkdown
+    plotly (>= 4.10.0), 
+    knitr (>= 1.39),
+    rmarkdown (>= 2.14)
 VignetteBuilder: knitr
