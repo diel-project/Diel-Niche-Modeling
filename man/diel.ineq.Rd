@@ -37,7 +37,7 @@ diel.ineq(
 )
 }
 \arguments{
-\item{e}{Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epislon hypotheses values are specified.}
+\item{e}{Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified.}
 
 \item{e.D}{Default is 0.05. A single value of variation for the Diurnal hypothesis.}
 
@@ -95,7 +95,7 @@ diel.ineq(
 }
 \value{
 diel.hyp A list of diel hypotheses as multinomial inequalities.
-\item{inputs}{Include all inputted values; epsilon, xi, and p.avail.} 
+\item{inputs}{Includes all inputted values; epsilon, xi, and p.avail.} 
 \item{D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th,
 Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th,
 Nc.max, Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,
@@ -106,14 +106,7 @@ EC.th, EC.var, AC.var}{Each is a list of three elements: Hypotheis Descriptive N
 Multinomial model inequalities for diel hypotheses
 }
 \examples{
+diel.ineq()
 diel.ineq(e=0.01) #To replace all epsilon values with 0.01.
 diel.ineq(e.Dn=0.2, xi.Dn=c(0.80,0.20,0.90,0.10)) #To replace teh default values with a new epsilon value and a new xi value.
-diel.ineq(e=NULL, e.D=NULL, e.Dn=NULL, e.Dc=NULL, e.Dcr=NULL, 
-                  e.N=NULL, e.Nd=NULL, e.Nc=NULL, e.Ncr=NULL, 
-                  e.CR=NULL, e.CRd=NULL, e.CRn=NULL, e.CRc=NULL,
-                  e.EC=NULL, e.AC=NULL,
-                  xi.D=NULL, xi.Dn=NULL, xi.Dc=NULL,xi.Dcr=NULL,
-                  xi.N=NULL,xi.Nd=NULL,xi.Nc=NULL,xi.Ncr=NULL,
-                  xi.CR=NULL,xi.CRd=NULL,xi.CRn=NULL,xi.CRc=NULL,
-                  xi.EC=NULL, p.avail=NULL)
 }

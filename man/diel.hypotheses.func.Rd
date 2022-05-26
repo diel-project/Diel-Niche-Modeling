@@ -4,7 +4,7 @@
 \alias{diel.hypotheses.func}
 \title{Diel Modeling}
 \usage{
-diel.hypotheses.func(diel.setup, y, hyp.set, n.mcmc, n.cpu, burnin, cath.avail)
+diel.hypotheses.func(diel.setup, y, hyp.set, n.mcmc, n.cpu, burnin)
 }
 \arguments{
 \item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}

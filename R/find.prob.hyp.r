@@ -1,7 +1,7 @@
 #' Inequality Setup
 #'
 #' Find probabilities of diel hypotheses
-#' @param hyp, hypothesis name: D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th,
+#' @param hyp Hypothesis name: D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th,
 #' Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th,
 #' Nc.max, Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,
 #' CRd.max, CRd.var, CRn.th, CRn.max, CRn.var, CRc.th, CRc.max, CRc.var,

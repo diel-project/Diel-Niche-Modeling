@@ -7,14 +7,15 @@
 hyp.sets(hyp.in = NULL)
 }
 \arguments{
-\item{hyp.in, }{hypothesis code name to use}
+\item{hyp.in, }{Hypothesis set code names}
 }
 \value{
-names of hypotheses for that set
+Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned.
 }
 \description{
 Call defined hypotheses sets
 }
 \examples{
+hyp.sets()
 hyp.sets("hyp.th")
 }

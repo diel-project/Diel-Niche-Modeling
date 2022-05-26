@@ -1,9 +1,10 @@
 #' Hypothesis Sets
 #'
 #' Call defined hypotheses sets
-#' @param hyp.in, hypothesis code name to use
-#' @return names of hypotheses for that set 
+#' @param hyp.in, Hypothesis set code names
+#' @return Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned.
 #' @examples 
+#' hyp.sets()
 #' hyp.sets("hyp.th")
 #' @export
 
@@ -25,11 +26,13 @@ hyp.sets=function(hyp.in=NULL){
   hyp.set[[7]]=c(hyp.set[[1]],hyp.set[[4]]) #General & Primary-secondary Hypotheses
   hyp.set[[8]]=c(hyp.set[[2]],hyp.set[[5]]) #General & Primary-secondary Hypotheses
   hyp.set[[9]]=c(hyp.set[[4]],hyp.set[[6]]) #General & Primary-secondary Hypotheses
+  hyp.set[[10]]=c(hyp.set[[1]],hyp.set[[2]],hyp.set[[3]],hyp.set[[4]],hyp.set[[5]],hyp.set[[6]]) #All hypotheses; used for testing
 
 #name the list hyp.set
   names(hyp.set)=c("hyp.th","hyp.max","hyp.var",
                     "hyp.Ps.th","hyp.Ps.max","hyp.Ps.var",
-                    "hyp.th.Ps.th","hyp.max.Ps.max","hyp.var.Ps.var")
+                    "hyp.th.Ps.th","hyp.max.Ps.max","hyp.var.Ps.var",
+                   "hyp.all")
 if(!is.null(hyp.in)){ 
 #match the model set called for and return it
   hyp.set[[match(hyp.in,names(hyp.set))]]
