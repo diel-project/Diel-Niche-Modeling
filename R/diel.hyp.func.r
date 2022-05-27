@@ -120,6 +120,11 @@ form.in=paste(c(text1,model.inputs,text3,prior.inputs,text5,")"),collapse="")
 prior.postbf.hyp=eval(str2lang(form.in))
 prior.postbf.hyp=prior.postbf.hyp[-nrow(prior.postbf.hyp),]
 
+#remove models not fit
+ppc.list=ppc.list[indicator %in% "1" == FALSE]  
+ppc=data.frame(names(ppc.list),matrix(unlist(ppc.list),ncol=3,byrow = TRUE))
+colnames(ppc)<-c("Model","X2_obs","X2_pred","ppp")
+
 #show warning if there is an issue with model fitting
 #if(sum(indicator)>0){
 #  warning=indicator
@@ -134,11 +139,6 @@ if(length(hyp.set)>1){
  indicator.highest.bf.model=1 
  most.supported.model=sampling.mcmc[[indicator.highest.bf.model]]
 }
-  #remove models not fit
-ppc.list=ppc.list[indicator %in% "1" == FALSE]  
-    
-ppc=data.frame(names(ppc.list),matrix(unlist(ppc.list),ncol=3,byrow = TRUE))
-colnames(ppc)<-c("Model","X2_obs","X2_pred","ppp")
 
 ppc.ms=ppc[indicator.highest.bf.model,]
 model.ms=hyp.set2[indicator.highest.bf.model]
