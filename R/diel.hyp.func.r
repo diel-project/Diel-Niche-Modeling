@@ -125,7 +125,7 @@ prior.postbf.hyp=prior.postbf.hyp[-nrow(prior.postbf.hyp),]
 #  warning=indicator
 #  print(data.frame(hyp.set,warning))
 #}
-
+if(isFALSE(any(is.na(prior.postbf.hyp[,2])))){ #check for NA's in bf table
 if(length(hyp.set)>1){
 #Identify posteriors of most supported model
   indicator.highest.bf.model=which.max(prior.postbf.hyp[,2])
@@ -135,17 +135,24 @@ if(length(hyp.set)>1){
  most.supported.model=sampling.mcmc[[indicator.highest.bf.model]]
 }
   #remove models not fit
-  ppc.list=ppc.list[indicator %in% "1" == FALSE]  
+ppc.list=ppc.list[indicator %in% "1" == FALSE]  
     
 ppc=data.frame(names(ppc.list),matrix(unlist(ppc.list),ncol=3,byrow = TRUE))
 colnames(ppc)<-c("Model","X2_obs","X2_pred","ppp")
 
 ppc.ms=ppc[indicator.highest.bf.model,]
-
 model.ms=hyp.set2[indicator.highest.bf.model]
-
+  
 cat("The most supported model was: \n", 
           model.ms,"\n")
+
+}else{#end isFalse check  
+  indicator.highest.bf.model=NA
+  most.supported.model=NA
+  ppc.ms=NA
+  model.ms=NA
+}
+
 
 if(sum(indicator)>0){
 warning("Model(s) not fit and were removed: \n",
