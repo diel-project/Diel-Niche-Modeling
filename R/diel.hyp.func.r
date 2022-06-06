@@ -31,7 +31,7 @@
 #' @export
 
 diel.hypotheses.func=function(diel.setup,y,hyp.set,
-                              n.mcmc,n.cpu,burnin,print=TRUE){
+                              n.mcmc,n.cpu,burnin,prints=TRUE){
 
 
 #These are the list items of A and b that need to be fit based on hyp.set
@@ -145,7 +145,7 @@ if(length(hyp.set)>1){
 ppc.ms=ppc[indicator.highest.bf.model,]
 model.ms=hyp.set2[indicator.highest.bf.model]
 
-if(print=TRUE){  
+if(prints==TRUE){  
 cat("The most supported model was: \n", 
           model.ms,"\n")
 }
@@ -156,7 +156,7 @@ cat("The most supported model was: \n",
   model.ms=NA
 }
 
-if(print=TRUE){
+if(prints==TRUE){
 if(sum(indicator)>0){
 warning("Model(s) that were not fit: \n",
         hyp.set[indicator==1],call.=FALSE)
