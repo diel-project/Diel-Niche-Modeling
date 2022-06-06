@@ -216,7 +216,7 @@ diel.ineq=function(e=NULL,
 
 # Variability
   A.Dn.var <- matrix(c(2,1,-1,-2,0,-1,0,1,1,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.Dn.var <- c(1,1, -xi.Dn[3]+e.Dn,xi.Dn[3]+e.Dn, -xi.Dn[4]+e.Dn+1,
+  b.Dn.var <- c(1,-1, -xi.Dn[3]+e.Dn,xi.Dn[3]+e.Dn, -xi.Dn[4]+e.Dn+1,
                 xi.Dn[4]+e.Dn-1)
   Dn.var=list("Diurnal-nocturnal Var",A.Dn.var,b.Dn.var)     
 
