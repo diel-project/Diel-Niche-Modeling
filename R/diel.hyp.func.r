@@ -119,7 +119,9 @@ form.in=paste(c(text1,model.inputs,text3,prior.inputs,text5,")"),collapse="")
 #evaluate bayes factor
 prior.postbf.hyp=eval(str2lang(form.in))
 prior.postbf.hyp=prior.postbf.hyp[-nrow(prior.postbf.hyp),]
-
+prior.postbf.hyp=matrix(prior.postbf.hyp,ncol=2)
+rownames(prior.postbf.hyp)=hyp.set2
+colnames(prior.postbf.hyp)=c("Prior","Posterior")
 #remove models not fit
 ppc.list=ppc.list[indicator %in% "1" == FALSE]  
 ppc=data.frame(names(ppc.list),matrix(unlist(ppc.list),ncol=3,byrow = TRUE))
@@ -162,6 +164,6 @@ warning("Model(s) not fit and were removed: \n",
 #Output list
 list(bf.final=prior.postbf.hyp,bf=bf,posteriors=sampling.mcmc,
      most.supported.model=most.supported.model,indicator.highest.bf.model=indicator.highest.bf.model,
-     indicator=indicator,ppc=ppc,ppc.ms=ppc.ms,model.ms=model.ms)
+     indicator=indicator,ppc=ppc,ppc.ms=ppc.ms,model.ms=model.ms,y=y)
 
 }#end function
