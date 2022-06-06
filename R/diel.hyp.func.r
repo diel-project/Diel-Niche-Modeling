@@ -122,6 +122,21 @@ prior.postbf.hyp=prior.postbf.hyp[-nrow(prior.postbf.hyp),]
 prior.postbf.hyp=matrix(prior.postbf.hyp,ncol=2)
 rownames(prior.postbf.hyp)=hyp.set2
 colnames(prior.postbf.hyp)=c("Prior","Posterior")
+
+#Put missing models back in
+if(sum(indicator)>0){
+temp.models=  matrix(NA,nrow=length(hyp.set[indicator==1]),ncol=2)
+colnames(temp.models)  =c("Prior","Posterior")
+rownames(temp.models)  =hyp.set[indicator==1]
+
+prior.postbf.hyp=rbind(prior.postbf.hyp,temp.models)
+reorder=match(rownames(prior.postbf.hyp),hyp.set)
+prior.postbf.hyp=prior.postbf.hyp[reorder,]
+}
+
+
+
+
 #remove models not fit
 ppc.list=ppc.list[indicator %in% "1" == FALSE]  
 ppc=data.frame(names(ppc.list),matrix(unlist(ppc.list),ncol=3,byrow = TRUE))
