@@ -14,7 +14,7 @@
 
 #Need to create a call to provide a description of each hypothesis.
 
-hyp.sets=function(hyp.in=NULL){
+hyp.sets2=function(hyp.in=NULL){
 
   #NEED TO INCLUDE C.th somewhere
   hyp.set=vector("list",9)
