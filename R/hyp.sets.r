@@ -16,6 +16,7 @@
 
 hyp.sets=function(hyp.in=NULL){
 
+  #NEED TO INCLUDE C.th somewhere
   hyp.set=vector("list",9)
   hyp.set[[1]]=c("D.th","N.th","CR.th","EC.th")     #General Hypotheses
   hyp.set[[2]]=c("D.max","N.max","CR.max")          #General Hypotheses

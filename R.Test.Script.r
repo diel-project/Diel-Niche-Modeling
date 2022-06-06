@@ -27,9 +27,12 @@ library(Diel.Niche)
 #Setup inequalities using default values  
   diel.setup=diel.ineq()
 
-#simulate a single dataset of 100
+#simulate a 1 dataset of 100 samples at reps sites/projects
   set.seed(45451)
-  sim.dat=sim.diel(n.sim=1,n.sample=100,
+  reps=3
+  sim.dat=sim.diel.alt(n.sim=1,
+                   reps=reps,
+                   n.sample=100,
                    hyp,diel.setup)
 
   y=sim.dat$y
@@ -47,7 +50,7 @@ library(Diel.Niche)
  burnin=1000 #burn-in period to discard from n.mcmc
 
 #Fit models to hypothesis set
-  out=diel.hypotheses.func(diel.setup=diel.setup,y=y,
+  out=diel.hypotheses.func.alt(diel.setup=diel.setup,y=y,reps=reps,
                            hyp.set=hyp.set,
                            n.mcmc=n.mcmc,
                            n.cpu=n.cpu,
