@@ -214,17 +214,17 @@ diel.ineq2=function(e=NULL,
   #Diurnal-crepuscular Hypotheses
   # Threshold
   A.Dcr.th <- matrix(c(-2,-1,1,-1,0,-1,1,0,-1,-1),ncol = 2, byrow = TRUE)
-  b.Dcr.th <- c(-1,0,-xi.Dcr[1],xi.Dcr[2],0.01-1)
+  b.Dcr.th <- c(-1,0,-xi.Dcr[1],xi.Dcr[2],0.001-1)
   Dcr.th=list("Diurnal-crepuscular Threshold",A.Dcr.th,b.Dcr.th)     
   
   # Maximizing
   A.Dcr.max <- matrix(c(-2,-1, 1,-1,-1,-1),ncol = 2, byrow = TRUE)
-  b.Dcr.max <- c(-1,0,0.01-1)
+  b.Dcr.max <- c(-1,0,0.001-1)
   Dcr.max=list("Diurnal-crepuscular Max",A.Dcr.max,b.Dcr.max)     
   
   # Variability
   A.Dcr.var <- matrix(c(-2,-1,1,-1,0,1,0,-1,-1,-1,1,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.Dcr.var <- c(-1, 0,xi.Dcr[3]+e.Dcr,-xi.Dcr[3]+e.Dcr,xi.Dcr[4]+e.Dcr-1,-xi.Dcr[4]+e.Dcr+1,0.01-1)
+  b.Dcr.var <- c(-1, 0,xi.Dcr[3]+e.Dcr,-xi.Dcr[3]+e.Dcr,xi.Dcr[4]+e.Dcr-1,-xi.Dcr[4]+e.Dcr+1,0.001-1)
   Dcr.var=list("Diurnal-crepuscular Var",A.Dcr.var,b.Dcr.var)     
   
   #################################
