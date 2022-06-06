@@ -8,30 +8,24 @@ diel.ineq2(
   e = NULL,
   e.D = NULL,
   e.Dn = NULL,
-  e.Dc = NULL,
   e.Dcr = NULL,
   e.N = NULL,
   e.Nd = NULL,
-  e.Nc = NULL,
   e.Ncr = NULL,
   e.CR = NULL,
   e.CRd = NULL,
   e.CRn = NULL,
-  e.CRc = NULL,
   e.EC = NULL,
   e.AC = NULL,
   xi.D = NULL,
   xi.Dn = NULL,
-  xi.Dc = NULL,
   xi.Dcr = NULL,
   xi.N = NULL,
   xi.Nd = NULL,
-  xi.Nc = NULL,
   xi.Ncr = NULL,
   xi.CR = NULL,
   xi.CRd = NULL,
   xi.CRn = NULL,
-  xi.CRc = NULL,
   xi.EC = NULL,
   p.avail = NULL
 )
@@ -41,15 +35,11 @@ diel.ineq2(
 
 \item{e.D}{Default is 0.05. A single value of variation for the Diurnal hypothesis.}
 
-\item{e.Dc}{Default is 0.05. A single value of variation for the Diurnal-cathemeral hypothesis.}
-
 \item{e.Dcr}{Default is 0.05. A single value of variation for the Diurnal-crepuscular hypothesis.}
 
 \item{e.N}{Default is 0.05. A single value of variation for the Nocturnal hypothesis.}
 
 \item{e.Nd}{Default is 0.05. A single value of variation for the Nocturnal-diurnal hypothesis.}
-
-\item{e.Nc}{Default is 0.05. A single value of variation for the Nocturnal-cathenerak hypothesis.}
 
 \item{e.Ncr}{Default is 0.05. A single value of variation for the Nocturnal-crepuscular hypothesis.}
 
@@ -59,8 +49,6 @@ diel.ineq2(
 
 \item{e.CRn}{Default is 0.05. A single value of variation for the Crepuscular-nocturnal hypothesis.}
 
-\item{e.CRc}{Default is 0.05. A single value of variation for the Crepuscular-cathemeral hypothesis.}
-
 \item{e.EC}{Default is 0.05. A single value of variation for the Evan Cathemeral hypothesis.}
 
 \item{e.AC}{Default is 0.10. A single value of variation for the Available Cathemeral hypothesis.}
@@ -69,15 +57,11 @@ diel.ineq2(
 
 \item{xi.Dn}{Default c(0.80,0.20,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Diurnal-nocturnal hypothesis.}
 
-\item{xi.Dc}{Default c(0.80,0.01,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Diurnal-cathemeral hypothesis.}
-
 \item{xi.Dcr}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Diurnal-crepuscular hypothesis.}
 
 \item{xi.N}{Default c(0.80,0.90). A vector of the lower threshold value and most likely value,, respectively for the Nocturnal hypothesis.}
 
 \item{xi.Nd}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-diurnal hypothesis.}
-
-\item{xi.Nc}{Default c(0.80,0.01,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-cathemeral hypothesis.}
 
 \item{xi.Ncr}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-crepuscular hypothesis.}
 
@@ -87,20 +71,19 @@ diel.ineq2(
 
 \item{xi.CRn}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-nocturnal hypothesis.}
 
-\item{xi.CRc}{Default c(0.80,0.01,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.}
-
 \item{xi.EC}{Default c(0.33). A single value of the available amount of time in all three diel periods.}
 
 \item{p.avail}{Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.}
+
+\item{xi.CRc}{Default c(0.80,0.01,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.}
 }
 \value{
 diel.hyp A list of diel hypotheses as multinomial inequalities.
 \item{inputs}{Includes all inputted values; epsilon, xi, and p.avail.} 
-\item{D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th,
-Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th,
-Nc.max, Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,
-CRd.max, CRd.var, CRn.th, CRn.max, CRn.var, CRc.th, CRc.max, CRc.var,
-EC.th, EC.var, AC.var, C.th}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.}
+\item{D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.max, Dcr.th,
+Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, 
+ Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,
+CRd.max, CRd.var, CRn.th, CRn.max, CRn.var,'EC.th, EC.var, AC.var, C.th}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.}
 }
 \description{
 Multinomial model inequalities for diel hypotheses

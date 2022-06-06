@@ -22,6 +22,7 @@ if(!is.null(hyp.in)){
   if(hyp.in=="N.var"){print("General: Nocturnal Variation Hypothesis")}
   if(hyp.in=="CR.var"){print("General: Crepuscular Variation Hypothesis")}
   if(hyp.in=="EC.var"){print("General: Even Cathemeral Variation Hypothesis")}
+  if(hyp.in=="C.var"){print("General: Cathemeral Variation Hypothesis")}
 
   if(hyp.in=="Dn.th"){print("Primary-secondary: Diurnal-nocturnal threshold")}
   if(hyp.in=="Dc.th"){print("Primary-secondary: Diurnal-cathemeral threshold")}

@@ -130,7 +130,7 @@ colnames(ppc)<-c("Model","X2_obs","X2_pred","ppp")
 #  warning=indicator
 #  print(data.frame(hyp.set,warning))
 #}
-if(isFALSE(any(is.na(prior.postbf.hyp[,2])))){ #check for NA's in bf table
+if(isFALSE(any(is.na(matrix(prior.postbf.hyp,ncol=2)[,2])))){ #check for NA's in bf table
 if(length(hyp.set)>1){
 #Identify posteriors of most supported model
   indicator.highest.bf.model=which.max(prior.postbf.hyp[,2])
