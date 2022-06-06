@@ -2,6 +2,7 @@
 
 export(diel.hypotheses.func)
 export(diel.ineq)
+export(diel.ineq2)
 export(diel.plot)
 export(find.prob.hyp)
 export(hyp.sets)
