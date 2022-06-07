@@ -69,7 +69,7 @@ for(i in 1:length(index.models)){
                                     A=diel.setup[[index.models[i]]][[2]], 
                                     b=diel.setup[[index.models[i]]][[3]],
                                     M=n.mcmc,cpu=n.cpu,burnin=burnin,progress = FALSE)
-                        ,silent=TRUE,max_tries=10, until = ~ nrow(.) > 1)
+                        ,silent=TRUE,max_tries=10, until = ~ length(.) > 0)
                     ,silent=TRUE)
 
  
