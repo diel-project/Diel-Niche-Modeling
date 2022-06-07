@@ -252,9 +252,9 @@ diel.ineq=function(e=NULL,
   Dcr.max=list("Diurnal-crepuscular Max",A.Dcr.max,b.Dcr.max)     
 
 # Variability
-  A.Dcr.var <- matrix(c(-2,-1,1,-1,0,1,0,-1,-1,-1,1,1),ncol = 2, byrow = TRUE)
-  b.Dcr.var <- c(-1, 0,xi.Dcr[3]+e.Dcr,-xi.Dcr[3]+e.Dcr,xi.Dcr[4]+e.Dcr-1,-xi.Dcr[4]+e.Dcr+1)
-  Dcr.var=list("Diurnal-crepuscular Var",A.Dcr.var,b.Dcr.var)     
+    A.Dcr.var <- matrix(c(-2,-1,1,-1,0,1,0,-1,-1,0, 1,0),ncol = 2, byrow = TRUE)
+    b.Dcr.var <- c(-1, 0,xi.Dcr[3]+e.Dcr,-xi.Dcr[3]+e.Dcr,-xi.Dcr[4]+e.Dcr, xi.Dcr[4]+e.Dcr)
+    Dcr.var=list("Diurnal-crepuscular Var",A.Dcr.var,b.Dcr.var)     
 
 #################################
 #################################

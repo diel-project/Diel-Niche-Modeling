@@ -42,6 +42,9 @@
 # when using epsilon ,   #ifelse( level.general.diurnal+e > 1, 1,level.general.diurnal+e)
 # need to work out 0 and 1 probability constraints
 
+# include paratmeter constraint that is near zero, but maybe not zero for hard constraints that 
+# should actually be zero
+#
 ############################
 
 
@@ -223,8 +226,8 @@ diel.ineq2=function(e=NULL,
   Dcr.max=list("Diurnal-crepuscular Max",A.Dcr.max,b.Dcr.max)     
   
   # Variability
-  A.Dcr.var <- matrix(c(-2,-1,1,-1,0,1,0,-1,-1,-1,1,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.Dcr.var <- c(-1, 0,xi.Dcr[3]+e.Dcr,-xi.Dcr[3]+e.Dcr,xi.Dcr[4]+e.Dcr-1,-xi.Dcr[4]+e.Dcr+1,0.001-1)
+  A.Dcr.var <- matrix(c(-2,-1,1,-1,0,1,0,-1,-1,0, 1,0,-1,-1),ncol = 2, byrow = TRUE)
+  b.Dcr.var <- c(-1, 0,xi.Dcr[3]+e.Dcr,-xi.Dcr[3]+e.Dcr,-xi.Dcr[4]+e.Dcr, xi.Dcr[4]+e.Dcr, 0.001-1)
   Dcr.var=list("Diurnal-crepuscular Var",A.Dcr.var,b.Dcr.var)     
   
   #################################

@@ -8,6 +8,7 @@
 #' @param n.mcmc Number of mcmc iterations.
 #' @param n.cpu Number of threads for each model fit, which is parallelized by core.
 #' @param burnin Burn-in number of mcmc iterations.
+#' @param prints Whether to print messages about model fitting.
 #' @return A list of outputs, including bayes factors for a model set, model bayes factor inputs, posterior samples, warning indicator, and posterior predictive checks.
 
 #' @return A list of outputs
