@@ -4,7 +4,15 @@
 \alias{diel.hypotheses.func}
 \title{Diel Modeling}
 \usage{
-diel.hypotheses.func(diel.setup, y, hyp.set, n.mcmc, n.cpu, burnin)
+diel.hypotheses.func(
+  diel.setup,
+  y,
+  hyp.set,
+  n.mcmc,
+  n.cpu,
+  burnin,
+  prints = TRUE
+)
 }
 \arguments{
 \item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
@@ -18,6 +26,8 @@ diel.hypotheses.func(diel.setup, y, hyp.set, n.mcmc, n.cpu, burnin)
 \item{n.cpu}{Number of threads for each model fit, which is parallelized by core.}
 
 \item{burnin}{Burn-in number of mcmc iterations.}
+
+\item{prints}{Whether to print messages about model fitting.}
 }
 \value{
 A list of outputs, including bayes factors for a model set, model bayes factor inputs, posterior samples, warning indicator, and posterior predictive checks.

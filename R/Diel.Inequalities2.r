@@ -161,7 +161,7 @@ diel.ineq2=function(e=NULL,
   if(is.null(p.avail)){p.avail  = c(0.166666,0.4166667)}
   
   
-  soft.zero=0.005
+  soft.zero=0.01
   
   #################################
   #################################
