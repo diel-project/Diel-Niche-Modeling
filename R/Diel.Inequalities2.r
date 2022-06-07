@@ -161,6 +161,8 @@ diel.ineq2=function(e=NULL,
   if(is.null(p.avail)){p.avail  = c(0.166666,0.4166667)}
   
   
+  soft.zero=0.005
+  
   #################################
   #################################
   #Diurnal Hypotheses
@@ -181,17 +183,17 @@ diel.ineq2=function(e=NULL,
   #Diurnal-nocturnal Hypotheses
   # Threshold
   A.Dn.th <- matrix(c(2,1,-1,-2,0,-1,-1,-1,1,0),ncol = 2, byrow = TRUE)
-  b.Dn.th <- c(1,-1,-xi.Dn[1],xi.Dn[2]-1,0.001)
+  b.Dn.th <- c(1,-1,-xi.Dn[1],xi.Dn[2]-1,soft.zero)
   Dn.th=list("Diurnal-nocturnal Threshold",A.Dn.th,b.Dn.th)     
   # Maximizing
   A.Dn.max <- matrix(c(2,1,-1,-2,1,0),ncol = 2, byrow = TRUE)
-  b.Dn.max <- c(1,-1,0.001)
+  b.Dn.max <- c(1,-1,soft.zero)
   Dn.max=list("Diurnal-nocturnal Max",A.Dn.max,b.Dn.max)     
   
   # Variability
   A.Dn.var <- matrix(c(2,1,-1,-2,0,-1,0,1,1,1,-1,-1,1,0),ncol = 2, byrow = TRUE)
   b.Dn.var <- c(1,-1, -xi.Dn[3]+e.Dn,xi.Dn[3]+e.Dn, -xi.Dn[4]+e.Dn+1,
-                xi.Dn[4]+e.Dn-1,0.001)
+                xi.Dn[4]+e.Dn-1,soft.zero)
   Dn.var=list("Diurnal-nocturnal Var",A.Dn.var,b.Dn.var)     
   
   # #################################
@@ -217,17 +219,17 @@ diel.ineq2=function(e=NULL,
   #Diurnal-crepuscular Hypotheses
   # Threshold
   A.Dcr.th <- matrix(c(-2,-1,1,-1,0,-1,1,0,-1,-1),ncol = 2, byrow = TRUE)
-  b.Dcr.th <- c(-1,0,-xi.Dcr[1],xi.Dcr[2],0.001-1)
+  b.Dcr.th <- c(-1,0,-xi.Dcr[1],xi.Dcr[2],soft.zero-1)
   Dcr.th=list("Diurnal-crepuscular Threshold",A.Dcr.th,b.Dcr.th)     
   
   # Maximizing
   A.Dcr.max <- matrix(c(-2,-1, 1,-1,-1,-1),ncol = 2, byrow = TRUE)
-  b.Dcr.max <- c(-1,0,0.001-1)
+  b.Dcr.max <- c(-1,0,soft.zero-1)
   Dcr.max=list("Diurnal-crepuscular Max",A.Dcr.max,b.Dcr.max)     
   
   # Variability
   A.Dcr.var <- matrix(c(-2,-1,1,-1,0,1,0,-1,-1,0, 1,0,-1,-1),ncol = 2, byrow = TRUE)
-  b.Dcr.var <- c(-1, 0,xi.Dcr[3]+e.Dcr,-xi.Dcr[3]+e.Dcr,-xi.Dcr[4]+e.Dcr, xi.Dcr[4]+e.Dcr, 0.001-1)
+  b.Dcr.var <- c(-1, 0,xi.Dcr[3]+e.Dcr,-xi.Dcr[3]+e.Dcr,-xi.Dcr[4]+e.Dcr, xi.Dcr[4]+e.Dcr, soft.zero-1)
   Dcr.var=list("Diurnal-crepuscular Var",A.Dcr.var,b.Dcr.var)     
   
   #################################
@@ -252,17 +254,17 @@ diel.ineq2=function(e=NULL,
   #Nocturnal-diurnal Hypotheses
   # Threshold
   A.Nd.th <- matrix(c(1,2,1,-1,1,1,0,1,1,0),ncol = 2, byrow = TRUE)
-  b.Nd.th <- c(1,0,-xi.Nd[1]+1,xi.Nd[2],0.001)
+  b.Nd.th <- c(1,0,-xi.Nd[1]+1,xi.Nd[2],soft.zero)
   Nd.th=list("Nocturnal-diurnal Threshold",A.Nd.th,b.Nd.th)     
   
   # Maximizing
   A.Nd.max <- matrix(c(1,2,1,-1,1,0),ncol = 2, byrow = TRUE)
-  b.Nd.max <- c(1,0,0.001)
+  b.Nd.max <- c(1,0,soft.zero)
   Nd.max=list("Nocturnal-diurnal Max",A.Nd.max,b.Nd.max)     
   
   # Variability
   A.Nd.var <- matrix(c(1,2,1,-1,-1,-1,1,1,0,1,0,-1,1,0),ncol = 2, byrow = TRUE)
-  b.Nd.var <- c(1,0,xi.Nd[3]+e.Nd-1,-xi.Nd[3]+e.Nd+1,xi.Nd[3]+e.Nd,-xi.Nd[4]+e.Nd,0.001)
+  b.Nd.var <- c(1,0,xi.Nd[3]+e.Nd-1,-xi.Nd[3]+e.Nd+1,xi.Nd[3]+e.Nd,-xi.Nd[4]+e.Nd,soft.zero)
   Nd.var=list("Nocturnal-diurnal Var",A.Nd.var,b.Nd.var)     
   
   #################################
@@ -287,18 +289,18 @@ diel.ineq2=function(e=NULL,
   #Nocturnal-crepuscular Hypotheses
   # Threshold
   A.Ncr.th <- matrix(c(-1,1,2,1,1,1,1,0,0,1),ncol = 2, byrow = TRUE)
-  b.Ncr.th <- c(0,1,xi.Ncr[1]+1,xi.Ncr[2],0.001)
+  b.Ncr.th <- c(0,1,xi.Ncr[1]+1,xi.Ncr[2],soft.zero)
   Ncr.th=list("Nocturnal-crepuscular Threshold",A.Ncr.th,b.Ncr.th)     
   
   # Maximizing
   A.Ncr.max <- matrix(c(-1,1,2,1,0,1),ncol = 2, byrow = TRUE)
-  b.Ncr.max <- c(0,1,0.001)
+  b.Ncr.max <- c(0,1,soft.zero)
   Ncr.max=list("Nocturnal-crepuscular Max",A.Ncr.max,b.Ncr.max)     
   
   # Variability
   A.Ncr.var <- matrix(c(-1,1,2,1,-1,-1,1,1,1,0,-1,0,0,1),ncol = 2, byrow = TRUE)
   b.Ncr.var <- c(0,1,xi.Ncr[3]+e.Ncr-1,-xi.Ncr[3]+e.Ncr+1,
-                 xi.Ncr[4]+e.Ncr,-xi.Ncr[4]+e.Ncr,0.001)
+                 xi.Ncr[4]+e.Ncr,-xi.Ncr[4]+e.Ncr,soft.zero)
   Ncr.var=list("Nocturnal-crepuscular Var",A.Ncr.var,b.Ncr.var)     
   
   
@@ -324,34 +326,34 @@ diel.ineq2=function(e=NULL,
   #Crepuscular-diurnal Hypotheses
   # Threshold
   A.CRd.th <- matrix(c(-1,-2,-1,1,-1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.CRd.th <- c(-1,0,-xi.CRd[1],xi.CRd[2],-0.9999)
+  b.CRd.th <- c(-1,0,-xi.CRd[1],xi.CRd[2],soft.zero-1)
   CRd.th=list("Crepuscular-diurnal Threshold",A.CRd.th,b.CRd.th)     
   
   # Maximizing
   A.CRd.max <- matrix(c(-1,-2,-1,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.CRd.max <- c(-1,0,-0.9999)
+  b.CRd.max <- c(-1,0,soft.zero-1)
   CRd.max=list("Crepuscular-diurnal Max",A.CRd.max,b.CRd.max)     
   
   # Variability
   A.CRd.var <- matrix(c(-1,-2,-1,1,-1,0,1,0,0,-1,0,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.CRd.var <- c(-1, 0,-xi.CRd[3]+e.CRd,xi.CRd[3]+e.CRd,-xi.CRd[4]+e.CRd,xi.CRd[4]+e.CRd,-0.9999)
+  b.CRd.var <- c(-1, 0,-xi.CRd[3]+e.CRd,xi.CRd[3]+e.CRd,-xi.CRd[4]+e.CRd,xi.CRd[4]+e.CRd,soft.zero-1)
   CRd.var=list("Crepuscular-diurnal Var",A.CRd.var,b.CRd.var)     
   
   #################################
   #Crepuscular-nocturnal Hypotheses
   # Threshold
   A.CRn.th <- matrix(c(1,2,-2,-1,-1,0,-1,-1,0,1),ncol = 2, byrow = TRUE)
-  b.CRn.th <- c(1,-1,xi.CRn[1],xi.CRn[2]-1,0.001)
+  b.CRn.th <- c(1,-1,xi.CRn[1],xi.CRn[2]-1,soft.zero)
   CRn.th=list("Crepuscular-nocturnal Threshold",A.CRn.th,b.CRn.th)     
   
   # Maximizing
   A.CRn.max <- matrix(c(1,2,-2,-1,0,1),ncol = 2, byrow = TRUE)
-  b.CRn.max <- c(1,-1,0.001)
+  b.CRn.max <- c(1,-1,soft.zero)
   CRn.max=list("Crepuscular-nocturnal Max",A.CRn.max,b.CRn.max)     
   
   # Variability
   A.CRn.var <- matrix(c(1,2,-2,-1,-1,0,1,0,1,1,-1,-1,0,1),ncol = 2, byrow = TRUE)
-  b.CRn.var <- c(1,-1,-xi.CRn[3]+e.CRn,xi.CRn[3]+e.CRn,-xi.CRn[4]+e.CRn+1,xi.CRn[4]+e.CRn-1,0.001)
+  b.CRn.var <- c(1,-1,-xi.CRn[3]+e.CRn,xi.CRn[3]+e.CRn,-xi.CRn[4]+e.CRn+1,xi.CRn[4]+e.CRn-1,soft.zero)
   CRn.var=list("Crepuscular-nocturnal Var",A.CRn.var,b.CRn.var)     
   
   #################################
@@ -438,7 +440,7 @@ diel.ineq2=function(e=NULL,
               xi.D=xi.D, xi.Dn=xi.Dn, xi.Dcr=xi.Dcr,
               xi.N=xi.N,xi.Nd=xi.Nd,xi.Ncr=xi.Ncr,
               xi.CR=xi.CR,xi.CRd=xi.CRd,xi.CRn=xi.CRn,
-              xi.EC=xi.EC, p.avail=p.avail)  
+              xi.EC=xi.EC, p.avail=p.avail,soft.zero=soft.zero)  
   
   #package outputs  
   diel.hyp=list(   
