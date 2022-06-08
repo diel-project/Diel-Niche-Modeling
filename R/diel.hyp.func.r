@@ -6,7 +6,6 @@
 #' @param y Vector of frequencies in order of twilight, day, night.
 #' @param hyp.set Vector of diel hypotheses names representing hypotheses set or individual hypotheses.
 #' @param n.mcmc Number of mcmc iterations.
-#' @param n.cpu Number of threads for each model fit, which is parallelized by core.
 #' @param burnin Burn-in number of mcmc iterations.
 #' @param prints Whether to print messages about model fitting.
 #' @return A list of outputs, including bayes factors for a model set, model bayes factor inputs, posterior samples, warning indicator, and posterior predictive checks.
@@ -32,9 +31,11 @@
 #' @export
 
 diel.hypotheses.func=function(diel.setup,y,hyp.set,
-                              n.mcmc,n.cpu,burnin,prints=TRUE){
+                              n.mcmc,burnin,prints=TRUE){
 
-list.func=function(x){x[[1]]}
+#Fixed this for now. In sampling posteriors, it modifies the output strucutre
+#making it hard to use retry until conditions
+n.cpu=1
 #These are the list items of A and b that need to be fit based on hyp.set
   index.models=match(hyp.set,names(diel.setup))
 
@@ -64,16 +65,6 @@ for(i in 1:length(index.models)){
   if(indicator[i]==0){
   #sample posterior distributions
  
-    if(n.cpu>1){
-    sampling.mcmc[[i]]= try(
-                     retry::retry(
-                              multinomineq::sampling_multinom(k=y,options = length(y),
-                                    A=diel.setup[[index.models[i]]][[2]], 
-                                    b=diel.setup[[index.models[i]]][[3]],
-                                    M=n.mcmc,cpu=n.cpu,burnin=burnin,progress = FALSE)
-                        ,silent=TRUE,max_tries=3, until = ~ nrow(list.func(.)) > 0)
-                    ,silent=TRUE)
-    }else{
     sampling.mcmc[[i]]= try(
                      retry::retry(
                               multinomineq::sampling_multinom(k=y,options = length(y),
@@ -82,8 +73,7 @@ for(i in 1:length(index.models)){
                                     M=n.mcmc,cpu=n.cpu,burnin=burnin,progress = FALSE)
                         ,silent=TRUE,max_tries=3, until = ~ nrow(.) > 0)
                     ,silent=TRUE)
-  
-}
+
  
  #can not be empty or contain an error
  if(!is.null(sampling.mcmc[[i]]) & 
@@ -104,10 +94,6 @@ for(i in 1:length(index.models)){
 
 ##############################
 #Create input for bayes factor calculation using text string
-  
-#Which of bf list to include- need to maybe modify 1:4
-#model.inputs=apply(as.matrix(1:4),1,FUN=function(x){paste0("bf[[",x,"]],")})
-#model.inputs=paste(model.inputs,collapse=" ")
 
 #Remove models from bf that did not fit
   hyp.set2=hyp.set[indicator!=1]
