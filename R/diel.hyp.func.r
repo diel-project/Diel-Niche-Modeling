@@ -34,7 +34,7 @@
 diel.hypotheses.func=function(diel.setup,y,hyp.set,
                               n.mcmc,n.cpu,burnin,prints=TRUE){
 
-
+list.func=function(x){x[[1]]}
 #These are the list items of A and b that need to be fit based on hyp.set
   index.models=match(hyp.set,names(diel.setup))
 
@@ -54,7 +54,7 @@ for(i in 1:length(index.models)){
                             b=diel.setup[[index.models[i]]][[3]],
                             M=n.mcmc,cpu=n.cpu,burnin=burnin,
                             prior = rep(1,length(y)),progress = FALSE)
-              ,silent=TRUE,max_tries=10, until = ~ nrow(.) > 1)
+              ,silent=TRUE,max_tries=3, until = ~ nrow(.) > 1)
               ,silent=TRUE)
   
   if(grepl("Error", bf[[i]][[1]])| all(is.na(bf[[i]][,1]))){indicator[i]=1}
@@ -63,15 +63,27 @@ for(i in 1:length(index.models)){
   
   if(indicator[i]==0){
   #sample posterior distributions
- sampling.mcmc[[i]]= try(
+ 
+    if(n.cpu>1){
+    sampling.mcmc[[i]]= try(
                      retry::retry(
                               multinomineq::sampling_multinom(k=y,options = length(y),
                                     A=diel.setup[[index.models[i]]][[2]], 
                                     b=diel.setup[[index.models[i]]][[3]],
                                     M=n.mcmc,cpu=n.cpu,burnin=burnin,progress = FALSE)
-                        ,silent=TRUE,max_tries=10, until = ~ length(.) > 0)
+                        ,silent=TRUE,max_tries=3, until = ~ nrow(list.func(.)) > 0)
                     ,silent=TRUE)
-
+    }else{
+    sampling.mcmc[[i]]= try(
+                     retry::retry(
+                              multinomineq::sampling_multinom(k=y,options = length(y),
+                                    A=diel.setup[[index.models[i]]][[2]], 
+                                    b=diel.setup[[index.models[i]]][[3]],
+                                    M=n.mcmc,cpu=n.cpu,burnin=burnin,progress = FALSE)
+                        ,silent=TRUE,max_tries=3, until = ~ nrow(.) > 0)
+                    ,silent=TRUE)
+  
+}
  
  #can not be empty or contain an error
  if(!is.null(sampling.mcmc[[i]]) & 
