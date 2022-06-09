@@ -8,6 +8,7 @@
 #' @param n.mcmc Number of mcmc iterations.
 #' @param burnin Burn-in number of mcmc iterations.
 #' @param prints Whether to print messages about model fitting.
+#' @param alt.optim Defaults to false. If TRUE, uses a different approach to derive the bayes factors. It can be more stable, but takes a bit longer.
 #' @return A list of outputs, including bayes factors for a model set, model bayes factor inputs, posterior samples, warning indicator, and posterior predictive checks.
 
 #' @return A list of outputs
@@ -31,7 +32,7 @@
 #' @export
 
 diel.hypotheses.func=function(diel.setup,y,hyp.set,
-                              n.mcmc,burnin,prints=TRUE){
+                              n.mcmc,burnin,prints=TRUE,alt.optim=FALSE){
 
 #Fixed this for now. In sampling posteriors, it modifies the output strucutre
 #making it hard to use retry until conditions
@@ -48,16 +49,42 @@ n.cpu=1
 #Loop through models/hyps that need to be fit
 for(i in 1:length(index.models)){
 
+  #Get A matrix and b vector
+    A=diel.setup[[index.models[i]]][[2]]
+    b=diel.setup[[index.models[i]]][[3]]
+  
   #Calculate bayes factor
+  if(isFALSE(alt.optim)){
       bf[[i]]= try(retry::retry(
                         multinomineq::bf_multinom(k=y,options = length(y),
-                            A=diel.setup[[index.models[i]]][[2]], 
-                            b=diel.setup[[index.models[i]]][[3]],
+                            A=A, 
+                            b=b,
                             M=n.mcmc,cpu=n.cpu,burnin=burnin,
                             prior = rep(1,length(y)),progress = FALSE)
               ,silent=TRUE,max_tries=3, until = ~ nrow(.) > 1)
               ,silent=TRUE)
-  
+  }else{
+      #Alternative process to calculate bayes factors
+      count.model=multinomineq::count_multinom(k=y,options = rep(3,reps),
+                                      A=A, 
+                                      b=b,
+                                      steps=1:nrow(A),
+                                      M=n.mcmc,cpu=n.cpu,burnin=burnin,
+                                      progress = FALSE)
+      
+      count.model.prior=multinomineq::count_multinom(k=0,options = rep(3,reps),
+                                      A=A, 
+                                      b=b,
+                                      steps=1:nrow(A),
+                                      M=n.mcmc,cpu=n.cpu,burnin=burnin,
+                                      progress = FALSE)
+      
+      
+      bf[[i]]= multinomineq::count_to_bf(posterior=count.model,prior=count.model.prior)
+
+
+  }
+      
   if(grepl("Error", bf[[i]][[1]])| all(is.na(bf[[i]][,1]))){indicator[i]=1}
   
   
