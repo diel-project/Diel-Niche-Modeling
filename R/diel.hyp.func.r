@@ -108,7 +108,7 @@ for(i in 1:length(index.models)){
   prior.inputs=paste(prior.inputs,collapse=", ")
 
 #additional text strings
-text1="postprob("
+text1="multinomineq::postprob("
 text3=c("prior=c(")
 text5=c(",include_unconstr = FALSE)")
 
