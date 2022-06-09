@@ -81,7 +81,7 @@ for(i in 1:length(index.models)){
     length(which(is.na( sampling.mcmc[[i]])))<100
     ){
   #Calculate posterior predictive check 
-    ppc.list[[i]]=ppp_multinom(sampling.mcmc[[i]],k=y,options=length(y))
+    ppc.list[[i]]=multinomineq::ppp_multinom(sampling.mcmc[[i]],k=y,options=length(y))
   
   #Estimate last probability by subtraction   
     sampling.mcmc[[i]]=cbind(sampling.mcmc[[i]],1-apply(sampling.mcmc[[i]],1,sum))
