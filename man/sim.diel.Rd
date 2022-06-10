@@ -4,7 +4,7 @@
 \alias{sim.diel}
 \title{Simulate}
 \usage{
-sim.diel(n.sim, n.sample, hyp, diel.setup)
+sim.diel(n.sim, n.sample, hyp, diel.setup = diel.ineq())
 }
 \arguments{
 \item{n.sim}{The number of simulated datasets}
@@ -24,7 +24,7 @@ A list of outputs
 Simulate diel data
 }
 \examples{
-sim.diel(1,100,"D.th",diel.setup)
+sim.diel(1,100,"D.th")
                     
 Required libraries:   stats
 }

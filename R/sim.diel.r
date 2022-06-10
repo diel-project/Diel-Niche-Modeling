@@ -10,13 +10,14 @@
 #' \item{y}{Matrix of simulated datasets}
 #' \item{p}{Probabilities used to simulate the data}  
 #' @examples 
-#' sim.diel(1,100,"D.th",diel.setup)
+#' sim.diel(1,100,"D.th")
 #'                     
 #' Required libraries:   stats
 #' @importFrom stats rmultinom
 #' @export
 
-sim.diel<- function(n.sim,n.sample,hyp,diel.setup){
+sim.diel<- function(n.sim,n.sample,hyp,
+                    diel.setup =diel.ineq()){
   
   #Find appropriate probabilities of hyp using inequalities in diel.setup
   prob.hyp=find.prob.hyp(hyp,diel.setup)
