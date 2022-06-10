@@ -4,14 +4,16 @@
 #' @import plotly
 #' @import coda
 #' @param hyp, hypothesis code name to use
-#' @param diel.setup A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
+#' @param diel.setup Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
 #' @param posteriors A single models MCMC output from the function 'diel.hypotheses.func'.
 #' @return A plotly 3d plot
 #' @examples 
-#' plot.diel(hyp=out$model.ms,diel.setup,out$most.supported.model)
+#' plot.diel(hyp=out$model.ms,out$most.supported.model)
 #' @export
 
-diel.plot=function(hyp, diel.setup, posteriors){
+diel.plot=function(hyp, 
+                   diel.setup=diel.ineq(), 
+                   posteriors){
   
   post=coda::as.mcmc(posteriors)
   

@@ -4,12 +4,12 @@
 \alias{diel.plot}
 \title{Plot Diel Hypotheis}
 \usage{
-diel.plot(hyp, diel.setup, posteriors)
+diel.plot(hyp, diel.setup = diel.ineq(), posteriors)
 }
 \arguments{
 \item{hyp, }{hypothesis code name to use}
 
-\item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
+\item{diel.setup}{Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
 
 \item{posteriors}{A single models MCMC output from the function 'diel.hypotheses.func'.}
 }
@@ -20,5 +20,5 @@ A plotly 3d plot
 Plots the diel niche space and posterior disribution of a fitted model.
 }
 \examples{
-plot.diel(hyp=out$model.ms,diel.setup,out$most.supported.model)
+plot.diel(hyp=out$model.ms,out$most.supported.model)
 }
