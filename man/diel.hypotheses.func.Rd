@@ -5,9 +5,10 @@
 \title{Diel Modeling}
 \usage{
 diel.hypotheses.func(
-  diel.setup,
   y,
   hyp.set,
+  diel.setup = diel.ineq(),
+  prior = NULL,
   n.mcmc = 50000,
   burnin = 10000,
   prints = TRUE,
@@ -15,11 +16,13 @@ diel.hypotheses.func(
 )
 }
 \arguments{
-\item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
-
 \item{y}{Vector of frequencies in order of twilight, day, night.}
 
 \item{hyp.set}{Vector of diel hypotheses names representing hypotheses set or individual hypotheses.}
+
+\item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'. Defaults to the defaults of diel.ineq function.}
+
+\item{prior}{Prior probabilities for models. Defaults to equal among models.}
 
 \item{n.mcmc}{Number of mcmc iterations.}
 
@@ -48,7 +51,7 @@ Diel model hypotheses evaluation and parameter estimation.
 This is essentially a wrapper function for functions provided by the package ‘multinomineq’.
 }
 \examples{
-diel.hypotheses.func(diel.setup=diel.setup,y=y,hyp.set=hyp.set)
+diel.hypotheses.func(y=y,hyp.set=hyp.set)
                     
 Required libraries:   multinomineq, retry, MASS
 }

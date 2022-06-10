@@ -2,9 +2,10 @@
 #'
 #' Diel model hypotheses evaluation and parameter estimation.
 #' This is essentially a wrapper function for functions provided by the package ‘multinomineq’.
-#' @param diel.setup A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
 #' @param y Vector of frequencies in order of twilight, day, night.
 #' @param hyp.set Vector of diel hypotheses names representing hypotheses set or individual hypotheses.
+#' @param prior Prior probabilities for models. Defaults to equal among models. 
+#' @param diel.setup A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'. Defaults to the defaults of diel.ineq function.
 #' @param n.mcmc Number of mcmc iterations.
 #' @param burnin Burn-in number of mcmc iterations.
 #' @param prints Whether to print messages about model fitting.
@@ -22,7 +23,7 @@
 #' \item{ppc.ms}{Posterior predictive check output from the most supported model}    
 #' \item{model.ms}{Posterior distributions of the most supported model}    
 #' @examples 
-#' diel.hypotheses.func(diel.setup=diel.setup,y=y,hyp.set=hyp.set)
+#' diel.hypotheses.func(y=y,hyp.set=hyp.set)
 #'                     
 #' Required libraries:   multinomineq, retry, MASS
 #' @importFrom MASS fractions
@@ -30,8 +31,10 @@
 #' @import multinomineq
 #' @export
 
-diel.hypotheses.func=function(diel.setup,y,hyp.set,
-                              n.mcmc=50000,burnin=10000,prints=TRUE,alt.optim=FALSE){
+diel.hypotheses.func=function(y,hyp.set,diel.setup=diel.ineq(),
+                              prior=NULL,
+                              n.mcmc=50000,burnin=10000,
+                              prints=TRUE,alt.optim=FALSE){
 
 #Fixed this for now. In sampling posteriors, it modifies the output strucutre
 #making it hard to use retry until conditions
@@ -127,12 +130,20 @@ for(i in 1:length(index.models)){
   model.inputs=paste(model.inputs,collapse=" ")
 
 #Create text string for prior- assuming equal weight
+  if(is.null(prior)){
   prior.num=as.character(MASS::fractions(rep(1/length(hyp.set2),length(hyp.set2))))
   temp=data.frame(hyp.set2,prior.num)
 
   prior.inputs=apply(temp,1,FUN=function(x){paste0(x[1]," = ",x[2])})
   prior.inputs=paste(prior.inputs,collapse=", ")
-
+  }else{
+  #Using prior provided
+  prior.num=as.character(MASS::fractions(prior[indicator!=1]))
+  temp=data.frame(hyp.set2,prior.num)
+  prior.inputs=apply(temp,1,FUN=function(x){paste0(x[1]," = ",x[2])})
+  
+  prior.inputs=paste(prior.inputs,collapse=", ")
+}
 #additional text strings
 text1="multinomineq::postprob("
 text3=c("prior=c(")
