@@ -21,9 +21,9 @@ hyp.sets=function(hyp.in=NULL){
   hyp.set[[1]]=c("D.th","N.th","CR.th","C.th")     #General Hypotheses
   hyp.set[[2]]=c("D.max","N.max","CR.max")          #General Hypotheses
   hyp.set[[3]]=c("D.var","N.var","CR.var","EC.var") #General Hypotheses
-  hyp.set[[4]]=c("Dn.th","Dc.th","Dcr.th","Nd.th","Nc.th","Ncr.th","CRd.th","CRn.th","CRc.th")          #Primary-secondary Hypotheses
-  hyp.set[[5]]=c("Dn.max","Dc.max","Dcr.max","Nd.max","Nc.max","Ncr.max","CRd.max","CRn.max","CRc.max") #Primary-secondary Hypotheses
-  hyp.set[[6]]=c("Dn.var","Dc.var","Dcr.var","Nd.var","Nc.var","Ncr.var","CRd.var","CRn.var","CRc.var") #Primary-secondary Hypotheses
+  hyp.set[[4]]=c("Dn.th","Dcr.th","Nd.th","Ncr.th","CRd.th","CRn.th")          #Primary-secondary Hypotheses
+  hyp.set[[5]]=c("Dn.max","Dcr.max","Nd.max","Ncr.max","CRd.max","CRn.max") #Primary-secondary Hypotheses
+  hyp.set[[6]]=c("Dn.var","Dcr.var","Nd.var","Ncr.var","CRd.var","CRn.var") #Primary-secondary Hypotheses
   hyp.set[[7]]=c(hyp.set[[1]],hyp.set[[4]]) #General & Primary-secondary Hypotheses
   hyp.set[[8]]=c(hyp.set[[2]],hyp.set[[5]]) #General & Primary-secondary Hypotheses
   hyp.set[[9]]=c(hyp.set[[4]],hyp.set[[6]]) #General & Primary-secondary Hypotheses
