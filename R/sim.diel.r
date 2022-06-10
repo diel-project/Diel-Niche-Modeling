@@ -17,7 +17,7 @@
 #' @export
 
 sim.diel<- function(n.sim,n.sample,hyp,
-                    diel.setup =diel.ineq()){
+                    diel.setup = diel.ineq()){
   
   #Find appropriate probabilities of hyp using inequalities in diel.setup
   prob.hyp=find.prob.hyp(hyp,diel.setup)
