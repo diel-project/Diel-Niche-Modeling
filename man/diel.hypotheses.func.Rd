@@ -8,8 +8,8 @@ diel.hypotheses.func(
   diel.setup,
   y,
   hyp.set,
-  n.mcmc,
-  burnin,
+  n.mcmc = 50000,
+  burnin = 10000,
   prints = TRUE,
   alt.optim = FALSE
 )
@@ -48,8 +48,7 @@ Diel model hypotheses evaluation and parameter estimation.
 This is essentially a wrapper function for functions provided by the package ‘multinomineq’.
 }
 \examples{
-diel.hypotheses.func(diel.setup=diel.setup,y=y,hyp.set=hyp.set,
-                    n.mcmc=2000,n.cpu=1,burnin=500);
+diel.hypotheses.func(diel.setup=diel.setup,y=y,hyp.set=hyp.set)
                     
 Required libraries:   multinomineq, retry, MASS
 }

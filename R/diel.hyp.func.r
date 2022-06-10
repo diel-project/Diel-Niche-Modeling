@@ -22,8 +22,7 @@
 #' \item{ppc.ms}{Posterior predictive check output from the most supported model}    
 #' \item{model.ms}{Posterior distributions of the most supported model}    
 #' @examples 
-#' diel.hypotheses.func(diel.setup=diel.setup,y=y,hyp.set=hyp.set,
-#'                     n.mcmc=2000,n.cpu=1,burnin=500);
+#' diel.hypotheses.func(diel.setup=diel.setup,y=y,hyp.set=hyp.set)
 #'                     
 #' Required libraries:   multinomineq, retry, MASS
 #' @importFrom MASS fractions
@@ -32,7 +31,7 @@
 #' @export
 
 diel.hypotheses.func=function(diel.setup,y,hyp.set,
-                              n.mcmc,burnin,prints=TRUE,alt.optim=FALSE){
+                              n.mcmc=50000,burnin=10000,prints=TRUE,alt.optim=FALSE){
 
 #Fixed this for now. In sampling posteriors, it modifies the output strucutre
 #making it hard to use retry until conditions
