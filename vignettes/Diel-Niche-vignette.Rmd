@@ -37,6 +37,11 @@ Lastly, a description for a specific hypothesis can also be called
   what.hyp("D.max")
 ```
 
+To view the probability space of the hypothesis
+```{r 3dplot1}
+diel.plot(hyp="N.max")
+```
+
 # Simulate Data
 To simulate data based on a diel hypotheses, we need define a hypothesis using it's coded name. Pick a hypothesis to simulate data from  
 ```{r sim1}
