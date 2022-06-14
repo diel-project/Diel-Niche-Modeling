@@ -4,7 +4,7 @@
 \alias{sim.diel}
 \title{Simulate}
 \usage{
-sim.diel(n.sim = 100, reps = 1, n.sample, hyp, diel.setup = NULL)
+sim.diel(n.sim = 1, reps = 1, n.sample = 100, hyp, diel.setup = NULL)
 }
 \arguments{
 \item{n.sim}{The number of simulated datasets}
