@@ -37,8 +37,9 @@ diel.bf=function(y,
                               C=C,
                               d=d,
                               prior = rep(1,length(y)),
-                              M1 = 1e+05,
-                              M2 = 20000,
+                              M1 = n.mcmc,
+                              M2 = n.mcmc,
+                              burnin=burnin,
                               delta = 0.5^(1:8))  
       ,silent=TRUE)
     }
