@@ -1,4 +1,4 @@
-check.inputs=function(y,hyp.set,prior,bf.fit){
+check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
   
   if(!is.null(prior) & isTRUE(bf.fit)){
     if(length(prior)!=length(hyp.set)){
@@ -20,7 +20,7 @@ check.inputs=function(y,hyp.set,prior,bf.fit){
     stop("The data y needs to be only numeric  \n")
   }
   
-  if(all(hyp.set%in%unique(c(hyp.sets("hyp.all"),hyp.sets("hyp.all2"))))!=TRUE){
+  if(all(hyp.set%in%names(diel.setup))!=TRUE){
     stop("Check that hyp.set match names in diel.setup \n")
   }
   
