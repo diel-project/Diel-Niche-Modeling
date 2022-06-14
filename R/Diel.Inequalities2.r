@@ -117,7 +117,7 @@
 #           diel probs.
 
 #start function
-diel.ineq=function(e=NULL,
+diel.ineq2=function(e=NULL,
                    e.D=NULL, e.Dn=NULL, e.Dcr=NULL, 
                    e.N=NULL, e.Nd=NULL, e.Ncr=NULL, 
                    e.CR=NULL, e.CRd=NULL, e.CRn=NULL,
