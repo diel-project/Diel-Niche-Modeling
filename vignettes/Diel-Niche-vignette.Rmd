@@ -81,7 +81,7 @@ You can discover the available outputs as
 ```{r results}
 attributes(out)
 
-?diel.hypotheses.func
+?diel.fit
 ```
 
 # Plotting
