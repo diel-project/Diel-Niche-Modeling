@@ -66,6 +66,8 @@ diel.bf=function(y,
       
     #IF two values in bf are na then automatically do the alterntaive model fitting  
     if(length(which(is.infinite(bf[[i]][,1])))>1){
+            warning("Trying alternative model fitting process...please be patient")
+
          count.model=multinomineq::count_multinom(k=y,options = rep(3,reps),
                                                A=A, 
                                                b=b,
@@ -88,7 +90,6 @@ diel.bf=function(y,
     }
       
     }else{
-      warning("Trying alternative model fitting process...please be patient")
       #Alternative process to calculate bayes factors
       count.model=multinomineq::count_multinom(k=y,options = rep(3,reps),
                                                A=A, 
