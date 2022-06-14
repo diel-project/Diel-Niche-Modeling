@@ -169,33 +169,40 @@ diel.ineq=function(e=NULL,
   # Threshold
   A.D.th <- matrix(c(1,-1,-1,-2,0,-1),ncol = 2, byrow = TRUE)
   b.D.th <- c(0,-1,-xi.D[1])
-  D.th=list("Diurnal Threshold",A.D.th,b.D.th)
+  D.th=list(Name="Diurnal Threshold",A=A.D.th,b=b.D.th)
   # Maximizing
   A.D.max <- matrix(c(1,-1,-1,-2),ncol = 2, byrow = TRUE)
   b.D.max <- c(0,-1)
-  D.max=list("Diurnal Max",A.D.max,b.D.max)     
+  D.max=list(Name="Diurnal Max",A=A.D.max, b=b.D.max)     
   # Variability
   A.D.var <- matrix(c(1,-1,-1,-2,0,-1,0,1),ncol = 2, byrow = TRUE)
   
   b.D.var <- c(0,-1,-xi.D[2]+e.D,xi.D[2]+e.D)
-  D.var=list("Diurnal Var",A.D.var,b.D.var)     
+  D.var=list(Name="Diurnal Var",A=A.D.var,b=b.D.var)     
   #################################
   #Diurnal-nocturnal Hypotheses
   # Threshold
   A.Dn.th <- matrix(c(2,1,-1,-2,0,-1,-1,-1,1,0),ncol = 2, byrow = TRUE)
   b.Dn.th <- c(1,-1,-xi.Dn[1],xi.Dn[2]-1,soft.zero)
-  Dn.th=list("Diurnal-nocturnal Threshold",A.Dn.th,b.Dn.th)     
+  Dn.th=list(Name="Diurnal-nocturnal Threshold",A=A.Dn.th,b=b.Dn.th)     
 
   # Maximizing
   A.Dn.max <- matrix(c(2,1,-1,-2,1,0),ncol = 2, byrow = TRUE)
   b.Dn.max <- c(1,-1,soft.zero)
-  Dn.max=list("Diurnal-nocturnal Max",A.Dn.max,b.Dn.max)     
-  
+  Dn.max=list(Name="Diurnal-nocturnal Max",A=A.Dn.max,b=b.Dn.max)     
+
+  A.Dn.max2 <- matrix(c(2,1,-1,-2),ncol = 2, byrow = TRUE)
+  b.Dn.max2 <- c(1,-1)
+  C.Dn.max2 <- matrix(c(1,0),ncol = 2, byrow = TRUE)
+  d.Dn.max2 <- c(0)
+  Dn.max2=list(Name="Diurnal-nocturnal Max 2",A=A.Dn.max2,b=b.Dn.max2,C=C.Dn.max2,d=d.Dn.max2 )     
+
+    
   # Variability
   A.Dn.var <- matrix(c(2,1,-1,-2,0,-1,0,1,1,1,-1,-1,1,0),ncol = 2, byrow = TRUE)
   b.Dn.var <- c(1,-1, -xi.Dn[3]+e.Dn,xi.Dn[3]+e.Dn, -xi.Dn[4]+e.Dn+1,
                 xi.Dn[4]+e.Dn-1,soft.zero)
-  Dn.var=list("Diurnal-nocturnal Var",A.Dn.var,b.Dn.var)     
+  Dn.var=list(Name="Diurnal-nocturnal Var",A=A.Dn.var,b=b.Dn.var)     
   
   # #################################
   # #Diurnal-cathemeral Hypotheses
@@ -221,17 +228,17 @@ diel.ineq=function(e=NULL,
   # Threshold
   A.Dcr.th <- matrix(c(-2,-1,1,-1,0,-1,1,0,-1,-1),ncol = 2, byrow = TRUE)
   b.Dcr.th <- c(-1,0,-xi.Dcr[1],xi.Dcr[2],soft.zero-1)
-  Dcr.th=list("Diurnal-crepuscular Threshold",A.Dcr.th,b.Dcr.th)     
+  Dcr.th=list(Name="Diurnal-crepuscular Threshold",A=A.Dcr.th,b=b.Dcr.th)     
   
   # Maximizing
   A.Dcr.max <- matrix(c(-2,-1, 1,-1,-1,-1),ncol = 2, byrow = TRUE)
   b.Dcr.max <- c(-1,0,soft.zero-1)
-  Dcr.max=list("Diurnal-crepuscular Max",A.Dcr.max,b.Dcr.max)     
+  Dcr.max=list(Name="Diurnal-crepuscular Max",A=A.Dcr.max,b=b.Dcr.max)     
   
   # Variability
   A.Dcr.var <- matrix(c(-2,-1,1,-1,0,1,0,-1,-1,0, 1,0,-1,-1),ncol = 2, byrow = TRUE)
   b.Dcr.var <- c(-1, 0,xi.Dcr[3]+e.Dcr,-xi.Dcr[3]+e.Dcr,-xi.Dcr[4]+e.Dcr, xi.Dcr[4]+e.Dcr, soft.zero-1)
-  Dcr.var=list("Diurnal-crepuscular Var",A.Dcr.var,b.Dcr.var)     
+  Dcr.var=list(Name="Diurnal-crepuscular Var",A=A.Dcr.var,b=b.Dcr.var)     
   
   #################################
   #################################
@@ -239,34 +246,34 @@ diel.ineq=function(e=NULL,
   # Threshold
   A.N.th <- matrix(c(1,2,2,1,1,1),ncol = 2, byrow = TRUE)
   b.N.th <- c(1,1,-xi.N[1]+1)
-  N.th=list("Nocturnal Threshold",A.N.th,b.N.th)     
+  N.th=list(Name="Nocturnal Threshold",A=A.N.th,b=b.N.th)     
   
   # Maximizing
   A.N.max <- matrix(c(1,2,2,1),ncol = 2, byrow = TRUE)
   b.N.max <- c(1,1)
-  N.max=list("Nocturnal Max",A.N.max,b.N.max)     
+  N.max=list(Name="Nocturnal Max",A=A.N.max,b=b.N.max)     
   
   # Variability
   A.N.var <- matrix(c(1,2,2,1,-1,-1,1,1),ncol = 2, byrow = TRUE)
   b.N.var <- c(1, 1,xi.N[2]+e.N-1,-xi.N[2]+e.N+1)
-  N.var=list("Nocturnal Var",A.N.var,b.N.var)     
+  N.var=list(Name="Nocturnal Var",A=A.N.var,b=b.N.var)     
   
   #################################
   #Nocturnal-diurnal Hypotheses
   # Threshold
   A.Nd.th <- matrix(c(1,2,1,-1,1,1,0,1,1,0),ncol = 2, byrow = TRUE)
   b.Nd.th <- c(1,0,-xi.Nd[1]+1,xi.Nd[2],soft.zero)
-  Nd.th=list("Nocturnal-diurnal Threshold",A.Nd.th,b.Nd.th)     
+  Nd.th=list(Name="Nocturnal-diurnal Threshold",A=A.Nd.th,b=b.Nd.th)     
   
   # Maximizing
   A.Nd.max <- matrix(c(1,2,1,-1,1,0),ncol = 2, byrow = TRUE)
   b.Nd.max <- c(1,0,soft.zero)
-  Nd.max=list("Nocturnal-diurnal Max",A.Nd.max,b.Nd.max)     
+  Nd.max=list(Name="Nocturnal-diurnal Max",A=A.Nd.max,b=b.Nd.max)     
   
   # Variability
   A.Nd.var <- matrix(c(1,2,1,-1,-1,-1,1,1,0,1,0,-1,1,0),ncol = 2, byrow = TRUE)
   b.Nd.var <- c(1,0,xi.Nd[3]+e.Nd-1,-xi.Nd[3]+e.Nd+1,xi.Nd[3]+e.Nd,-xi.Nd[4]+e.Nd,soft.zero)
-  Nd.var=list("Nocturnal-diurnal Var",A.Nd.var,b.Nd.var)     
+  Nd.var=list(Name="Nocturnal-diurnal Var",A.Nd.var,b.Nd.var)     
   
   #################################
   # #Nocturnal-cathemeral Hypotheses
@@ -291,18 +298,18 @@ diel.ineq=function(e=NULL,
   # Threshold
   A.Ncr.th <- matrix(c(-1,1,2,1,1,1,1,0,0,1),ncol = 2, byrow = TRUE)
   b.Ncr.th <- c(0,1,xi.Ncr[1]+1,xi.Ncr[2],soft.zero)
-  Ncr.th=list("Nocturnal-crepuscular Threshold",A.Ncr.th,b.Ncr.th)     
+  Ncr.th=list(Name="Nocturnal-crepuscular Threshold",A=A.Ncr.th,b=b.Ncr.th)     
   
   # Maximizing
   A.Ncr.max <- matrix(c(-1,1,2,1,0,1),ncol = 2, byrow = TRUE)
   b.Ncr.max <- c(0,1,soft.zero)
-  Ncr.max=list("Nocturnal-crepuscular Max",A.Ncr.max,b.Ncr.max)     
+  Ncr.max=list(Name="Nocturnal-crepuscular Max",A=A.Ncr.max,b=b.Ncr.max)     
   
   # Variability
   A.Ncr.var <- matrix(c(-1,1,2,1,-1,-1,1,1,1,0,-1,0,0,1),ncol = 2, byrow = TRUE)
   b.Ncr.var <- c(0,1,xi.Ncr[3]+e.Ncr-1,-xi.Ncr[3]+e.Ncr+1,
                  xi.Ncr[4]+e.Ncr,-xi.Ncr[4]+e.Ncr,soft.zero)
-  Ncr.var=list("Nocturnal-crepuscular Var",A.Ncr.var,b.Ncr.var)     
+  Ncr.var=list(Name="Nocturnal-crepuscular Var",A=A.Ncr.var,b=b.Ncr.var)     
   
   
   #################################
@@ -311,51 +318,51 @@ diel.ineq=function(e=NULL,
   # Threshold
   A.CR.th <- matrix(c(-1,1,-2,-1,-1,0),ncol = 2, byrow = TRUE)
   b.CR.th <- c(0,-1,-xi.CR[1])
-  CR.th=list("Crepuscular Threshold",A.CR.th,b.CR.th)     
+  CR.th=list(Name="Crepuscular Threshold",A=A.CR.th,b=b.CR.th)     
   
   # Maximizing
   A.CR.max <- matrix(c(-1,1,-2,-1),ncol = 2, byrow = TRUE)
   b.CR.max <- c(0,-1)
-  CR.max=list("Crepuscular Max",A.CR.max,b.CR.max)     
+  CR.max=list(Name="Crepuscular Max",A=A.CR.max,b=b.CR.max)     
   
   # Variability
   A.CR.var <- matrix(c(-1,1,-2,-1,-1,0,1,0),ncol = 2, byrow = TRUE)
   b.CR.var <- c(0,-1,-xi.CR[2]+e.CR,xi.CR[2]+e.CR)
-  CR.var=list("Crepuscular Var",A.CR.var,b.CR.var)     
+  CR.var=list(Name="Crepuscular Var",A=A.CR.var,b=b.CR.var)     
   
   #################################
   #Crepuscular-diurnal Hypotheses
   # Threshold
   A.CRd.th <- matrix(c(-1,-2,-1,1,-1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
   b.CRd.th <- c(-1,0,-xi.CRd[1],xi.CRd[2],soft.zero-1)
-  CRd.th=list("Crepuscular-diurnal Threshold",A.CRd.th,b.CRd.th)     
+  CRd.th=list(Name="Crepuscular-diurnal Threshold",A=A.CRd.th,b=b.CRd.th)     
   
   # Maximizing
   A.CRd.max <- matrix(c(-1,-2,-1,1,-1,-1),ncol = 2, byrow = TRUE)
   b.CRd.max <- c(-1,0,soft.zero-1)
-  CRd.max=list("Crepuscular-diurnal Max",A.CRd.max,b.CRd.max)     
+  CRd.max=list(Name="Crepuscular-diurnal Max",A=A.CRd.max,b=b.CRd.max)     
   
   # Variability
   A.CRd.var <- matrix(c(-1,-2,-1,1,-1,0,1,0,0,-1,0,1,-1,-1),ncol = 2, byrow = TRUE)
   b.CRd.var <- c(-1, 0,-xi.CRd[3]+e.CRd,xi.CRd[3]+e.CRd,-xi.CRd[4]+e.CRd,xi.CRd[4]+e.CRd,soft.zero-1)
-  CRd.var=list("Crepuscular-diurnal Var",A.CRd.var,b.CRd.var)     
+  CRd.var=list(Name="Crepuscular-diurnal Var",A.CRd.var,b.CRd.var)     
   
   #################################
   #Crepuscular-nocturnal Hypotheses
   # Threshold
   A.CRn.th <- matrix(c(1,2,-2,-1,-1,0,-1,-1,0,1),ncol = 2, byrow = TRUE)
   b.CRn.th <- c(1,-1,xi.CRn[1],xi.CRn[2]-1,soft.zero)
-  CRn.th=list("Crepuscular-nocturnal Threshold",A.CRn.th,b.CRn.th)     
+  CRn.th=list(Name="Crepuscular-nocturnal Threshold",A=A.CRn.th,b=b.CRn.th)     
   
   # Maximizing
   A.CRn.max <- matrix(c(1,2,-2,-1,0,1),ncol = 2, byrow = TRUE)
   b.CRn.max <- c(1,-1,soft.zero)
-  CRn.max=list("Crepuscular-nocturnal Max",A.CRn.max,b.CRn.max)     
+  CRn.max=list(Name="Crepuscular-nocturnal Max",A=A.CRn.max,b=b.CRn.max)     
   
   # Variability
   A.CRn.var <- matrix(c(1,2,-2,-1,-1,0,1,0,1,1,-1,-1,0,1),ncol = 2, byrow = TRUE)
   b.CRn.var <- c(1,-1,-xi.CRn[3]+e.CRn,xi.CRn[3]+e.CRn,-xi.CRn[4]+e.CRn+1,xi.CRn[4]+e.CRn-1,soft.zero)
-  CRn.var=list("Crepuscular-nocturnal Var",A.CRn.var,b.CRn.var)     
+  CRn.var=list(Name="Crepuscular-nocturnal Var",A=A.CRn.var,b=b.CRn.var)     
   
   #################################
   # #Crepuscular-cathemeral Hypotheses
@@ -382,7 +389,7 @@ diel.ineq=function(e=NULL,
   # Threshold
   A.EC.th <- matrix(c(-1,-1,0,1,1,0,1,1,0,-1,-1,0),ncol = 2, byrow = TRUE)
   b.EC.th <- c(0.43-1,0.43,0.43,-0.23+1,-0.23,-0.23)
-  EC.th=list("Even Cathemeral Threshold",A.EC.th,b.EC.th)     
+  EC.th=list(Name="Even Cathemeral Threshold",A=A.EC.th,b=b.EC.th)     
   
   # Maximizing
   # NA
@@ -391,7 +398,7 @@ diel.ineq=function(e=NULL,
   A.EC.var <- matrix(c(1,0,-1,0,0,1,0,-1,-1,-1,1,1),ncol = 2, byrow = TRUE)
   b.EC.var <- c(xi.EC[1]+e.EC,-xi.EC[1]+e.EC,xi.EC[1]+e.EC,
                 -xi.EC[1]+e.EC,xi.EC[1]+e.EC-1,-xi.EC[1]+e.EC+1)
-  EC.var=list("Even Cathemeral Var",A.EC.var,b.EC.var)     
+  EC.var=list(Name="Even Cathemeral Var",A=A.EC.var,b=b.EC.var)     
   
   #################################
   #################################
@@ -412,7 +419,7 @@ diel.ineq=function(e=NULL,
                        -1/(1-sum(p.avail)),-1/(1-sum(p.avail))),ncol = 2, byrow = TRUE)
   b.AC.var <- c(-1+e.AC,1+e.AC,-1+e.AC,1+e.AC,
                 -1+e.AC+(1/(1-sum(p.avail))),1+e.AC-(1/(1-sum(p.avail))))
-  AC.var=list("Available Cathemeral Var",A.AC.var,b.AC.var)     
+  AC.var=list(Name="Available Cathemeral Var",A=A.AC.var,b=b.AC.var)     
 #################################
 #################################
 #General Cathemeral Hypotheses
@@ -422,7 +429,7 @@ diel.ineq=function(e=NULL,
                        0, -1,
                        -1, 0),ncol = 2, byrow = TRUE)
   b.C.th <- c(-0.2+1,-0.2,-0.2)
-  C.th=list("Cathemeral Threshold",A.C.th,b.C.th)     
+  C.th=list(Name="Cathemeral Threshold",A=A.C.th,b=b.C.th)     
 
 
   
@@ -455,7 +462,7 @@ diel.ineq=function(e=NULL,
     CRd.th=CRd.th,CRd.max=CRd.max,CRd.var=CRd.var,
     CRn.th=CRn.th,CRn.max=CRn.max,CRn.var=CRn.var,
     EC.th=EC.th,EC.var=EC.var,AC.var=AC.var, C.th=C.th,
-    inputs=inputs
+    inputs=inputs, Dn.max2
   )
   
   #output from function
