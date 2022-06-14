@@ -42,7 +42,7 @@ diel.bf=function(y,
                               burnin=burnin,
                               delta = 0.5^(1:8))  
       ,silent=TRUE)
-    }
+    }else{
     
     #Get A matrix and b vector
     A=diel.setup[[idx.mod[i]]][[2]]
@@ -66,8 +66,9 @@ diel.bf=function(y,
       
     #IF two values in bf are na then automatically do the alterntaive model fitting  
     if(length(which(is.infinite(bf[[i]][,1])))>1){
+          options(warn=1)
             warning("Trying alternative model fitting process...please be patient")
-
+options(warn=0)
          count.model=multinomineq::count_multinom(k=y,options = rep(3,reps),
                                                A=A, 
                                                b=b,
@@ -108,7 +109,7 @@ diel.bf=function(y,
       
       bf[[i]]= multinomineq::count_to_bf(posterior=count.model,prior=count.model.prior)
     }
-    
+    }#end first else
     if(grepl("Error", bf[[i]][[1]])| all(is.na(bf[[i]][,1]))){indicator[i]=1}
     
   } #End model for loop
