@@ -65,7 +65,7 @@ diel.bf=function(y,
       
       
     #IF two values in bf are na then automatically do the alterntaive model fitting  
-    if(length(which(is.na(bf[[i]][,1])))>1){
+    if(length(which(is.infinite(bf[[i]][,1])))>1){
          count.model=multinomineq::count_multinom(k=y,options = rep(3,reps),
                                                A=A, 
                                                b=b,
@@ -150,11 +150,14 @@ diel.bf=function(y,
   rownames(prior.postbf.hyp)=hyp.set2
   colnames(prior.postbf.hyp)=c("Prior","Posterior")
   
+  #NOTE- there will be an error if there is no maximum, such as all zeros and and NA
   if(isFALSE(any(is.na(matrix(prior.postbf.hyp,ncol=2)[,2])))){ #check for NA's in bf table
     if(length(hyp.set)>1){
       #Identify posteriors of most supported model
       idx.high.bf.model=row.names(prior.postbf.hyp)[which.max(prior.postbf.hyp[,2])]
     }
+  }else{
+    idx.high.bf.model=NA
   }
   
 

@@ -89,7 +89,7 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
                          indicator=indicator)
 #########################################    
 
-  if(length(hyp.set)>1 & isTRUE(bf.fit)){
+  if(length(hyp.set)>1 & isTRUE(bf.fit) & !is.na(bf.out$idx.high.bf.model)){
     ms.model=bf.out$idx.high.bf.model
     idx.ms=which(names(post.samples$sampling.mcmc) %in% ms.model)
     post.samp.ms.model=post.samples$sampling.mcmc[[idx.ms]]
