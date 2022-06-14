@@ -18,6 +18,31 @@ diel.bf=function(y,
   #Loop through models/hyps that need to be fit
   for(i in 1:length(idx.mod)){
     
+    #if there is a 2 do this function
+    if(grepl("2", diel.setup[[idx.mod[i]]]$Name, fixed = TRUE)){
+    #Get A matrix and b vector
+    A=diel.setup[[idx.mod[i]]][[2]]
+    b=diel.setup[[idx.mod[i]]][[3]]
+    C=diel.setup[[idx.mod[i]]][[4]]
+    d=diel.setup[[idx.mod[i]]][[5]]
+    #Need to repeat A matrix the number of reps  
+    A=do.call("cbind", rep(list(A), reps))
+    C=do.call("cbind", rep(list(C), reps))
+
+    
+    bf[[i]]= try(multinomineq::bf_equality(k=y,
+                              options=rep(3,reps),
+                              A=A.Dn.max,
+                              b=b.Dn.max,
+                              C=C.Dn.max,
+                              d=d.Dn.max,
+                              prior = rep(1,length(y)),
+                              M1 = 1e+05,
+                              M2 = 20000,
+                              delta = 0.5^(1:8))  
+      ,silent=TRUE)
+    }
+    
     #Get A matrix and b vector
     A=diel.setup[[idx.mod[i]]][[2]]
     b=diel.setup[[idx.mod[i]]][[3]]

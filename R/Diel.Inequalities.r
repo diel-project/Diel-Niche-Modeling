@@ -462,7 +462,7 @@ diel.ineq=function(e=NULL,
     CRd.th=CRd.th,CRd.max=CRd.max,CRd.var=CRd.var,
     CRn.th=CRn.th,CRn.max=CRn.max,CRn.var=CRn.var,
     EC.th=EC.th,EC.var=EC.var,AC.var=AC.var, C.th=C.th,
-    inputs=inputs, Dn.max2
+    inputs=inputs, Dn.max2=Dn.max2
   )
   
   #output from function
