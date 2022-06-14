@@ -88,7 +88,7 @@ diel.bf=function(y,
     }
       
     }else{
-      print("Trying alternative model fitting process...please be patient")
+      warning("Trying alternative model fitting process...please be patient")
       #Alternative process to calculate bayes factors
       count.model=multinomineq::count_multinom(k=y,options = rep(3,reps),
                                                A=A, 
