@@ -54,7 +54,7 @@ diel.fit=function(y,
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
 ###################################    
 #Check the inputs  
-  check.inputs(y=y,hyp.set=hyp.set,bf.fit=bf.fit,prior=prior)
+  Diel.Niche:::check.inputs(y=y,hyp.set=hyp.set,bf.fit=bf.fit,prior=prior)
 ###################################    
 #setup data for model fitting
     reps= nrow(y)
