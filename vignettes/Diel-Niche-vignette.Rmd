@@ -43,12 +43,12 @@ To simulate data based on a diel hypotheses, we need define a hypothesis using i
   hyp=c("N.th")
 ```
 
-Next, we need to setup the multinomial inequality constraints for the models. We could use the defaults as,
+There are hypotheses already setup as multinomial models with inequality constraints. These defaults are, 
 
 ```{r sim2}
     diel.setup=diel.ineq()
 ```
-or for the specified model, we could set up the lower threshold value as
+If you want to specify your own hypotheses, such as defining the lower threshold of a Nocturnal hypotheses, you could set up the lower threshold value as
 ```{r sim3}
   #The first element is the lower threshold relevant to the   threshold models and the second element is the most likely value, which is not relevent for the model chossen.
     diel.setup=diel.ineq(xi.N=c(0.7,0.9))
@@ -57,13 +57,12 @@ or for the specified model, we could set up the lower threshold value as
 Then we simulate data as
 ```{r sim4}
   set.seed(45451)
-  sim.dat=sim.diel(n.sim=1,n.sample=100,
-                   hyp,diel.setup)
+  sim.dat=sim.diel(n.sim=1,n.sample=100,hyp=hyp)
   y=sim.dat$y
   y
 ```
 
-# Setup hypothesis set and fit models
+# Setup hypotheses set and fit models
 
 You can setup your own model set or use pre-defined model sets as
 ```{r hyp.set}
@@ -71,21 +70,10 @@ You can setup your own model set or use pre-defined model sets as
   hyp.set=hyp.sets("hyp.max") #pre-defined
 ```
 
-
-All models are fit using MCMC, which require setting up input values
-```{r MCMC}
- n.mcmc=2000 #number of MCMC iterations
- n.cpu=1     #Number of processors to use or number of chains
- burnin=1000 #burn-in period to discard from n.mcmc
-```
-
 Lastly, we fit our models  
 ```{r fit}
-  out=diel.hypotheses.func(diel.setup=diel.setup,y=y,
-                           hyp.set=hyp.set,
-                           n.mcmc=n.mcmc,
-                           n.cpu=n.cpu,
-                           burnin=burnin)
+  out = diel.fit(y=y,hyp.set=hyp.set)
+
 ```
 
 You can discover the available outputs as

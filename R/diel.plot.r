@@ -12,9 +12,10 @@
 #' @export
 
 diel.plot=function(hyp, 
-                   diel.setup=diel.ineq(), 
+                   diel.setup=NULL, 
                    posteriors){
   
+  if(is.null(diel.setup)){diel.setup=diel.ineq()}
   post=coda::as.mcmc(posteriors)
   
   #source("plot.setup.hyp.params.r")

@@ -4,7 +4,7 @@
 \alias{diel.plot}
 \title{Plot Diel Hypotheis}
 \usage{
-diel.plot(hyp, diel.setup = diel.ineq(), posteriors)
+diel.plot(hyp, diel.setup = NULL, posteriors)
 }
 \arguments{
 \item{hyp, }{hypothesis code name to use}

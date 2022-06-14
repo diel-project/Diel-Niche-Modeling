@@ -4,14 +4,16 @@
 \alias{sim.diel}
 \title{Simulate}
 \usage{
-sim.diel(n.sim, n.sample, hyp, diel.setup = diel.ineq())
+sim.diel(n.sim = 100, reps = 1, n.sample, hyp, diel.setup = NULL)
 }
 \arguments{
 \item{n.sim}{The number of simulated datasets}
 
+\item{reps}{The number of replicates of crepuscular, daytime, and nocturnal for each simulated dataset}
+
 \item{n.sample}{The number of total samples for a given simulation}
 
-\item{hyp}{The hypothesis to simulate data from.}
+\item{hyp}{The hypothesis to simulate data from}
 
 \item{diel.setup}{Multinomial inequalities for hypotheses setup using function 'diel.ineq'.}
 }
@@ -24,7 +26,7 @@ A list of outputs
 Simulate diel data
 }
 \examples{
-sim.diel(1,100,"D.th")
+sim.diel(1,1,100,"D.th",diel.setup)
                     
 Required libraries:   stats
 }
