@@ -62,6 +62,31 @@ diel.bf=function(y,
                                   prior = rep(1,length(y)),progress = FALSE)
         #,silent=TRUE,max_tries=3, until = ~ nrow(.) > 1)
         ,silent=TRUE)
+      
+      
+    #IF two values in bf are na then automatically do the alterntaive model fitting  
+    if(length(which(is.na(bf[[i]][,1])))>1){
+         count.model=multinomineq::count_multinom(k=y,options = rep(3,reps),
+                                               A=A, 
+                                               b=b,
+                                               steps=1:nrow(A),
+                                               M=n.mcmc,cpu=n.cpu,burnin=burnin,
+                                               progress = FALSE)
+      
+      count.model.prior=multinomineq::count_multinom(k=0,options = rep(3,reps),
+                                                     A=A, 
+                                                     b=b,
+                                                     steps=1:nrow(A),
+                                                     M=n.mcmc,cpu=n.cpu,burnin=burnin,
+                                                     progress = FALSE)
+      
+      
+      bf[[i]]= multinomineq::count_to_bf(posterior=count.model,prior=count.model.prior)
+      
+      
+      
+    }
+      
     }else{
       #Alternative process to calculate bayes factors
       count.model=multinomineq::count_multinom(k=y,options = rep(3,reps),
