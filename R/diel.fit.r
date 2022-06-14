@@ -67,7 +67,7 @@ diel.fit=function(y,
   names(idx.mod)=hyp.set
 #########################################  
 #Function for bayes factors
-if(isTRUE(bf.fit)){  
+if(isTRUE(bf.fit) & length(idx.mod)>1){  
   bf.out=Diel.Niche:::diel.bf(y=y.vec,idx.mod=idx.mod,
              reps=reps,diel.setup=diel.setup,
              prior=prior,
