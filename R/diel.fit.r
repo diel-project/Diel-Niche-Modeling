@@ -30,7 +30,8 @@
 #' @import multinomineq
 #' @export
 
-diel.fit=function(y,hyp.set,
+diel.fit=function(y,
+                  hyp.set,
                   bf.fit=TRUE,
                   diel.setup=NULL,
                   prior=NULL,
@@ -67,7 +68,7 @@ diel.fit=function(y,hyp.set,
 #########################################  
 #Function for bayes factors
 if(isTRUE(bf.fit)){  
-  bf.out=diel.bf(y=y.vec,idx.mod=idx.mod,
+  bf.out=Diel.Niche:::diel.bf(y=y.vec,idx.mod=idx.mod,
              reps=reps,diel.setup=diel.setup,
              prior=prior,
              n.mcmc=n.mcmc,burnin=burnin,n.cpu=n.cpu,
@@ -83,7 +84,7 @@ if(isTRUE(bf.fit)){
 }
 #########################################  
 #fit models
-  post.samples=diel.post(y=y.vec,idx.mod,diel.setup=diel.setup,
+  post.samples=Diel.Niche:::diel.post(y=y.vec,idx.mod,diel.setup=diel.setup,reps=reps,
                          n.mcmc=n.mcmc,burnin=burnin,n.cpu=n.cpu,
                          indicator=indicator)
 #########################################    

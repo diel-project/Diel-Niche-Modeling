@@ -1,4 +1,4 @@
-diel.post=function(y,idx.mod,diel.setup,
+diel.post=function(y,idx.mod,diel.setup,reps,
                    n.mcmc,burnin,n.cpu,
                    indicator){
 

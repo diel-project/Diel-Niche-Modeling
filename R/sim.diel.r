@@ -17,7 +17,7 @@
 #' @importFrom stats rmultinom
 #' @export
 
-sim.diel<- function(n.sim=100,reps=1,n.sample,hyp,diel.setup=NULL){
+sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL){
   #if diel.setup not provided use defaults
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   
