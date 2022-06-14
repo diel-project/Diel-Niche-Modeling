@@ -385,7 +385,16 @@ diel.ineq=function(e=NULL,
   # 
   #################################
   #################################
-  #Even Cathemeral Hypotheses
+  #Even Cathemeral Hypotheses - Equality Hypothesis
+  #A just forces p1 and p2 to be less than 1. Allows for consistency in code execution indiel.bf
+  A.EC <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
+  b.EC <- c(1,1)
+  
+  C.EC <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
+  d.EC <- c(0.3333,0.3333)
+  EC=list(Name="Even Cathemeral Equality2",A=A.EC,b=b.EC,C=C.EC,d=d.EC) 
+
+  
   # Threshold
   A.EC.th <- matrix(c(-1,-1,0,1,1,0,1,1,0,-1,-1,0),ncol = 2, byrow = TRUE)
   b.EC.th <- c(0.43-1,0.43,0.43,-0.23+1,-0.23,-0.23)
@@ -402,8 +411,15 @@ diel.ineq=function(e=NULL,
   
   #################################
   #################################
-  #Available Cathemeral Hypotheses
+  #Available Cathemeral Hypotheses - Equality Hypothesis
+  #A just forces p1 and p2 to be less than 1. Allows for consistency in code execution indiel.bf
+  A.AC <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
+  b.AC <- c(1,1)
   
+  C.AC <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
+  d.AC <- c(p.avail[1],p.avail[2])
+  AC=list(Name="Available Cathemeral Equality2",A=A.AC,b=b.AC,C=C.AC,d=d.AC) 
+
   # Threshold
   # NA  
   
@@ -462,7 +478,7 @@ diel.ineq=function(e=NULL,
     CRd.th=CRd.th,CRd.max=CRd.max,CRd.var=CRd.var,
     CRn.th=CRn.th,CRn.max=CRn.max,CRn.var=CRn.var,
     EC.th=EC.th,EC.var=EC.var,AC.var=AC.var, C.th=C.th,
-    inputs=inputs, Dn.max2=Dn.max2
+    inputs=inputs, Dn.max2=Dn.max2, AC=AC,EC=EC
   )
   
   #output from function
