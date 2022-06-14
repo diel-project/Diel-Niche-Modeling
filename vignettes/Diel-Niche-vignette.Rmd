@@ -72,7 +72,7 @@ You can setup your own model set or use pre-defined model sets as
 
 Lastly, we fit our models  
 ```{r fit}
-  out = diel.fit(y=y,hyp.set=hyp.set)
+  out = diel.fit(y,hyp.set)
 
 ```
 
@@ -92,7 +92,7 @@ We can plot our most supported models posterior probability distribution a numbe
 library(bayesplot)
 library(ggplot2)
 
-posteriors=coda::as.mcmc(out$most.supported.model)
+posteriors=coda::as.mcmc(out$post.samp.ms.model)
 
 plot_title <- ggtitle("Posterior distributions",
                       "with medians and 80% intervals")
@@ -105,9 +105,8 @@ mcmc_areas(posteriors, prob = 0.8) + plot_title+
 Another way to examine our hypothesis to plot the theoretical niche space for the hypothesis along with the postesterior samples.
 
 ```{r 3dplot}
-diel.plot(hyp=out$model.ms,
-          diel.setup=diel.setup,
-          posteriors=out$most.supported.model)
+diel.plot(hyp=out$ms.model,
+          posteriors=out$post.samp.ms.model)
 ```
 
 If you are using RStudio and no figure is opening
