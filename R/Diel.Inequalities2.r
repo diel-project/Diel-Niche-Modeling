@@ -186,6 +186,13 @@ diel.ineq=function(e=NULL,
   b.Dn.th <- c(1,-1,-xi.Dn[1],xi.Dn[2]-1,soft.zero)
   Dn.th=list("Diurnal-nocturnal Threshold",A.Dn.th,b.Dn.th)     
 
+  
+  A.Dn.th2 <- matrix(c(2,1,-1,-2,0,-1,-1,-1),ncol = 2, byrow = TRUE)
+  C.Dn.th2 <- matrix(c(1,0),ncol = 2, byrow = TRUE)
+  b.Dn.th2 <- c(1,-1,-xi.Dn[1],xi.Dn[2]-1)
+  d.Dn.th2 = c(0)
+  Dn.th2=list("Diurnal-nocturnal Threshold2",A.Dn.th2,b.Dn.th2,C.Dn.th2,d.Dn.th2)     
+  
   # Maximizing
   A.Dn.max <- matrix(c(2,1,-1,-2,1,0),ncol = 2, byrow = TRUE)
   b.Dn.max <- c(1,-1,soft.zero)
@@ -455,7 +462,7 @@ diel.ineq=function(e=NULL,
     CRd.th=CRd.th,CRd.max=CRd.max,CRd.var=CRd.var,
     CRn.th=CRn.th,CRn.max=CRn.max,CRn.var=CRn.var,
     EC.th=EC.th,EC.var=EC.var,AC.var=AC.var, C.th=C.th,
-    inputs=inputs
+    inputs=inputs, Dn.th2=Dn.th2
   )
   
   #output from function
