@@ -53,7 +53,7 @@ diel.fit=function(y,
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
 ###################################    
 #Check the inputs  
-  Diel.Niche:::check.inputs(y=y,hyp.set=hyp.set,bf.fit=bf.fit,prior=prior,diel.setup=diel.setup)
+  check.inputs(y=y,hyp.set=hyp.set,bf.fit=bf.fit,prior=prior,diel.setup=diel.setup)
 ###################################    
 #setup data for model fitting
     reps= nrow(y)
@@ -67,7 +67,7 @@ diel.fit=function(y,
 #########################################  
 #Function for bayes factors
 if(isTRUE(bf.fit) & length(idx.mod)>1){  
-  bf.out=Diel.Niche:::diel.bf(y=y.vec,idx.mod=idx.mod,
+  bf.out=diel.bf(y=y.vec,idx.mod=idx.mod,
              reps=reps,diel.setup=diel.setup,
              prior=prior,
              n.mcmc=n.mcmc,burnin=burnin,n.cpu=n.cpu,
@@ -86,7 +86,7 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
 }
 #########################################  
 #fit models
-  post.samples=Diel.Niche:::diel.post(y=y.vec,idx.mod,diel.setup=diel.setup,reps=reps,
+  post.samples=diel.post(y=y.vec,idx.mod,diel.setup=diel.setup,reps=reps,
                          n.mcmc=n.mcmc,burnin=burnin,n.cpu=n.cpu,
                          indicator=indicator,
                          prints=prints)

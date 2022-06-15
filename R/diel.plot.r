@@ -22,7 +22,7 @@ diel.plot=function(hyp,
   
   #source("plot.setup.hyp.params.r")
   index.models=match(hyp,names(diel.setup))
-  plot.points=data.frame(Diel.Niche:::plot.setup.hyp.params(diel.setup,index.models))
+  plot.points=data.frame(plot.setup.hyp.params(diel.setup,index.models))
 
   xlim=range(plot.points[,1])
   ylim=range(plot.points[,2])

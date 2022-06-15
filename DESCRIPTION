@@ -33,6 +33,7 @@ License: GPL-3
 Depends: 
     R (>= 3.4)
 Imports:
+    stats (>= 4.20),
     MASS (>= 7.3-56),
     utils (>= 4.2.0),
     coda (>= 0.19-4), 
