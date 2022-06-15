@@ -1,6 +1,6 @@
 diel.post=function(y,idx.mod,diel.setup,reps,
                    n.mcmc,burnin,n.cpu,
-                   indicator){
+                   indicator,prints){
 
 #the names of the models to use  
   hyp.set=names(idx.mod)
