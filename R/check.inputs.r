@@ -35,4 +35,147 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
   if(ncol(y)!=3){
     stop("y needs to have three columns \n")
   }
+############################################  
+  #Need to check all the inputs for inequalities
+  if(diel.setup$inputs$e.D<0.01 | diel.setup$inputs$e.D>0.25){
+    stop("diel.setup$inputs$e.D needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.N<0.01 | diel.setup$inputs$e.N>0.25){
+    stop("diel.setup$inputs$e.N needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.CR<0.01 | diel.setup$inputs$e.CR>0.25){
+    stop("diel.setup$inputs$e.CR needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.EC<0.01 | diel.setup$inputs$e.EC>0.25){
+    stop("diel.setup$inputs$e.EC needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.AC<0.01 | diel.setup$inputs$e.AC>0.25){
+    stop("diel.setup$inputs$e.AC needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.Dn<0.01 | diel.setup$inputs$e.Dn>0.25){
+    stop("diel.setup$inputs$e.Dn needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.Dcr<0.01 | diel.setup$inputs$e.Dcr>0.25){
+    stop("diel.setup$inputs$e.Dcr needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.Nd<0.01 | diel.setup$inputs$e.Nd>0.25){
+    stop("diel.setup$inputs$e.Nd needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.Ncr<0.01 | diel.setup$inputs$e.Ncr>0.25){
+    stop("diel.setup$inputs$e.Nd needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.CRd<0.01 | diel.setup$inputs$e.CRd>0.25){
+    stop("diel.setup$inputs$e.CRd needs to be between 0.01-0.25 \n")
+  }
+  if(diel.setup$inputs$e.CRn<0.01 | diel.setup$inputs$e.CRn>0.25){
+    stop("diel.setup$inputs$e.CRn needs to be between 0.01-0.25 \n")
+  }
+  if(any(diel.setup$inputs$xi.D<0) | any(diel.setup$inputs$xi.D>1)){
+    stop("diel.setup$inputs$xi.D needs to be between 0-1 \n")
+  }
+  if(any(diel.setup$inputs$xi.EC<0) | any(diel.setup$inputs$xi.EC>1)){
+    stop("diel.setup$inputs$xi.EC needs to be between 0-1 \n")
+  }
+  if(any(diel.setup$inputs$xi.CR<0) | any(diel.setup$inputs$xi.CR>1)){
+    stop("diel.setup$inputs$xi.CR needs to be between 0-1 \n")
+  }
+  if(any(diel.setup$inputs$xi.N) | any(diel.setup$inputs$xi.N>1)){
+    stop("diel.setup$inputs$xi.N needs to be between 0-1 \n")
+  }
+  if(any(diel.setup$inputs$xi.CRd) | any(diel.setup$inputs$xi.CRd>1)){
+    stop("diel.setup$inputs$xi.CRd needs to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.CRd[1] < diel.setup$inputs$xi.CRd[2]){
+    stop("diel.setup$inputs$xi.CRd[1] has to be greater than diel.setup$inputs$xi.CRd[2] \n")
+  }
+  if(diel.setup$inputs$xi.CRd[3] < diel.setup$inputs$xi.CRd[4]){
+    stop("diel.setup$inputs$xi.CRd[3] has to be greater than diel.setup$inputs$xi.CRd[4] \n")
+  }
+  if(diel.setup$inputs$xi.CRn[1] < diel.setup$inputs$xi.CRn[2]){
+    stop("diel.setup$inputs$xi.CRn[1] has to be greater than diel.setup$inputs$xi.CRn[2] \n")
+  }
+  if(diel.setup$inputs$xi.CRn[3] < diel.setup$inputs$xi.CRn[4]){
+    stop("diel.setup$inputs$xi.CRn[3] has to be greater than diel.setup$inputs$xi.CRn[4] \n")
+  }
+  if(diel.setup$inputs$xi.Dcr[1] < diel.setup$inputs$xi.Dcr[2]){
+    stop("diel.setup$inputs$xi.Dcr[1] has to be greater than diel.setup$inputs$xi.Dcr[2] \n")
+  }
+  if(diel.setup$inputs$xi.Dcr[3] < diel.setup$inputs$xi.Dcr[4]){
+    stop("diel.setup$inputs$xi.Dcr[3] has to be greater than diel.setup$inputs$xi.Dcr[4] \n")
+  }
+  if(diel.setup$inputs$xi.Dn[1] < diel.setup$inputs$xi.Dn[2]){
+    stop("diel.setup$inputs$xi.Dn[1] has to be greater than diel.setup$inputs$xi.Dn[2] \n")
+  }
+  if(diel.setup$inputs$xi.Dn[3] < diel.setup$inputs$xi.Dn[4]){
+    stop("diel.setup$inputs$xi.Dn[3] has to be greater than diel.setup$inputs$xi.Dn[4] \n")
+  }
+  if(diel.setup$inputs$xi.Ncr[1] < diel.setup$inputs$xi.Ncr[2]){
+    stop("diel.setup$inputs$xi.Ncr[1] has to be greater than diel.setup$inputs$xi.Ncr[2] \n")
+  }
+  if(diel.setup$inputs$xi.Ncr[3] < diel.setup$inputs$xi.Ncr[4]){
+    stop("diel.setup$inputs$xi.Ncr[3] has to be greater than diel.setup$inputs$xi.Ncr[4] \n")
+  }
+  if(diel.setup$inputs$xi.Nd[1] < diel.setup$inputs$xi.Nd[2]){
+    stop("diel.setup$inputs$xi.Nd[1] has to be greater than diel.setup$inputs$xi.Nd[2] \n")
+  }
+  if(diel.setup$inputs$xi.Nd[3] < diel.setup$inputs$xi.Nd[4]){
+    stop("diel.setup$inputs$xi.Nd[3] has to be greater than diel.setup$inputs$xi.Nd[4] \n")
+  }
+  if(diel.setup$inputs$xi.D[2]-diel.setup$inputs$e.D < 0 |
+     diel.setup$inputs$xi.D[2]+diel.setup$inputs$e.D >1){
+    stop("xi.D[2] ± e.D has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.CR[2]-diel.setup$inputs$e.CR < 0 |
+     diel.setup$inputs$xi.CR[2]+diel.setup$inputs$e.CR >1){
+    stop("xi.CR[2] ± e.CR has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.N[2]-diel.setup$inputs$e.N < 0 |
+     diel.setup$inputs$xi.N[2]+diel.setup$inputs$e.N >1){
+    stop("xi.N[2] ± e.N has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.CRd[3]-diel.setup$inputs$e.CRd < 0 |
+     diel.setup$inputs$xi.CRd[3]+diel.setup$inputs$e.CRd >1){
+    stop("xi.CRd[3] ± e.CRd has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.CRd[4]-diel.setup$inputs$e.CRd < 0 |
+     diel.setup$inputs$xi.CRd[4]+diel.setup$inputs$e.CRd >1){
+    stop("xi.CRd[4] ± e.CRd has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.CRn[3]-diel.setup$inputs$e.CRn < 0 |
+     diel.setup$inputs$xi.CRn[3]+diel.setup$inputs$e.CRn >1){
+    stop("xi.CRd[3] ± e.CRd has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.CRn[4]-diel.setup$inputs$e.CRn < 0 |
+     diel.setup$inputs$xi.CRn[4]+diel.setup$inputs$e.CRn >1){
+    stop("xi.CRd[4] ± e.CRd has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.Dcr[3]-diel.setup$inputs$e.Dcr < 0 |
+     diel.setup$inputs$xi.Dcr[3]+diel.setup$inputs$e.Dcr >1){
+    stop("xi.Dcr[3] ± e.Dcr has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.Dcr[4]-diel.setup$inputs$e.Dcr < 0 |
+     diel.setup$inputs$xi.Dcr[4]+diel.setup$inputs$e.Dcr >1){
+    stop("xi.Dcr[4] ± e.Dcr has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.EC[1]-diel.setup$inputs$e.EC < 0 |
+     diel.setup$inputs$xi.EC[1]+diel.setup$inputs$e.EC >1){
+    stop("xi.EC[3] ± e.EC has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.Ncr[3]-diel.setup$inputs$e.Ncr < 0 |
+     diel.setup$inputs$xi.Ncr[3]+diel.setup$inputs$e.Ncr >1){
+    stop("xi.Ncr[3] ± e.Ncr has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.Ncr[4]-diel.setup$inputs$e.Ncr < 0 |
+     diel.setup$inputs$xi.Ncr[4]+diel.setup$inputs$e.Ncr >1){
+    stop("xi.Ncr[4] ± e.Ncr has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.Nd[3]-diel.setup$inputs$e.Nd < 0 |
+     diel.setup$inputs$xi.Nd[3]+diel.setup$inputs$e.Nd >1){
+    stop("xi.Nd[3] ± e.Nd has to be between 0-1 \n")
+  }
+  if(diel.setup$inputs$xi.Nd[4]-diel.setup$inputs$e.Nd < 0 |
+     diel.setup$inputs$xi.Nd[4]+diel.setup$inputs$e.Nd >1){
+    stop("xi.Nd[4] ± e.Nd has to be between 0-1 \n")
+  }  
+  
 }#End function
