@@ -72,7 +72,8 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
              reps=reps,diel.setup=diel.setup,
              prior=prior,
              n.mcmc=n.mcmc,burnin=burnin,n.cpu=n.cpu,
-             alt.optim=alt.optim)
+             alt.optim=alt.optim,
+             prints=prints)
   
   bf.table=bf.out$prior.postbf.hyp
   bf=bf.out$bf
@@ -86,7 +87,8 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
 #fit models
   post.samples=Diel.Niche:::diel.post(y=y.vec,idx.mod,diel.setup=diel.setup,reps=reps,
                          n.mcmc=n.mcmc,burnin=burnin,n.cpu=n.cpu,
-                         indicator=indicator)
+                         indicator=indicator,
+                         prints=prints)
 #########################################    
 
   if(length(hyp.set)>1 & isTRUE(bf.fit) & !is.na(bf.out$idx.high.bf.model)){
