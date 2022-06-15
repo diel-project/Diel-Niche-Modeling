@@ -24,7 +24,7 @@ plot.points=vector("list",length(index.models))
   #now add back in the third prob
   p.plot=cbind(p.plot,1-apply(p.plot,1,sum))
   colnames(p.plot)=c("p.crep","p.day","p.night")
-  head(p.plot)
+  #head(p.plot)
   
   #make sure there are not mistakes
   index.remove=which(p.plot[,3]<0 | p.plot[,3]>1)
