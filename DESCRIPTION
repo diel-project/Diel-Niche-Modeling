@@ -33,7 +33,7 @@ License: GPL-3
 Depends: 
     R (>= 3.4)
 Imports:
-    MASS (>= 7.3-56), 
+    MASS (>= 7.3-56),
     coda (>= 0.19-4), 
     multinomineq (>= 0.2.3), 
     plotly (>= 4.10.0) 
