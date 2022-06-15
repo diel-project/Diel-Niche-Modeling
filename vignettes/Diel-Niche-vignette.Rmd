@@ -94,8 +94,8 @@ attributes(out)
 We can plot our most supported models posterior probability distribution a number of ways. Using ggplo2 and bayesplot:
 
 ```{r plot}
-library(bayesplot)
-library(ggplot2)
+#library(bayesplot)
+#library(ggplot2)
 
 posteriors=coda::as.mcmc(out$post.samp.ms.model)
 
