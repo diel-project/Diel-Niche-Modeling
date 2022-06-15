@@ -26,7 +26,6 @@
 #'                     
 #' Required libraries:   multinomineq, retry, MASS
 #' @importFrom MASS fractions
-#' @importFrom retry retry
 #' @import multinomineq
 #' @export
 
