@@ -123,59 +123,59 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
   }
   if(diel.setup$inputs$xi.D[2]-diel.setup$inputs$e.D < 0 |
      diel.setup$inputs$xi.D[2]+diel.setup$inputs$e.D >1){
-    stop("xi.D[2] ± e.D has to be between 0-1 \n")
+    stop("xi.D[2] \u00B1 e.D has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.CR[2]-diel.setup$inputs$e.CR < 0 |
      diel.setup$inputs$xi.CR[2]+diel.setup$inputs$e.CR >1){
-    stop("xi.CR[2] ± e.CR has to be between 0-1 \n")
+    stop("xi.CR[2] \u00B1 e.CR has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.N[2]-diel.setup$inputs$e.N < 0 |
      diel.setup$inputs$xi.N[2]+diel.setup$inputs$e.N >1){
-    stop("xi.N[2] ± e.N has to be between 0-1 \n")
+    stop("xi.N[2] \u00B1 e.N has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.CRd[3]-diel.setup$inputs$e.CRd < 0 |
      diel.setup$inputs$xi.CRd[3]+diel.setup$inputs$e.CRd >1){
-    stop("xi.CRd[3] ± e.CRd has to be between 0-1 \n")
+    stop("xi.CRd[3] \u00B1 e.CRd has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.CRd[4]-diel.setup$inputs$e.CRd < 0 |
      diel.setup$inputs$xi.CRd[4]+diel.setup$inputs$e.CRd >1){
-    stop("xi.CRd[4] ± e.CRd has to be between 0-1 \n")
+    stop("xi.CRd[4] \u00B1 e.CRd has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.CRn[3]-diel.setup$inputs$e.CRn < 0 |
      diel.setup$inputs$xi.CRn[3]+diel.setup$inputs$e.CRn >1){
-    stop("xi.CRd[3] ± e.CRd has to be between 0-1 \n")
+    stop("xi.CRd[3] \u00B1 e.CRd has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.CRn[4]-diel.setup$inputs$e.CRn < 0 |
      diel.setup$inputs$xi.CRn[4]+diel.setup$inputs$e.CRn >1){
-    stop("xi.CRd[4] ± e.CRd has to be between 0-1 \n")
+    stop("xi.CRd[4] \u00B1 e.CRd has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.Dcr[3]-diel.setup$inputs$e.Dcr < 0 |
      diel.setup$inputs$xi.Dcr[3]+diel.setup$inputs$e.Dcr >1){
-    stop("xi.Dcr[3] ± e.Dcr has to be between 0-1 \n")
+    stop("xi.Dcr[3] \u00B1 e.Dcr has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.Dcr[4]-diel.setup$inputs$e.Dcr < 0 |
      diel.setup$inputs$xi.Dcr[4]+diel.setup$inputs$e.Dcr >1){
-    stop("xi.Dcr[4] ± e.Dcr has to be between 0-1 \n")
+    stop("xi.Dcr[4] \u00B1 e.Dcr has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.EC[1]-diel.setup$inputs$e.EC < 0 |
      diel.setup$inputs$xi.EC[1]+diel.setup$inputs$e.EC >1){
-    stop("xi.EC[3] ± e.EC has to be between 0-1 \n")
+    stop("xi.EC[3] \u00B1 e.EC has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.Ncr[3]-diel.setup$inputs$e.Ncr < 0 |
      diel.setup$inputs$xi.Ncr[3]+diel.setup$inputs$e.Ncr >1){
-    stop("xi.Ncr[3] ± e.Ncr has to be between 0-1 \n")
+    stop("xi.Ncr[3] \u00B1 e.Ncr has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.Ncr[4]-diel.setup$inputs$e.Ncr < 0 |
      diel.setup$inputs$xi.Ncr[4]+diel.setup$inputs$e.Ncr >1){
-    stop("xi.Ncr[4] ± e.Ncr has to be between 0-1 \n")
+    stop("xi.Ncr[4] \u00B1 e.Ncr has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.Nd[3]-diel.setup$inputs$e.Nd < 0 |
      diel.setup$inputs$xi.Nd[3]+diel.setup$inputs$e.Nd >1){
-    stop("xi.Nd[3] ± e.Nd has to be between 0-1 \n")
+    stop("xi.Nd[3] \u00B1 e.Nd has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.Nd[4]-diel.setup$inputs$e.Nd < 0 |
      diel.setup$inputs$xi.Nd[4]+diel.setup$inputs$e.Nd >1){
-    stop("xi.Nd[4] ± e.Nd has to be between 0-1 \n")
+    stop("xi.Nd[4] \u00B1 e.Nd has to be between 0-1 \n")
   }  
   
 }#End function

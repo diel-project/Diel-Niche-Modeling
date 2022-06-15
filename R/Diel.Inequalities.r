@@ -3,6 +3,7 @@
 #' Multinomial model inequalities for diel hypotheses
 #' @param e Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified. 
 #' @param e.D Default is 0.05. A single value of variation for the Diurnal hypothesis.
+#' @param e.Dn Default is 0.05. A single value of variation for the Diurnal-nocturnal hypothesis.
 #' @param e.Dcr Default is 0.05. A single value of variation for the Diurnal-crepuscular hypothesis.
 #' @param e.N Default is 0.05. A single value of variation for the Nocturnal hypothesis.
 #' @param e.Nd Default is 0.05. A single value of variation for the Nocturnal-diurnal hypothesis.
@@ -21,7 +22,6 @@
 #' @param xi.CR Default c(0.80,0.90). A vector of the lower threshold value and most likely value,, respectively for the Crepuscular hypothesis.
 #' @param xi.CRd  Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-crepuscular hypothesis.
 #' @param xi.CRn  Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-nocturnal hypothesis.
-#' @param xi.CRc Default c(0.80,0.01,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.
 #' @param xi.EC Default c(0.33). A single value of the available amount of time in all three diel periods.
 #' @param p.avail Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.
 #' 
@@ -38,13 +38,8 @@
 #' @export
 ############################
 #To do
-# Need to constrain diel.hyp.func so that that we maintain probs b/w 0 and 1
-# when using epsilon ,   #ifelse( level.general.diurnal+e > 1, 1,level.general.diurnal+e)
-# need to work out 0 and 1 probability constraints
+## @param xi.CRc Default c(0.80,0.01,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.
 
-# include paratmeter constraint that is near zero, but maybe not zero for hard constraints that 
-# should actually be zero
-#
 ############################
 
 
