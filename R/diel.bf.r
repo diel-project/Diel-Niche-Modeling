@@ -1,3 +1,21 @@
+#' Calculate Bayes factor (internal function)
+#'
+#' Wrapper for multinomineq::bf_multinom 
+#' @import multinomineq
+#' @param y, vector of frequencies
+#' @param idx.mod vector of indices indicating which hypotheses to use from diel.setup
+#' @param diel.setup provided by user or used default as diel.setup=diel.ineq()
+#' @param reps The number of replicate sets of three frequencies
+#' @param prior Prior used for bayes factors. NULL indicates equal weights.
+#' @param n.mcmc The number of mcmc iterations
+#' @param burnin Burnin for mcmc algorithim
+#' @param n.cpu Currently fixed at 1
+#' @param alt.optim Alternative optimization for bayes factors
+#' @param prints Whether to print information
+#' @return Internal list
+#' @export
+#' @keywords internal
+
 diel.bf=function(y,
                  idx.mod,
                  diel.setup,

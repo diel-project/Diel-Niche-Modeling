@@ -1,3 +1,15 @@
+#' Check on inputs
+#'
+#' A function to check the inputs provided through the funciton diel.fit()
+#' @param y, vector of frequencies
+#' @param hyp.set the hypotheses to use
+#' @param prior Prior used for bayes factors. NULL indicates equal weights.
+#' @param bf.fit Indicator whether to fit bayes factors
+#' @param diel.setup provided by user or used default as diel.setup=diel.ineq()
+#' @return Internal list
+#' @export
+#' @keywords internal
+
 check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
   
   if(!is.null(prior) & isTRUE(bf.fit)){

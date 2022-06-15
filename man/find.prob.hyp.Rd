@@ -4,7 +4,7 @@
 \alias{find.prob.hyp}
 \title{Inequality Setup}
 \usage{
-find.prob.hyp(hyp, diel.setup = diel.ineq())
+find.prob.hyp(hyp, diel.setup = NULL)
 }
 \arguments{
 \item{hyp}{Hypothesis name: D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th,

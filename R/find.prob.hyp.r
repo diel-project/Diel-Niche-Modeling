@@ -16,7 +16,9 @@
 # probability sets that match the diel hypothesis (i.e., satisfies the inequality constrints).
 
 #start function
-find.prob.hyp=function(hyp, diel.setup= diel.ineq()){
+find.prob.hyp=function(hyp, diel.setup = NULL){
+# If there is no diel setup then use defaults
+  if(is.null(diel.setup)){diel.setup=diel.ineq()}
 
 #Run the main function with defaults to get A and b. 
 #  source("Diel.Inequalities.r")

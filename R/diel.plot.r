@@ -10,7 +10,6 @@
 #' @examples 
 #' out=diel.fit(y=t(matrix(c(11,87,2))),hyp.set="D.max",n.mcmc=1000,burnin=200)
 #' diel.plot(hyp="D.max",posteriors=out$post.samp[[1]])
-
 #' @export
 
 diel.plot=function(hyp, 
