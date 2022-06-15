@@ -1,6 +1,7 @@
 #' Inequality Setup
 #'
-#' Find probabilities of diel hypotheses
+#' Function that inputs a given hypothesis and outputs as many possible
+#' probability sets that match the diel hypothesis (i.e., satisfies the inequality constrints).
 #' @param hyp Hypothesis name: D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th,
 #' Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th,
 #' Nc.max, Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,
@@ -9,11 +10,9 @@
 #' @param diel.setup A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
 #' @return A matrix of probabilities that match hypothesis in variable hyp
 #' @examples 
-#' find.prob.hyp(hyp ="D.max", diel.setup = diel.setup)
+#' find.prob.hyp(hyp ="D.max")
 #' @export
-#' 
-# Function that inputs a given hypothesis and outputs as many possible
-# probability sets that match the diel hypothesis (i.e., satisfies the inequality constrints).
+
 
 #start function
 find.prob.hyp=function(hyp, diel.setup = NULL){
