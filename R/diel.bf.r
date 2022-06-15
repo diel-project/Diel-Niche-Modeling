@@ -67,9 +67,11 @@ diel.bf=function(y,
       
     #IF two values in bf are na then automatically do the alterntaive model fitting  
     if(length(which(is.finite(bf[[i]][,1])))<2){
-      options(warn=1)
-            warning("Trying alternative model fitting process...please be patient")
-      options(warn=0)
+      if(isTRUE(prints)){
+          options(warn=1)
+          warning("Trying alternative model fitting process...please be patient")
+          options(warn=0)
+      }
              count.model=multinomineq::count_multinom(k=y,options = rep(3,reps),
                                                A=A, 
                                                b=b,
