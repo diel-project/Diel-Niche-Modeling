@@ -40,7 +40,7 @@ diel.plot=function(hyp,
                                        rep("3",nrow(post))))
 
     
-fig <- plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
+fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
            #     width=800,height=800,
                color = ~col, colors=col2,
                 marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))

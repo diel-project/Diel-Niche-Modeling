@@ -77,10 +77,12 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
   bf.table=bf.out$prior.postbf.hyp
   bf=bf.out$bf
   indicator=bf.out$indicator
+  idx.high.bf.model=bf.out$idx.high.bf.model
 }else{
   bf.table=NULL
   bf=NULL
   indicator=rep(0,length(idx.mod))
+  idx.high.bf.model=NA
 }
 #########################################  
 #fit models
@@ -90,7 +92,7 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
                          prints=prints)
 #########################################    
 
-  if(length(hyp.set)>1 & isTRUE(bf.fit) & !is.na(bf.out$idx.high.bf.model)){
+  if(length(hyp.set)>1 & isTRUE(bf.fit) & !is.na(idx.high.bf.model)){
     ms.model=bf.out$idx.high.bf.model
     idx.ms=which(names(post.samples$sampling.mcmc) %in% ms.model)
     post.samp.ms.model=post.samples$sampling.mcmc[[idx.ms]]

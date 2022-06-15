@@ -37,7 +37,7 @@
 #' diel.ineq(e.Dn=0.2, xi.Dn=c(0.80,0.20,0.90,0.10)) #To replace teh default values with a new epsilon value and a new xi value.
 #' @export
 ############################
-#To do
+#REMOVED
 ## @param xi.CRc Default c(0.80,0.01,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.
 
 ############################
