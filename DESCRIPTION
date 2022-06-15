@@ -36,10 +36,10 @@ Imports:
     MASS (>= 7.3-56), 
     coda (>= 0.19-4), 
     multinomineq (>= 0.2.3), 
-    plotly (>= 4.10.0), 
+    plotly (>= 4.10.0) 
 Suggests: 
     knitr (>= 1.39),
-    rmarkdown (>= 2.14)
-    bayesplot (>=1.9.0)
-    ggplot2 (>=3.3.6)
+    rmarkdown (>= 2.14),
+    bayesplot (>= 1.9.0),
+    ggplot2 (>= 3.3.6)
 VignetteBuilder: knitr

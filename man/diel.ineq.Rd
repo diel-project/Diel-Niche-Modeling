@@ -35,6 +35,8 @@ diel.ineq(
 
 \item{e.D}{Default is 0.05. A single value of variation for the Diurnal hypothesis.}
 
+\item{e.Dn}{Default is 0.05. A single value of variation for the Diurnal-nocturnal hypothesis.}
+
 \item{e.Dcr}{Default is 0.05. A single value of variation for the Diurnal-crepuscular hypothesis.}
 
 \item{e.N}{Default is 0.05. A single value of variation for the Nocturnal hypothesis.}
@@ -74,8 +76,6 @@ diel.ineq(
 \item{xi.EC}{Default c(0.33). A single value of the available amount of time in all three diel periods.}
 
 \item{p.avail}{Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.}
-
-\item{xi.CRc}{Default c(0.80,0.01,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.}
 }
 \value{
 diel.hyp A list of diel hypotheses as multinomial inequalities.
