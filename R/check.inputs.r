@@ -79,10 +79,10 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
   if(any(diel.setup$inputs$xi.CR<0) | any(diel.setup$inputs$xi.CR>1)){
     stop("diel.setup$inputs$xi.CR needs to be between 0-1 \n")
   }
-  if(any(diel.setup$inputs$xi.N) | any(diel.setup$inputs$xi.N>1)){
+  if(any(diel.setup$inputs$xi.N<0) | any(diel.setup$inputs$xi.N>1)){
     stop("diel.setup$inputs$xi.N needs to be between 0-1 \n")
   }
-  if(any(diel.setup$inputs$xi.CRd) | any(diel.setup$inputs$xi.CRd>1)){
+  if(any(diel.setup$inputs$xi.CRd<0) | any(diel.setup$inputs$xi.CRd>1)){
     stop("diel.setup$inputs$xi.CRd needs to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi.CRd[1] < diel.setup$inputs$xi.CRd[2]){
