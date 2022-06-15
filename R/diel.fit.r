@@ -107,7 +107,7 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
   }    
 
   
-  if(prints==TRUE & isTRUE(bf.fit)){
+  if(prints==TRUE & isTRUE(bf.fit) & length(hyp.set)>1){
     cat("The most supported model is: \n", ms.model,"\n")
     if(sum(indicator)>0){
       warning("Models that were not fit: \n",

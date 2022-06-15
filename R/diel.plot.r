@@ -8,7 +8,9 @@
 #' @param posteriors A single models MCMC output from the function 'diel.hypotheses.func'.
 #' @return A plotly 3d plot
 #' @examples 
-#' plot.diel(hyp=out$model.ms,out$most.supported.model)
+#' out=diel.fit(y=t(matrix(c(11,87,2))),hyp.set="D.max",n.mcmc=2000,burnin=500)
+#' diel.plot(hyp="D.max",posteriors=out$post.samp[[1]])
+
 #' @export
 
 diel.plot=function(hyp, 
