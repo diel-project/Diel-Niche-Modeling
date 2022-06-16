@@ -3,11 +3,12 @@
 #' Prepares data to plot hypotheses
 #' @param diel.setup provided by user or used default as diel.setup=diel.ineq()
 #' @param index.models vector of indices indicating which hypotheses to use from diel.setup
+#' @param ... Other parameters
 #' @return Internal list
 #' @export
 #' @keywords internal
 
-plot.setup.hyp.params=function(diel.setup,index.models){
+setup.hyp.plot.params=function(diel.setup,index.models,...){
 
 #load possible probabilities generated
 #load("p.plotting.combs")
