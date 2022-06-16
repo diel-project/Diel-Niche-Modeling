@@ -45,14 +45,10 @@ A list of outputs
 \item{ms.model}{The name of the most supported model detrerminded by the maximum probability of support from the bayes factors}  
 \item{ppc}{A list of ordered model posterior predictive check output}
 \item{ms.ppc}{Posterior predictive check output from the most supported model}    
-\item{post.samp.ms.model}{Posterior distributions of the most supported model}
+\item{post.samp.ms.model}{Posterior distributions of the most supported model}    
+Required libraries:   multinomineq, retry, MASS
 }
 \description{
 Diel model hypotheses evaluation and parameter estimation.
 This is essentially a wrapper function for functions provided by the package multinomineq.
-}
-\examples{
-diel.fit(y=t(matrix(c(10,100,10))),hyp.set=hyp.sets("hyp.th"))
-                    
-Required libraries:   multinomineq, retry, MASS
 }

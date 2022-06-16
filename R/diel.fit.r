@@ -21,9 +21,6 @@
 #' \item{ppc}{A list of ordered model posterior predictive check output}
 #' \item{ms.ppc}{Posterior predictive check output from the most supported model}    
 #' \item{post.samp.ms.model}{Posterior distributions of the most supported model}    
-#' @examples 
-#' diel.fit(y=t(matrix(c(10,100,10))),hyp.set=hyp.sets("hyp.th"))
-#'                     
 #' Required libraries:   multinomineq, retry, MASS
 #' @importFrom MASS fractions
 #' @import multinomineq

@@ -7,16 +7,11 @@
 what.hyp(hyp.in = NULL)
 }
 \arguments{
-\item{hyp.in, }{hypothesis code name, NULL, or ?}
+\item{hyp.in}{hypothesis code name, NULL, or ?}
 }
 \value{
 Full name of hypothesis if code name is provided. If NULL a general description of hypotheses is provided. If ? then hypotheses code names are provided.
 }
 \description{
 Call defined hypotheses sets
-}
-\examples{
-hyp.sets("hyp.th")
-hyp.sets()
-hyp.sets("?")
 }

@@ -18,7 +18,7 @@ diel.bf(
 )
 }
 \arguments{
-\item{y, }{vector of frequencies}
+\item{y}{vector of frequencies}
 
 \item{idx.mod}{vector of indices indicating which hypotheses to use from diel.setup}
 

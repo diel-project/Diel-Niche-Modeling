@@ -7,7 +7,7 @@
 check.inputs(y, hyp.set, prior, bf.fit, diel.setup)
 }
 \arguments{
-\item{y, }{vector of frequencies}
+\item{y}{vector of frequencies}
 
 \item{hyp.set}{the hypotheses to use}
 
@@ -15,12 +15,12 @@ check.inputs(y, hyp.set, prior, bf.fit, diel.setup)
 
 \item{bf.fit}{Indicator whether to fit bayes factors}
 
-\item{diel.setup}{provided by user or used default as diel.setup=diel.ineq()}
+\item{diel.setup}{provided by user or used default as 'diel.setup=diel.ineq()'}
 }
 \value{
 Internal list
 }
 \description{
-A function to check the inputs provided through the funciton diel.fit()
+A function to check the inputs provided through the function 'diel.fit'
 }
 \keyword{internal}

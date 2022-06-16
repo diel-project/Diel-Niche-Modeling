@@ -5,6 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Diel-Niche-vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{bayesplot,ggplot2,coda,Diel.Niche}
 ---
 
 ```{r, include = FALSE}
@@ -93,11 +94,12 @@ attributes(out)
 
 We can plot our most supported models posterior probability distribution a number of ways. Using ggplo2 and bayesplot:
 
-```{r plot}
-#library(bayesplot)
-#library(ggplot2)
+```{r plot, eval = FALSE}
+library(bayesplot)
+library(ggplot2)
 
-posteriors=coda::as.mcmc(out$post.samp.ms.model)
+if (require(coda,ggplot2,bayesplot)) {
+  posteriors=coda::as.mcmc(out$post.samp.ms.model)
 
 plot_title <- ggtitle("Posterior distributions",
                       "with medians and 80% intervals")
@@ -105,6 +107,7 @@ mcmc_areas(posteriors, prob = 0.8) + plot_title+
   geom_vline(xintercept=sim.dat$p, linetype="dashed", 
                 color = c("red","green","purple"), size=1)
 
+}
 ```
 
 Another way to examine our hypothesis to plot the theoretical niche space for the hypothesis along with the postesterior samples.
@@ -115,7 +118,6 @@ diel.plot(hyp=out$ms.model,
 ```
 
 If you are using RStudio and no figure is opening
-
 Tools-->Global Options-->Advanced-->Rengering Engine
 Choose "Desktop OpenGL{}
 restart RStudio completely

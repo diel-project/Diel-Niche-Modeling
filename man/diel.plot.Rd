@@ -7,7 +7,7 @@
 diel.plot(hyp, diel.setup = NULL, posteriors = NULL)
 }
 \arguments{
-\item{hyp, }{hypothesis code name to use}
+\item{hyp}{hypothesis code name to use}
 
 \item{diel.setup}{Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
 
@@ -18,8 +18,4 @@ A plotly 3d plot
 }
 \description{
 Plots the diel niche space and posterior disribution of a fitted model.
-}
-\examples{
-out=diel.fit(y=t(matrix(c(11,87,2))),hyp.set="D.max",n.mcmc=1000,burnin=200)
-diel.plot(hyp="D.max",posteriors=out$post.samp[[1]])
 }

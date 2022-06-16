@@ -21,7 +21,7 @@ diel.post(
 
 \item{idx.mod}{vector of indices indicating which hypotheses to use from diel.setup}
 
-\item{diel.setup}{provided by user or used default as diel.setup=diel.ineq()}
+\item{diel.setup}{provided by user or used default as 'diel.setup=diel.ineq()'}
 
 \item{reps}{The number of replicate sets of three frequencies}
 

@@ -7,11 +7,7 @@
 find.prob.hyp(hyp, diel.setup = NULL)
 }
 \arguments{
-\item{hyp}{Hypothesis name: D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th,
-Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th,
-Nc.max, Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,
-CRd.max, CRd.var, CRn.th, CRn.max, CRn.var, CRc.th, CRc.max, CRc.var,
-EC.th, EC.var, AC.var.}
+\item{hyp}{Hypothesis name: D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th, Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th, Nc.max, Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,' CRd.max, CRd.var, CRn.th, CRn.max, CRn.var, CRc.th, CRc.max, CRc.var,'EC.th, EC.var, AC.var.}
 
 \item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
 }
@@ -19,8 +15,6 @@ EC.th, EC.var, AC.var.}
 A matrix of probabilities that match hypothesis in variable hyp
 }
 \description{
-Find probabilities of diel hypotheses
-}
-\examples{
-find.prob.hyp(hyp ="D.max", diel.setup = diel.setup)
+Function that inputs a given hypothesis and outputs as many possible
+probability sets that match the diel hypothesis (i.e., satisfies the inequality constrints).
 }

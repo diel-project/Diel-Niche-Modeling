@@ -31,11 +31,6 @@
 #' Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, 
 #'  Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,
 #' CRd.max, CRd.var, CRn.th, CRn.max, CRn.var,'EC.th, EC.var, AC.var, C.th}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.} 
-#' @examples 
-#' diel.ineq()
-#' diel.ineq(e=0.01) #To replace all epsilon values with 0.01.
-#' #To replace the default values with a new epsilon value and a new xi value.
-#' diel.ineq(e.Dn=0.2, xi.Dn=c(0.80,0.20,0.90,0.10)) 
 #' @export
 ############################
 #REMOVED
