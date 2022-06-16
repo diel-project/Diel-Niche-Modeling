@@ -27,5 +27,4 @@ Simulate diel data
 }
 \examples{
 sim.diel(n.sim=1,reps=1,n.sample=100,hyp="D.th")
-Required libraries:   stats
 }
