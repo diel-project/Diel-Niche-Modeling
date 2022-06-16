@@ -15,3 +15,8 @@ Full name of hypothesis if code name is provided. If NULL a general description 
 \description{
 Call defined hypotheses sets
 }
+\examples{
+what.hyp()
+what.hyp("D.th")
+what.hyp("?")
+}

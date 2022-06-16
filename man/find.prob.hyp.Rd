@@ -18,3 +18,6 @@ A matrix of probabilities that match hypothesis in variable hyp
 Function that inputs a given hypothesis and outputs as many possible
 probability sets that match the diel hypothesis (i.e., satisfies the inequality constrints).
 }
+\examples{
+find.prob.hyp(hyp ="D.max")
+}

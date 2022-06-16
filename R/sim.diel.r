@@ -9,6 +9,8 @@
 #' @return A list of outputs
 #' \item{y}{Matrix of simulated datasets}
 #' \item{p}{Probabilities used to simulate the data}  
+#' @examples 
+#' sim.diel(n.sim=1,reps=1,n.sample=100,hyp="D.th")
 #' Required libraries:   stats
 #' @importFrom stats rmultinom
 #' @export

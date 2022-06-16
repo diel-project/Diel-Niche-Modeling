@@ -24,6 +24,8 @@
 #' Required libraries:   multinomineq, retry, MASS
 #' @importFrom MASS fractions
 #' @import multinomineq
+#' @examples 
+#' diel.fit(y=t(matrix(c(10,100,10))),hyp.set=hyp.sets("hyp.th"))
 #' @export
 
 diel.fit=function(y,

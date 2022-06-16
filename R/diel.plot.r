@@ -7,6 +7,9 @@
 #' @param diel.setup Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
 #' @param posteriors A single models MCMC output from the function 'diel.hypotheses.func'.
 #' @return A plotly 3d plot
+#' @examples 
+#' out=diel.fit(y=t(matrix(c(11,87,2))),hyp.set="D.max",n.mcmc=1000,burnin=200)
+#' diel.plot(hyp="D.max",posteriors=out$post.samp[[1]])
 #' @export
 
 diel.plot=function(hyp, 

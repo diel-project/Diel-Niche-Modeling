@@ -3,6 +3,9 @@
 #' Call defined hypotheses sets
 #' @param hyp.in Hypothesis set code names
 #' @return Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned.
+#' @examples 
+#' hyp.sets()
+#' hyp.sets("hyp.th")
 #' @export
 
 # A function to simply call certain pre-defined hypotheses sets

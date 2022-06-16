@@ -52,3 +52,6 @@ Required libraries:   multinomineq, retry, MASS
 Diel model hypotheses evaluation and parameter estimation.
 This is essentially a wrapper function for functions provided by the package multinomineq.
 }
+\examples{
+diel.fit(y=t(matrix(c(10,100,10))),hyp.set=hyp.sets("hyp.th"))
+}

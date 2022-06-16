@@ -15,3 +15,7 @@ Names of hypotheses for the set. If NULL, the names of all hypotheses sets are r
 \description{
 Call defined hypotheses sets
 }
+\examples{
+hyp.sets()
+hyp.sets("hyp.th")
+}
