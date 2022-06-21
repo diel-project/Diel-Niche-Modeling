@@ -12,25 +12,40 @@ setup.hyp.plot.params=function(diel.setup,index.models,...){
 
 #Loop through hypotheses and get many sample points  
 plot.points=vector("list",length(index.models))
- for(i in 1:length(index.models)){
+
+for(i in 1:length(index.models)){
 
 if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
   A=diel.setup[[index.models[i]]][[2]]
   b=diel.setup[[index.models[i]]][[3]]
+  
+  #Find all A %*% theta combinations
+  p.ineq= apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
+  #find if that is <= b
+  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+
 }else{
   A=diel.setup[[index.models[i]]][[2]]
   b=diel.setup[[index.models[i]]][[3]]
   C=diel.setup[[index.models[i]]][[4]]
   d=diel.setup[[index.models[i]]][[5]]
-  A=rbind(A,C)
-  b=c(b,d)
-}
   
- #Find all A %*% theta combinations
- p.ineq= apply(p.options2,2,FUN=function(x){A%*%x})  
- #find if that is <= b
- p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
-
+  #Find all A %*% theta combinations
+  p.ineq= apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
+  #find if that is <= b
+  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+  
+  #Find all C %*% theta combinations
+  p.ineq2= apply(p.options2[1:2,],2,FUN=function(x){C%*%x})  
+  #find if abs(C*theta -d) < delta
+  delta=0.005
+  p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
+  
+  p.ineq.logical=apply(data.frame(p.ineq.logical,p.ineq.logical2),1,FUN=function(x){all(x)})
+}
+ 
+ 
+ 
  index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints

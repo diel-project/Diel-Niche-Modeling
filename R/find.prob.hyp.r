@@ -20,18 +20,31 @@ find.prob.hyp=function(hyp, diel.setup = NULL){
 if(diel.setup[[index.models]]$func=="bf_multinom"){
   A=diel.setup[[index.models]][[2]]
   b=diel.setup[[index.models]][[3]]
+  
+  #Find all A %*% theta combinations
+  p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})  
+  #find if that is <= b
+  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+
 }else{
   A=diel.setup[[index.models]][[2]]
   b=diel.setup[[index.models]][[3]]
   C=diel.setup[[index.models]][[4]]
   d=diel.setup[[index.models]][[5]]
-  A=rbind(A,C)
-  b=c(b,d)
+  
+  #Find all A %*% theta combinations
+  p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})  
+  #find if that is <= b
+  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+  
+  #Find all C %*% theta combinations
+  p.ineq2= apply(p.options[1:2,],2,FUN=function(x){C%*%x})  
+  #find if abs(C*theta -d) < delta
+  delta=0.001
+  p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
+  
+  p.ineq.logical=apply(data.frame(p.ineq.logical,p.ineq.logical2),1,FUN=function(x){all(x)})
 }
- #Find all A %*% theta combinations
- p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})  
- #find if that is <= b
- p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
 
  #Find where they are true
  index=which(p.ineq.logical)
