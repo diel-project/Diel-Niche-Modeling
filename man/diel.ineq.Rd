@@ -26,7 +26,10 @@ diel.ineq(
   xi.CR = NULL,
   xi.CRd = NULL,
   xi.CRn = NULL,
+  xi.CRc = NULL,
   xi.EC = NULL,
+  xi.Dc = NULL,
+  xi.Nc = NULL,
   p.avail = NULL
 )
 }
@@ -73,15 +76,21 @@ diel.ineq(
 
 \item{xi.CRn}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-nocturnal hypothesis.}
 
+\item{xi.CRc}{Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.}
+
 \item{xi.EC}{Default c(0.33). A single value of the available amount of time in all three diel periods.}
+
+\item{xi.Dc}{Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Diurnal-cathemeral hypothesis.}
+
+\item{xi.Nc}{Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-cathemeral hypothesis.}
 
 \item{p.avail}{Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.}
 }
 \value{
 diel.hyp A list of diel hypotheses as multinomial inequalities.
 \item{inputs}{Includes all inputted values; epsilon, xi, and p.avail.} 
-\item{D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.max, Dcr.th,
-Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, 
+\item{D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.max, Dcr.th, Dc.th,
+Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th, 
  Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,
 CRd.max, CRd.var, CRn.th, CRn.max, CRn.var,'EC.th, EC.var, AC.var, C.th}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.}
 }

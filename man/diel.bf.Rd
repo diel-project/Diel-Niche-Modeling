@@ -14,7 +14,8 @@ diel.bf(
   burnin,
   n.cpu,
   alt.optim,
-  prints
+  prints,
+  delta
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ diel.bf(
 \item{alt.optim}{Alternative optimization for bayes factors}
 
 \item{prints}{Whether to print information}
+
+\item{delta}{vector of error tolerances for equality thresholds}
 }
 \value{
 Internal list

@@ -10,10 +10,12 @@ diel.fit(
   bf.fit = TRUE,
   diel.setup = NULL,
   prior = NULL,
+  n.chains = 1,
   n.mcmc = 50000,
   burnin = 10000,
   prints = TRUE,
-  alt.optim = FALSE
+  alt.optim = FALSE,
+  delta = NULL
 )
 }
 \arguments{
@@ -34,6 +36,8 @@ diel.fit(
 \item{prints}{Whether to print messages about model fitting.}
 
 \item{alt.optim}{Default is FALSE. If TRUE, uses an alternative approach to derive the bayes factors. It can be more stable, but takes a bit longer.}
+
+\item{delta}{Error tolerance of equality constraints}
 }
 \value{
 A list of outputs, including bayes factors for a model set, model bayes factor inputs, posterior samples, warning indicator, and posterior predictive checks.

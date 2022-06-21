@@ -9,7 +9,7 @@ sim.diel(n.sim = 1, reps = 1, n.sample = 100, hyp, diel.setup = NULL)
 \arguments{
 \item{n.sim}{The number of simulated datasets}
 
-\item{reps}{The number of replicates of crepuscular, daytime, and nocturnal for each simulated dataset}
+\item{reps}{The number of sets of probabilities to use when simulating crepuscular, daytime, and nocturnal frequencies}
 
 \item{n.sample}{The number of total samples for a given simulation}
 

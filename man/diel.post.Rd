@@ -8,7 +8,9 @@ diel.post(
   y,
   idx.mod,
   diel.setup,
+  bf.Ab.new,
   reps,
+  n.chains,
   n.mcmc,
   burnin,
   n.cpu,
@@ -23,7 +25,11 @@ diel.post(
 
 \item{diel.setup}{provided by user or used default as 'diel.setup=diel.ineq()'}
 
+\item{bf.Ab.new}{Modified A matrix and b vector for those equality/inequality hypotheses}
+
 \item{reps}{The number of replicate sets of three frequencies}
+
+\item{n.chains}{The number of chains for posterior sampling}
 
 \item{n.mcmc}{The number of mcmc iterations}
 
@@ -31,11 +37,9 @@ diel.post(
 
 \item{n.cpu}{Currently fixed at 1}
 
+\item{indicator}{Indicates failed bayes factor}
+
 \item{prints}{Whether to print information}
-
-\item{prior}{Prior used for bayes factors. NULL indicates equal weights.}
-
-\item{alt.optim}{Alternative optimization for bayes factors}
 }
 \value{
 Internal list
