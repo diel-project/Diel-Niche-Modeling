@@ -29,6 +29,8 @@ diel.fit(
 
 \item{prior}{Prior probabilities for models used in bayes factors. Defaults to equal among models.}
 
+\item{n.chains}{the number of chains to use when fitting models}
+
 \item{n.mcmc}{Number of mcmc iterations.}
 
 \item{burnin}{Burn-in number of mcmc iterations.}

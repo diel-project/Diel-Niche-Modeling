@@ -6,6 +6,7 @@
 #' @param hyp.set Vector of diel hypotheses names representing hypotheses set or individual hypotheses.
 #' @param bf.fit If TRUE, will calculate bayes factors for the model sit. Default is TRUE.
 #' @param prior Prior probabilities for models used in bayes factors. Defaults to equal among models. 
+#' @param n.chains the number of chains to use when fitting models
 #' @param diel.setup A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'. If not provided, it will use the defaults of the diel.ineq function.
 #' @param n.mcmc Number of mcmc iterations.
 #' @param burnin Burn-in number of mcmc iterations.
