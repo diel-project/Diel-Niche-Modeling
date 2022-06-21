@@ -63,7 +63,7 @@ If you want to specify your own hypotheses, such as defining the lower threshold
 Then we simulate data as
 ```{r sim4}
   set.seed(45451)
-  sim.dat=sim.diel(n.sim=1,n.sample=100,hyp=hyp)
+  sim.dat=sim.diel(n.sim=1,reps=1,n.sample=100,hyp=hyp)
   y=sim.dat$y
   y
 ```
