@@ -30,7 +30,7 @@ sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL){
   #names(y)=paste(rep(c("p_crep","p_day","p_night"), times = reps), rep(1:(reps),each=3), sep = "_")
   
   y=matrix(y,ncol=3,byrow=TRUE)
-  colnames(y)=c("p_crep","p_day","p_night")
+  colnames(y)=c("y_crep","y_day","y_night")
   
   #return sim data and probability
   list(y=y,p=prob.select)
