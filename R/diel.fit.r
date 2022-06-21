@@ -23,7 +23,6 @@
 #' \item{post.samp.ms.model}{Posterior distributions of the most supported model}    
 #' Required libraries:   multinomineq, retry, MASS
 #' @importFrom MASS fractions
-#' @importFrom runjags combine.mcmc
 #' @import multinomineq
 #' @examples 
 #' diel.fit(y=t(matrix(c(10,100,10))),hyp.set=hyp.sets("hyp.th"))
