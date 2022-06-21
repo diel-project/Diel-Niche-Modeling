@@ -14,14 +14,14 @@ setup.hyp.plot.params=function(diel.setup,index.models,...){
 plot.points=vector("list",length(index.models))
  for(i in 1:length(index.models)){
 
-if(diel.setup[[index.models]]$func=="bf_multinom"){
-  A=diel.setup[[index.models]][[2]]
-  b=diel.setup[[index.models]][[3]]
+if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
+  A=diel.setup[[index.models[i]]][[2]]
+  b=diel.setup[[index.models[i]]][[3]]
 }else{
-  A=diel.setup[[index.models]][[2]]
-  b=diel.setup[[index.models]][[3]]
-  C=diel.setup[[index.models]][[4]]
-  d=diel.setup[[index.models]][[5]]
+  A=diel.setup[[index.models[i]]][[2]]
+  b=diel.setup[[index.models[i]]][[3]]
+  C=diel.setup[[index.models[i]]][[4]]
+  d=diel.setup[[index.models[i]]][[5]]
   A=rbind(A,C)
   b=c(b,d)
 }
