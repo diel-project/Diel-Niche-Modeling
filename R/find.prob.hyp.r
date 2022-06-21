@@ -15,19 +15,19 @@ find.prob.hyp=function(hyp, diel.setup = NULL){
 # If there is no diel setup then use defaults
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
 
-#Run the main function with defaults to get A and b. 
-#  source("Diel.Inequalities.r")
-#  diel.setup=diel.ineq()
-
-
-#load possible probabilities generated
-#load("./data/p.plotting.combs.full")
-
   index.models=match(hyp,names(diel.setup))
 
+if(diel.setup[[index.models]]$func=="bf_multinom"){
   A=diel.setup[[index.models]][[2]]
   b=diel.setup[[index.models]][[3]]
-  
+}else{
+  A=diel.setup[[index.models]][[2]]
+  b=diel.setup[[index.models]][[3]]
+  C=diel.setup[[index.models]][[4]]
+  d=diel.setup[[index.models]][[5]]
+  A=rbind(A,C)
+  b=c(b,d)
+}
  #Find all A %*% theta combinations
  p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})  
  #find if that is <= b
@@ -40,8 +40,8 @@ find.prob.hyp=function(hyp, diel.setup = NULL){
   probs.out=t(p.options[,index])
   
   #make sure there are not mistakes
-  index.remove=which(probs.out[,3]<0 | probs.out[,3]>1)
-  if(length(index.remove)>0){probs.out=probs.out[-index.remove,]}
+  #index.remove=which(probs.out[,3]<0 | probs.out[,3]>1)
+  #if(length(index.remove)>0){probs.out=probs.out[-index.remove,]}
   
   probs.out
 }#end function

@@ -2,7 +2,7 @@
 #'
 #' Simulate diel data
 #' @param n.sim The number of simulated datasets
-#' @param reps The number of replicates of crepuscular, daytime, and nocturnal for each simulated dataset
+#' @param reps The number of sets of probabilities to use when simulating crepuscular, daytime, and nocturnal frequencies
 #' @param n.sample The number of total samples for a given simulation
 #' @param hyp The hypothesis to simulate data from
 #' @param diel.setup Multinomial inequalities for hypotheses setup using function 'diel.ineq'.
@@ -32,7 +32,6 @@ sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL){
   y=matrix(y,ncol=3,byrow=TRUE)
   colnames(y)=c("p_crep","p_day","p_night")
   
-  #y=t(rmultinom(n.sim,size=n.sample,prob=prob.select))
   #return sim data and probability
   list(y=y,p=prob.select)
 }

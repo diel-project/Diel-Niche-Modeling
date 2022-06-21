@@ -33,7 +33,10 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
   }
   
   if(all(hyp.set%in%names(diel.setup))!=TRUE){
-    stop("Check that hyp.set match names in diel.setup \n")
+    stop("Check that hyp.set match names in diel.setup \n",
+         "Cannot find ",paste(hyp.set[which(hyp.set%in%names(diel.setup)==FALSE)], collapse = ' '), "\n")
+    
+    
   }
   
   if(!is.character(hyp.set) | !is.vector(hyp.set)){
