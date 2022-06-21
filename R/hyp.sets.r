@@ -57,16 +57,14 @@ hyp.sets=function(hyp.in=NULL){
   hyp.set[[18]]=unique(unlist(hyp.set[1:11]))
   names(hyp.set)[17:18]=c("hyp.all","hyp.all2")
 
-if(!is.null(hyp.in) & hyp.in=="list"){hyp.set
-  }else{    
-    
-if(!is.null(hyp.in) & hyp.in!="list"){ 
+  
+if(is.null(hyp.in)){   
+  cat("Names of Hypotheses Sets: \n",names(hyp.set),sep="  ")
+}else{
+if(hyp.in=="list"){hyp.set}else{
 #match the model set called for and return it
   hyp.set[[match(hyp.in,names(hyp.set))]]
-}else{
-  cat("Names of Hypotheses Sets: \n",names(hyp.set),sep="  ")
-}
+}  
 }
 
-  
 }#end of function
