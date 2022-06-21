@@ -10,16 +10,21 @@
 
 setup.hyp.plot.params=function(diel.setup,index.models,...){
 
-#load possible probabilities generated
-#load("p.plotting.combs")
-
-  
 #Loop through hypotheses and get many sample points  
 plot.points=vector("list",length(index.models))
  for(i in 1:length(index.models)){
 
-  A=diel.setup[[index.models[i]]][[2]]
-  b=diel.setup[[index.models[i]]][[3]]
+if(diel.setup[[index.models]]$func=="bf_multinom"){
+  A=diel.setup[[index.models]][[2]]
+  b=diel.setup[[index.models]][[3]]
+}else{
+  A=diel.setup[[index.models]][[2]]
+  b=diel.setup[[index.models]][[3]]
+  C=diel.setup[[index.models]][[4]]
+  d=diel.setup[[index.models]][[5]]
+  A=rbind(A,C)
+  b=c(b,d)
+}
   
  #Find all A %*% theta combinations
  p.ineq= apply(p.options2,2,FUN=function(x){A%*%x})  
