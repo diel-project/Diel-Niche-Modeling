@@ -590,7 +590,7 @@ diel.ineq=function(e=NULL,
     Dn.th.wk=Dn.th.wk,Dn.var.wk=Dn.var.wk,Dcr.th.wk=Dcr.th.wk,
     Dcr.var.wk=Dcr.var.wk,Nd.th.wk=Nd.th.wk,Nd.var.wk=Nd.var.wk,
     Ncr.var.wk=Ncr.var.wk,CRd.th.wk=CRd.th.wk,CRn.var.wk=CRn.var.wk,
-    Ncr.th.wk=Ncr.th.wk,CRn.th.wk=CRn.th.wk,inputs=inputs
+    Ncr.th.wk=Ncr.th.wk,CRn.th.wk=CRn.th.wk,Uncon=Uncon,inputs=inputs
     )
   
   #output from function
