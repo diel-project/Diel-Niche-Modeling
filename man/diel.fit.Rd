@@ -19,7 +19,7 @@ diel.fit(
 )
 }
 \arguments{
-\item{y}{a matrix of frequencies of animal detections. Each row is a replicate dataset. Rows should be limited when using P-s hyps (1 or 2). The matrix should always be three columns in this order: twilight, day, night.}
+\item{y}{a matrix of frequencies of animal detections. Each row is a replicate dataset. Rows should be limited when using P-s hyps (1 or 2). The matrix should always be three columns in this order: twilight, day, night. If all frequencies are 0, posteriors will be sampled from the prior according to the hypotheses.}
 
 \item{hyp.set}{Vector of diel hypotheses names representing hypotheses set or individual hypotheses.}
 

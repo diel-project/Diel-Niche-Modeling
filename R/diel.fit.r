@@ -2,7 +2,7 @@
 #'
 #' Diel model hypotheses evaluation and parameter estimation.
 #' This is essentially a wrapper function for functions provided by the package multinomineq.
-#' @param y a matrix of frequencies of animal detections. Each row is a replicate dataset. Rows should be limited when using P-s hyps (1 or 2). The matrix should always be three columns in this order: twilight, day, night.
+#' @param y a matrix of frequencies of animal detections. Each row is a replicate dataset. Rows should be limited when using P-s hyps (1 or 2). The matrix should always be three columns in this order: twilight, day, night. If all frequencies are 0, posteriors will be sampled from the prior according to the hypotheses.
 #' @param hyp.set Vector of diel hypotheses names representing hypotheses set or individual hypotheses.
 #' @param bf.fit If TRUE, will calculate bayes factors for the model sit. Default is TRUE.
 #' @param prior Prior probabilities for models used in bayes factors. Defaults to equal among models. 
