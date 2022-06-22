@@ -31,10 +31,10 @@ sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0){
   prob.select=matrix(prob.hyp[sample(nrow(prob.hyp),reps),],nrow=reps,ncol=3)
   
   #add in normal distribution error on logit scale and backtransorm
-  prob.select=plogis(qlogis(prob.select)+matrix(rnorm(length(prob.select),0,sd.error),ncol=3))
+  prob.select.with.error=plogis(qlogis(prob.select)+matrix(rnorm(length(prob.select),0,sd.error),ncol=3))
   
   #simulate n.sim datesets of n.sample size
-  y=c(apply(prob.select,1,
+  y=c(apply(prob.select.with.error,1,
         FUN=function(x){t(rmultinom(n.sim,size=n.sample,prob=x))}))
   #names(y)=paste(rep(c("p_crep","p_day","p_night"), times = reps), rep(1:(reps),each=3), sep = "_")
   
@@ -42,5 +42,5 @@ sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0){
   colnames(y)=c("y_crep","y_day","y_night")
   
   #return sim data and probability
-  list(y=y,p=prob.select,sd.error=sd.error)
+  list(y=y,p=prob.select,p.error=prob.select.with.error,sd.error=sd.error)
 }
