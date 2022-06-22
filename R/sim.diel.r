@@ -6,6 +6,7 @@
 #' @param n.sample The number of total samples for a given simulation
 #' @param hyp The hypothesis to simulate data from
 #' @param diel.setup Multinomial inequalities for hypotheses setup using function 'diel.ineq'.
+#' @param sd.error Normal distribution standard deviation to simulate error to add to the probabilities on the logit-scale. Default is 0
 #' @return A list of outputs
 #' \item{y}{Matrix of simulated datasets}
 #' \item{p}{Probabilities used to simulate the data}  
@@ -14,7 +15,12 @@
 #' sim.diel(n.sim=1,reps=1,n.sample=100,hyp="D.th")
 #' @export
 
-sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL){
+sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0){
+  
+  if(sd.error<0| !is.numeric(sd.error)){
+    stop("sd.error need to be numeric and greater than or equal to zero.")
+  }
+  
   #if diel.setup not provided use defaults
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   
@@ -23,6 +29,9 @@ sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL){
   
   #Randomly select  probabilities- reps times
   prob.select=matrix(prob.hyp[sample(nrow(prob.hyp),reps),],nrow=reps,ncol=3)
+  
+  #add in normal distribution error on logit scale and backtransorm
+  prob.select=plogis(qlogis(prob.select)+matrix(rnorm(length(prob.select),0,sd.error),ncol=3))
   
   #simulate n.sim datesets of n.sample size
   y=c(apply(prob.select,1,

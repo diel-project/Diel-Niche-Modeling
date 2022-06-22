@@ -1,3 +1,15 @@
+#' Check on inputs
+#'
+#' A function to check the inputs provided through the function 'diel.fit'
+#' @param y vector of frequencies
+#' @param idx.mod indices of hypotheses of diel.setup to use
+#' @param reps replicate samples of three
+#' @param diel.setup provided by user or used default as 'diel.setup=diel.ineq()'
+#' @param delta error tolerance allowed
+#' @return Internal list
+#' @export
+#' @keywords internal
+
 modify.Ab=function(y,idx.mod,reps,diel.setup,delta){
     
   bf.Ab.new=vector("list",length(idx.mod)); names(bf.Ab.new)=names(idx.mod)

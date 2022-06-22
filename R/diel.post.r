@@ -53,8 +53,9 @@ if(isTRUE(prints)){message(paste0("Posterior Sampling..."))}
             sampling.mcmc[[i]]=coda::as.mcmc.list(sampling.mcmc[[i]])
             if(n.chains>1){gelm.diag[[i]]=coda::gelman.diag(sampling.mcmc[[i]], confidence = 0.95,multivariate = FALSE)}
         
-            #Calculate posterior predictive check 
-            ppc.list[[i]]=multinomineq::ppp_multinom(sampling.mcmc[[i]],k=y,options=rep(3,reps))
+            #Calculate posterior predictive check
+            #skips this if y is all zero, indicating to simualte from the prior
+            if(sum(y)>0){ppc.list[[i]]=multinomineq::ppp_multinom(sampling.mcmc[[i]],k=y,options=rep(3,reps))}
         
           for(l in 1:n.chains){
             #First, find the paired reps and assign them the same column name
@@ -81,9 +82,11 @@ if(isTRUE(prints)){message(paste0("Posterior Sampling..."))}
 
   #remove models not fit
   #ppc.list=ppc.list[indicator %in% "1" == FALSE]  
+  #only do this if not simulating frrm prior
+  if(sum(y)>0){
   ppc=data.frame(names(ppc.list),matrix(unlist(ppc.list),ncol=3,byrow = TRUE))
   colnames(ppc)<-c("Model","X2_obs","X2_pred","ppp")
-  
+  }else{ppc=NULL}
 #output results as list  
   list(sampling.mcmc=sampling.mcmc,
        ppc=ppc,

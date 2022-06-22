@@ -4,7 +4,14 @@
 \alias{sim.diel}
 \title{Simulate}
 \usage{
-sim.diel(n.sim = 1, reps = 1, n.sample = 100, hyp, diel.setup = NULL)
+sim.diel(
+  n.sim = 1,
+  reps = 1,
+  n.sample = 100,
+  hyp,
+  diel.setup = NULL,
+  sd.error = 0
+)
 }
 \arguments{
 \item{n.sim}{The number of simulated datasets}
@@ -16,6 +23,8 @@ sim.diel(n.sim = 1, reps = 1, n.sample = 100, hyp, diel.setup = NULL)
 \item{hyp}{The hypothesis to simulate data from}
 
 \item{diel.setup}{Multinomial inequalities for hypotheses setup using function 'diel.ineq'.}
+
+\item{sd.error}{Normal distribution standard deviation to simulate error to add to the probabilities on the logit-scale. Default is 0}
 }
 \value{
 A list of outputs
