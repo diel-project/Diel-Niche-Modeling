@@ -166,6 +166,15 @@ diel.ineq=function(e=NULL,
   
   #################################
   #################################
+  #Unconstrained model
+  #Consraints specify p_c and p_d have to be between 0 and 1
+  A.uncon <- matrix(c(0,1,0,-1,1,0,-1,0),ncol = 2, byrow = TRUE)
+  b.uncon <- c(1,0,1,0)
+  Uncon=list(Name="Unconstrained",A=A.uncon,b=b.uncon,func="bf_multinom")
+  
+  #################################
+  #################################
+  
   #Diurnal Hypotheses
   # Threshold
   A.D.th <- matrix(c(1,-1,-1,-2,0,-1),ncol = 2, byrow = TRUE)
