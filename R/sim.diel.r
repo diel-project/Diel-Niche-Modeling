@@ -42,5 +42,5 @@ sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0){
   colnames(y)=c("y_crep","y_day","y_night")
   
   #return sim data and probability
-  list(y=y,p=prob.select)
+  list(y=y,p=prob.select,sd.error=sd.error)
 }
