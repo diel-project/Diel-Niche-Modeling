@@ -178,14 +178,14 @@ diel.ineq=function(e=NULL,
   #Crepuscular
   CR =list(Name="Gen.CR",func="bf_nonlinear",
            inside= function(x){
-            min(apply(abs(non.linear.data$Gen.CR-x),1,sum))<0.001
+            min(apply(abs(non.linear.data$Gen.CR-x),1,sum))<0.01
              }
            )
 
   #Diurnal
    D =list(Name="Gen.D",func="bf_nonlinear",
           inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Gen.D,2,x)),1,sum))<0.001
+            min(apply(abs(sweep(non.linear.data$Gen.D,2,x)),1,sum))<0.01
         })
    
    
@@ -193,13 +193,13 @@ diel.ineq=function(e=NULL,
   #Nocturnal
   N =list(Name="Gen.N",func="bf_nonlinear",
           inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Gen.N,2,x)),1,sum))<0.001
+            min(apply(abs(sweep(non.linear.data$Gen.N,2,x)),1,sum))<0.01
              })
 
   #Cathemeral
   C =list(Name="Gen.C",func="bf_nonlinear",
           inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Gen.C,2,x)),1,sum))<0.001
+            min(apply(abs(sweep(non.linear.data$Gen.C,2,x)),1,sum))<0.01
              })
 
   #################################
@@ -208,11 +208,11 @@ diel.ineq=function(e=NULL,
   
    Full.C =list(Name="Full.C",func="bf_nonlinear",
           inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Full.C,2,x)),1,sum))<0.001
+            min(apply(abs(sweep(non.linear.data$Full.C,2,x)),1,sum))<0.01
         })
    Full.CR =list(Name="Full.CR",func="bf_nonlinear",
           inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Full.CR,2,x)),1,sum))<0.001
+            min(apply(abs(sweep(non.linear.data$Full.CR,2,x)),1,sum))<0.01
         })
 
     
