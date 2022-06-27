@@ -191,8 +191,8 @@ diel.ineq=function(e=NULL,
   N =list(Name="N",A=A.N,b=b.N,func="bf_multinom")
 
   #Cathemeral
-  A.C <- matrix(c(1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.C <- c(0.499,0.499,0.499-1)
+  A.C <- matrix(c(1,0,0,1,-1,-1,-1,0,0,-1,1,1),ncol = 2, byrow = TRUE)
+  b.C <- c(0.499,0.499,0.499-1,-0.1001,-0.1001,-0.1001+1)
   C =list(Name="C",A=A.C,b=b.C,func="bf_multinom")
 
   #################################
