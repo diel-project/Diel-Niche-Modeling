@@ -171,7 +171,30 @@ diel.ineq=function(e=NULL,
   A.uncon <- matrix(c(0,1,0,-1,1,0,-1,0),ncol = 2, byrow = TRUE)
   b.uncon <- c(1,0,1,0)
   Uncon=list(Name="Unconstrained",A=A.uncon,b=b.uncon,func="bf_multinom")
-  
+
+  #################################
+  #################################
+  #General Hypotheses 
+  #Crepuscular
+  A.CR <- matrix(c(-1,0),ncol = 2, byrow = TRUE)
+  b.CR <- c(-0.5)
+  CR =list(Name="CR",A=A.CR,b=b.CR,func="bf_multinom")
+
+  #Diurnal
+  A.D <- matrix(c(0,-1),ncol = 2, byrow = TRUE)
+  b.D <- c(-0.5)
+  D =list(Name="D",A=A.D,b=b.D,func="bf_multinom")
+
+  #Nocturnal
+  A.N <- matrix(c(1,1),ncol = 2, byrow = TRUE)
+  b.N <- c(-0.5+1)
+  N =list(Name="N",A=A.N,b=b.N,func="bf_multinom")
+
+  #Cathemeral
+  A.C <- matrix(c(1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
+  b.C <- c(0.499,0.499,0.499-1)
+  C =list(Name="C",A=A.C,b=b.C,func="bf_multinom")
+
   #################################
   #################################
   
@@ -590,7 +613,8 @@ diel.ineq=function(e=NULL,
     Dn.th.wk=Dn.th.wk,Dn.var.wk=Dn.var.wk,Dcr.th.wk=Dcr.th.wk,
     Dcr.var.wk=Dcr.var.wk,Nd.th.wk=Nd.th.wk,Nd.var.wk=Nd.var.wk,
     Ncr.var.wk=Ncr.var.wk,CRd.th.wk=CRd.th.wk,CRn.var.wk=CRn.var.wk,
-    Ncr.th.wk=Ncr.th.wk,CRn.th.wk=CRn.th.wk,Uncon=Uncon,inputs=inputs
+    Ncr.th.wk=Ncr.th.wk,CRn.th.wk=CRn.th.wk,Uncon=Uncon,
+    N=N,C=C,CR=CR,D=D,inputs=inputs
     )
   
   #output from function
