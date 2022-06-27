@@ -45,6 +45,7 @@ if(isTRUE(prints)){message(paste0("Posterior Sampling..."))}
                                                                                ))
                                   ,silent=TRUE)
       }
+    }
       if(diel.setup[[idx.mod[i]]]$func=="bf_nonlinear"){
                 sampling.mcmc[[i]]= try(
                             multinomineq::sampling_nonlinear(k=y,options = rep(3,reps),
