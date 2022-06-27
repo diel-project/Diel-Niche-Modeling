@@ -63,8 +63,7 @@ if(isTRUE(prints)){message(paste0("Posterior Sampling..."))}
       #Process output as long as no error
       if(!is.null(sampling.mcmc[[i]]) & 
          isFALSE(any(grepl("Error", sampling.mcmc[[i]][[1]]))) &
-         length(which(is.na( sampling.mcmc[[i]])))<100
-         ){
+         length(which(is.na( sampling.mcmc[[i]])))<100){
             sampling.mcmc[[i]]=coda::as.mcmc.list(sampling.mcmc[[i]])
             if(n.chains>1){gelm.diag[[i]]=coda::gelman.diag(sampling.mcmc[[i]], confidence = 0.95,multivariate = FALSE)}
         
