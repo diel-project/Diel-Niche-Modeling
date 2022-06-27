@@ -30,7 +30,7 @@ diel.post=function(y,idx.mod,diel.setup,bf.Ab.new,reps,
 if(isTRUE(prints)){message(paste0("Posterior Sampling..."))}    
 #Loop through models/hyps that need to be fit
   for(i in 1:length(idx.mod)){
-
+    if(diel.setup[[idx.mod[i]]]$func!="bf_nonlinear"){
       A=bf.Ab.new[[i]]$A
       b=bf.Ab.new[[i]]$b
     
@@ -44,6 +44,19 @@ if(isTRUE(prints)){message(paste0("Posterior Sampling..."))}
                                                                                progress = FALSE
                                                                                ))
                                   ,silent=TRUE)
+      }
+      if(diel.setup[[idx.mod[i]]]$func=="bf_nonlinear"){
+                sampling.mcmc[[i]]= try(
+                            multinomineq::sampling_nonlinear(k=y,options = rep(3,reps),
+                                                     inside=diel.setup[[idx.mod[i]]]$inside,                          
+                                                      M=n.mcmc,cpu=n.cpu,burnin=burnin,
+                                                      progress = FALSE)
+                                  ,silent=TRUE)
+                                  
+
+        
+      }  
+      
       
       #Process output as long as no error
       if(!is.null(sampling.mcmc[[i]]) & 
