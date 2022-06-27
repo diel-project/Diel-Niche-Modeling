@@ -36,7 +36,8 @@ modify.Ab=function(y,idx.mod,reps,diel.setup,delta){
                                return_Ab = TRUE)
       bf.Ab.new[[i]]=list(A=temp$A,b=temp$b)
       
-    }else{#End if statement                
+    }
+    if(diel.setup[[idx.mod[i]]]$func=="bf_multinom"){
     #if_equality is false then  
       A=diel.setup[[idx.mod[i]]][[2]]
       b=diel.setup[[idx.mod[i]]][[3]]
