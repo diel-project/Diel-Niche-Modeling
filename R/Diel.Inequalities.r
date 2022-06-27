@@ -177,17 +177,17 @@ diel.ineq=function(e=NULL,
   #General Hypotheses - first inequality is not doing much - maintaining code
   #Crepuscular
   A.CR <- matrix(c(1,0,-1,0),ncol = 2, byrow = TRUE)
-  b.CR <- c(1,-0.5)
+  b.CR <- c(1,-0.4501)
   CR =list(Name="CR",A=A.CR,b=b.CR,func="bf_multinom")
 
   #Diurnal
   A.D <- matrix(c(0,1,0,-1),ncol = 2, byrow = TRUE)
-  b.D <- c(1,-0.5)
+  b.D <- c(1,-0.4501)
   D =list(Name="D",A=A.D,b=b.D,func="bf_multinom")
 
   #Nocturnal
   A.N <- matrix(c(-1,-1,1,1),ncol = 2, byrow = TRUE)
-  b.N <- c(0,-0.5+1)
+  b.N <- c(0,-0.4501+1)
   N =list(Name="N",A=A.N,b=b.N,func="bf_multinom")
 
   #Cathemeral
