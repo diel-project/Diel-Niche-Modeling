@@ -160,7 +160,7 @@ diel.bf=function(y,
                                   M=n.mcmc,cpu=n.cpu,
                                   prior = rep(1,length(y)),progress = FALSE)
                     ,silent=TRUE)
-    if(any(is.infinite(bf[[i]][,1]))){indicator[i]=1}
+    #if(any(is.infinite(bf[[i]][,1]))){indicator[i]=1}
       }
       
     if(grepl("Error", bf[[i]][[1]])| all(is.na(bf[[i]][,1]))){indicator[i]=1}
