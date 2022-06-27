@@ -22,7 +22,7 @@ if(diel.setup[[index.models]]$func=="bf_multinom"){
   b=diel.setup[[index.models]][[3]]
   
   #Find all A %*% theta combinations
-  p.ineq= matrix(apply(p.options[1:2,],2,FUN=function(x){A%*%x}),ncol=length(b))
+  p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
 
