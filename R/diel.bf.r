@@ -83,8 +83,9 @@ diel.bf=function(y,
 
     } #End if Error stament
     
-    }else{ # bf_equality is false
+    }#END IF bf_equality
     
+    if(diel.setup[[idx.mod[i]]]$func=="bf_multinom"){
     #Get A matrix and b vector
     A=diel.setup[[idx.mod[i]]][[2]]
     b=diel.setup[[idx.mod[i]]][[3]]
@@ -149,7 +150,19 @@ diel.bf=function(y,
       
       bf[[i]]= multinomineq::count_to_bf(posterior=count.model,prior=count.model.prior)
     }
-    }#end first else
+    }#end bf_multinom IF
+    
+    #bf_nonlinera
+    if(diel.setup[[idx.mod[i]]]$func=="bf_nonlinear"){
+      bf[[i]]= try(
+                    multinomineq::bf_nonlinear(k=y,options =  rep(3,reps),
+                                  inside=diel.setup[[idx.mod[i]]]$inside,
+                                  M=n.mcmc,cpu=n.cpu,
+                                  prior = rep(1,length(y)),progress = FALSE)
+                    ,silent=TRUE)
+    
+      }
+      
     if(grepl("Error", bf[[i]][[1]])| all(is.na(bf[[i]][,1]))){indicator[i]=1}
     
   } #End model for loop

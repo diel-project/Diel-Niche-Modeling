@@ -174,30 +174,54 @@ diel.ineq=function(e=NULL,
 
   #################################
   #################################
-  #General Hypotheses - first inequality is not doing much - maintaining code
+  #General Hypotheses - non linear model fitting
   #Crepuscular
-  A.CR <- matrix(c(1,0,-1,0),ncol = 2, byrow = TRUE)
-  b.CR <- c(1,-0.4501)
-  CR =list(Name="CR",A=A.CR,b=b.CR,func="bf_multinom")
+  CR =list(Name="Gen.CR",func="bf_nonlinear",
+           inside= function(x){
+            min(apply(abs(non.linear.data$Gen.CR-x),1,sum))<0.01
+             }
+           )
 
   #Diurnal
-  A.D <- matrix(c(0,1,0,-1),ncol = 2, byrow = TRUE)
-  b.D <- c(1,-0.4501)
-  D =list(Name="D",A=A.D,b=b.D,func="bf_multinom")
+   D =list(Name="Gen.D",func="bf_nonlinear",
+          inside= function(x){
+            min(apply(abs(non.linear.data$Gen.D-x),1,sum))<0.01
+        })
 
   #Nocturnal
-  A.N <- matrix(c(-1,-1,1,1),ncol = 2, byrow = TRUE)
-  b.N <- c(0,-0.4501+1)
-  N =list(Name="N",A=A.N,b=b.N,func="bf_multinom")
+  N =list(Name="Gen.N",func="bf_nonlinear",
+          inside= function(x){
+            min(apply(abs(non.linear.data$Gen.N-x),1,sum))<0.01
+             })
 
   #Cathemeral
-  A.C <- matrix(c(1,0,0,1,-1,-1,-1,0,0,-1,1,1),ncol = 2, byrow = TRUE)
-  b.C <- c(0.499,0.499,0.499-1,-0.1001,-0.1001,-0.1001+1)
-  C =list(Name="C",A=A.C,b=b.C,func="bf_multinom")
+  C =list(Name="Gen.C",func="bf_nonlinear",
+          inside= function(x){
+            min(apply(abs(non.linear.data$Gen.C-x),1,sum))<0.01
+             })
 
   #################################
   #################################
+  #Full list of models for complete set - no cathemeral
   
+   Full.C =list(Name="Full.C",func="bf_nonlinear",
+          inside= function(x){
+            min(apply(abs(non.linear.data$Full.C-x),1,sum))<0.01
+        })
+   Full.CR =list(Name="Full.CR",func="bf_nonlinear",
+          inside= function(x){
+            min(apply(abs(non.linear.data$Full.CR-x),1,sum))<0.01
+        })
+   Full.CR.D =list(Name="Full.CR-D",func="bf_nonlinear",
+          inside= function(x){
+            min(apply(abs(non.linear.data$Full.CR.D-x),1,sum))<0.01
+        })
+
+    
+  
+  #################################
+  #################################
+    
   #Diurnal Hypotheses
   # Threshold
   A.D.th <- matrix(c(1,-1,-1,-2,0,-1),ncol = 2, byrow = TRUE)

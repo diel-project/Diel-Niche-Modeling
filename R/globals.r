@@ -4,4 +4,4 @@
 #' @importFrom utils globalVariables
 #' @keywords internal
 #' @name globalvars
-utils::globalVariables(c("p.options", "p.options2"))
+utils::globalVariables(c("p.options", "p.options2", "non.linear.data"))
