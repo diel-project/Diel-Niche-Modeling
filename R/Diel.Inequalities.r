@@ -207,6 +207,31 @@ diel.ineq=function(e=NULL,
           inside=  function(x){
                   min(abs(x[1] - matrix(non.linear.data$Gen.C[,1]))+abs(x[2] - matrix(non.linear.data$Gen.C[,2])))<=0.01
                     })
+#################################
+#################################
+#Using general hyps as inequalities
+
+  
+  #D
+  A.D <- matrix(c(1,-1,-1,-2,0,-1),ncol = 2, byrow = TRUE)
+  b.D <- c(0,-1,-0.45)
+  D.Gen=list(Name="Diurnal (General)",A=A.D,b=b.D,func="bf_multinom")     
+
+  #N
+  A.N <- matrix(c(2,1,1,2,1,1),ncol = 2, byrow = TRUE)
+  b.N <- c(1,1,-0.45+1)
+  N.Gen=list(Name="Nocturnal (General)",A=A.N,b=b.N,func="bf_multinom")     
+  
+  #CR
+  A.CR <- matrix(c(-1,1,-2,-1,-1,0),ncol = 2, byrow = TRUE)
+  b.CR <- c(0,-1,-0.45)
+  CR.Gen=list(Name="Crepuscular (General)",A=A.CR,b=b.CR,func="bf_multinom")     
+
+  #C
+  A.C <- matrix(c(1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
+  b.C <- c(0.4499,0.4499,0.4499-1)
+  C.Gen=list(Name="Cathemeral (General)",A=A.C,b=b.C,func="bf_multinom")     
+
 
   #################################
   #################################
@@ -707,6 +732,7 @@ diel.ineq=function(e=NULL,
     CRc.Full=CRc.Full,CRd.Full=CRd.Full,CRn.Full=CRn.Full, D.Full=D.Full,  D.N.Full=D.N.Full,
     Dc.Full=Dc.Full, Dcr.Full=Dcr.Full,Dn.Full=Dn.Full, EC.Full=EC.Full,N.Full=N.Full,  
     Nc.Full=Nc.Full, Ncr.Full=Ncr.Full, Nd.Full=Nd.Full,
+    D.Gen=D.Gen,N.Gen=N.Gen,CR.Gen=CR.Gen,C.Gen=C.Gen,
     inputs=inputs
     )
   
