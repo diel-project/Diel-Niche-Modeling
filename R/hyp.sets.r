@@ -17,7 +17,7 @@
 hyp.sets=function(hyp.in=NULL){
 
   #NEED TO INCLUDE C.th somewhere
-  hyp.set=vector("list",19)
+  hyp.set=vector("list",20)
   
  #General Hypotheses
   hyp.set[[1]]=c("D.th","N.th","CR.th","EC.th")   
@@ -57,7 +57,14 @@ hyp.sets=function(hyp.in=NULL){
   hyp.set[[18]]=unique(unlist(hyp.set[1:11]))
   names(hyp.set)[17:18]=c("hyp.all","hyp.all2")
 
-  hyp.set[[10]]=c("Gen.D","Gen.N","Gen.C","Gen.CR")
+  hyp.set[[19]]=c("D","N","C","CR")
+  names(hyp.set)[19]=c("General")
+  
+  hyp.set[[20]]=c("C.Full", "CR.Full",  "CR.D.Full","CR.N.Full", "CRc.Full","CRd.Full" ,
+          "CRn.Full", "D.Full",  "D.N.Full","Dc.Full", "Dcr.Full","Dn.Full",  
+          "N.Full",  "Nc.Full", "Ncr.Full", "Nd.Full" )
+  
+  names(hyp.set)[20]=c("Full")
   
 if(is.null(hyp.in)){   
   cat("Names of Hypotheses Sets: \n",names(hyp.set),sep="  ")

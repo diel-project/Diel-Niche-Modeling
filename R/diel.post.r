@@ -53,7 +53,7 @@ if(isTRUE(prints)){message(paste0("Posterior Sampling..."))}
                                         expr = multinomineq::sampling_nonlinear(k=y,options = rep(3,reps),
                                                      inside=diel.setup[[idx.mod[i]]]$inside,                          
                                                       M=n.mcmc,cpu=n.cpu,burnin=burnin,
-                                                      progress = TRUE,eps = 1e-06))
+                                                      progress = FALSE,eps = 1e-06))
                   
                   
                             
