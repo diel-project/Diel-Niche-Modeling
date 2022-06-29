@@ -58,7 +58,7 @@ hyp.sets=function(hyp.in=NULL){
   names(hyp.set)[17:18]=c("hyp.all","hyp.all2")
 
   hyp.set[[19]]=c("D.Gen","N.Gen","C.Gen","CR.Gen")
-  names(hyp.set)[19]=c("General")
+  names(hyp.set)[19]=c("General.Ineq")
 
   hyp.set[[20]]=c("D","N","C","CR")
   names(hyp.set)[20]=c("General")
