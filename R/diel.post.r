@@ -49,10 +49,14 @@ if(isTRUE(prints)){message(paste0("Posterior Sampling..."))}
     
       if(diel.setup[[idx.mod[i]]]$func=="bf_nonlinear"){
                 sampling.mcmc[[i]]= try(
-                            multinomineq::sampling_nonlinear(k=y,options = rep(3,reps),
+                   replicate(n = n.chains, simplify = FALSE,
+                                        expr = multinomineq::sampling_nonlinear(k=y,options = rep(3,reps),
                                                      inside=diel.setup[[idx.mod[i]]]$inside,                          
                                                       M=n.mcmc,cpu=n.cpu,burnin=burnin,
-                                                      progress = FALSE)
+                                                      progress = TRUE,eps = 1e-06))
+                  
+                  
+                            
                                   ,silent=TRUE)
                                   
 

@@ -176,46 +176,112 @@ diel.ineq=function(e=NULL,
   #################################
   #General Hypotheses - non linear model fitting
   #Crepuscular
-  CR =list(Name="Gen.CR",func="bf_nonlinear",
-           inside= function(x){
-            min(apply(abs(non.linear.data$Gen.CR-x),1,sum))<0.01
-             }
+  CR =list(Name="Gen.CR",func="bf_nonlinear",data=non.linear.data$Gen.CR,
+                  inside=  function(x){
+                  min(abs(x[1] - matrix(non.linear.data$Gen.CR[,1]))+abs(x[2] - matrix(non.linear.data$Gen.CR[,2])))<=0.01
+                    }
+
            )
 
+#              inside=  function(x){
+#                   General.hyps[which.min(abs(x[1] - General.hyps[,1])+abs(x[2] - General.hyps[,2])),3]=="CR"
+# }
+
+  
   #Diurnal
-   D =list(Name="Gen.D",func="bf_nonlinear",
-          inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Gen.D,2,x)),1,sum))<0.01
-        })
+   D =list(Name="Gen.D",func="bf_nonlinear",data=non.linear.data$Gen.D,
+              inside=  function(x){
+                  min(abs(x[1] - matrix(non.linear.data$Gen.D[,1]))+abs(x[2] - matrix(non.linear.data$Gen.D[,2])))<=0.01
+                    })
    
    
 
   #Nocturnal
-  N =list(Name="Gen.N",func="bf_nonlinear",
-          inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Gen.N,2,x)),1,sum))<0.01
-             })
+  N =list(Name="Gen.N",func="bf_nonlinear",data=non.linear.data$Gen.N,
+          inside=  function(x){
+                  min(abs(x[1] - matrix(non.linear.data$Gen.N[,1]))+abs(x[2] - matrix(non.linear.data$Gen.N[,2])))<=0.01
+                    })
 
   #Cathemeral
-  C =list(Name="Gen.C",func="bf_nonlinear",
-          inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Gen.C,2,x)),1,sum))<0.01
-             })
+  C =list(Name="Gen.C",func="bf_nonlinear",data=non.linear.data$Gen.C,
+          inside=  function(x){
+                  min(abs(x[1] - matrix(non.linear.data$Gen.C[,1]))+abs(x[2] - matrix(non.linear.data$Gen.C[,2])))<=0.01
+                    })
 
   #################################
   #################################
   #Full list of models for complete set - no cathemeral
-  
-   Full.C =list(Name="Full.C",func="bf_nonlinear",
-          inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Full.C,2,x)),1,sum))<0.01
-        })
-   Full.CR =list(Name="Full.CR",func="bf_nonlinear",
-          inside= function(x){
-            min(apply(abs(sweep(non.linear.data$Full.CR,2,x)),1,sum))<0.01
-        })
 
-    
+  C.Full =list(Name="Full.C",func="bf_nonlinear",data=non.linear.data$Full.C,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="C"
+              })
+#inside=  function(x){min(abs(x[1] - matrix(non.linear.data$Full.C[,1]))+abs(x[2] - matrix(non.linear.data$Full.C[,2])))<=0.01}
+
+  CR.Full =list(Name="Full.CR",func="bf_nonlinear",data=non.linear.data$Full.CR,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CR"
+              })
+  CR.D.Full =list(Name="Full.CR.D",func="bf_nonlinear",data=non.linear.data$Full.CR.D,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CR.D"
+              })  
+  CR.N.Full =list(Name="Full.CR.N",func="bf_nonlinear",data=non.linear.data$Full.CR.N,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CR.N"
+              })  
+  CRc.Full =list(Name="Full.CRc",func="bf_nonlinear",data=non.linear.data$Full.CRc,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CRc"
+              })  
+  CRd.Full =list(Name="Full.CRd",func="bf_nonlinear",data=non.linear.data$Full.CRd,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CRd"
+              })  
+  CRn.Full =list(Name="Full.CRn",func="bf_nonlinear",data=non.linear.data$Full.CRn,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CRn"
+              })  
+  D.Full =list(Name="Full.D",func="bf_nonlinear",data=non.linear.data$Full.D,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="D"
+              })  
+  D.N.Full =list(Name="Full.D.N",func="bf_nonlinear",data=non.linear.data$Full.D.N,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="D.N"
+              })  
+  Dc.Full =list(Name="Full.Dc",func="bf_nonlinear",data=non.linear.data$Full.Dc,
+          inside=  function(x){
+                  min(abs(x[1] - matrix(non.linear.data$Full.Dc[,1]))+abs(x[2] - matrix(non.linear.data$Full.Dc[,2])))<=0.01
+                    })  
+  Dcr.Full =list(Name="Full.Dcr",func="bf_nonlinear",data=non.linear.data$Full.Dcr,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Dcr"
+              })  
+  Dn.Full =list(Name="Full.Dn",func="bf_nonlinear",data=non.linear.data$Full.Dn,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Dn"
+              })  
+  EC.Full =list(Name="Full.EC",func="bf_nonlinear",data=non.linear.data$Full.EC,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="EC"
+              })  
+  N.Full =list(Name="Full.N",func="bf_nonlinear",data=non.linear.data$Full.N,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="N"
+              })  
+  Nc.Full =list(Name="Full.Nc",func="bf_nonlinear",data=non.linear.data$Full.Nc,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Nc"
+              })  
+  Ncr.Full =list(Name="Full.Ncr",func="bf_nonlinear",data=non.linear.data$Full.Ncr,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Ncr"
+              })  
+  Nd.Full =list(Name="Full.Nd",func="bf_nonlinear",data=non.linear.data$Full.Nd,
+          inside=  function(x){
+                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Nd"
+              })  
   
   #################################
   #################################
@@ -636,7 +702,12 @@ diel.ineq=function(e=NULL,
     Dcr.var.wk=Dcr.var.wk,Nd.th.wk=Nd.th.wk,Nd.var.wk=Nd.var.wk,
     Ncr.var.wk=Ncr.var.wk,CRd.th.wk=CRd.th.wk,CRn.var.wk=CRn.var.wk,
     Ncr.th.wk=Ncr.th.wk,CRn.th.wk=CRn.th.wk,Uncon=Uncon,
-    N=N,C=C,CR=CR,D=D,inputs=inputs
+    N=N,C=C,CR=CR,D=D,
+    C.Full=C.Full, CR.Full=CR.Full,  CR.D.Full=CR.D.Full,CR.N.Full=CR.N.Full,
+    CRc.Full=CRc.Full,CRd.Full=CRd.Full,CRn.Full=CRn.Full, D.Full=D.Full,  D.N.Full=D.N.Full,
+    Dc.Full=Dc.Full, Dcr.Full=Dcr.Full,Dn.Full=Dn.Full, EC.Full=EC.Full,N.Full=N.Full,  
+    Nc.Full=Nc.Full, Ncr.Full=Ncr.Full, Nd.Full=Nd.Full,
+    inputs=inputs
     )
   
   #output from function

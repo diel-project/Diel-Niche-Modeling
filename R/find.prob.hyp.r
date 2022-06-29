@@ -26,7 +26,16 @@ if(diel.setup[[index.models]]$func=="bf_multinom"){
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
 
-}else{
+  #Find where they are true
+  index=which(p.ineq.logical)
+
+ #These are the combinations of p's that match the constraints
+  probs.out=t(p.options[,index])
+  
+
+}#End if
+  
+if(diel.setup[[index.models]]$func=="bf_equality"){  
   A=diel.setup[[index.models]][[2]]
   b=diel.setup[[index.models]][[3]]
   C=diel.setup[[index.models]][[4]]
@@ -44,13 +53,23 @@ if(diel.setup[[index.models]]$func=="bf_multinom"){
   p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
   
   p.ineq.logical=apply(data.frame(p.ineq.logical,p.ineq.logical2),1,FUN=function(x){all(x)})
-}
-
- #Find where they are true
- index=which(p.ineq.logical)
+  
+   #Find where they are true
+  index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
   probs.out=t(p.options[,index])
+  
+}
+
+if(diel.setup[[index.models]]$func=="bf_nonlinear"){  
+probs.out=as.matrix(diel.setup[[index.models]]$data,ncol=2)
+probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
+probs.out=matrix(probs.out,ncol=3)
+  }
+  
+  
+
   
   #make sure there are not mistakes
   #index.remove=which(probs.out[,3]<0 | probs.out[,3]>1)

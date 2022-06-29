@@ -160,7 +160,7 @@ diel.bf=function(y,
                                   M=n.mcmc,cpu=n.cpu,
                                   prior = rep(1,length(y)),progress = FALSE)
                     ,silent=TRUE)
-    #if(any(is.infinite(bf[[i]][,1]))){indicator[i]=1}
+    if((is.infinite(bf[[i]][2,1]))){indicator[i]=2}
       }
       
     if(grepl("Error", bf[[i]][[1]])| all(is.na(bf[[i]][,1]))){indicator[i]=1}
@@ -172,7 +172,7 @@ diel.bf=function(y,
   #Remove models from bf that did not fit
 
   prior.postbf.hyp=construct.post.prob(bf,hyp.set,prior,indicator)
-
+  indicator[which(indicator==2)]=1
   
 #output results as list  
 list(prior.postbf.hyp=prior.postbf.hyp$prior.postbf.hyp,

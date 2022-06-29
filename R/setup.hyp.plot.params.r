@@ -22,9 +22,16 @@ if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
   #Find all A %*% theta combinations
   p.ineq= apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
   #find if that is <= b
-  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})
+  
+  index=which(p.ineq.logical)
 
-}else{
+ #These are the combinations of p's that match the constraints
+  p.plot=t(p.options2[,index])
+
+}#end if statement
+  
+if(diel.setup[[index.models[i]]]$func=="bf_equality"){  
   A=diel.setup[[index.models[i]]][[2]]
   b=diel.setup[[index.models[i]]][[3]]
   C=diel.setup[[index.models[i]]][[4]]
@@ -42,14 +49,21 @@ if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
   p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
   
   p.ineq.logical=apply(data.frame(p.ineq.logical,p.ineq.logical2),1,FUN=function(x){all(x)})
-}
- 
- 
- 
+  
  index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
   p.plot=t(p.options2[,index])
+
+}
+ 
+if(diel.setup[[index.models[i]]]$func=="bf_nonlinear"){  
+p.plot=as.matrix(diel.setup[[index.models[i]]]$data,ncol=2)
+#probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
+#probs.out=matrix(probs.out,ncol=3)
+
+}  
+ 
   
   #now add back in the third prob
   p.plot=cbind(p.plot,1-apply(p.plot,1,sum))
