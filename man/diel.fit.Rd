@@ -8,6 +8,7 @@ diel.fit(
   y,
   hyp.set,
   bf.fit = TRUE,
+  post.fit = FALSE,
   diel.setup = NULL,
   prior = NULL,
   n.chains = 1,
@@ -24,6 +25,8 @@ diel.fit(
 \item{hyp.set}{Vector of diel hypotheses names representing hypotheses set or individual hypotheses.}
 
 \item{bf.fit}{If TRUE, will calculate bayes factors for the model sit. Default is TRUE.}
+
+\item{post.fit}{If TRUE, will fit posterior samples to all models in hyp.set. Default is FALSE.}
 
 \item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'. If not provided, it will use the defaults of the diel.ineq function.}
 
