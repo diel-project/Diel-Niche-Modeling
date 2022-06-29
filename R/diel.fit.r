@@ -5,6 +5,7 @@
 #' @param y a matrix of frequencies of animal detections. Each row is a replicate dataset. Rows should be limited when using P-s hyps (1 or 2). The matrix should always be three columns in this order: twilight, day, night. If all frequencies are 0, posteriors will be sampled from the prior according to the hypotheses.
 #' @param hyp.set Vector of diel hypotheses names representing hypotheses set or individual hypotheses.
 #' @param bf.fit If TRUE, will calculate bayes factors for the model sit. Default is TRUE.
+#' @param post.fit If TRUE, will fit posterior samples to all models in hyp.set. Default is FALSE. 
 #' @param prior Prior probabilities for models used in bayes factors. Defaults to equal among models. 
 #' @param n.chains the number of chains to use when fitting models
 #' @param diel.setup A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'. If not provided, it will use the defaults of the diel.ineq function.
@@ -32,6 +33,7 @@
 diel.fit=function(y,
                   hyp.set,
                   bf.fit=TRUE,
+                  post.fit=FALSE,
                   diel.setup=NULL,
                   prior=NULL,
                   n.chains=1,
@@ -102,23 +104,31 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
 }
 #########################################  
 #fit models
+  if(isTRUE(post.fit)){  
   post.samples=diel.post(y=y.vec,idx.mod,diel.setup=diel.setup, bf.Ab.new=bf.Ab.new,reps=reps,
                          n.chains=n.chains,n.mcmc=n.mcmc,burnin=burnin,n.cpu=n.cpu,
                          indicator=indicator,
                          prints=prints)
   gelm.diag=post.samples$gelm.diag
+  }else{
+    post.samples=NULL
+    gelm.diag=NULL
+  }
 #########################################    
 #post processing of posterior samples    
   if(length(hyp.set)>1 & isTRUE(bf.fit) & !is.na(idx.high.bf.model)){
     #Replace NUlls
     ms.model=bf.out$idx.high.bf.model
+  }
+
+if(isTRUE(post.fit)){
     idx.ms=which(names(post.samples$sampling.mcmc) %in% ms.model)
     post.samp.ms.model=post.samples$sampling.mcmc[[idx.ms]]
     idx.ms2=which(names(post.samples$ppc.list) %in% ms.model)
     ms.ppc=post.samples$ppc.list[[idx.ms2]]
     ms.gelm.diag=gelm.diag[[idx.ms2]]
-  }
-
+}
+  
   if(prints==TRUE & isTRUE(bf.fit) & length(hyp.set)>1){
     cat("The most supported model is: \n", ms.model,"\n")
     if(sum(indicator)>0){
