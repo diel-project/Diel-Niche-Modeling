@@ -254,7 +254,7 @@ small.num=0.0001
 
   #DN.full
   A.DN <- matrix(c(1,0,0,1,0,-1,-1,-1,1,1),ncol = 2, byrow = TRUE)
-  b.DN <- c(0.1-small.num,0.6,-(0.4+small.num),0.6-1,-(0.4+small.num)+1)
+  b.DN <- c(0.1,0.6,-(0.4+small.num),0.6-1,-(0.4+small.num)+1)
   DN.full=list(Name="Diurnal-Nocturnal (Full)",A=A.DN,b=b.DN,func="bf_multinom")     
 
   #DCR.full
