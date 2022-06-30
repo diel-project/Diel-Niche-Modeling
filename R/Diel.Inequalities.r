@@ -255,17 +255,17 @@ small.num=0.0001
   #DN.full
   A.DN <- matrix(c(1,0,0,1,0,-1,-1,-1,1,1),ncol = 2, byrow = TRUE)
   b.DN <- c(0.1,0.6,-(0.4+small.num),0.6-1,-(0.4+small.num)+1)
-  DN.full=list(Name="Diurnal-Nocturnal (Full)",A=A.DN,b=b.DN,func="bf_multinom")     
+  D.N.full=list(Name="Diurnal-Nocturnal (Full)",A=A.DN,b=b.DN,func="bf_multinom")     
 
   #DCR.full
   A.DCR <- matrix(c(-1,-1,0.1,0.6,0,-1,1,0,-1,0),ncol = 2, byrow = TRUE)
   b.DCR <- c((0.1)-1,0.6,-(0.4+small.num),0.6,-(0.4+small.num))
-  DCR.full=list(Name="Diurnal-Crepuscular (Full)",A=A.DCR,b=b.DCR,func="bf_multinom")     
+  D.CR.full=list(Name="Diurnal-Crepuscular (Full)",A=A.DCR,b=b.DCR,func="bf_multinom")     
 
   #NCR.full
   A.NCR <- matrix(c(0,1,-1,-1,1,1,1,0,-1,0),ncol = 2, byrow = TRUE)
   b.NCR <- c(0.1,0.6-1,-(0.4+small.num)+1,0.6,-(0.4+small.num))
-  NCR.full=list(Name="Nocturnal-Crepuscular (Full)",A=A.NCR,b=b.NCR,func="bf_multinom")     
+  N.CR.full=list(Name="Nocturnal-Crepuscular (Full)",A=A.NCR,b=b.NCR,func="bf_multinom")     
 
   #Dc.full
   A.Dc <- matrix(c(0,-1,-1,0,1,1),ncol = 2, byrow = TRUE)
@@ -702,8 +702,8 @@ small.num=0.0001
     Ncr.var.wk=Ncr.var.wk,CRd.th.wk=CRd.th.wk,CRn.var.wk=CRn.var.wk,
     Ncr.th.wk=Ncr.th.wk,CRn.th.wk=CRn.th.wk,Uncon=Uncon,
     N=N,C=C,CR=CR,D=D,
-     C.full=C.full, CR.full=CR.full,  DCR.full=DCR.full,NCR.full=NCR.full,
-     CRc.full=CRc.full,CRd.full=CRd.full,CRn.full=CRn.full, D.full=D.full,  DN.full=DN.full,
+     C.full=C.full, CR.full=CR.full,  D.CR.full=D.CR.full,N.CR.full=N.CR.full,
+     CRc.full=CRc.full,CRd.full=CRd.full,CRn.full=CRn.full, D.full=D.full,  D.N.full=D.N.full,
      Dc.full=Dc.full, Dcr.full=Dcr.full,Dn.full=Dn.full, N.full=N.full,  
      Nc.full=Nc.full, Ncr.full=Ncr.full, Nd.full=Nd.full,
     inputs=inputs

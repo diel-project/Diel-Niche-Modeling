@@ -61,8 +61,8 @@ hyp.sets=function(hyp.in=NULL){
   names(hyp.set)[19]=c("General")
 
     
-  hyp.set[[20]]=c("C.full", "CR.full",  "DCR.full","NCR.full", "CRc.full","CRd.full" ,
-          "CRn.full", "D.full",  "DN.full","Dc.full", "Dcr.full","Dn.full",  
+  hyp.set[[20]]=c("C.full", "CR.full",  "D.CR.full","N.CR.full", "CRc.full","CRd.full" ,
+          "CRn.full", "D.full",  "D.N.full","Dc.full", "Dcr.full","Dn.full",  
           "N.full",  "Nc.full", "Ncr.full", "Nd.full" )
   
   names(hyp.set)[20]=c("Full")
