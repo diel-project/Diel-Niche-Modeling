@@ -259,12 +259,12 @@ small.num=0.0001
 
   #DCR.full
   A.DCR <- matrix(c(-1,-1,0.1,0.6,0,-1,1,0,-1,0),ncol = 2, byrow = TRUE)
-  b.DCR <- c((0.1-small.num)-1,0.6,-(0.4+small.num),0.6,-(0.4+small.num))
+  b.DCR <- c((0.1)-1,0.6,-(0.4+small.num),0.6,-(0.4+small.num))
   DCR.full=list(Name="Diurnal-Crepuscular (Full)",A=A.DCR,b=b.DCR,func="bf_multinom")     
 
   #NCR.full
   A.NCR <- matrix(c(0,1,-1,-1,1,1,1,0,-1,0),ncol = 2, byrow = TRUE)
-  b.NCR <- c(0.1-small.num,0.6-1,-(0.4+small.num)+1,0.6,-(0.4+small.num))
+  b.NCR <- c(0.1,0.6-1,-(0.4+small.num)+1,0.6,-(0.4+small.num))
   NCR.full=list(Name="Nocturnal-Crepuscular (Full)",A=A.NCR,b=b.NCR,func="bf_multinom")     
 
   #Dc.full
