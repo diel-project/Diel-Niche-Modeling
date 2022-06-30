@@ -43,7 +43,7 @@ diel.fit=function(y,
                   alt.optim=FALSE,
                   delta=NULL){
 
-#bf.fit=TRUE; diel.setup=NULL; prior=NULL; n.chains=2; n.mcmc=50000; burnin=10000;prints=TRUE;alt.optim=FALSE;delta=NULL
+#post.fit=TRUE;bf.fit=TRUE; diel.setup=NULL; prior=NULL; n.chains=2; n.mcmc=50000; burnin=10000;prints=TRUE;alt.optim=FALSE;delta=NULL
 
 ###################################
 #Setup variables  
@@ -121,13 +121,14 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
     ms.model=bf.out$idx.high.bf.model
   }
 
-if(isTRUE(post.fit)){
+if(isTRUE(post.fit) & !is.null(bf)){
     idx.ms=which(names(post.samples$sampling.mcmc) %in% ms.model)
     post.samp.ms.model=post.samples$sampling.mcmc[[idx.ms]]
     idx.ms2=which(names(post.samples$ppc.list) %in% ms.model)
     ms.ppc=post.samples$ppc.list[[idx.ms2]]
     ms.gelm.diag=gelm.diag[[idx.ms2]]
 }
+
   
   if(prints==TRUE & isTRUE(bf.fit) & length(hyp.set)>1){
     cat("The most supported model is: \n", ms.model,"\n")

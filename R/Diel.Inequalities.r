@@ -174,142 +174,116 @@ diel.ineq=function(e=NULL,
 
   #################################
   #################################
-  #General Hypotheses - non linear model fitting
-  #Crepuscular
-  CR =list(Name="Gen.CR",func="bf_nonlinear",data=non.linear.data$Gen.CR,
-                  inside=  function(x){
-                  min(abs(x[1] - matrix(non.linear.data$Gen.CR[,1]))+abs(x[2] - matrix(non.linear.data$Gen.CR[,2])))<=0.01
-                    }
 
-           )
-
-#              inside=  function(x){
-#                   General.hyps[which.min(abs(x[1] - General.hyps[,1])+abs(x[2] - General.hyps[,2])),3]=="CR"
-# }
-
-  
-  #Diurnal
-   D =list(Name="Gen.D",func="bf_nonlinear",data=non.linear.data$Gen.D,
-              inside=  function(x){
-                  min(abs(x[1] - matrix(non.linear.data$Gen.D[,1]))+abs(x[2] - matrix(non.linear.data$Gen.D[,2])))<=0.01
-                    })
-   
-   
-
-  #Nocturnal
-  N =list(Name="Gen.N",func="bf_nonlinear",data=non.linear.data$Gen.N,
-          inside=  function(x){
-                  min(abs(x[1] - matrix(non.linear.data$Gen.N[,1]))+abs(x[2] - matrix(non.linear.data$Gen.N[,2])))<=0.01
-                    })
-
-  #Cathemeral
-  C =list(Name="Gen.C",func="bf_nonlinear",data=non.linear.data$Gen.C,
-          inside=  function(x){
-                  min(abs(x[1] - matrix(non.linear.data$Gen.C[,1]))+abs(x[2] - matrix(non.linear.data$Gen.C[,2])))<=0.01
-                    })
 #################################
 #################################
 #Using general hyps as inequalities
-
-  
+small.num=0.001  
   #D
   A.D <- matrix(c(1,-1,-1,-2,0,-1),ncol = 2, byrow = TRUE)
   b.D <- c(0,-1,-0.45)
-  D.Gen=list(Name="Diurnal (General)",A=A.D,b=b.D,func="bf_multinom")     
+  D=list(Name="Diurnal (General)",A=A.D,b=b.D,func="bf_multinom")     
 
   #N
   A.N <- matrix(c(2,1,1,2,1,1),ncol = 2, byrow = TRUE)
   b.N <- c(1,1,-0.45+1)
-  N.Gen=list(Name="Nocturnal (General)",A=A.N,b=b.N,func="bf_multinom")     
+  N=list(Name="Nocturnal (General)",A=A.N,b=b.N,func="bf_multinom")     
   
   #CR
   A.CR <- matrix(c(-1,1,-2,-1,-1,0),ncol = 2, byrow = TRUE)
   b.CR <- c(0,-1,-0.45)
-  CR.Gen=list(Name="Crepuscular (General)",A=A.CR,b=b.CR,func="bf_multinom")     
+  CR=list(Name="Crepuscular (General)",A=A.CR,b=b.CR,func="bf_multinom")     
 
   #C
   A.C <- matrix(c(1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.C <- c(0.4499,0.4499,0.4499-1)
-  C.Gen=list(Name="Cathemeral (General)",A=A.C,b=b.C,func="bf_multinom")     
+  b.C <- c(0.45-small.num,0.45-small.num,(0.45-small.num)-1)
+  C=list(Name="Cathemeral (General)",A=A.C,b=b.C,func="bf_multinom")     
 
+#################################
+#################################
+#FULL hyps as inequalities
+  #CR.full
+  A.CR <- matrix(c(0,1,-1,-1),ncol = 2, byrow = TRUE)
+  b.CR <- c(0.1-small.num,(0.1-small.num)-1)
+  CR.full=list(Name="Crepuscular (Full)",A=A.CR,b=b.CR,func="bf_multinom")     
 
-  #################################
-  #################################
-  #Full list of models for complete set - no cathemeral
+  #D.full
+  A.D <- matrix(c(1,0,-1,-1),ncol = 2, byrow = TRUE)
+  b.D <- c(0.1-small.num,(0.1-small.num)-1)
+  D.full=list(Name="Diurnal (Full)",A=A.D,b=b.D,func="bf_multinom")     
 
-  C.Full =list(Name="Full.C",func="bf_nonlinear",data=non.linear.data$Full.C,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="C"
-              })
-#inside=  function(x){min(abs(x[1] - matrix(non.linear.data$Full.C[,1]))+abs(x[2] - matrix(non.linear.data$Full.C[,2])))<=0.01}
-
-  CR.Full =list(Name="Full.CR",func="bf_nonlinear",data=non.linear.data$Full.CR,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CR"
-              })
-  CR.D.Full =list(Name="Full.CR.D",func="bf_nonlinear",data=non.linear.data$Full.CR.D,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CR.D"
-              })  
-  CR.N.Full =list(Name="Full.CR.N",func="bf_nonlinear",data=non.linear.data$Full.CR.N,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CR.N"
-              })  
-  CRc.Full =list(Name="Full.CRc",func="bf_nonlinear",data=non.linear.data$Full.CRc,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CRc"
-              })  
-  CRd.Full =list(Name="Full.CRd",func="bf_nonlinear",data=non.linear.data$Full.CRd,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CRd"
-              })  
-  CRn.Full =list(Name="Full.CRn",func="bf_nonlinear",data=non.linear.data$Full.CRn,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="CRn"
-              })  
-  D.Full =list(Name="Full.D",func="bf_nonlinear",data=non.linear.data$Full.D,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="D"
-              })  
-  D.N.Full =list(Name="Full.D.N",func="bf_nonlinear",data=non.linear.data$Full.D.N,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="D.N"
-              })  
-  Dc.Full =list(Name="Full.Dc",func="bf_nonlinear",data=non.linear.data$Full.Dc,
-          inside=  function(x){
-                  min(abs(x[1] - matrix(non.linear.data$Full.Dc[,1]))+abs(x[2] - matrix(non.linear.data$Full.Dc[,2])))<=0.01
-                    })  
-  Dcr.Full =list(Name="Full.Dcr",func="bf_nonlinear",data=non.linear.data$Full.Dcr,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Dcr"
-              })  
-  Dn.Full =list(Name="Full.Dn",func="bf_nonlinear",data=non.linear.data$Full.Dn,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Dn"
-              })  
-  EC.Full =list(Name="Full.EC",func="bf_nonlinear",data=non.linear.data$Full.EC,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="EC"
-              })  
-  N.Full =list(Name="Full.N",func="bf_nonlinear",data=non.linear.data$Full.N,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="N"
-              })  
-  Nc.Full =list(Name="Full.Nc",func="bf_nonlinear",data=non.linear.data$Full.Nc,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Nc"
-              })  
-  Ncr.Full =list(Name="Full.Ncr",func="bf_nonlinear",data=non.linear.data$Full.Ncr,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Ncr"
-              })  
-  Nd.Full =list(Name="Full.Nd",func="bf_nonlinear",data=non.linear.data$Full.Nd,
-          inside=  function(x){
-                   Full.hyps[which.min(abs(x[1] - Full.hyps$p.crep)+abs(x[2] - Full.hyps$p.day)),3]=="Nd"
-              })  
+  #N.full
+  A.N <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
+  b.N <- c(0.1-small.num,0.1-small.num)
+  N.full=list(Name="Nocturnal (Full)",A=A.N,b=b.N,func="bf_multinom")     
   
-  #################################
-  #################################
+  #C.full
+  A.C <- matrix(c(0,1,-1,-1,1,0,0,-1,1,1,-1,0),ncol = 2, byrow = TRUE)
+  b.C <- c(0.5-small.num,(0.5-small.num)-1,0.5-small.num,-(0.1+small.num),-(0.1+small.num)+1,-(0.1+small.num))
+  C.full=list(Name="Cathemeral (Full)",A=A.C,b=b.C,func="bf_multinom")     
+
+  #Dcr.full
+  A.Dcr <- matrix(c(0,-1,-1,0,1,0,-1,-1),ncol = 2, byrow = TRUE)
+  b.Dcr <- c(-0.5,-0.1,0.4,(0.1-small.num)-1)
+  Dcr.full=list(Name="Diurnal-crepuscular (Full)",A=A.Dcr,b=b.Dcr,func="bf_multinom")     
+
+  #Dn.full
+  A.Dn <- matrix(c(0,-1,1,1,-1,-1,1,0),ncol = 2, byrow = TRUE)
+  b.Dn <- c(-0.5,0.1+1,0.4-1,0.1-small.num)
+  Dn.full=list(Name="Diurnal-nocturnal (Full)",A=A.Dn,b=b.Dn,func="bf_multinom")     
+  
+  #Ncr.full
+  A.Ncr <- matrix(c(1,1,-1,0,1,0,0,1),ncol = 2, byrow = TRUE)
+  b.Ncr <- c(0.5+1,-0.1,0.4,0.1-small.num)
+  Ncr.full=list(Name="Nocturnal-crepuscular (Full)",A=A.Ncr,b=b.Ncr,func="bf_multinom")     
+
+  #Nd.full
+  A.Nd <- matrix(c(1,1,0,-1,0,1,1,0),ncol = 2, byrow = TRUE)
+  b.Nd <- c(-0.5+1,-0.1,0.4,0.1-small.num)
+  Nd.full=list(Name="Nocturnal-diurnal (Full)",A=A.Nd,b=b.Nd,func="bf_multinom")     
+
+  #CRd.full
+  A.CRd <- matrix(c(-1,0,0,-1,0,1,-1,-1),ncol = 2, byrow = TRUE)
+  b.CRd <- c(-0.5,-0.1,0.4,(0.1-small.num)-1)
+  CRd.full=list(Name="Crepuscular-diurnal (Full)",A=A.CRd,b=b.CRd,func="bf_multinom")     
+
+  #CRn.full
+  A.CRn <- matrix(c(-1,0,1,1,-1,-1,0,1),ncol = 2, byrow = TRUE)
+  b.CRn <- c(-0.5,0.1+1,0.4-1,0.1-small.num)
+  CRn.full=list(Name="Crepuscular-nocturnal (Full)",A=A.CRn,b=b.CRn,func="bf_multinom")     
+
+  #DN.full
+  A.DN <- matrix(c(1,0,0,1,0,-1,-1,-1,1,1),ncol = 2, byrow = TRUE)
+  b.DN <- c(0.1-small.num,0.6,-(0.4+small.num),0.6-1,-(0.4+small.num)+1)
+  DN.full=list(Name="Diurnal-Nocturnal (Full)",A=A.DN,b=b.DN,func="bf_multinom")     
+
+  #DCR.full
+  A.DCR <- matrix(c(-1,-1,0.1,0.6,0,-1,1,0,-1,0),ncol = 2, byrow = TRUE)
+  b.DCR <- c((0.1-small.num)-1,0.6,-(0.4+small.num),0.6,-(0.4+small.num))
+  DCR.full=list(Name="Diurnal-Crepuscular (Full)",A=A.DCR,b=b.DCR,func="bf_multinom")     
+
+  #NCR.full
+  A.NCR <- matrix(c(0,1,-1,-1,1,1,1,0,-1,0),ncol = 2, byrow = TRUE)
+  b.NCR <- c(0.1-small.num,0.6-1,-(0.4+small.num)+1,0.6,-(0.4+small.num))
+  NCR.full=list(Name="Nocturnal-Crepuscular (Full)",A=A.NCR,b=b.NCR,func="bf_multinom")     
+
+  #Dc.full
+  A.Dc <- matrix(c(0,-1,-1,0,1,1),ncol = 2, byrow = TRUE)
+  b.Dc <- c(-0.5,-0.1,-0.1+1)
+  Dc.full=list(Name="Diurnal-cathemeral (Full)",A=A.Dc,b=b.Dc,func="bf_multinom")     
+
+  #Nc.full
+  A.Nc <- matrix(c(1,1,0,-1,-1,0),ncol = 2, byrow = TRUE)
+  b.Nc <- c(-0.5+1,-0.1,-0.1)
+  Nc.full=list(Name="Nocturnal-cathemeral (Full)",A=A.Nc,b=b.Nc,func="bf_multinom")     
+        
+  #CRc.full
+  A.CRc <- matrix(c(-1,0,0,-1,1,1),ncol = 2, byrow = TRUE)
+  b.CRc <- c(-0.5,-0.1,-0.1+1)
+  CRc.full=list(Name="Crepuscular-cathemeral (Full)",A=A.CRc,b=b.CRc,func="bf_multinom")     
+        
+#################################
+#################################
     
   #Diurnal Hypotheses
   # Threshold
@@ -728,11 +702,10 @@ diel.ineq=function(e=NULL,
     Ncr.var.wk=Ncr.var.wk,CRd.th.wk=CRd.th.wk,CRn.var.wk=CRn.var.wk,
     Ncr.th.wk=Ncr.th.wk,CRn.th.wk=CRn.th.wk,Uncon=Uncon,
     N=N,C=C,CR=CR,D=D,
-    C.Full=C.Full, CR.Full=CR.Full,  CR.D.Full=CR.D.Full,CR.N.Full=CR.N.Full,
-    CRc.Full=CRc.Full,CRd.Full=CRd.Full,CRn.Full=CRn.Full, D.Full=D.Full,  D.N.Full=D.N.Full,
-    Dc.Full=Dc.Full, Dcr.Full=Dcr.Full,Dn.Full=Dn.Full, EC.Full=EC.Full,N.Full=N.Full,  
-    Nc.Full=Nc.Full, Ncr.Full=Ncr.Full, Nd.Full=Nd.Full,
-    D.Gen=D.Gen,N.Gen=N.Gen,CR.Gen=CR.Gen,C.Gen=C.Gen,
+     C.full=C.full, CR.full=CR.full,  DCR.full=DCR.full,NCR.full=NCR.full,
+     CRc.full=CRc.full,CRd.full=CRd.full,CRn.full=CRn.full, D.full=D.full,  DN.full=DN.full,
+     Dc.full=Dc.full, Dcr.full=Dcr.full,Dn.full=Dn.full, N.full=N.full,  
+     Nc.full=Nc.full, Ncr.full=Ncr.full, Nd.full=Nd.full,
     inputs=inputs
     )
   
