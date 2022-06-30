@@ -178,7 +178,7 @@ diel.ineq=function(e=NULL,
 #################################
 #################################
 #Using general hyps as inequalities
-small.num=0.001  
+small.num=0.0001  
   #D
   A.D <- matrix(c(1,-1,-1,-2,0,-1),ncol = 2, byrow = TRUE)
   b.D <- c(0,-1,-0.45)
