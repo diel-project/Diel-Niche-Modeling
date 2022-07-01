@@ -219,7 +219,7 @@ small.num=0.0001
   
   #C.full
   A.C <- matrix(c(0,1,-1,-1,1,0,0,-1,1,1,-1,0),ncol = 2, byrow = TRUE)
-  b.C <- c(0.5-small.num,(0.5-small.num)-1,0.5-small.num,-(0.1+small.num),-(0.1+small.num)+1,-(0.1+small.num))
+  b.C <- c(0.5-small.num,(0.5-small.num)-1,0.5-small.num,-(0.1),-(0.1)+1,-(0.1))
   C.full=list(Name="Cathemeral (Full)",A=A.C,b=b.C,func="bf_multinom")     
 
   #Dcr.full
