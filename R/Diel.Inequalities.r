@@ -229,7 +229,7 @@ small.num=0.0001
 
   #Dn.full
   A.Dn <- matrix(c(0,-1,1,1,-1,-1,1,0),ncol = 2, byrow = TRUE)
-  b.Dn <- c(-0.5,0.1+1,0.4-1,0.1-small.num)
+  b.Dn <- c(-0.5,-0.1+1,0.4-1,0.1-small.num)
   Dn.full=list(Name="Diurnal-nocturnal (Full)",A=A.Dn,b=b.Dn,func="bf_multinom")     
   
   #Ncr.full
@@ -249,7 +249,7 @@ small.num=0.0001
 
   #CRn.full
   A.CRn <- matrix(c(-1,0,1,1,-1,-1,0,1),ncol = 2, byrow = TRUE)
-  b.CRn <- c(-0.5,0.1+1,0.4-1,0.1-small.num)
+  b.CRn <- c(-0.5,-0.1+1,0.4-1,0.1-small.num)
   CRn.full=list(Name="Crepuscular-nocturnal (Full)",A=A.CRn,b=b.CRn,func="bf_multinom")     
 
   #DN.full
