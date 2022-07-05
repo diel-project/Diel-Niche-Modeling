@@ -60,7 +60,7 @@ fig <- fig %>% layout(scene = list(
                 )
 #fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = 20),
 #                                                       itemsizing='constant'))
-
-fig
 options(warn=0)
+fig
+
 }
