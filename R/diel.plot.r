@@ -15,7 +15,7 @@
 diel.plot=function(hyp, 
                    diel.setup=NULL, 
                    posteriors=NULL){
-  
+options(warn=-1)  
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   if(is.null(posteriors)){post=t(matrix(c(0,0,0)))}else{post=coda::as.mcmc(posteriors)}
   
@@ -42,7 +42,7 @@ diel.plot=function(hyp,
   plot.points2$size=(c(rep("2",nrow(plot.points)),
                                        rep("3",nrow(post))))
 
-options(warn=-1)
+
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
            #     width=800,height=800,
                color = ~hyp,# colors=col2,
@@ -60,7 +60,7 @@ fig <- fig %>% layout(scene = list(
                 )
 #fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = 20),
 #                                                       itemsizing='constant'))
-options(warn=0)
-fig
 
+fig
+options(warn=0)
 }
