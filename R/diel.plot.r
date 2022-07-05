@@ -15,7 +15,7 @@
 diel.plot=function(hyp, 
                    diel.setup=NULL, 
                    posteriors=NULL){
-options(warn=-1)  
+
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   if(is.null(posteriors)){post=t(matrix(c(0,0,0)))}else{post=coda::as.mcmc(posteriors)}
   
@@ -34,19 +34,28 @@ options(warn=-1)
   #plot.points2=data.frame(plot.points2,as.factor(c(rep("Niche",nrow(plot.points)),
   #                                     rep("Posteriors",nrow(post)))))
 ##  colnames(plot.points2)[4]="type"
-  #col2=c("#000000","#D8BFD8")
+  col2=c("#000000","#D8BFD8")
   #col2=colors(length(unique(plot.points2$hyp)))
   
-#  plot.points2$col=(c(rep("1",nrow(plot.points)),
-#                                       rep("2",nrow(post))))
+  plot.points2$col=as.factor((c(rep("1",nrow(plot.points)),
+                                       rep("2",nrow(post)))))
   plot.points2$size=(c(rep("2",nrow(plot.points)),
                                        rep("3",nrow(post))))
 
-
+if(length(unique(plot.points2$hyp))>2){
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
            #     width=800,height=800,
                color = ~hyp,# colors=col2,
                 marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
+}else{
+  
+fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
+           #     width=800,height=800,
+                color=~col, colors=col2,
+                marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
+  
+}
+
 fig <- fig %>% add_markers()
 fig <- fig %>% layout(scene = list(
   #camera = list(eye = list(x=1, y=2, z = 0.25)),
@@ -60,7 +69,7 @@ fig <- fig %>% layout(scene = list(
                 )
 #fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = 20),
 #                                                       itemsizing='constant'))
-options(warn=0)
+
 fig
 
 }
