@@ -20,14 +20,14 @@ if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
   b=diel.setup[[index.models[i]]][[3]]
   
   #Find all A %*% theta combinations
-  p.ineq= apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
+  p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})  
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})
   
   index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
-  p.plot=t(p.options2[,index])
+  p.plot=t(p.options[,index])
 
 }#end if statement
   
@@ -38,12 +38,12 @@ if(diel.setup[[index.models[i]]]$func=="bf_equality"){
   d=diel.setup[[index.models[i]]][[5]]
   
   #Find all A %*% theta combinations
-  p.ineq= apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
+  p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})  
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
   
   #Find all C %*% theta combinations
-  p.ineq2= apply(p.options2[1:2,],2,FUN=function(x){C%*%x})  
+  p.ineq2= apply(p.options[1:2,],2,FUN=function(x){C%*%x})  
   #find if abs(C*theta -d) < delta
   delta=0.005
   p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
@@ -53,7 +53,7 @@ if(diel.setup[[index.models[i]]]$func=="bf_equality"){
  index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
-  p.plot=t(p.options2[,index])
+  p.plot=t(p.options[,index])
 
 }
  
@@ -65,8 +65,8 @@ p.plot=as.matrix(diel.setup[[index.models[i]]]$data,ncol=2)
 }  
  
   
-  #now add back in the third prob
-  p.plot=cbind(p.plot,1-apply(p.plot,1,sum),rep(diel.setup[[index.models[i]]]$Name,nrow(p.plot)))
+
+  p.plot=cbind(p.plot,rep(diel.setup[[index.models[i]]]$Name,nrow(p.plot)))
   
   colnames(p.plot)=c("p.crep","p.day","p.night","hyp")
   #head(p.plot)
