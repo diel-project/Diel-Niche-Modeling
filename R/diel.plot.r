@@ -22,28 +22,30 @@ diel.plot=function(hyp,
   
   #source("plot.setup.hyp.params.r")
   index.models=match(hyp,names(diel.setup))
-  plot.points=data.frame(setup.hyp.plot.params(diel.setup,index.models))
-
+  plot.points=data.frame(do.call(rbind,setup.hyp.plot.params(diel.setup,index.models)))
+  plot.points$hyp=as.factor(plot.points$hyp)
+  
   xlim=range(plot.points[,1])
   ylim=range(plot.points[,2])
   zlim=range(plot.points[,3])
-  
+  post=data.frame(post,rep("posterior",nrow(post)))
   colnames(post)=colnames(plot.points)
   plot.points2=rbind(plot.points,data.frame(post))
-  plot.points2=data.frame(plot.points2,as.factor(c(rep("Niche",nrow(plot.points)),
-                                       rep("Posteriors",nrow(post)))))
-  colnames(plot.points2)[4]="type"
-  col2=c("#000000","#D8BFD8")
+  #plot.points2=data.frame(plot.points2,as.factor(c(rep("Niche",nrow(plot.points)),
+  #                                     rep("Posteriors",nrow(post)))))
+##  colnames(plot.points2)[4]="type"
+  #col2=c("#000000","#D8BFD8")
+  #col2=colors(length(unique(plot.points2$hyp)))
   
-  plot.points2$col=(c(rep("1",nrow(plot.points)),
-                                       rep("2",nrow(post))))
+#  plot.points2$col=(c(rep("1",nrow(plot.points)),
+#                                       rep("2",nrow(post))))
   plot.points2$size=(c(rep("2",nrow(plot.points)),
                                        rep("3",nrow(post))))
 
     
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
            #     width=800,height=800,
-               color = ~col, colors=col2,
+               color = ~hyp,# colors=col2,
                 marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
 fig <- fig %>% add_markers()
 fig <- fig %>% layout(scene = list(

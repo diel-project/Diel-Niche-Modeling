@@ -66,8 +66,9 @@ p.plot=as.matrix(diel.setup[[index.models[i]]]$data,ncol=2)
  
   
   #now add back in the third prob
-  p.plot=cbind(p.plot,1-apply(p.plot,1,sum))
-  colnames(p.plot)=c("p.crep","p.day","p.night")
+  p.plot=cbind(p.plot,1-apply(p.plot,1,sum),rep(diel.setup[[index.models[i]]]$Name,nrow(p.plot)))
+  
+  colnames(p.plot)=c("p.crep","p.day","p.night","hyp")
   #head(p.plot)
   
   #make sure there are not mistakes
