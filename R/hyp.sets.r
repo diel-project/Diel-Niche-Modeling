@@ -69,7 +69,7 @@ hyp.sets=function(hyp.in=NULL){
   
   names(hyp.set)[21]=c("Full")
   
-  hyp.set[[22]]=c("D.Gen","N.Gen","CR.Gen","N.Gen","C.Gen","DN.Gen","CRN.Gen","CRD.Gen")
+  hyp.set[[22]]=c("D.Gen","CR.Gen","N.Gen","C.Gen","DN.Gen","CRN.Gen","CRD.Gen")
   names(hyp.set)[22]=c("General3")
   
 if(is.null(hyp.in)){   
