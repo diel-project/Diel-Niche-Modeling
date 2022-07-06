@@ -3,16 +3,18 @@
 #' Prepares data to plot hypotheses
 #' @param diel.setup provided by user or used default as diel.setup=diel.ineq()
 #' @param index.models vector of indices indicating which hypotheses to use from diel.setup
+#' @param more.points which to use, p.options or p.options2
 #' @param ... Other parameters
 #' @return Internal list
 #' @export
 #' @keywords internal
 
-setup.hyp.plot.params=function(diel.setup,index.models,...){
+setup.hyp.plot.params=function(diel.setup,index.models,more.points,...){
 
 #Loop through hypotheses and get many sample points  
 plot.points=vector("list",length(index.models))
-
+if(isFALSE(more.points)){load.points=p.options}
+if(isTRUE(more.points)){load.points=p.options2}
 for(i in 1:length(index.models)){
 
 if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
@@ -21,14 +23,14 @@ if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
   
   #Find all A %*% theta combinations
   #THIS IS AN ISSUE 
-  p.ineq= round(matrix(apply(p.options[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=6)
+  p.ineq= round(matrix(apply(load.points[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=6)
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})
   
   index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
-  p.plot=t(p.options[,index])
+  p.plot=t(load.points[,index])
 
 }#end if statement
   
@@ -39,12 +41,12 @@ if(diel.setup[[index.models[i]]]$func=="bf_equality"){
   d=diel.setup[[index.models[i]]][[5]]
   
   #Find all A %*% theta combinations
-  p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})  
+  p.ineq= apply(load.points[1:2,],2,FUN=function(x){A%*%x})  
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
   
   #Find all C %*% theta combinations
-  p.ineq2= apply(p.options[1:2,],2,FUN=function(x){C%*%x})  
+  p.ineq2= apply(load.points[1:2,],2,FUN=function(x){C%*%x})  
   #find if abs(C*theta -d) < delta
   delta=0.005
   p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
@@ -54,7 +56,7 @@ if(diel.setup[[index.models[i]]]$func=="bf_equality"){
  index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
-  p.plot=t(p.options[,index])
+  p.plot=t(load.points[,index])
 
 }
  

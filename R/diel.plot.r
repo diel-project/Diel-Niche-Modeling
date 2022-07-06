@@ -6,6 +6,7 @@
 #' @param hyp hypothesis code name to use
 #' @param diel.setup Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
 #' @param posteriors A single models MCMC output from the function 'diel.hypotheses.func'.
+#' @param more.points Default is FALSE. To use more points for hyps in plotting.
 #' @return A plotly 3d plot
 #' @examples 
 #' out=diel.fit(y=t(matrix(c(11,87,2))),hyp.set="D.max",n.mcmc=1000,burnin=200)
@@ -14,15 +15,15 @@
 
 diel.plot=function(hyp, 
                    diel.setup=NULL, 
-                   posteriors=NULL){
-
+                   posteriors=NULL,
+                   more.points=FALSE){
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   if(is.null(posteriors)){post=t(matrix(c(0,0,0)))}else{post=coda::as.mcmc(posteriors)}
   
   
   #source("plot.setup.hyp.params.r")
   index.models=match(hyp,names(diel.setup))
-  plot.points=data.frame(do.call(rbind,setup.hyp.plot.params(diel.setup,index.models)))
+  plot.points=data.frame(do.call(rbind,setup.hyp.plot.params(diel.setup,index.models,more.points)))
   plot.points$hyp=as.factor(plot.points$hyp)
   
   xlim=range(plot.points[,1])
