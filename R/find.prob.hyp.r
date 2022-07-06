@@ -12,7 +12,7 @@
 
 
 #start function
-find.prob.hyp=function(hyp, diel.setup = NULL,fast){
+find.prob.hyp=function(hyp, diel.setup = NULL,fast=TRUE){
 # If there is no diel setup then use defaults
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   if(isFALSE(fast)){p.opts=p.options3}
