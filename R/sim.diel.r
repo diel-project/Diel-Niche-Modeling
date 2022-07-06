@@ -15,6 +15,7 @@
 #' sim.diel(n.sim=1,reps=1,n.sample=100,hyp="D.th")
 #' @export
 
+#n.sim=1;reps=1;n.sample=100;diel.setup=NULL;sd.error=0
 sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0){
   
   if(sd.error<0| !is.numeric(sd.error)){

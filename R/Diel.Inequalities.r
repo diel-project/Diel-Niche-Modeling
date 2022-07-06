@@ -26,6 +26,7 @@
 #' @param xi.CRn  Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-nocturnal hypothesis.
 #' @param xi.CRc Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.
 #' @param xi.EC Default c(0.33). A single value of the available amount of time in all three diel periods.
+#' @param xi.min.dom Default c(0.8). A single value of the min prob for a a dominant category 
 #' @param p.avail Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.
 #' 
 #' @return diel.hyp A list of diel hypotheses as multinomial inequalities.
@@ -124,7 +125,8 @@ diel.ineq=function(e=NULL,
                    xi.D=NULL, xi.Dn=NULL, xi.Dcr=NULL,
                    xi.N=NULL,xi.Nd=NULL,xi.Ncr=NULL,
                    xi.CR=NULL,xi.CRd=NULL,xi.CRn=NULL,xi.CRc=NULL,
-                   xi.EC=NULL,xi.Dc=NULL,xi.Nc=NULL, p.avail=NULL){
+                   xi.EC=NULL,xi.Dc=NULL,xi.Nc=NULL, p.avail=NULL,
+                   xi.min.dom=NULL){
   
   #Default epsilon values for variation hypotheses
   if(is.null(e.D)){e.D=0.05}
@@ -163,6 +165,7 @@ diel.ineq=function(e=NULL,
   
   if(is.null(p.avail)){p.avail  = c(0.166666,0.4166667)}
   
+  if(is.null(xi.min.dom)){xi.min.dom  = c(0.8,0.1)}else{xi.min.dom  = c(xi.min.dom,(1-xi.min.dom)/2)}
   
   #################################
   #################################
@@ -198,7 +201,69 @@ small.num=0.0001
   A.C <- matrix(c(1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
   b.C <- c(0.45-small.num,0.45-small.num,(0.45-small.num)-1)
   C=list(Name="Cathemeral (General)",A=A.C,b=b.C,func="bf_multinom")     
+#################################
+#################################
+#Using general hyps 2 as inequalities
+  #D
+  A.D <- matrix(c(0,-1),ncol = 2, byrow = TRUE)
+  b.D <- c(-xi.min.dom[1])
+  D2=list(Name="Diurnal (General2)",A=A.D,b=b.D,func="bf_multinom")     
 
+  #N
+  A.N <- matrix(c(1,1),ncol = 2, byrow = TRUE)
+  b.N <- c(-xi.min.dom[1]+1)
+  N2=list(Name="Nocturnal (General2)",A=A.N,b=b.N,func="bf_multinom")     
+  
+  #CR
+  A.CR <- matrix(c(-1,0),ncol = 2, byrow = TRUE)
+  b.CR <- c(-xi.min.dom[1])
+  CR2=list(Name="Crepuscular (General2)",A=A.CR,b=b.CR,func="bf_multinom")     
+
+  #C
+  A.C <- matrix(c(0,1,1,0,-1,-1),ncol = 2, byrow = TRUE)
+  b.C <- c(xi.min.dom[1]-small.num,xi.min.dom[1]-small.num,xi.min.dom[1]-small.num-1)
+  C2=list(Name="Cathemeral (General2)",A=A.C,b=b.C,func="bf_multinom")   
+
+#################################
+#################################
+#Using general hyps with 4 type of cathemeral
+  #D
+  A.D <- matrix(c(0,-1),ncol = 2, byrow = TRUE)
+  b.D <- c(-xi.min.dom[1])
+  D.Gen=list(Name="Diurnal",A=A.D,b=b.D,func="bf_multinom")     
+
+  #N
+  A.N <- matrix(c(1,1),ncol = 2, byrow = TRUE)
+  b.N <- c(-xi.min.dom[1]+1)
+  N.Gen=list(Name="Nocturnal",A=A.N,b=b.N,func="bf_multinom")     
+  
+  #CR
+  A.CR <- matrix(c(-1,0),ncol = 2, byrow = TRUE)
+  b.CR <- c(-xi.min.dom[1])
+  CR.Gen=list(Name="Crepuscular",A=A.CR,b=b.CR,func="bf_multinom")     
+
+  #C
+  A.C <- matrix(c(0,-1,1,1,-1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
+  b.C <- c(-xi.min.dom[2],-xi.min.dom[2]+1,-xi.min.dom[2],xi.min.dom[1]-small.num,xi.min.dom[1]-small.num-1)
+  C.Gen=list(Name="Cathemeral",A=A.C,b=b.C,func="bf_multinom")   
+  
+ 
+  #CRD
+  A.CRD <- matrix(c(-1,-1,-1,0,1,0,0,-1,0,1),ncol = 2, byrow = TRUE)
+  b.CRD <- c(xi.min.dom[2]-small.num-1,-xi.min.dom[2],xi.min.dom[1]-small.num,-xi.min.dom[2],xi.min.dom[1]-small.num)
+  CRD.Gen=list(Name="Cathemeral (CR.D)",A=A.CRD,b=b.CRD,func="bf_multinom")   
+
+  #DN
+  A.DN <- matrix(c(1,0,0,-1,0,1,1,1,-1,-1),ncol = 2, byrow = TRUE)
+  b.DN <- c(xi.min.dom[2]-small.num,-xi.min.dom[2],xi.min.dom[1]-small.num,-xi.min.dom[2]+1,xi.min.dom[1]-small.num-1)
+  DN.Gen=list(Name="Cathemeral (D.N)",A=A.DN,b=b.DN,func="bf_multinom")   
+  
+  #CRN
+  A.CRN <- matrix(c(0,1,1,1,-1,-1,-1,0,1,0),ncol = 2, byrow = TRUE)
+  b.CRN <- c(xi.min.dom[2]-small.num,-xi.min.dom[2]+1,xi.min.dom[1]-small.num-1,-xi.min.dom[2],xi.min.dom[1]-small.num)
+  CRN.Gen=list(Name="Cathemeral (CR.N)",A=A.CRN,b=b.CRN,func="bf_multinom")   
+  
+  
 #################################
 #################################
 #FULL hyps as inequalities
@@ -292,7 +357,8 @@ small.num=0.0001
   D.th=list(Name="Diurnal Threshold",A=A.D.th,b=b.D.th,func="bf_multinom")
   # Maximizing
   A.D.max <- matrix(c(1,-1,-1,-2),ncol = 2, byrow = TRUE)
-  b.D.max <- c(0,-1)
+  #b.D.max <- c(0,-1)
+  b.D.max <- c(-small.num,-small.num-1)
   D.max=list(Name="Diurnal Max",A=A.D.max, b=b.D.max,func="bf_multinom")     
   # Variability
   A.D.var <- matrix(c(1,-1,-1,-2,0,-1,0,1),ncol = 2, byrow = TRUE)
@@ -400,7 +466,7 @@ small.num=0.0001
   
   # Maximizing
   A.N.max <- matrix(c(1,2,2,1),ncol = 2, byrow = TRUE)
-  b.N.max <- c(1,1)
+  b.N.max <- c(-small.num+1,-small.num+1)
   N.max=list(Name="Nocturnal Max",A=A.N.max,b=b.N.max,func="bf_multinom")     
   
   # Variability
@@ -506,7 +572,8 @@ small.num=0.0001
   
   # Maximizing
   A.CR.max <- matrix(c(-1,1,-2,-1),ncol = 2, byrow = TRUE)
-  b.CR.max <- c(0,-1)
+  #b.CR.max <- c(0,-1)
+  b.CR.max <- c(-small.num,-small.num-1)
   CR.max=list(Name="Crepuscular Max",A=A.CR.max,b=b.CR.max,func="bf_multinom")     
   
   # Variability
@@ -702,6 +769,8 @@ small.num=0.0001
     Ncr.var.wk=Ncr.var.wk,CRd.th.wk=CRd.th.wk,CRn.var.wk=CRn.var.wk,
     Ncr.th.wk=Ncr.th.wk,CRn.th.wk=CRn.th.wk,Uncon=Uncon,
     N=N,C=C,CR=CR,D=D,
+    N2=N2,C2=C2,CR2=CR2,D2=D2,
+    D.Gen=D.Gen,N.Gen=N.Gen,CR.Gen=CR.Gen,C.Gen=C.Gen,DN.Gen=DN.Gen,CRN.Gen=CRN.Gen,CRD.Gen=CRD.Gen,
      C.full=C.full, CR.full=CR.full,  D.CR.full=D.CR.full,N.CR.full=N.CR.full,
      CRc.full=CRc.full,CRd.full=CRd.full,CRn.full=CRn.full, D.full=D.full,  D.N.full=D.N.full,
      Dc.full=Dc.full, Dcr.full=Dcr.full,Dn.full=Dn.full, N.full=N.full,  

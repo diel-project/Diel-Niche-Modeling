@@ -28,7 +28,7 @@ diel.plot=function(hyp,
   xlim=range(plot.points[,1])
   ylim=range(plot.points[,2])
   zlim=range(plot.points[,3])
-  post=data.frame(post,rep("posterior",nrow(post)))
+  post=data.frame(post,rep("posteriors",nrow(post)))
   colnames(post)=colnames(plot.points)
   plot.points2=rbind(plot.points,data.frame(post))
   #plot.points2=data.frame(plot.points2,as.factor(c(rep("Niche",nrow(plot.points)),
@@ -37,10 +37,8 @@ diel.plot=function(hyp,
   col2=c("#000000","#D8BFD8")
   #col2=colors(length(unique(plot.points2$hyp)))
   
-  plot.points2$col=as.factor((c(rep("1",nrow(plot.points)),
-                                       rep("2",nrow(post)))))
-  plot.points2$size=(c(rep("2",nrow(plot.points)),
-                                       rep("3",nrow(post))))
+#  plot.points2$size=(c(rep("2",nrow(plot.points)),
+#                                       rep("3",nrow(post))))
 
 if(length(unique(plot.points2$hyp))>2){
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
@@ -48,6 +46,9 @@ fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
                color = ~hyp,# colors=col2,
                 marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
 }else{
+
+    plot.points2$col=as.factor((c(rep(hyp,nrow(plot.points)),
+                                       rep("posteriors",nrow(post)))))
   
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
            #     width=800,height=800,
@@ -67,8 +68,8 @@ fig <- fig %>% layout(scene = list(
                        title = 'Nighttime',range = zlim),gridwidth = 3
                                 )
                 )
-#fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = 20),
-#                                                       itemsizing='constant'))
+fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = 20),
+                                                       itemsizing='constant'))
 
 fig
 

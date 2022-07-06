@@ -123,7 +123,7 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
 
 if(isTRUE(post.fit) & !is.null(bf)){
     idx.ms=which(names(post.samples$sampling.mcmc) %in% ms.model)
-    post.samp.ms.model=post.samples$sampling.mcmc[[idx.ms]]
+    post.samp.ms.model=do.call("rbind",post.samples$sampling.mcmc[[idx.ms]])
     idx.ms2=which(names(post.samples$ppc.list) %in% ms.model)
     ms.ppc=post.samples$ppc.list[[idx.ms2]]
     ms.gelm.diag=gelm.diag[[idx.ms2]]

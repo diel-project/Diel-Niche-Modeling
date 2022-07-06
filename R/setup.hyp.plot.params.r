@@ -16,11 +16,12 @@ plot.points=vector("list",length(index.models))
 for(i in 1:length(index.models)){
 
 if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
-  A=diel.setup[[index.models[i]]][[2]]
-  b=diel.setup[[index.models[i]]][[3]]
+  A=round(diel.setup[[index.models[i]]][[2]],digits=5)
+  b=round(diel.setup[[index.models[i]]][[3]],digits=5)
   
   #Find all A %*% theta combinations
-  p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})  
+  #THIS IS AN ISSUE 
+  p.ineq= round(matrix(apply(p.options[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=6)
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})
   
