@@ -193,4 +193,8 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
     stop("xi.Nd[4] \u00B1 e.Nd has to be between 0-1 \n")
   }  
   
+  if(diel.setup$inputs$xi.min.dom[1]<=0.5){
+    stop("xi.min.dom has to be greater that 0.5 \n")
+  }
+  
 }#End function

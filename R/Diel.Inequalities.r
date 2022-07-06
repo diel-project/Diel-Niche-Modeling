@@ -251,17 +251,17 @@ small.num=0.0001
   #CRD
   A.CRD <- matrix(c(-1,-1,-1,0,1,0,0,-1,0,1),ncol = 2, byrow = TRUE)
   b.CRD <- c(xi.min.dom[2]-small.num-1,-xi.min.dom[2],xi.min.dom[1]-small.num,-xi.min.dom[2],xi.min.dom[1]-small.num)
-  CRD.Gen=list(Name="Cathemeral (CR.D)",A=A.CRD,b=b.CRD,func="bf_multinom")   
+  CRD.Gen=list(Name="Cath[CR.D]",A=A.CRD,b=b.CRD,func="bf_multinom")   
 
   #DN
   A.DN <- matrix(c(1,0,0,-1,0,1,1,1,-1,-1),ncol = 2, byrow = TRUE)
   b.DN <- c(xi.min.dom[2]-small.num,-xi.min.dom[2],xi.min.dom[1]-small.num,-xi.min.dom[2]+1,xi.min.dom[1]-small.num-1)
-  DN.Gen=list(Name="Cathemeral (D.N)",A=A.DN,b=b.DN,func="bf_multinom")   
+  DN.Gen=list(Name="Cath[D.N]",A=A.DN,b=b.DN,func="bf_multinom")   
   
   #CRN
   A.CRN <- matrix(c(0,1,1,1,-1,-1,-1,0,1,0),ncol = 2, byrow = TRUE)
   b.CRN <- c(xi.min.dom[2]-small.num,-xi.min.dom[2]+1,xi.min.dom[1]-small.num-1,-xi.min.dom[2],xi.min.dom[1]-small.num)
-  CRN.Gen=list(Name="Cathemeral (CR.N)",A=A.CRN,b=b.CRN,func="bf_multinom")   
+  CRN.Gen=list(Name="Cath[CR.N]",A=A.CRN,b=b.CRN,func="bf_multinom")   
   
   
 #################################
@@ -749,6 +749,7 @@ small.num=0.0001
               xi.N=xi.N,xi.Nd=xi.Nd,xi.Ncr=xi.Ncr,
               xi.CR=xi.CR,xi.CRd=xi.CRd,xi.CRn=xi.CRn,xi.CRc=xi.CRc,
               xi.Dc=xi.Dc,xi.Nc=xi.Nc,
+              xi.min.dom=xi.min.dom,
               xi.EC=xi.EC, p.avail=p.avail)  
   
   #package outputs  
