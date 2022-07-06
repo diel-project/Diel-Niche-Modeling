@@ -145,7 +145,7 @@ diel.ineq=function(e=NULL,
   if(!is.null(e)){e.D=e.Dn=e.Dcr=e.N=e.Nd=e.Ncr=e.CR=e.CRd=e.CRn=e.EC=e.AC=e}
   
   # Defaults for threshold and variation models     
-  if(is.null(xi.D)){xi.D=c(0.90,0.95)} #lower threshold value, and most likely value
+  if(is.null(xi.D)){xi.D=c(0.80,0.9)} #lower threshold value, and most likely value
   if(is.null(xi.Dn)){xi.Dn=c(0.8,0.2,0.9,0.1)}
   if(is.null(xi.Dcr)){xi.Dcr=c(0.8,0.2,0.9,0.1)}
   
