@@ -22,7 +22,7 @@ if(diel.setup[[index.models]]$func=="bf_multinom"){
   b=round(diel.setup[[index.models]][[3]],digits=5)
   
   #Find all A %*% theta combinations
-  p.ineq= round(matrix(apply(p.options[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=4)
+  p.ineq= round(matrix(apply(p.options2[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=4)
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
 
@@ -30,7 +30,7 @@ if(diel.setup[[index.models]]$func=="bf_multinom"){
   index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
-  probs.out=t(p.options[,index])
+  probs.out=t(p.options2[,index])
   
 
 }#End if
@@ -42,12 +42,12 @@ if(diel.setup[[index.models]]$func=="bf_equality"){
   d=diel.setup[[index.models]][[5]]
   
   #Find all A %*% theta combinations
-  p.ineq= apply(p.options[1:2,],2,FUN=function(x){A%*%x})  
+  p.ineq= apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
   
   #Find all C %*% theta combinations
-  p.ineq2= apply(p.options[1:2,],2,FUN=function(x){C%*%x})  
+  p.ineq2= apply(p.options2[1:2,],2,FUN=function(x){C%*%x})  
   #find if abs(C*theta -d) < delta
   delta=0.001
   p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
@@ -58,7 +58,7 @@ if(diel.setup[[index.models]]$func=="bf_equality"){
   index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
-  probs.out=t(p.options[,index])
+  probs.out=t(p.options2[,index])
   
 }
 
