@@ -7,6 +7,7 @@
 #' @param hyp The hypothesis to simulate data from
 #' @param diel.setup Multinomial inequalities for hypotheses setup using function 'diel.ineq'.
 #' @param sd.error Normal distribution standard deviation to simulate error to add to the probabilities on the logit-scale. Default is 0
+#' @param fast Default is TRUE. Uses less preceise probs (0.005 vs 0.001). Does not apply to equality hyps.
 #' @return A list of outputs
 #' \item{y}{Matrix of simulated datasets}
 #' \item{p}{Probabilities used to simulate the data}  
@@ -15,8 +16,8 @@
 #' sim.diel(n.sim=1,reps=1,n.sample=100,hyp="D.th")
 #' @export
 
-#n.sim=1;reps=1;n.sample=100;diel.setup=NULL;sd.error=0
-sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0){
+#n.sim=1;reps=1;n.sample=100;diel.setup=NULL;sd.error=0; fast=TRUE
+sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0,fast=TRUE){
   
   if(sd.error<0| !is.numeric(sd.error)){
     stop("sd.error need to be numeric and greater than or equal to zero.")
@@ -26,7 +27,7 @@ sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0){
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   
   #Find appropriate probabilities of hyp using inequalities in diel.setup
-  prob.hyp=find.prob.hyp(hyp,diel.setup)
+  prob.hyp=find.prob.hyp(hyp,diel.setup,fast)
   
   #Randomly select  probabilities- reps times
   prob.select=matrix(prob.hyp[sample(nrow(prob.hyp),reps),],nrow=reps,ncol=3)

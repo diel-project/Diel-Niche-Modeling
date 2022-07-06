@@ -22,7 +22,7 @@ hyp.sets=function(hyp.in=NULL){
  #General Hypotheses
   hyp.set[[1]]=c("D.th","N.th","CR.th","EC.th")   
   hyp.set[[2]]=c("D.th","N.th","CR.th","C.th")    
-  hyp.set[[3]]=c("D.max","N.max","CR.max","EC")
+  hyp.set[[3]]=c("D.max","N.max","CR.max")
   hyp.set[[4]]=c("D.max","N.max","CR.max","AC")
   hyp.set[[5]]=c("D.var","N.var","CR.var","EC.var") 
   hyp.set[[6]]=c("D.var","N.var","CR.var","AC.var")
