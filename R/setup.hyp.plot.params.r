@@ -41,12 +41,14 @@ if(diel.setup[[index.models[i]]]$func=="bf_equality"){
   d=diel.setup[[index.models[i]]][[5]]
   
   #Find all A %*% theta combinations
-  p.ineq= apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
+  p.ineq= round(matrix(apply(p.options2[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=6)
+    #apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
   
   #Find all C %*% theta combinations
-  p.ineq2= apply(p.options2[1:2,],2,FUN=function(x){C%*%x})  
+  p.ineq2= round(matrix(apply(p.options2[1:2,],2,FUN=function(x){C%*%x}),nrow=nrow(C)),digits=6)
+    #apply(p.options2[1:2,],2,FUN=function(x){C%*%x})  
   #find if abs(C*theta -d) < delta
   delta=0.005
   p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
