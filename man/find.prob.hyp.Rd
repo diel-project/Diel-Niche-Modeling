@@ -4,12 +4,14 @@
 \alias{find.prob.hyp}
 \title{Inequality Setup}
 \usage{
-find.prob.hyp(hyp, diel.setup = NULL)
+find.prob.hyp(hyp, diel.setup = NULL, fast = TRUE)
 }
 \arguments{
 \item{hyp}{Hypothesis name: D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th, Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th, Nc.max, Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,' CRd.max, CRd.var, CRn.th, CRn.max, CRn.var, CRc.th, CRc.max, CRc.var,'EC.th, EC.var, AC.var.}
 
 \item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
+
+\item{fast}{Default is TRUE, which uses p.options2 instead of p.options3. Does not apply to equality hyps.}
 }
 \value{
 A matrix of probabilities that match hypothesis in variable hyp

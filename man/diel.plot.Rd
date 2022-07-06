@@ -4,7 +4,7 @@
 \alias{diel.plot}
 \title{Plot Diel Hypotheis}
 \usage{
-diel.plot(hyp, diel.setup = NULL, posteriors = NULL)
+diel.plot(hyp, diel.setup = NULL, posteriors = NULL, more.points = FALSE)
 }
 \arguments{
 \item{hyp}{hypothesis code name to use}
@@ -12,6 +12,8 @@ diel.plot(hyp, diel.setup = NULL, posteriors = NULL)
 \item{diel.setup}{Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
 
 \item{posteriors}{A single models MCMC output from the function 'diel.hypotheses.func'.}
+
+\item{more.points}{Default is FALSE. To use more points for hyps in plotting.}
 }
 \value{
 A plotly 3d plot

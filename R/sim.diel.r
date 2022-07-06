@@ -33,7 +33,7 @@ sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0,f
   prob.select=matrix(prob.hyp[sample(nrow(prob.hyp),reps),],nrow=reps,ncol=3)
   
   #add in normal distribution error on logit scale and backtransorm
-  prob.select.with.error=plogis(qlogis(prob.select)+matrix(rnorm(length(prob.select),0,sd.error),ncol=3))
+  prob.select.with.error=stats::plogis(stats::qlogis(prob.select)+matrix(stats::rnorm(length(prob.select),0,sd.error),ncol=3))
   
   #simulate n.sim datesets of n.sample size
   y=c(apply(prob.select.with.error,1,

@@ -4,12 +4,14 @@
 \alias{setup.hyp.plot.params}
 \title{Setup plotting hypotheses (Internal)}
 \usage{
-setup.hyp.plot.params(diel.setup, index.models, ...)
+setup.hyp.plot.params(diel.setup, index.models, more.points, ...)
 }
 \arguments{
 \item{diel.setup}{provided by user or used default as diel.setup=diel.ineq()}
 
 \item{index.models}{vector of indices indicating which hypotheses to use from diel.setup}
+
+\item{more.points}{which to use, p.options or p.options2}
 
 \item{...}{Other parameters}
 }

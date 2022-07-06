@@ -30,7 +30,8 @@ diel.ineq(
   xi.EC = NULL,
   xi.Dc = NULL,
   xi.Nc = NULL,
-  p.avail = NULL
+  p.avail = NULL,
+  xi.min.dom = NULL
 )
 }
 \arguments{
@@ -85,6 +86,8 @@ diel.ineq(
 \item{xi.Nc}{Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-cathemeral hypothesis.}
 
 \item{p.avail}{Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.}
+
+\item{xi.min.dom}{Default c(0.8). A single value of the min prob for a a dominant category}
 }
 \value{
 diel.hyp A list of diel hypotheses as multinomial inequalities.
