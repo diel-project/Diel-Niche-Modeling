@@ -41,12 +41,12 @@ if(diel.setup[[index.models[i]]]$func=="bf_equality"){
   d=diel.setup[[index.models[i]]][[5]]
   
   #Find all A %*% theta combinations
-  p.ineq= apply(load.points[1:2,],2,FUN=function(x){A%*%x})  
+  p.ineq= apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
   #find if that is <= b
   p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
   
   #Find all C %*% theta combinations
-  p.ineq2= apply(load.points[1:2,],2,FUN=function(x){C%*%x})  
+  p.ineq2= apply(p.options2[1:2,],2,FUN=function(x){C%*%x})  
   #find if abs(C*theta -d) < delta
   delta=0.005
   p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
@@ -56,7 +56,7 @@ if(diel.setup[[index.models[i]]]$func=="bf_equality"){
  index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
-  p.plot=t(load.points[,index])
+  p.plot=t(p.options2[,index])
 
 }
  

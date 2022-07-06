@@ -506,7 +506,7 @@ small.num=0.0001
   # Variability - weak - no constraint on third probability being zero
   A.Nd.var.wk <- matrix(c(1,2,1,-1,-1,-1,1,1,0,1,0,-1),ncol = 2, byrow = TRUE)
   b.Nd.var.wk <- c(1,0,xi.Nd[3]+e.Nd-1,-xi.Nd[3]+e.Nd+1,xi.Nd[3]+e.Nd,-xi.Nd[4]+e.Nd)
-  Nd.var.wk=list(Name="Nocturnal-diurnal Var (Weak)",A=A.Nd.var.wk,b=b.Nd.var.wk)
+  Nd.var.wk=list(Name="Nocturnal-diurnal Var (Weak)",A=A.Nd.var.wk,b=b.Nd.var.wk,func="bf_multinom")
   
   #################################
   #Nocturnal-cathemeral Hypotheses
@@ -719,7 +719,7 @@ small.num=0.0001
                        -1/(1-sum(p.avail)),-1/(1-sum(p.avail))),ncol = 2, byrow = TRUE)
   b.AC.var <- c(-1+e.AC,1+e.AC,-1+e.AC,1+e.AC,
                 -1+e.AC+(1/(1-sum(p.avail))),1+e.AC-(1/(1-sum(p.avail))))
-  AC.var=list(Name="Available Cathemeral Var",A=A.AC.var,b=b.AC.var,func="bf_equality")     
+  AC.var=list(Name="Available Cathemeral Var",A=A.AC.var,b=b.AC.var,func="bf_multinom")     
 #################################
 #################################
 #General Cathemeral Hypotheses
