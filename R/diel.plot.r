@@ -1,9 +1,9 @@
-#' Plot Diel Hypotheis
+#' Plot Diel Hypothesis or Hypothesis Set
 #'
 #' Plots the diel niche space and posterior disribution of a fitted model.
 #' @import plotly
 #' @import coda
-#' @param hyp hypothesis code name to use
+#' @param hyp a vector of hypotheses code names
 #' @param diel.setup Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
 #' @param posteriors A single models MCMC output from the function 'diel.hypotheses.func'.
 #' @param more.points Default is FALSE. To use more points for hyps in plotting.
@@ -17,18 +17,21 @@ diel.plot=function(hyp,
                    diel.setup=NULL, 
                    posteriors=NULL,
                    more.points=FALSE){
+  
+  
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   #if(is.null(posteriors)){post=t(matrix(c(0,0,0)))}else{post=coda::as.mcmc(posteriors)}
   if(!is.null(posteriors)){post=coda::as.mcmc(posteriors)}
   
-  #source("plot.setup.hyp.params.r")
   index.models=match(hyp,names(diel.setup))
+  
   plot.points=data.frame(do.call(rbind,setup.hyp.plot.params(diel.setup,index.models,more.points)))
   plot.points$hyp=as.factor(plot.points$hyp)
   
   xlim=range(plot.points[,1])
   ylim=range(plot.points[,2])
   zlim=range(plot.points[,3])
+  
   if(!is.null(posteriors)){
   post=data.frame(post,rep("posteriors",nrow(post)))
   colnames(post)=colnames(plot.points)
@@ -38,7 +41,7 @@ diel.plot=function(hyp,
   }
   #plot.points2=data.frame(plot.points2,as.factor(c(rep("Niche",nrow(plot.points)),
   #                                     rep("Posteriors",nrow(post)))))
-##  colnames(plot.points2)[4]="type"
+
   col2=c("#000000","#D8BFD8")
   #col2=colors(length(unique(plot.points2$hyp)))
   
@@ -48,8 +51,7 @@ diel.plot=function(hyp,
 if(length(unique(plot.points2$hyp))>2){
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
            #     width=800,height=800,
-               color = ~hyp,# colors=col2,
-                marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
+               color = ~hyp,marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
 }else{
 
 if(!is.null(posteriors)){plot.points2$col=as.factor((c(rep(hyp,nrow(plot.points)),
