@@ -17,7 +17,7 @@
 hyp.sets=function(hyp.in=NULL){
 
   #NEED TO INCLUDE C.th somewhere
-  hyp.set=vector("list",22)
+  hyp.set=vector("list",20)
   
  #General Hypotheses
   hyp.set[[1]]=c("D.th","N.th","CR.th","EC.th")   
@@ -51,26 +51,20 @@ hyp.sets=function(hyp.in=NULL){
   hyp.set[[16]]=c(hyp.set[[3]],hyp.set[[11]]) 
   names(hyp.set)[15:16]=c("hyp.th.Ps.th.wk","hyp.var.Ps.var.wk")
 
-#All hypotheses; used for testing    
-  hyp.set[[17]]=c(hyp.set[[2]],hyp.set[[3]],hyp.set[[5]],
-                  hyp.set[[7]],hyp.set[[8]],hyp.set[[9]]) 
-  hyp.set[[18]]=unique(unlist(hyp.set[1:11]))
-  names(hyp.set)[17:18]=c("hyp.all","hyp.all2")
+  hyp.set[[17]]=c("D","N","C","CR")
+  names(hyp.set)[17]=c("General")
 
-  hyp.set[[19]]=c("D","N","C","CR")
-  names(hyp.set)[19]=c("General")
-
-  hyp.set[[20]]=c("D2","N2","C2","CR2")
-  names(hyp.set)[20]=c("General2")
+  hyp.set[[18]]=c("D2","N2","C2","CR2")
+  names(hyp.set)[18]=c("General2")
     
-  hyp.set[[21]]=c("C.full", "CR.full",  "D.CR.full","N.CR.full", "CRc.full","CRd.full" ,
+  hyp.set[[19]]=c("C.full", "CR.full",  "D.CR.full","N.CR.full", "CRc.full","CRd.full" ,
           "CRn.full", "D.full",  "D.N.full","Dc.full", "Dcr.full","Dn.full",  
           "N.full",  "Nc.full", "Ncr.full", "Nd.full" )
   
-  names(hyp.set)[21]=c("Full")
+  names(hyp.set)[19]=c("Full")
   
-  hyp.set[[22]]=c("D.Gen","CR.Gen","N.Gen","C.Gen","DN.Gen","CRN.Gen","CRD.Gen")
-  names(hyp.set)[22]=c("General3")
+  hyp.set[[20]]=c("D.Gen","CR.Gen","N.Gen","C.Gen","DN.Gen","CRN.Gen","CRD.Gen")
+  names(hyp.set)[20]=c("General3")
   
 if(is.null(hyp.in)){   
   cat("Names of Hypotheses Sets: \n",names(hyp.set),sep="  ")

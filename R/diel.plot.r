@@ -18,8 +18,8 @@ diel.plot=function(hyp,
                    posteriors=NULL,
                    more.points=FALSE){
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
-  if(is.null(posteriors)){post=t(matrix(c(0,0,0)))}else{post=coda::as.mcmc(posteriors)}
-  
+  #if(is.null(posteriors)){post=t(matrix(c(0,0,0)))}else{post=coda::as.mcmc(posteriors)}
+  if(!is.null(posteriors)){post=coda::as.mcmc(posteriors)}
   
   #source("plot.setup.hyp.params.r")
   index.models=match(hyp,names(diel.setup))
@@ -29,9 +29,13 @@ diel.plot=function(hyp,
   xlim=range(plot.points[,1])
   ylim=range(plot.points[,2])
   zlim=range(plot.points[,3])
+  if(!is.null(posteriors)){
   post=data.frame(post,rep("posteriors",nrow(post)))
   colnames(post)=colnames(plot.points)
   plot.points2=rbind(plot.points,data.frame(post))
+  }else{
+    plot.points2=plot.points
+  }
   #plot.points2=data.frame(plot.points2,as.factor(c(rep("Niche",nrow(plot.points)),
   #                                     rep("Posteriors",nrow(post)))))
 ##  colnames(plot.points2)[4]="type"
@@ -48,8 +52,11 @@ fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
                 marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
 }else{
 
-    plot.points2$col=as.factor((c(rep(hyp,nrow(plot.points)),
+if(!is.null(posteriors)){plot.points2$col=as.factor((c(rep(hyp,nrow(plot.points)),
                                        rep("posteriors",nrow(post)))))
+}else{
+  plot.points2$col=as.factor(rep(hyp,nrow(plot.points)))
+}
   
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
            #     width=800,height=800,

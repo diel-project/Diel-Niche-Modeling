@@ -43,13 +43,18 @@ To view the probability space of the hypothesis
 diel.plot(hyp="N.max")
 ```
 
+To view a hypothesis set
+```{r 3dplot1}
+diel.plot(hyp=hyp.sets("hyp.max"))
+```
+
 # Simulate Data
 To simulate data based on a diel hypotheses, we need define a hypothesis using it's coded name. Pick a hypothesis to simulate data from  
 ```{r sim1}
   hyp=c("N.th")
 ```
 
-There are hypotheses already setup as multinomial models with inequality constraints. These defaults are, 
+There are hypotheses already setup as multinational models with inequality constraints. These defaults are, 
 
 ```{r sim2}
     diel.setup=diel.ineq()
@@ -60,10 +65,11 @@ If you want to specify your own hypotheses, such as defining the lower threshold
     diel.setup=diel.ineq(xi.N=c(0.7,0.9))
 ```
 
-Then we simulate data as
+We can simulate data  without specififying diel.setup
 ```{r sim4}
   set.seed(45451)
-  sim.dat=sim.diel(n.sim=1,reps=1,n.sample=100,hyp=hyp)
+  sim.dat=sim.diel(n.sample=100,hyp=hyp)
+  sim.dat
   y=sim.dat$y
   y
 ```
@@ -76,10 +82,10 @@ You can setup your own model set or use pre-defined model sets as
   hyp.set=hyp.sets("hyp.max") #pre-defined
 ```
 
-Lastly, we fit our models  
+Lastly, we fit our model and look at the model probabilities
 ```{r fit}
   out = diel.fit(y,hyp.set)
-
+  out$bf.table
 ```
 
 You can discover the available outputs as
@@ -88,6 +94,14 @@ You can discover the available outputs as
 attributes(out)
 
 ?diel.fit
+```
+
+The default is to not return posterior samples, so to changet that we can do,
+```{r results2}
+  out = diel.fit(y,hyp.set,post.fit = TRUE)
+
+#look at a specific models posteriors
+  plot(out$post.samp$D.max)
 ```
 
 # Plotting
@@ -110,11 +124,16 @@ mcmc_areas(posteriors, prob = 0.8) + plot_title+
 }
 ```
 
-Another way to examine our hypothesis to plot the theoretical niche space for the hypothesis along with the postesterior samples.
+Another way to examine our hypothesis to plot the theoretical niche space for the hypothesis along with the posterior samples. Or, show the whole hypothesis set
 
 ```{r 3dplot}
 diel.plot(hyp=out$ms.model,
           posteriors=out$post.samp.ms.model)
+
+
+diel.plot(hyp=hyp.set,
+          posteriors=out$post.samp.ms.model)
+
 ```
 
 If you are using RStudio and no figure is opening
