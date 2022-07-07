@@ -27,6 +27,7 @@
 #' @param xi.CRc Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.
 #' @param xi.EC Default c(0.33). A single value of the available amount of time in all three diel periods.
 #' @param xi.min.dom Default c(0.8). A single value of the min prob for a a dominant category 
+#' @param seperation Default is 0. However, if you want to separate the hypotheses General2 and General 3, this will create separation and empty space
 #' @param p.avail Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.
 #' 
 #' @return diel.hyp A list of diel hypotheses as multinomial inequalities.
@@ -126,7 +127,7 @@ diel.ineq=function(e=NULL,
                    xi.N=NULL,xi.Nd=NULL,xi.Ncr=NULL,
                    xi.CR=NULL,xi.CRd=NULL,xi.CRn=NULL,xi.CRc=NULL,
                    xi.EC=NULL,xi.Dc=NULL,xi.Nc=NULL, p.avail=NULL,
-                   xi.min.dom=NULL){
+                   xi.min.dom=NULL, seperation=NULL){
   
   #Default epsilon values for variation hypotheses
   if(is.null(e.D)){e.D=0.05}
@@ -167,6 +168,8 @@ diel.ineq=function(e=NULL,
   
   if(is.null(xi.min.dom)){xi.min.dom  = c(0.8,0.1)}else{xi.min.dom  = c(xi.min.dom,(1-xi.min.dom)/2)}
   
+  if(is.null(seperation)){seperation  = c(0)}
+  
   #################################
   #################################
   #Unconstrained model
@@ -188,6 +191,7 @@ diel.ineq=function(e=NULL,
 #################################
 #Using general hyps as inequalities
 small.num=0.0001  
+
   #D
   A.D <- matrix(c(1,-1,-1,-2,0,-1),ncol = 2, byrow = TRUE)
   b.D <- c(0,-1,-0.45)
@@ -227,7 +231,7 @@ small.num=0.0001
 
   #C
   A.C <- matrix(c(0,1,1,0,-1,-1),ncol = 2, byrow = TRUE)
-  b.C <- c(xi.min.dom[1]-small.num,xi.min.dom[1]-small.num,xi.min.dom[1]-small.num-1)
+  b.C <- c(xi.min.dom[1]-small.num-seperation,xi.min.dom[1]-small.num-seperation,xi.min.dom[1]-small.num-1-seperation)
   C2=list(Name="Cathemeral (General2)",A=A.C,b=b.C,func="bf_multinom")   
 
 #################################
@@ -250,23 +254,23 @@ small.num=0.0001
 
   #C
   A.C <- matrix(c(0,-1,1,1,-1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.C <- c(-xi.min.dom[2],-xi.min.dom[2]+1,-xi.min.dom[2],xi.min.dom[1]-small.num,xi.min.dom[1]-small.num-1)
+  b.C <- c(-xi.min.dom[2]-seperation,-xi.min.dom[2]+1-seperation,-xi.min.dom[2]-seperation,xi.min.dom[1]-small.num-seperation,xi.min.dom[1]-small.num-1-seperation)
   C.Gen=list(Name="Cathemeral",A=A.C,b=b.C,func="bf_multinom")   
   
  
   #CRD
   A.CRD <- matrix(c(-1,-1,-1,0,1,0,0,-1,0,1),ncol = 2, byrow = TRUE)
-  b.CRD <- c(xi.min.dom[2]-small.num-1,-xi.min.dom[2],xi.min.dom[1]-small.num,-xi.min.dom[2],xi.min.dom[1]-small.num)
+  b.CRD <- c(xi.min.dom[2]-small.num-1,-xi.min.dom[2]-seperation,xi.min.dom[1]-small.num-seperation,-xi.min.dom[2],xi.min.dom[1]-small.num-seperation)
   CRD.Gen=list(Name="Cath[CR.D]",A=A.CRD,b=b.CRD,func="bf_multinom")   
 
   #DN
   A.DN <- matrix(c(1,0,0,-1,0,1,1,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.DN <- c(xi.min.dom[2]-small.num,-xi.min.dom[2],xi.min.dom[1]-small.num,-xi.min.dom[2]+1,xi.min.dom[1]-small.num-1)
+  b.DN <- c(xi.min.dom[2]-small.num,-xi.min.dom[2]-seperation,xi.min.dom[1]-small.num-seperation,-xi.min.dom[2]+1,xi.min.dom[1]-small.num-1-seperation)
   DN.Gen=list(Name="Cath[D.N]",A=A.DN,b=b.DN,func="bf_multinom")   
   
   #CRN
   A.CRN <- matrix(c(0,1,1,1,-1,-1,-1,0,1,0),ncol = 2, byrow = TRUE)
-  b.CRN <- c(xi.min.dom[2]-small.num,-xi.min.dom[2]+1,xi.min.dom[1]-small.num-1,-xi.min.dom[2],xi.min.dom[1]-small.num)
+  b.CRN <- c(xi.min.dom[2]-small.num,-xi.min.dom[2]+1-seperation,xi.min.dom[1]-small.num-1-seperation,-xi.min.dom[2],xi.min.dom[1]-small.num-seperation)
   CRN.Gen=list(Name="Cath[CR.N]",A=A.CRN,b=b.CRN,func="bf_multinom")   
   
   
@@ -364,7 +368,7 @@ small.num=0.0001
   # Maximizing
   A.D.max <- matrix(c(1,-1,-1,-2),ncol = 2, byrow = TRUE)
   #b.D.max <- c(0,-1)
-  b.D.max <- c(-small.num,-small.num-1)
+  b.D.max <- c(-small.num-seperation,-small.num-1-seperation)
   D.max=list(Name="Diurnal Max",A=A.D.max, b=b.D.max,func="bf_multinom")     
   # Variability
   A.D.var <- matrix(c(1,-1,-1,-2,0,-1,0,1),ncol = 2, byrow = TRUE)
@@ -472,7 +476,7 @@ small.num=0.0001
   
   # Maximizing
   A.N.max <- matrix(c(1,2,2,1),ncol = 2, byrow = TRUE)
-  b.N.max <- c(-small.num+1,-small.num+1)
+  b.N.max <- c(-small.num+1-seperation,-small.num+1-seperation)
   N.max=list(Name="Nocturnal Max",A=A.N.max,b=b.N.max,func="bf_multinom")     
   
   # Variability
@@ -579,7 +583,7 @@ small.num=0.0001
   # Maximizing
   A.CR.max <- matrix(c(-1,1,-2,-1),ncol = 2, byrow = TRUE)
   #b.CR.max <- c(0,-1)
-  b.CR.max <- c(-small.num,-small.num-1)
+  b.CR.max <- c(-small.num-seperation,-small.num-1-seperation)
   CR.max=list(Name="Crepuscular Max",A=A.CR.max,b=b.CR.max,func="bf_multinom")     
   
   # Variability
