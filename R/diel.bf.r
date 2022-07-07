@@ -152,7 +152,7 @@ diel.bf=function(y,
     }
     }#end bf_multinom IF
     
-    #bf_nonlinera
+    #bf_nonlinear
     if(diel.setup[[idx.mod[i]]]$func=="bf_nonlinear"){
       bf[[i]]= try(
                     multinomineq::bf_nonlinear(k=y,options =  rep(3,reps),

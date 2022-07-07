@@ -177,7 +177,13 @@ diel.ineq=function(e=NULL,
 
   #################################
   #################################
+  #non-linear model for Hyp.max set
+  C.max =list(Name="C.max",func="bf_nonlinear",data=non.linear.data$hyp.C.max,
+                  inside=  function(x){
+                  min(abs(x[1] - matrix(non.linear.data$hyp.C.max[,1]))+abs(x[2] - matrix(non.linear.data$hyp.C.max[,2])))<=0.005
+                    }
 
+           )
 #################################
 #################################
 #Using general hyps as inequalities
@@ -771,6 +777,7 @@ small.num=0.0001
     Ncr.th.wk=Ncr.th.wk,CRn.th.wk=CRn.th.wk,Uncon=Uncon,
     N=N,C=C,CR=CR,D=D,
     N2=N2,C2=C2,CR2=CR2,D2=D2,
+    C.max=C.max,
     D.Gen=D.Gen,N.Gen=N.Gen,CR.Gen=CR.Gen,C.Gen=C.Gen,DN.Gen=DN.Gen,CRN.Gen=CRN.Gen,CRD.Gen=CRD.Gen,
      C.full=C.full, CR.full=CR.full,  D.CR.full=D.CR.full,N.CR.full=N.CR.full,
      CRc.full=CRc.full,CRd.full=CRd.full,CRn.full=CRn.full, D.full=D.full,  D.N.full=D.N.full,

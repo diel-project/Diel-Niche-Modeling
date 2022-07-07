@@ -69,9 +69,10 @@ find.prob.hyp=function(hyp, diel.setup = NULL,fast=TRUE){
 
 # Non-linear models - the data is stored in diel.setup  
   if(diel.setup[[index.models]]$func=="bf_nonlinear"){  
-    probs.out=as.matrix(diel.setup[[index.models]]$data,ncol=2)
-    probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
-    probs.out=matrix(probs.out,ncol=3)
+    probs.out=as.matrix(diel.setup[[index.models]]$data,ncol=3)
+    #probs.out=as.matrix(diel.setup[[index.models]]$data,ncol=2)
+    #probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
+    #probs.out=matrix(probs.out,ncol=3)
   }
   
 # output  
