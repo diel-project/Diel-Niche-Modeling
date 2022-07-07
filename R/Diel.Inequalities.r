@@ -27,7 +27,7 @@
 #' @param xi.CRc Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.
 #' @param xi.EC Default c(0.33). A single value of the available amount of time in all three diel periods.
 #' @param xi.min.dom Default c(0.8). A single value of the min prob for a a dominant category 
-#' @param seperation Default is 0. However, if you want to separate the hypotheses General2 and General 3, this will create separation and empty space
+#' @param seperation Default is 0. However, if you want to separate the hypotheses hyp.max, General2, and General 3, this will create separation and empty space
 #' @param p.avail Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.
 #' 
 #' @return diel.hyp A list of diel hypotheses as multinomial inequalities.
