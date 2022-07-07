@@ -23,47 +23,44 @@ find.prob.hyp=function(hyp, diel.setup = NULL,fast=TRUE){
   index.models=match(hyp,names(diel.setup))
 
 # Inequality models  
-if(diel.setup[[index.models]]$func=="bf_multinom"){
-  A=round(diel.setup[[index.models]][[2]],digits=5)
-  b=round(diel.setup[[index.models]][[3]],digits=5)
+  if(diel.setup[[index.models]]$func=="bf_multinom"){
+    A=round(diel.setup[[index.models]][[2]],digits=5)
+    b=round(diel.setup[[index.models]][[3]],digits=5)
   
-  #Find all A %*% theta combinations
-  p.ineq= round(matrix(apply(p.opts[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=4)
-  #find if that is <= b
-  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+    #Find all A %*% theta combinations
+    p.ineq= round(matrix(apply(p.opts[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=4)
+    #find if that is <= b
+    p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
 
-  #Find where they are true
-  index=which(p.ineq.logical)
+    #Find where they are true
+    index=which(p.ineq.logical)
 
- #These are the combinations of p's that match the constraints
-  probs.out=t(p.opts[,index])
-  
-
-}#End if
+    #These are the combinations of p's that match the constraints
+    probs.out=t(p.opts[,index])
+  }#End if
 
 # Equality models      
-if(diel.setup[[index.models]]$func=="bf_equality"){  
-  A=diel.setup[[index.models]][[2]]
-  b=diel.setup[[index.models]][[3]]
-  C=diel.setup[[index.models]][[4]]
-  d=diel.setup[[index.models]][[5]]
+  if(diel.setup[[index.models]]$func=="bf_equality"){  
+    A=diel.setup[[index.models]][[2]]
+    b=diel.setup[[index.models]][[3]]
+    C=diel.setup[[index.models]][[4]]
+    d=diel.setup[[index.models]][[5]]
   
-  #Find all A %*% theta combinations
-  p.ineq=  round(matrix(apply(p.options3[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=4)
-  #find if that is <= b
-  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+    #Find all A %*% theta combinations
+    p.ineq=  round(matrix(apply(p.options3[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=4)
+    #find if that is <= b
+    p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
   
-  #Find all C %*% theta combinations
-  p.ineq2=  round(matrix(apply(p.options3[1:2,],2,FUN=function(x){C%*%x}),nrow=nrow(C)),digits=4)
+    #Find all C %*% theta combinations
+    p.ineq2=  round(matrix(apply(p.options3[1:2,],2,FUN=function(x){C%*%x}),nrow=nrow(C)),digits=4)
   
-  #find if abs(C*theta -d) < delta
-  delta=0.001
-  p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
+    #find if abs(C*theta -d) < delta
+    delta=0.001
+    p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
+    p.ineq.logical=apply(data.frame(p.ineq.logical,p.ineq.logical2),1,FUN=function(x){all(x)})
   
-  p.ineq.logical=apply(data.frame(p.ineq.logical,p.ineq.logical2),1,FUN=function(x){all(x)})
-  
-  #Find where they are true
-  index=which(p.ineq.logical)
+    #Find where they are true
+    index=which(p.ineq.logical)
 
  #These are the combinations of p's that match the constraints
   probs.out=t(p.options3[,index])
@@ -71,14 +68,13 @@ if(diel.setup[[index.models]]$func=="bf_equality"){
 }
 
 # Non-linear models - the data is stored in diel.setup  
-if(diel.setup[[index.models]]$func=="bf_nonlinear"){  
-  probs.out=as.matrix(diel.setup[[index.models]]$data,ncol=2)
-  probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
-  probs.out=matrix(probs.out,ncol=3)
-}
+  if(diel.setup[[index.models]]$func=="bf_nonlinear"){  
+    probs.out=as.matrix(diel.setup[[index.models]]$data,ncol=2)
+    probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
+    probs.out=matrix(probs.out,ncol=3)
+  }
   
 # output  
   probs.out
 
 } #end function
-  

@@ -5,13 +5,14 @@
 #' @param idx.mod indices of hypotheses of diel.setup to use
 #' @param reps replicate samples of three
 #' @param diel.setup provided by user or used default as 'diel.setup=diel.ineq()'
-#' @param delta error tolerance allowed
+#' @param delta error tolerance allowed for equalities
 #' @return Internal list
 #' @export
 #' @keywords internal
 
 modify.Ab=function(y,idx.mod,reps,diel.setup,delta){
-    
+  
+  #Create list  
   bf.Ab.new=vector("list",length(idx.mod)); names(bf.Ab.new)=names(idx.mod)
 
   for(i in 1:length(bf.Ab.new)){
@@ -47,8 +48,8 @@ modify.Ab=function(y,idx.mod,reps,diel.setup,delta){
       
     }
   }#End Model for Loop
-  bf.Ab.new
+  
+# output  from function
+bf.Ab.new
+
 }#End Function
-
-
-
