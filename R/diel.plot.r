@@ -16,7 +16,10 @@
 diel.plot=function(hyp, 
                    diel.setup=NULL, 
                    posteriors=NULL,
-                   more.points=FALSE){
+                   more.points=FALSE,
+                   x.scene=2,
+                   y.scene=2,
+                   z.scene=0.2){
   
   
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
@@ -69,7 +72,7 @@ fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
 
 fig <- fig %>% add_markers()
 fig <- fig %>% layout(scene = list(
-  #camera = list(eye = list(x=1, y=2, z = 0.25)),
+          camera = list(eye = list(x=x.scene, y=y.scene, z = z.scene)),
                      xaxis = list(title = 'Crepuscular',range = xlim,gridwidth = 3,
                                   titlefont = list(size = 18),tickfont = list(size=10)),
                      yaxis = list(title = 'Daytime',range = ylim,gridwidth = 3,
