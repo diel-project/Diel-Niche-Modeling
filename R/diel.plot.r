@@ -7,6 +7,12 @@
 #' @param diel.setup Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
 #' @param posteriors A single models MCMC output from the function 'diel.hypotheses.func'.
 #' @param more.points Default is FALSE. To use more points for hyps in plotting.
+#' @param x.scene
+#' @param y.scene
+#' @param z.scene
+#' @param axis.size
+#' @param axis.lab.size
+#' @param legend.lab.size
 #' @return A plotly 3d plot
 #' @examples 
 #' out=diel.fit(y=t(matrix(c(11,87,2))),hyp.set="D.max",n.mcmc=1000,burnin=200)
@@ -19,7 +25,10 @@ diel.plot=function(hyp,
                    more.points=FALSE,
                    x.scene=2,
                    y.scene=2,
-                   z.scene=0.2){
+                   z.scene=0.2,
+                   axis.size=16,
+                   axis.lab.size=18,
+                   legend.lab.size=15){
   
   
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
@@ -74,14 +83,14 @@ fig <- fig %>% add_markers()
 fig <- fig %>% layout(scene = list(
           camera = list(eye = list(x=x.scene, y=y.scene, z = z.scene)),
                      xaxis = list(title = 'Crepuscular',range = xlim,gridwidth = 3,
-                                  titlefont = list(size = 18),tickfont = list(size=10)),
+                                  titlefont = list(size = axis.lab.size),tickfont = list(size=axis.size)),
                      yaxis = list(title = 'Daytime',range = ylim,gridwidth = 3,
-                                  titlefont = list(size = 18),tickfont = list(size=10)),
-                     zaxis = list(titlefont = list(size = 18),tickfont = list(size=10),
+                                  titlefont = list(size = axis.lab.size),tickfont = list(size=axis.size)),
+                     zaxis = list(titlefont = list(size = axis.lab.size),tickfont = list(size=axis.size),
                        title = 'Nighttime',range = zlim),gridwidth = 3
                                 )
                 )
-fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = 20),
+fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = legend.lab.size),
                                                        itemsizing='constant'))
 
 fig
