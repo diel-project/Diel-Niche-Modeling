@@ -30,7 +30,7 @@ diel.plot=function(hyp,
                    axis.lab.size=18,
                    legend.lab.size=15){
   
-  
+#x.scene=0.8; y.scene=0.8; z.scene=0.2; axis.size=16; axis.lab.size=18; legend.lab.size=15
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   #if(is.null(posteriors)){post=t(matrix(c(0,0,0)))}else{post=coda::as.mcmc(posteriors)}
   if(!is.null(posteriors)){post=coda::as.mcmc(posteriors)}
@@ -62,7 +62,7 @@ diel.plot=function(hyp,
 
 if(length(unique(plot.points2$hyp))>2){
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
-           #     width=800,height=800,
+                #width=800,height=800,
                color = ~hyp,marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
 }else{
 
@@ -71,7 +71,8 @@ if(!is.null(posteriors)){plot.points2$col=as.factor((c(rep(hyp,nrow(plot.points)
 }else{
   plot.points2$col=as.factor(rep(hyp,nrow(plot.points)))
 }
-  
+ 
+
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
            #     width=800,height=800,
                 color=~col, colors=col2,
@@ -79,7 +80,20 @@ fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
   
 }
 
+
 fig <- fig %>% add_markers()
+
+
+m <- list(
+  l = 0,
+  r = 0,
+  b = 5,
+  t = 0,
+  pad = 0
+)
+
+#fig <- fig %>% layout(autosize = F, margin = m)
+# 
 fig <- fig %>% layout(scene = list(
           camera = list(eye = list(x=x.scene, y=y.scene, z = z.scene)),
                      xaxis = list(title = 'Crepuscular',range = xlim,gridwidth = 3,
@@ -92,6 +106,8 @@ fig <- fig %>% layout(scene = list(
                 )
 fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = legend.lab.size),
                                                        itemsizing='constant'))
+
+#fig <- fig %>% layout(autosize = F, margin = m)
 
 fig
 

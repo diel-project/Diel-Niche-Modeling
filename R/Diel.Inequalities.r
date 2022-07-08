@@ -195,44 +195,44 @@ small.num=0.0001
   #D
   A.D <- matrix(c(1,-1,-1,-2,0,-1),ncol = 2, byrow = TRUE)
   b.D <- c(0,-1,-0.45)
-  D=list(Name="Diurnal (General)",A=A.D,b=b.D,func="bf_multinom")     
+  D=list(Name="Diurnal",A=A.D,b=b.D,func="bf_multinom")     
 
   #N
   A.N <- matrix(c(2,1,1,2,1,1),ncol = 2, byrow = TRUE)
   b.N <- c(1,1,-0.45+1)
-  N=list(Name="Nocturnal (General)",A=A.N,b=b.N,func="bf_multinom")     
+  N=list(Name="Nocturnal",A=A.N,b=b.N,func="bf_multinom")     
   
   #CR
   A.CR <- matrix(c(-1,1,-2,-1,-1,0),ncol = 2, byrow = TRUE)
   b.CR <- c(0,-1,-0.45)
-  CR=list(Name="Crepuscular (General)",A=A.CR,b=b.CR,func="bf_multinom")     
+  CR=list(Name="Crepuscular",A=A.CR,b=b.CR,func="bf_multinom")     
 
   #C
   A.C <- matrix(c(1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
   b.C <- c(0.45-small.num,0.45-small.num,(0.45-small.num)-1)
-  C=list(Name="Cathemeral (General)",A=A.C,b=b.C,func="bf_multinom")     
+  C=list(Name="Cathemeral",A=A.C,b=b.C,func="bf_multinom")     
 #################################
 #################################
 #Using general hyps 2 as inequalities
   #D
   A.D <- matrix(c(0,-1),ncol = 2, byrow = TRUE)
   b.D <- c(-xi.min.dom[1])
-  D2=list(Name="Diurnal (General2)",A=A.D,b=b.D,func="bf_multinom")     
+  D2=list(Name="Diurnal",A=A.D,b=b.D,func="bf_multinom")     
 
   #N
   A.N <- matrix(c(1,1),ncol = 2, byrow = TRUE)
   b.N <- c(-xi.min.dom[1]+1)
-  N2=list(Name="Nocturnal (General2)",A=A.N,b=b.N,func="bf_multinom")     
+  N2=list(Name="Nocturnal",A=A.N,b=b.N,func="bf_multinom")     
   
   #CR
   A.CR <- matrix(c(-1,0),ncol = 2, byrow = TRUE)
   b.CR <- c(-xi.min.dom[1])
-  CR2=list(Name="Crepuscular (General2)",A=A.CR,b=b.CR,func="bf_multinom")     
+  CR2=list(Name="Crepuscular",A=A.CR,b=b.CR,func="bf_multinom")     
 
   #C
   A.C <- matrix(c(0,1,1,0,-1,-1),ncol = 2, byrow = TRUE)
   b.C <- c(xi.min.dom[1]-small.num-separation,xi.min.dom[1]-small.num-separation,xi.min.dom[1]-small.num-1-separation)
-  C2=list(Name="Cathemeral (General2)",A=A.C,b=b.C,func="bf_multinom")   
+  C2=list(Name="Cathemeral",A=A.C,b=b.C,func="bf_multinom")   
 
 #################################
 #################################
@@ -280,82 +280,82 @@ small.num=0.0001
   #CR.full
   A.CR <- matrix(c(0,1,-1,-1),ncol = 2, byrow = TRUE)
   b.CR <- c(0.1-small.num,(0.1-small.num)-1)
-  CR.full=list(Name="Crepuscular (Full)",A=A.CR,b=b.CR,func="bf_multinom")     
+  CR.full=list(Name="Crepuscular",A=A.CR,b=b.CR,func="bf_multinom")     
 
   #D.full
   A.D <- matrix(c(1,0,-1,-1),ncol = 2, byrow = TRUE)
   b.D <- c(0.1-small.num,(0.1-small.num)-1)
-  D.full=list(Name="Diurnal (Full)",A=A.D,b=b.D,func="bf_multinom")     
+  D.full=list(Name="Diurnal",A=A.D,b=b.D,func="bf_multinom")     
 
   #N.full
   A.N <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
   b.N <- c(0.1-small.num,0.1-small.num)
-  N.full=list(Name="Nocturnal (Full)",A=A.N,b=b.N,func="bf_multinom")     
+  N.full=list(Name="Nocturnal",A=A.N,b=b.N,func="bf_multinom")     
   
   #C.full
   A.C <- matrix(c(0,1,-1,-1,1,0,0,-1,1,1,-1,0),ncol = 2, byrow = TRUE)
   b.C <- c(0.5-small.num,(0.5-small.num)-1,0.5-small.num,-(0.1),-(0.1)+1,-(0.1))
-  C.full=list(Name="Cathemeral (Full)",A=A.C,b=b.C,func="bf_multinom")     
+  C.full=list(Name="Cathemeral",A=A.C,b=b.C,func="bf_multinom")     
 
   #Dcr.full
   A.Dcr <- matrix(c(0,-1,-1,0,1,0,-1,-1),ncol = 2, byrow = TRUE)
   b.Dcr <- c(-0.5,-0.1,0.4,(0.1-small.num)-1)
-  Dcr.full=list(Name="Diurnal-crepuscular (Full)",A=A.Dcr,b=b.Dcr,func="bf_multinom")     
+  Dcr.full=list(Name="Diurnal-crepuscular",A=A.Dcr,b=b.Dcr,func="bf_multinom")     
 
   #Dn.full
   A.Dn <- matrix(c(0,-1,1,1,-1,-1,1,0),ncol = 2, byrow = TRUE)
   b.Dn <- c(-0.5,-0.1+1,0.4-1,0.1-small.num)
-  Dn.full=list(Name="Diurnal-nocturnal (Full)",A=A.Dn,b=b.Dn,func="bf_multinom")     
+  Dn.full=list(Name="Diurnal-nocturnal",A=A.Dn,b=b.Dn,func="bf_multinom")     
   
   #Ncr.full
   A.Ncr <- matrix(c(1,1,-1,0,1,0,0,1),ncol = 2, byrow = TRUE)
   b.Ncr <- c(0.5+1,-0.1,0.4,0.1-small.num)
-  Ncr.full=list(Name="Nocturnal-crepuscular (Full)",A=A.Ncr,b=b.Ncr,func="bf_multinom")     
+  Ncr.full=list(Name="Nocturnal-crepuscular",A=A.Ncr,b=b.Ncr,func="bf_multinom")     
 
   #Nd.full
   A.Nd <- matrix(c(1,1,0,-1,0,1,1,0),ncol = 2, byrow = TRUE)
   b.Nd <- c(-0.5+1,-0.1,0.4,0.1-small.num)
-  Nd.full=list(Name="Nocturnal-diurnal (Full)",A=A.Nd,b=b.Nd,func="bf_multinom")     
+  Nd.full=list(Name="Nocturnal-diurnal",A=A.Nd,b=b.Nd,func="bf_multinom")     
 
   #CRd.full
   A.CRd <- matrix(c(-1,0,0,-1,0,1,-1,-1),ncol = 2, byrow = TRUE)
   b.CRd <- c(-0.5,-0.1,0.4,(0.1-small.num)-1)
-  CRd.full=list(Name="Crepuscular-diurnal (Full)",A=A.CRd,b=b.CRd,func="bf_multinom")     
+  CRd.full=list(Name="Crepuscular-diurnal",A=A.CRd,b=b.CRd,func="bf_multinom")     
 
   #CRn.full
   A.CRn <- matrix(c(-1,0,1,1,-1,-1,0,1),ncol = 2, byrow = TRUE)
   b.CRn <- c(-0.5,-0.1+1,0.4-1,0.1-small.num)
-  CRn.full=list(Name="Crepuscular-nocturnal (Full)",A=A.CRn,b=b.CRn,func="bf_multinom")     
+  CRn.full=list(Name="Crepuscular-nocturnal",A=A.CRn,b=b.CRn,func="bf_multinom")     
 
   #DN.full
   A.DN <- matrix(c(1,0,0,1,0,-1,-1,-1,1,1),ncol = 2, byrow = TRUE)
   b.DN <- c(0.1-small.num,0.6,-(0.4+small.num),0.6-1,-(0.4+small.num)+1)
-  D.N.full=list(Name="Diurnal-Nocturnal (Full)",A=A.DN,b=b.DN,func="bf_multinom")     
+  D.N.full=list(Name="Diurnal-Nocturnal",A=A.DN,b=b.DN,func="bf_multinom")     
 
   #DCR.full
   A.DCR <- matrix(c(-1,-1,0.1,0.6,0,-1,1,0,-1,0),ncol = 2, byrow = TRUE)
   b.DCR <- c((0.1-small.num)-1,0.6,-(0.4+small.num),0.6,-(0.4+small.num))
-  D.CR.full=list(Name="Diurnal-Crepuscular (Full)",A=A.DCR,b=b.DCR,func="bf_multinom")     
+  D.CR.full=list(Name="Diurnal-Crepuscular",A=A.DCR,b=b.DCR,func="bf_multinom")     
 
   #NCR.full
   A.NCR <- matrix(c(0,1,-1,-1,1,1,1,0,-1,0),ncol = 2, byrow = TRUE)
   b.NCR <- c(0.1-small.num,0.6-1,-(0.4+small.num)+1,0.6,-(0.4+small.num))
-  N.CR.full=list(Name="Nocturnal-Crepuscular (Full)",A=A.NCR,b=b.NCR,func="bf_multinom")     
+  N.CR.full=list(Name="Nocturnal-Crepuscular",A=A.NCR,b=b.NCR,func="bf_multinom")     
 
   #Dc.full
   A.Dc <- matrix(c(0,-1,-1,0,1,1),ncol = 2, byrow = TRUE)
   b.Dc <- c(-0.5,-0.1,-0.1+1)
-  Dc.full=list(Name="Diurnal-cathemeral (Full)",A=A.Dc,b=b.Dc,func="bf_multinom")     
+  Dc.full=list(Name="Diurnal-cathemeral",A=A.Dc,b=b.Dc,func="bf_multinom")     
 
   #Nc.full
   A.Nc <- matrix(c(1,1,0,-1,-1,0),ncol = 2, byrow = TRUE)
   b.Nc <- c(-0.5+1,-0.1,-0.1)
-  Nc.full=list(Name="Nocturnal-cathemeral (Full)",A=A.Nc,b=b.Nc,func="bf_multinom")     
+  Nc.full=list(Name="Nocturnal-cathemeral",A=A.Nc,b=b.Nc,func="bf_multinom")     
         
   #CRc.full
   A.CRc <- matrix(c(-1,0,0,-1,1,1),ncol = 2, byrow = TRUE)
   b.CRc <- c(-0.5,-0.1,-0.1+1)
-  CRc.full=list(Name="Crepuscular-cathemeral (Full)",A=A.CRc,b=b.CRc,func="bf_multinom")     
+  CRc.full=list(Name="Crepuscular-cathemeral",A=A.CRc,b=b.CRc,func="bf_multinom")     
         
 #################################
 #################################
