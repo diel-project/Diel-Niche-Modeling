@@ -706,13 +706,13 @@ small.num=0.0001
   
   #################################
   #################################
-  #Available Cathemeral Hypotheses - Equality Hypothesis
+  #Available Hypotheses - Equality Hypothesis
   #A just forces p1 and p2 to be less than 1. Allows for consistency in code execution in diel.bf
   A.AC <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
   b.AC <- c(1,1)
   C.AC <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
   d.AC <- c(p.avail[1],p.avail[2])
-  AC=list(Name="Available Cathemeral Equality",A=A.AC,b=b.AC,C=C.AC,d=d.AC,func="bf_equality") 
+  AC=list(Name="Available Equality",A=A.AC,b=b.AC,C=C.AC,d=d.AC,func="bf_equality") 
 
   # Threshold
   # NA  
@@ -729,7 +729,7 @@ small.num=0.0001
                        -1/(1-sum(p.avail)),-1/(1-sum(p.avail))),ncol = 2, byrow = TRUE)
   b.AC.var <- c(-1+e.AC,1+e.AC,-1+e.AC,1+e.AC,
                 -1+e.AC+(1/(1-sum(p.avail))),1+e.AC-(1/(1-sum(p.avail))))
-  AC.var=list(Name="Available Cathemeral Var",A=A.AC.var,b=b.AC.var,func="bf_multinom")     
+  AC.var=list(Name="Available Var",A=A.AC.var,b=b.AC.var,func="bf_multinom")     
 #################################
 #################################
 #General Cathemeral Hypotheses

@@ -17,7 +17,7 @@ if(!is.null(hyp.in)){
   if(hyp.in=="C.th"){print("General: Cathemeral Threshold (> 0.2)")}
   if(hyp.in=="EC"){print("General: Even Cathemeral (Equivalent probabilities)")}
   if(hyp.in=="EC.th"){print("General: Even Cathemeral Threshold")}
-  if(hyp.in=="AC.th"){print("General: Available Cathemeral (Probabilities equivalent to availabilitiy)")}
+#  if(hyp.in=="AC.th"){print("General: Available (Probabilities equivalent to availabilitiy)")}
   if(hyp.in=="D.max"){print("General: Diurnal Maximizing")}
   if(hyp.in=="N.max"){print("General: Nocturnal Maximizing")}
   if(hyp.in=="CR.max"){print("General: Crepuscular Maximizing")}
@@ -26,7 +26,7 @@ if(!is.null(hyp.in)){
   if(hyp.in=="CR.var"){print("General: Crepuscular Variation")}
   if(hyp.in=="EC.var"){print("General: Even Cathemeral Variation")}
   if(hyp.in=="C.var"){print("General: Cathemeral Variation")}
-  if(hyp.in=="AC.var"){print("General: Available Cathemeral Variation")}
+  if(hyp.in=="AC.var"){print("General: Available Variation")}
 
   if(hyp.in=="Dn.th"){print("Primary-secondary: Diurnal-nocturnal threshold")}
   if(hyp.in=="Dc.th"){print("Primary-secondary: Diurnal-cathemeral threshold")}

@@ -33,53 +33,48 @@ If you just need to remember the names of the hypotheses you can call
   what.hyp("?")
 ```
 
-Lastly, a description for a specific hypothesis can also be called
+There is also a description for a specific hypothesis can also be called
 ```{r hyp3}
   what.hyp("D.max")
 ```
 
-To view the probability space of the hypothesis
+There are three sets of complete hypotheses, which can be viewed
 ```{r 3dplot1}
-diel.plot(hyp="N.max")
+#Hypotheses of D.max, N.max, and CR.max, which together evaluate a hypothesis set of which diel period is used the most. This set disregards the definition of cathemrality.
+diel.plot(hyp=hyp.sets("hyp.max"))
+
+#Hypotheses of D2, N2, CR2, and C2. This is the most fundamental hypothesis set. Diurnal, Nocturnal, and Crepsucaular modalities are separated by cathemerality by having >= 0.8 probability in their diel category, respectively. When two categories are used >= 0.2 probability, it is defined as cathemeral.
+diel.plot(hyp=hyp.sets("General2"))
+
+#Hypotheses of  D.Gen, CR.Gen, N.Gen, C.Gen, DN.Gen, CRN.Gen, CRD.Gen. This set is simalar to General2, but separate cathemerality where two categories are used more than >0.1 probabilit and when three are used > 0.1 probability. 
+
+diel.plot(hyp=hyp.sets("General3"))
 ```
 
-To view a hypothesis set
-```{r 3dplot1}
-diel.plot(hyp=hyp.sets("hyp.max"))
+We can also view specific hypotheses, as
+```{r 3dplot2}
+diel.plot("D2",more.points = TRUE)
+
+diel.plot("N.th",more.points = TRUE)
 ```
 
 # Simulate Data
-To simulate data based on a diel hypotheses, we need define a hypothesis using it's coded name. Pick a hypothesis to simulate data from  
+To simulate data based on a diel hypothesis, we need define a hypothesis using it's coded name. Pick a hypothesis to simulate data from and how many samples.
 ```{r sim1}
-  hyp=c("N.th")
-```
-
-There are hypotheses already setup as multinational models with inequality constraints. These defaults are, 
-
-```{r sim2}
-    diel.setup=diel.ineq()
-```
-If you want to specify your own hypotheses, such as defining the lower threshold of a Nocturnal hypotheses, you could set up the lower threshold value as
-```{r sim3}
-  #The first element is the lower threshold relevant to the   threshold models and the second element is the most likely value, which is not relevent for the model chossen.
-    diel.setup=diel.ineq(xi.N=c(0.7,0.9))
-```
-
-We can simulate data  without specififying diel.setup
-```{r sim4}
   set.seed(45451)
-  sim.dat=sim.diel(n.sample=100,hyp=hyp)
-  sim.dat
-  y=sim.dat$y
-  y
+  hyp=c("CR2")
+  sim=sim.diel(hyp=hyp,n.sample=100)
+  p=sim$p
+  y=sim$y
+
 ```
 
 # Setup hypotheses set and fit models
 
 You can setup your own model set or use pre-defined model sets as
 ```{r hyp.set}
-  hyp.set = c("D.max","N.max") #manual
-  hyp.set=hyp.sets("hyp.max") #pre-defined
+  hyp.set = c("D2","CR2") #manual
+  hyp.set=hyp.sets("General2") #pre-defined
 ```
 
 Lastly, we fit our model and look at the model probabilities
@@ -96,12 +91,14 @@ attributes(out)
 ?diel.fit
 ```
 
-The default is to not return posterior samples, so to changet that we can do,
+The default is to not return posterior samples, so to change that we can do,
 ```{r results2}
-  out = diel.fit(y,hyp.set,post.fit = TRUE)
+  out = diel.fit(y,hyp.set,n.chains=2,post.fit = TRUE)
 
-#look at a specific models posteriors
-  plot(out$post.samp$D.max)
+#look at convergence
+out$gelm.diag
+#look at most supported models posteriors
+  plot(coda::as.mcmc(out$post.samp.ms.model))
 ```
 
 # Plotting
@@ -118,7 +115,7 @@ if (require(coda,ggplot2,bayesplot)) {
 plot_title <- ggtitle("Posterior distributions",
                       "with medians and 80% intervals")
 mcmc_areas(posteriors, prob = 0.8) + plot_title+ 
-  geom_vline(xintercept=sim.dat$p, linetype="dashed", 
+  geom_vline(xintercept=p, linetype="dashed", 
                 color = c("red","green","purple"), size=1)
 
 }
@@ -127,13 +124,33 @@ mcmc_areas(posteriors, prob = 0.8) + plot_title+
 Another way to examine our hypothesis to plot the theoretical niche space for the hypothesis along with the posterior samples. Or, show the whole hypothesis set
 
 ```{r 3dplot}
-diel.plot(hyp=out$ms.model,
+diel.plot(hyp=out$ms.model,more.points = TRUE,
           posteriors=out$post.samp.ms.model)
 
 
 diel.plot(hyp=hyp.set,
           posteriors=out$post.samp.ms.model)
 
+```
+
+You do not need to rely on our definitions of diel hypotheses. If you are interested in categoriesing a diel modality based on 0.7 probabilty or higher, you could adjust the hypotheses using diel.inequaties()
+```{r manual example}
+diel.setup=diel.ineq(xi.min.dom = 0.7)
+diel.plot(hyp=hyp.sets("General2"),diel.setup=diel.setup)
+
+#If you want to separate the hypotheses and reduce the parameter space of cathmerality,
+diel.setup=diel.ineq(xi.min.dom = 0.7,separation=0.1)
+diel.plot(hyp=hyp.sets("General2"),diel.setup=diel.setup)
+
+```
+This new set could be used to simulate data from and fit the same models as, 
+```{r manual example2}
+y=sim.diel(hyp="CR2",n.sample = 100,diel.setup=diel.setup)$y
+
+  out = diel.fit(y,hyp.set=hyp.sets("General2"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
+
+diel.plot(hyp=hyp.sets("General2"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
+  
 ```
 
 If you are using RStudio and no figure is opening
