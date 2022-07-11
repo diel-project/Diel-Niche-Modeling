@@ -9,7 +9,7 @@
 #' @export
 #' @keywords internal
 
-setup.hyp.plot.params=function(diel.setup,index.models,more.points,...){
+setup.hyp.plot.params=function(diel.setup,index.models,more.points=FALSE,...){
 
 #Loop through hypotheses and get many sample points  
 plot.points=vector("list",length(index.models))

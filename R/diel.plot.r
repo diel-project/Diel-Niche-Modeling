@@ -87,7 +87,7 @@ fig <- fig %>% add_markers()
 m <- list(
   l = 0,
   r = 0,
-  b = 5,
+  b = 1,
   t = 0,
   pad = 0
 )
@@ -105,7 +105,8 @@ fig <- fig %>% layout(scene = list(
                                 )
                 )
 fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = legend.lab.size),
-                                                       itemsizing='constant'))
+                                                       itemsizing='constant',
+                                                       orientation = "h",  xanchor = "center", x = 0.5))
 
 #fig <- fig %>% layout(autosize = F, margin = m)
 
