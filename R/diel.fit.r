@@ -57,7 +57,8 @@ diel.fit=function(y,
   ms.ppc=NULL
   ms.model=NULL
   gelm.diag=NULL
-  ms.gelm.diag=NULL   
+  ms.gelm.diag=NULL
+  bf.list=NULL
 ###################################    
 #Define variables
   n.mcmc=as.integer(round(n.mcmc,digits=0))
@@ -101,6 +102,7 @@ if(isTRUE(bf.fit) & length(idx.mod)>1){
   bf=bf.out$bf
   indicator=bf.out$indicator
   idx.high.bf.model=bf.out$idx.high.bf.model
+  bf.list=bf.out$bf
 }
 #########################################  
 #fit models
@@ -145,6 +147,7 @@ if(isTRUE(post.fit) & !is.null(bf)){
        ppc=post.samples$ppc,ms.ppc=ms.ppc,
        post.samp.ms.model=post.samp.ms.model,
        y=y,y.vec=y.vec,gelm.diag=gelm.diag,
-       ms.gelm.diag=ms.gelm.diag)
+       ms.gelm.diag=ms.gelm.diag,
+       bf.list=bf.list)
   
 }#end function
