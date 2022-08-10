@@ -24,8 +24,8 @@ hyp.sets=function(hyp.in=NULL){
   hyp.set[[2]]=c("D","N","CR","C2","CR.D","D.N","CR.N")
   hyp.set[[3]]=c("D.th","N.th","CR.th","C.th")
   hyp.set[[4]]=c("D.max","N.max","CR.max")
-  hyp.set[[5]]==c("D.var","N.var","CR.var","C.var")
-names(hyp.set)=c("Traditional","General","Threshold","Maximizing","Variation")
+  hyp.set[[5]]=c("D.var","N.var","CR.var","C.var")
+  names(hyp.set)=c("Traditional","General","Threshold","Maximizing","Variation")
 
 if(is.null(hyp.in)){   
   cat("Names of Hypotheses Sets: \n",names(hyp.set),sep="  ")
