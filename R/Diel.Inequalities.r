@@ -143,9 +143,9 @@ diel.ineq=function(e=NULL,
   
  
   #CRD
-  A.CR.D <- matrix(c(-1,-1,-1,0,1,0,0,-1,0,1),ncol = 2, byrow = TRUE)
-  b.CR.D <- c(xi.min.dom[2]-small.num-1,-xi.min.dom[2]-separation,xi.min.dom[1]-small.num-separation,-xi.min.dom[2],xi.min.dom[1]-small.num-separation)
-  CR.D=list(Name="CR.D",A=A.CR.D,b=b.CR.D,func="bf_multinom")   
+  A.D.CR <- matrix(c(-1,-1,-1,0,1,0,0,-1,0,1),ncol = 2, byrow = TRUE)
+  b.D.CR <- c(xi.min.dom[2]-small.num-1,-xi.min.dom[2]-separation,xi.min.dom[1]-small.num-separation,-xi.min.dom[2],xi.min.dom[1]-small.num-separation)
+  D.CR=list(Name="D.CR",A=A.D.CR,b=b.D.CR,func="bf_multinom")   
 
   #DN
   A.D.N <- matrix(c(1,0,0,-1,0,1,1,1,-1,-1),ncol = 2, byrow = TRUE)
@@ -294,7 +294,7 @@ diel.ineq=function(e=NULL,
   #package outputs  
   diel.hyp=list(   
     D=D,N=N,CR=CR,C=C,
-    D.N=D.N,CR.N=CR.N,CR.D=CR.D,C2=C2,
+    D.N=D.N,CR.N=CR.N,D.CR=D.CR,C2=C2,
     D.th=D.th, N.th =N.th, CR.th=CR.th,EC.th=EC.th,C.th=C.th,
     D.max=D.max,N.max=N.max, CR.max=CR.max,
     D.var=D.var,N.var=N.var,CR.var=CR.var,C.var=C.var,AV.var=AV.var, 

@@ -17,7 +17,7 @@ if(!is.null(hyp.in)){
   if(hyp.in=="C"){print("Traditional Cathemeral")}
   
   if(hyp.in=="C2"){print("General Cathemeral")}
-  if(hyp.in=="CR.D"){print("General Crepuscular-Diurnal")}
+  if(hyp.in=="D.CR"){print("General Crepuscular-Diurnal")}
   if(hyp.in=="D.N"){print("General Diurnal-Nocturnal")}
   if(hyp.in=="CR.N"){print("General Crepuscular-Nocturnal")}
   
