@@ -20,12 +20,12 @@ hyp.sets=function(hyp.in=NULL){
   hyp.set=vector("list",5)
   
  #Hypothesis Sets
-  hyp.set[[1]]=list(Traditional=c("D","N","CR","C"))
-  hyp.set[[2]]=list(General=c("D","N","CR","C2","CR.D","D.N","CR.N"))
-  hyp.set[[3]]=list(Threshold=c("D.th","N.th","CR.th","C.th"))
-  hyp.set[[4]]=list(Maximizing=c("D.max","N.max","CR.max"))
-  hyp.set[[5]]=list(Variation=c("D.var","N.var","CR.var","C.var"))
-
+  hyp.set[[1]]=c("D","N","CR","C")
+  hyp.set[[2]]=c("D","N","CR","C2","CR.D","D.N","CR.N")
+  hyp.set[[3]]=c("D.th","N.th","CR.th","C.th")
+  hyp.set[[4]]=c("D.max","N.max","CR.max")
+  hyp.set[[5]]==c("D.var","N.var","CR.var","C.var")
+names(hyp.set)=c("Traditional","General","Threshold","Maximizing","Variation")
 
 if(is.null(hyp.in)){   
   cat("Names of Hypotheses Sets: \n",names(hyp.set),sep="  ")
