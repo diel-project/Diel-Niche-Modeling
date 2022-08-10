@@ -73,6 +73,7 @@ diel.ineq=function(e=NULL,
                    xi.D=NULL, 
                    xi.N=NULL,
                    xi.CR=NULL,
+                   xi.C=NULL,
                    xi.EC=NULL, 
                    p.avail=NULL,
                    xi.min.dom=NULL, 
@@ -92,6 +93,7 @@ diel.ineq=function(e=NULL,
   if(is.null(xi.D)){xi.D=c(0.80,0.9)} #lower threshold value, most likely value
   if(is.null(xi.N)){xi.N=c(0.8,0.9)}  #lower threshold value, most likely value
   if(is.null(xi.CR)){xi.CR=c(0.8,0.9)}#lower threshold value, most likely value
+  if(is.null(xi.C)){xi.C=c(0.2)}      #lower threshold value
   if(is.null(xi.EC)){xi.EC  = c(0.33)}#Even cathemerality probability
   if(is.null(p.avail)){p.avail  = c(0.166666,0.4166667)} #crepuscular availability and diurnal availability
   if(is.null(xi.min.dom)){xi.min.dom  = c(0.8,0.1)}else{xi.min.dom  = c(xi.min.dom,(1-xi.min.dom)/2)}
