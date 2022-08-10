@@ -28,7 +28,7 @@ hyp.sets=function(hyp.in=NULL){
   names(hyp.set)=c("Traditional","General","Threshold","Maximizing","Variation")
 
 if(is.null(hyp.in)){   
-  cat("Names of Hypotheses Sets: \n",names(hyp.set),sep="  ")
+  cat("Names of Hypothesis Sets: \n",names(hyp.set),sep="  ")
 }else{
   if(hyp.in=="list"){hyp.set}else{
   #match the model set called for and return it
