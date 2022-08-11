@@ -29,7 +29,7 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
   
   
   if(!is.numeric(y)){
-    stop("The data y needs to be numeric  \n")
+    stop("y needs to be numeric  \n")
   }
   
   if(all(hyp.set%in%names(diel.setup))!=TRUE){
