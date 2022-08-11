@@ -78,9 +78,9 @@ fig <- fig %>% add_markers()
 
 
 #Setup layout
-  xlim=range(plot.points2[,1])
-  ylim=range(plot.points2[,2])
-  zlim=range(plot.points2[,3])
+  xlim=range(as.numeric(plot.points2[,1]))
+  ylim=range(as.numeric(plot.points2[,2]))
+  zlim=range(as.numeric(plot.points2[,3]))
 
 fig <- fig %>% layout(scene = list(
           camera = list(eye = list(x=x.scene, y=y.scene, z = z.scene)),
