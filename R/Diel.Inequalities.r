@@ -121,7 +121,7 @@ diel.ineq=function(e=NULL,
   #Cathemeral
   A.C <- matrix(c(0,1,1,0,-1,-1),ncol = 2, byrow = TRUE)
   b.C <- c(xi.min.dom[1]-small.num-separation,xi.min.dom[1]-small.num-separation,xi.min.dom[1]-small.num-1-separation)
-  C=list(Name="Cathemeral",A=A.C,b=b.C,func="bf_multinom")   
+  C=list(Name="Cathemeral Traditional",A=A.C,b=b.C,func="bf_multinom")   
 
 #################################
 #################################
@@ -139,23 +139,23 @@ diel.ineq=function(e=NULL,
   #Cathemeral
   A.C <- matrix(c(0,-1,1,1,-1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
   b.C <- c(-xi.min.dom[2]-separation,-xi.min.dom[2]+1-separation,-xi.min.dom[2]-separation,xi.min.dom[1]-small.num-separation,xi.min.dom[1]-small.num-1-separation)
-  C2=list(Name="Cathemeral",A=A.C,b=b.C,func="bf_multinom")   
+  C2=list(Name="Cathemeral General",A=A.C,b=b.C,func="bf_multinom")   
   
  
   #CRD
   A.D.CR <- matrix(c(-1,-1,-1,0,1,0,0,-1,0,1),ncol = 2, byrow = TRUE)
   b.D.CR <- c(xi.min.dom[2]-small.num-1,-xi.min.dom[2]-separation,xi.min.dom[1]-small.num-separation,-xi.min.dom[2],xi.min.dom[1]-small.num-separation)
-  D.CR=list(Name="D.CR",A=A.D.CR,b=b.D.CR,func="bf_multinom")   
+  D.CR=list(Name="Diurnal-Crepuscular",A=A.D.CR,b=b.D.CR,func="bf_multinom")   
 
   #DN
   A.D.N <- matrix(c(1,0,0,-1,0,1,1,1,-1,-1),ncol = 2, byrow = TRUE)
   b.D.N <- c(xi.min.dom[2]-small.num,-xi.min.dom[2]-separation,xi.min.dom[1]-small.num-separation,-xi.min.dom[2]+1,xi.min.dom[1]-small.num-1-separation)
-  D.N=list(Name="D.N",A=A.D.N,b=b.D.N,func="bf_multinom")   
+  D.N=list(Name="Diurnal-Nocturnal",A=A.D.N,b=b.D.N,func="bf_multinom")   
   
   #CRN
   A.CR.N <- matrix(c(0,1,1,1,-1,-1,-1,0,1,0),ncol = 2, byrow = TRUE)
   b.CR.N <- c(xi.min.dom[2]-small.num,-xi.min.dom[2]+1-separation,xi.min.dom[1]-small.num-1-separation,-xi.min.dom[2],xi.min.dom[1]-small.num-separation)
-  CR.N=list(Name="CR.N",A=A.CR.N,b=b.CR.N,func="bf_multinom")   
+  CR.N=list(Name="Crepuscular-Nocturnal",A=A.CR.N,b=b.CR.N,func="bf_multinom")   
   
   
 #################################
