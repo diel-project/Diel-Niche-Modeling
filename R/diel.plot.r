@@ -1,21 +1,21 @@
-#' Plot Diel Hypothesis or Hypothesis Set
+#' Plot Diel Hypothesis or Hypothesis Set Along with Posterior Samples
 #'
 #' Plots the diel niche space and posterior disribution of a fitted model.
 #' @import plotly
 #' @import coda
-#' @param hyp a vector of hypotheses code names
-#' @param diel.setup Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.
-#' @param posteriors A single models MCMC output from the function 'diel.hypotheses.func'.
-#' @param more.points Default is FALSE. To use more points for hyps in plotting.
-#' @param x.scene
-#' @param y.scene
-#' @param z.scene
-#' @param axis.size
-#' @param axis.lab.size
-#' @param legend.lab.size
+#' @param hyp a vector of hypothesis code names (characters)
+#' @param diel.setup If NULL uses the default diel.ineq function. Otherwise, a list of multinomial inequalities (Matrix A and vector b) representing diel hypotheses and the function needed for model fitting.
+#' @param posteriors A single models MCMC output from the function 'diel.fit'.
+#' @param more.points To use more points for hyps in plotting. Default is FALSE. 
+#' @param x.scene 3d graphical parameter
+#' @param y.scene 3d graphical parameter
+#' @param z.scene 3d graphical parameter
+#' @param axis.size 3d graphical parameter
+#' @param axis.lab.size 3d graphical parameter
+#' @param legend.lab.size 3d graphical parameter
 #' @return A plotly 3d plot
 #' @examples 
-#' out=diel.fit(y=t(matrix(c(11,87,2))),hyp.set="D",n.mcmc=1000,burnin=200)
+#' out=diel.fit(y=t(matrix(c(11,87,2))),hyp="D",post.fit=TRUE)
 #' diel.plot(hyp="D",posteriors=out$post.samp.ms.model)
 #' @export
 
@@ -23,14 +23,14 @@ diel.plot=function(hyp,
                    diel.setup=NULL, 
                    posteriors=NULL,
                    more.points=FALSE,
-                   x.scene=2,
-                   y.scene=2,
-                   z.scene=0.2,
+                   x.scene=2.5,
+                   y.scene=1,
+                   z.scene=0.3,
                    axis.size=16,
                    axis.lab.size=18,
                    legend.lab.size=15){
   
-#x.scene=0.8; y.scene=0.8; z.scene=0.2; axis.size=16; axis.lab.size=18; legend.lab.size=15
+#x.scene=2.5; y.scene=1; z.scene=0.3; axis.size=16; axis.lab.size=18; legend.lab.size=15
 
 #Setup diel.setup and posterior samples    
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
