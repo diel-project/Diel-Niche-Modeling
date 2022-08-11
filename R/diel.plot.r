@@ -41,6 +41,7 @@ diel.plot=function(hyp,
   plot.points=data.frame(do.call(rbind,setup.hyp.plot.params(diel.setup,index.models,more.points)))
   plot.points$hyp=as.factor(plot.points$hyp)
   
+#colors to use  
   color.set = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7","#999999")
   color.set.use=color.set[1:length(index.models)]
   
@@ -57,15 +58,15 @@ diel.plot=function(hyp,
     plot.points2$col=as.factor(plot.points2$hyp)
   }
 
-fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
-           #     width=800,height=800,
-                color=~col, colors=color.set.use,
-                marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
+  
+#Define Plot  
+  fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
+                  color=~col, colors=color.set.use,
+                  marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
 
-#Add
-fig <- fig %>% add_markers()
+  fig <- fig %>% add_markers()
 
-
+#margins
 # m <- list(
 #   l = 0,
 #   r = 0,
@@ -96,7 +97,7 @@ fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = legend
                                                        itemsizing='constant',
                                                        orientation = "h",  xanchor = "center", x = 0.5))
 
-
+#plot fig
 fig
 
 }
