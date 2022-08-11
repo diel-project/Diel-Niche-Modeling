@@ -41,7 +41,7 @@ diel.plot=function(hyp,
   plot.points=data.frame(do.call(rbind,setup.hyp.plot.params(diel.setup,index.models,more.points)))
   plot.points$hyp=as.factor(plot.points$hyp)
   
-  color.set = c("#32a852", "#c10dd1","#CC6666", "#9999CC", "#66CC99","red","blue", "black")
+  color.set = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
   color.set.use=color.set[1:length(index.models)]
   
 #Include posterior points if not null  
@@ -50,7 +50,7 @@ diel.plot=function(hyp,
       colnames(post)=colnames(plot.points)
       plot.points2=rbind(plot.points,data.frame(post))
       plot.points2$col=as.factor(plot.points2$hyp)
-      color.set.use=c(color.set.use,"black")
+      color.set.use=c(color.set.use,"#000000")
       
   }else{
     plot.points2=plot.points
@@ -59,7 +59,7 @@ diel.plot=function(hyp,
 
 fig <- plotly::plot_ly(plot.points2, x = ~p.crep, y = ~p.day, z = ~p.night,
            #     width=800,height=800,
-                color=~col, colors=color.set,
+                color=~col, colors=color.set.use,
                 marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
 
 #Add
