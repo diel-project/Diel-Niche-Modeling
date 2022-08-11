@@ -16,53 +16,49 @@ knitr::opts_chunk$set(
 ```
 
 # Introducion
-The Diel.Niche R pacakge is setup to evaluate how animals use the three fundamental light periods of twilight (dawn & dusk), daytime, and nighttime. First, we need to install and load the library
+The Diel.Niche pacakge is setup to evaluate how animals use the three fundamental periods of light: twilight (dawn & dusk), daytime, and nighttime. First, install and load the library
 ```{r package}
 #devtools::install_github("diel-project/Diel-Niche-Modeling",ref="main")
 
 library(Diel.Niche)
 ```
 
-To learn some basic information about the diel hypotheses you can call
+There are many hypotheses and hypothesis sets available. Their names are
 ```{r hyp}
   what.hyp()
 ```
 
-If you just need to remember the names of the hypotheses you can call
+If you want a short description of a specific hypotheses:
 ```{r hyp2}
-  what.hyp("?")
+  what.hyp("D")
 ```
 
-There is also a description for a specific hypothesis can also be called
-```{r hyp3}
-  what.hyp("D.max")
-```
-
-There are three sets of complete hypotheses, which can be viewed
+There are five main sets of hypotheses, which can be viewed
 ```{r 3dplot1}
-#Hypotheses of D.max, N.max, and CR.max, which together evaluate a hypothesis set of which diel period is used the most. This set disregards the definition of cathemrality.
-diel.plot(hyp=hyp.sets("hyp.max"))
+diel.plot(hyp=hyp.sets("Maximizing"))
 
-#Hypotheses of D2, N2, CR2, and C2. This is the most fundamental hypothesis set. Diurnal, Nocturnal, and Crepsucaular modalities are separated by cathemerality by having >= 0.8 probability in their diel category, respectively. When two categories are used >= 0.2 probability, it is defined as cathemeral.
-diel.plot(hyp=hyp.sets("General2"))
+diel.plot(hyp=hyp.sets("Traditional"))
 
-#Hypotheses of  D.Gen, CR.Gen, N.Gen, C.Gen, DN.Gen, CRN.Gen, CRD.Gen. This set is simalar to General2, but separate cathemerality where two categories are used more than >0.1 probabilit and when three are used > 0.1 probability. 
+diel.plot(hyp=hyp.sets("General"))
 
-diel.plot(hyp=hyp.sets("General3"))
+diel.plot(hyp=hyp.sets("Threshold"))
+
+diel.plot(hyp=hyp.sets("Variation"))
+
 ```
 
 We can also view specific hypotheses, as
 ```{r 3dplot2}
-diel.plot("D2",more.points = TRUE)
+diel.plot("D",more.points = TRUE)
 
-diel.plot("N.th",more.points = TRUE)
+diel.plot("N",more.points = TRUE)
 ```
 
 # Simulate Data
 To simulate data based on a diel hypothesis, we need define a hypothesis using it's coded name. Pick a hypothesis to simulate data from and how many samples.
 ```{r sim1}
   set.seed(45451)
-  hyp=c("CR2")
+  hyp=c("CR")
   sim=sim.diel(hyp=hyp,n.sample=100)
   p=sim$p
   y=sim$y
@@ -73,8 +69,8 @@ To simulate data based on a diel hypothesis, we need define a hypothesis using i
 
 You can setup your own model set or use pre-defined model sets as
 ```{r hyp.set}
-  hyp.set = c("D2","CR2") #manual
-  hyp.set=hyp.sets("General2") #pre-defined
+  hyp.set = c("D","CR") #manual
+  hyp.set=hyp.sets("Traditional") #pre-defined
 ```
 
 Lastly, we fit our model and look at the model probabilities
@@ -96,7 +92,7 @@ The default is to not return posterior samples, so to change that we can do,
   out = diel.fit(y,hyp.set,n.chains=2,post.fit = TRUE)
 
 #look at convergence
-out$gelm.diag
+  out$gelm.diag
 #look at most supported models posteriors
   plot(coda::as.mcmc(out$post.samp.ms.model))
 ```
@@ -109,8 +105,8 @@ We can plot our most supported models posterior probability distribution a numbe
 library(bayesplot)
 library(ggplot2)
 
-if (require(coda,ggplot2,bayesplot)) {
-  posteriors=coda::as.mcmc(out$post.samp.ms.model)
+
+posteriors=coda::as.mcmc(out$post.samp.ms.model)
 
 plot_title <- ggtitle("Posterior distributions",
                       "with medians and 80% intervals")
@@ -118,7 +114,7 @@ mcmc_areas(posteriors, prob = 0.8) + plot_title+
   geom_vline(xintercept=p, linetype="dashed", 
                 color = c("red","green","purple"), size=1)
 
-}
+
 ```
 
 Another way to examine our hypothesis to plot the theoretical niche space for the hypothesis along with the posterior samples. Or, show the whole hypothesis set
@@ -133,23 +129,24 @@ diel.plot(hyp=hyp.set,
 
 ```
 
-You do not need to rely on our definitions of diel hypotheses. If you are interested in categoriesing a diel modality based on 0.7 probabilty or higher, you could adjust the hypotheses using diel.inequaties()
+You do not need to rely on our definitions of diel hypotheses. If you are interested in categorizing a diel modality based on 0.7 probabilty or higher, you could adjust the hypotheses using diel.inequaties()
 ```{r manual example}
+
 diel.setup=diel.ineq(xi.min.dom = 0.7)
-diel.plot(hyp=hyp.sets("General2"),diel.setup=diel.setup)
+diel.plot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 
 #If you want to separate the hypotheses and reduce the parameter space of cathmerality,
 diel.setup=diel.ineq(xi.min.dom = 0.7,separation=0.1)
-diel.plot(hyp=hyp.sets("General2"),diel.setup=diel.setup)
+diel.plot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 
 ```
 This new set could be used to simulate data from and fit the same models as, 
 ```{r manual example2}
-y=sim.diel(hyp="CR2",n.sample = 100,diel.setup=diel.setup)$y
+y=sim.diel(hyp="CR",n.sample = 100,diel.setup=diel.setup)$y
 
-  out = diel.fit(y,hyp.set=hyp.sets("General2"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
+out = diel.fit(y,hyp.set=hyp.sets("Traditional"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
 
-diel.plot(hyp=hyp.sets("General2"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
+diel.plot(hyp=hyp.sets("Traditional"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
   
 ```
 
