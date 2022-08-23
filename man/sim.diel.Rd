@@ -11,7 +11,8 @@ sim.diel(
   hyp,
   diel.setup = NULL,
   sd.error = 0,
-  fast = TRUE
+  fast = TRUE,
+  return.probs = FALSE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ sim.diel(
 \item{sd.error}{Normal distribution standard deviation to simulate error to add to the probabilities on the logit-scale. Default is 0}
 
 \item{fast}{Default is TRUE. Uses less preceise probs (0.005 vs 0.001). Does not apply to equality hyps.}
+
+\item{return.probs}{Default is FALSE. If TRUE, returns probabilities from the hypothesis.}
 }
 \value{
 A list of outputs

@@ -35,7 +35,7 @@ if(return.probs==FALSE){
   #Randomly select  probabilities- reps times
   prob.select=matrix(prob.hyp[sample(nrow(prob.hyp),reps),],nrow=reps,ncol=3)
   
-  #add in normal distribution error on logit scale and backtransorm
+  #add in normal distribution error on logit scale and backtransform
   prob.select.with.error=stats::plogis(stats::qlogis(prob.select)+matrix(stats::rnorm(length(prob.select),0,sd.error),ncol=3))
   
   #simulate n.sim datesets of n.sample size
@@ -52,4 +52,4 @@ if(return.probs==FALSE){
   prob.hyp
 }  
   
-}
+} #End Function

@@ -27,7 +27,7 @@
 #' @importFrom MASS fractions
 #' @import multinomineq
 #' @examples 
-#' diel.fit(y=t(matrix(c(10,100,10))),hyp.set=hyp.sets("hyp.th"))
+#' out=diel.fit(y=t(matrix(c(10,100,10))),hyp.set=hyp.sets("Traditional"))
 #' @export
 
 diel.fit=function(y,
@@ -73,9 +73,9 @@ diel.fit=function(y,
   if(isTRUE(prints)){message(paste0("Data checks Complete."))}    
 ###################################    
 #setup data for model fitting
-    reps= nrow(y)
-    y.vec=c(t(y))
-    names(y.vec)=paste(rep(c("p_crep","p_day","p_night"), times = reps), rep(1:(reps),each=3), sep = "_")
+  reps= nrow(y)
+  y.vec=c(t(y))
+  names(y.vec)=paste(rep(c("p_crep","p_day","p_night"), times = reps), rep(1:(reps),each=3), sep = "_")
 ###################################      
 #These are the list items of A and b that need to be fit based on hyp.set
   idx.mod=match(hyp.set,names(diel.setup))

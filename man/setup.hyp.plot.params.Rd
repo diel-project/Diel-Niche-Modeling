@@ -4,7 +4,7 @@
 \alias{setup.hyp.plot.params}
 \title{Setup plotting hypotheses (Internal)}
 \usage{
-setup.hyp.plot.params(diel.setup, index.models, more.points, ...)
+setup.hyp.plot.params(diel.setup, index.models, more.points = FALSE, ...)
 }
 \arguments{
 \item{diel.setup}{provided by user or used default as diel.setup=diel.ineq()}

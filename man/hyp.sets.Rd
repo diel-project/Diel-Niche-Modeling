@@ -17,5 +17,5 @@ Call defined hypotheses sets
 }
 \examples{
 hyp.sets()
-hyp.sets("hyp.th")
+hyp.sets("Traditional")
 }

@@ -2,18 +2,41 @@
 % Please edit documentation in R/diel.plot.r
 \name{diel.plot}
 \alias{diel.plot}
-\title{Plot Diel Hypotheis}
+\title{Plot Diel Hypothesis or Hypothesis Set Along with Posterior Samples}
 \usage{
-diel.plot(hyp, diel.setup = NULL, posteriors = NULL, more.points = FALSE)
+diel.plot(
+  hyp,
+  diel.setup = NULL,
+  posteriors = NULL,
+  more.points = FALSE,
+  x.scene = 2.5,
+  y.scene = 1,
+  z.scene = 0.3,
+  axis.size = 16,
+  axis.lab.size = 18,
+  legend.lab.size = 15
+)
 }
 \arguments{
-\item{hyp}{hypothesis code name to use}
+\item{hyp}{a vector of hypothesis code names (characters)}
 
-\item{diel.setup}{Defaults to using diel.ineq function. A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
+\item{diel.setup}{If NULL uses the default diel.ineq function. Otherwise, a list of multinomial inequalities (Matrix A and vector b) representing diel hypotheses and the function needed for model fitting.}
 
-\item{posteriors}{A single models MCMC output from the function 'diel.hypotheses.func'.}
+\item{posteriors}{A single models MCMC output from the function 'diel.fit'.}
 
-\item{more.points}{Default is FALSE. To use more points for hyps in plotting.}
+\item{more.points}{To use more points for hyps in plotting. Default is FALSE.}
+
+\item{x.scene}{3d graphical parameter}
+
+\item{y.scene}{3d graphical parameter}
+
+\item{z.scene}{3d graphical parameter}
+
+\item{axis.size}{3d graphical parameter}
+
+\item{axis.lab.size}{3d graphical parameter}
+
+\item{legend.lab.size}{3d graphical parameter}
 }
 \value{
 A plotly 3d plot
@@ -22,6 +45,6 @@ A plotly 3d plot
 Plots the diel niche space and posterior disribution of a fitted model.
 }
 \examples{
-out=diel.fit(y=t(matrix(c(11,87,2))),hyp.set="D.max",n.mcmc=1000,burnin=200)
-diel.plot(hyp="D.max",posteriors=out$post.samp[[1]])
+out=diel.fit(y=t(matrix(c(11,87,2))),hyp="D",post.fit=TRUE)
+diel.plot(hyp="D",posteriors=out$post.samp.ms.model)
 }

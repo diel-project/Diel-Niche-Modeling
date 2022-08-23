@@ -7,31 +7,18 @@
 diel.ineq(
   e = NULL,
   e.D = NULL,
-  e.Dn = NULL,
-  e.Dcr = NULL,
   e.N = NULL,
-  e.Nd = NULL,
-  e.Ncr = NULL,
   e.CR = NULL,
-  e.CRd = NULL,
-  e.CRn = NULL,
   e.EC = NULL,
-  e.AC = NULL,
+  e.AV = NULL,
   xi.D = NULL,
-  xi.Dn = NULL,
-  xi.Dcr = NULL,
   xi.N = NULL,
-  xi.Nd = NULL,
-  xi.Ncr = NULL,
   xi.CR = NULL,
-  xi.CRd = NULL,
-  xi.CRn = NULL,
-  xi.CRc = NULL,
+  xi.C = NULL,
   xi.EC = NULL,
-  xi.Dc = NULL,
-  xi.Nc = NULL,
   p.avail = NULL,
-  xi.min.dom = NULL
+  xi.min.dom = NULL,
+  separation = NULL
 )
 }
 \arguments{
@@ -39,63 +26,35 @@ diel.ineq(
 
 \item{e.D}{Default is 0.05. A single value of variation for the Diurnal hypothesis.}
 
-\item{e.Dn}{Default is 0.05. A single value of variation for the Diurnal-nocturnal hypothesis.}
-
-\item{e.Dcr}{Default is 0.05. A single value of variation for the Diurnal-crepuscular hypothesis.}
-
 \item{e.N}{Default is 0.05. A single value of variation for the Nocturnal hypothesis.}
-
-\item{e.Nd}{Default is 0.05. A single value of variation for the Nocturnal-diurnal hypothesis.}
-
-\item{e.Ncr}{Default is 0.05. A single value of variation for the Nocturnal-crepuscular hypothesis.}
 
 \item{e.CR}{Default is 0.05. A single value of variation for the Crepuscular hypothesis.}
 
-\item{e.CRd}{Default is 0.05. A single value of variation for the Crepuscular-diurnal hypothesis.}
-
-\item{e.CRn}{Default is 0.05. A single value of variation for the Crepuscular-nocturnal hypothesis.}
-
 \item{e.EC}{Default is 0.05. A single value of variation for the Evan Cathemeral hypothesis.}
 
-\item{e.AC}{Default is 0.10. A single value of variation for the Available Cathemeral hypothesis.}
+\item{e.AV}{Default is 0.10. A single value of variation for the Available Cathemeral hypothesis.}
 
 \item{xi.D}{Default c(0.90,0.95). A vector of the lower threshold value and the most likely value, respectively for the Diurnal hypothesis.}
 
-\item{xi.Dn}{Default c(0.80,0.20,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Diurnal-nocturnal hypothesis.}
+\item{xi.N}{Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Nocturnal hypothesis.}
 
-\item{xi.Dcr}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Diurnal-crepuscular hypothesis.}
+\item{xi.CR}{Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Crepuscular hypothesis.}
 
-\item{xi.N}{Default c(0.80,0.90). A vector of the lower threshold value and most likely value,, respectively for the Nocturnal hypothesis.}
-
-\item{xi.Nd}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-diurnal hypothesis.}
-
-\item{xi.Ncr}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-crepuscular hypothesis.}
-
-\item{xi.CR}{Default c(0.80,0.90). A vector of the lower threshold value and most likely value,, respectively for the Crepuscular hypothesis.}
-
-\item{xi.CRd}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-crepuscular hypothesis.}
-
-\item{xi.CRn}{Default c(0.80,0.2,0.90,0.10). A vector of the lower threshold value for the primary probability, upper threshold value of the secondary probability, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-nocturnal hypothesis.}
-
-\item{xi.CRc}{Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Crepuscular-cathemeral hypothesis.}
+\item{xi.C}{Default c(0.2). Lower value threshold to be cathemeral}
 
 \item{xi.EC}{Default c(0.33). A single value of the available amount of time in all three diel periods.}
-
-\item{xi.Dc}{Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Diurnal-cathemeral hypothesis.}
-
-\item{xi.Nc}{Default c(0.70,0.05,0.80,0.10). A vector of the lower threshold value for the primary probability, lower threshold value for the secondary probabilities, most likely primary probability, and most likely secondary probability value, respectively for the Nocturnal-cathemeral hypothesis.}
 
 \item{p.avail}{Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.}
 
 \item{xi.min.dom}{Default c(0.8). A single value of the min prob for a a dominant category}
+
+\item{separation}{Default is 0. However, if you want to separate the hypotheses hyp.max, General2, and General 3, this will create separation and empty space}
 }
 \value{
 diel.hyp A list of diel hypotheses as multinomial inequalities.
 \item{inputs}{Includes all inputted values; epsilon, xi, and p.avail.} 
-\item{D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.max, Dcr.th, Dc.th,
-Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th, 
- Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,
-CRd.max, CRd.var, CRn.th, CRn.max, CRn.var,'EC.th, EC.var, AC.var, C.th, Uncon}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.}
+\item{D.th, N.th, CR.th, EC.th, C.th, D.max, N.max, CR.max, D.var, N.var, CR.var, C.var, AC.var, AV.var,
+   Uncon, C.max, EC, AV.EQ}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.}
 }
 \description{
 Multinomial model inequalities for diel hypotheses
