@@ -193,7 +193,7 @@ diel.plot(hyp=hyp.set,
 
 # User-specified Hypotheses
 
-You do not need to rely on our definitions of diel hypotheses. If you are interested in categorizing a diel modality based on 0.9 probability or higher, you could adjust the hypotheses using the function 'diel.ineq()'.
+You do not need to rely on pre-set definitions of diel hypotheses. If you are interested in categorizing a diel modality based on 0.9 probability or higher, you can adjust the hypotheses using the function 'diel.ineq()' than pass this object to the plot function or model fitting function.
 
 ```{r manual example 1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
   diel.setup=diel.ineq(xi.min.dom = c(0.9))
@@ -208,16 +208,21 @@ diel.plot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 
 ```
 
-This new hypothesis set can be used to simulate data and fit the same models as,
+When considering the General hypothesis set, you can adjust the lower probability value to define crepuscular, diurnal, and nocturnal, as well as adjust the definitions of Cathemeral General  vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular.
+
+```{r manual2 example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+diel.setup=diel.ineq(xi.min.dom = c(0.9,0.05))
+diel.plot(hyp=hyp.sets("General"),diel.setup=diel.setup)
+```
+This new hypothesis set can be used to simulate data and fit the same models by passing the object diel.setup as an attribute of the functions sim.diel, diel.fit, and diel.plot.
 
 ```{r manual example2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.setup=diel.ineq(xi.min.dom = 0.7,separation=0.1)
 
-y=sim.diel(hyp="CR",n.sample = 100,diel.setup=diel.setup)$y
+y=sim.diel(hyp="D.CR",n.sample = 200,diel.setup=diel.setup)$y
 
-out = diel.fit(y,hyp.set=hyp.sets("Traditional"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
+out = diel.fit(y,hyp.set=hyp.sets("General"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
 
-diel.plot(hyp=hyp.sets("Traditional"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
+diel.plot(hyp=hyp.sets("General"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
   
 ```
 
