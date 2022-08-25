@@ -157,12 +157,24 @@ We can plot the posterior samples from the most supported model to check converg
 ```{r postcheck,eval = TRUE,fig.height = 6, fig.width = 6}
  plot(coda::as.mcmc(out$post.samp.ms.model))
 ```
+The posterior samples for all hypotheses are available in a list.
+```{r postsamp,eval = TRUE,fig.height = 6, fig.width = 6}
+ names(out$post.samp)
+
+#For each of these list is a list of chains
+
+length(out$post.samp[[1]])
+
+#Here are the means of the posterior samples of all hypotheses for chain 1
+lapply(out$post.samp,FUN=function(x){colMeans(x[[1]])})
+```
+
 
 # Plotting
 
 Using the packages bayesplot and ggplot2, we can examine our posterior distributions along with the true probabilities values, 
 
-```{r plot, eval = TRUE,fig.height = 6, fig.width = 6}
+```{r plot, eval = TRUE,fig.height = 4, fig.width = 6}
 library(ggplot2)
 library(bayesplot)
 
@@ -224,6 +236,18 @@ out = diel.fit(y,hyp.set=hyp.sets("General"),n.chains=2,post.fit = TRUE,diel.set
 
 diel.plot(hyp=hyp.sets("General"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
   
+```
+# The Unconstrained Model
+
+If interested in comparing the constrained hypotheses to an unconstrained model, you can do that by adding it into the hypothesis set
+
+```{r uncond,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+hyp.set.new=c(hyp.sets("General"),"Uncon")
+out = diel.fit(y,hyp.set=hyp.set.new,n.chains=2,post.fit = FALSE,diel.setup=diel.setup)
+
+#Compare the uncosntrained model to the rest of the models of the General hypothesis set
+out$bf.table
+
 ```
 
 
