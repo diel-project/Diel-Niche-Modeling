@@ -24,7 +24,6 @@
 #' diel.ineq()
 #' diel.ineq(e=0.01) #To replace all epsilon values with 0.01.
 #' #To replace the default values with a new epsilon value and a new xi value.
-#' diel.ineq(e.Dn=0.2, xi.Dn=c(0.80,0.20,0.90,0.10)) 
 #' @export
 ############################
 
