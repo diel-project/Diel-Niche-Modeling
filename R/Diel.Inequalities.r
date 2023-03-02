@@ -89,7 +89,7 @@ diel.ineq=function(e=NULL,
   if(!is.null(e)){e.D=e.N=e.CR=e.EC=e.AV=e}
   
   # Defaults for threshold and variation models     
-  if(is.null(xi.D)){xi.D=c(0.80,0.9)} #lower threshold value, most likely value
+  if(is.null(xi.D)){xi.D=c(0.8,0.9)} #lower threshold value, most likely value
   if(is.null(xi.N)){xi.N=c(0.8,0.9)}  #lower threshold value, most likely value
   if(is.null(xi.CR)){xi.CR=c(0.8,0.9)}#lower threshold value, most likely value
   if(is.null(xi.C)){xi.C=c(0.2)}      #lower threshold value
