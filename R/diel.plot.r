@@ -43,7 +43,7 @@ diel.plot=function(hyp,
   
 #colors to use  
 
-  color.set = c("#868686FF", "#A73030FF", "#EFC000FF", "#8F7700FF","#CD534CFF", "#79AF97FF", "#0073C2FF","#999999")
+  color.set = c("#868686FF", "#A73030FF", "#EFC000FF", "#0073C2FF","#8F7700FF","#CD534CFF", "#79AF97FF", "#999999")
   color.set.use=color.set[1:length(index.models)]
   
 #Include posterior points if not null  
