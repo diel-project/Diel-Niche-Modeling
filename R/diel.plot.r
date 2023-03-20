@@ -86,12 +86,12 @@ diel.plot=function(hyp,
 
 fig <- fig %>% layout(scene = list(
           camera = list(eye = list(x=x.scene, y=y.scene, z = z.scene)),
-                     xaxis = list(title = 'Crepuscular',range = xlim,gridwidth = 3,
+                     xaxis = list(title = 'x = P(Twilight)',range = xlim,gridwidth = 3,
                                   titlefont = list(size = axis.lab.size),tickfont = list(size=axis.size)),
-                     yaxis = list(title = 'Daytime',range = ylim,gridwidth = 3,
+                     yaxis = list(title = 'y = P(Daytime)',range = ylim,gridwidth = 3,
                                   titlefont = list(size = axis.lab.size),tickfont = list(size=axis.size)),
                      zaxis = list(titlefont = list(size = axis.lab.size),tickfont = list(size=axis.size),
-                       title = 'Nighttime',range = zlim),gridwidth = 3
+                       title = 'z = P(Nighttime)',range = zlim),gridwidth = 3
                                 )
                 )
 fig <- fig %>% layout(showlegend = TRUE, legend = list(font = list(size = legend.lab.size),
