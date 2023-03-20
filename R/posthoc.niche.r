@@ -22,8 +22,8 @@ if(!is.matrix(y)){
 if(ncol(y)!=3){
   stop("y needs to have three columns \n")
 }
-tol = 1e-3  
-if(all(apply(y,1,sum) >= 1-tol)){
+tol = 1e-5  
+if(!all(apply(y,1,sum) >= 1-tol)){
   stop("all rows need to sum to 1 \n")
 }  
 
