@@ -1,7 +1,6 @@
 #' Kernel Overlap density integration
 #'
-#' Integrate kernel density to derieve probability of twilight, daytime, nightime
-#' @import sfsmisc
+#' Integrate kernel density to derieve probability of twilight, daytime, nighttime
 #' @param densityplot a densityPlot object from package Overlap.
 #' @param dawn begining and end numeric (0-24) times for dawn
 #' @param dusk begining and end numeric (0-24) times for dusk

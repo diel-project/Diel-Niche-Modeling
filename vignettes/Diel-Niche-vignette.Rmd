@@ -183,8 +183,9 @@ posteriors=coda::as.mcmc(out$post.samp.ms.model)
 plot_title <- ggtitle("Posterior distributions",
                       "with medians and 80% intervals")
 mcmc_areas(posteriors, prob = 0.8) + plot_title+ 
-  geom_vline(xintercept=p, linetype="dashed", 
-                color = c("red","green","purple"), size=1)
+  geom_vline(xintercept=p[1], linetype="dashed",color = c("red"), size=1)+
+  geom_vline(xintercept=p[2], linetype="dashed",color = c("purple"), size=1)+
+  geom_vline(xintercept=p[3], linetype="dashed",color = c("green"), size=1)
 
 
 ```
