@@ -7,6 +7,7 @@
 #' @return Internal list
 #' @export
 #' @keywords internal
+#' @import sfsmisc
 #' 
 
 prob.Overlap=function(densityplot,

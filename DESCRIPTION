@@ -37,7 +37,8 @@ Imports:
     utils (>= 4.2.0),
     coda (>= 0.19-4), 
     multinomineq (>= 0.2.3), 
-    plotly (>= 4.10.0) 
+    plotly (>= 4.10.0),
+    sfsmisc (>= 1.1)
 Suggests: 
     knitr (>= 1.39),
     rmarkdown (>= 2.14),
