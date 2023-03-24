@@ -133,7 +133,10 @@ if(isTRUE(post.fit) & !is.null(bf)){
 
   
   if(prints==TRUE & isTRUE(bf.fit) & length(hyp.set)>1){
-    cat("The most supported model is: \n", ms.model,"\n")
+    print.name=print.hyp.name(ms.model)
+    if(is.null(print.name)){print.name=ms.model}
+
+    cat("The most supported model is: \n", print.name,"\n")
     if(sum(indicator)>0){
       warning("Models that were not fit: \n",
               paste(hyp.set[indicator==1],rep("\n",length(hyp.set[indicator==1]))),call.=FALSE)
