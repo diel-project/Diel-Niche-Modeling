@@ -1,10 +1,5 @@
-#' Urban Wildlife Information Network from Chicago, Illinois, USA of species detections classified in the categories of twilight, daytime, and nighttime 
-#'
-#' A multi-species dataset containing detection frequencies during the twilight, daytime, and nighttime.
-#' Data come from camera-trapping along an urban gradient in Chicago, Illinois, USA. 
-#'
-#'@title Example data for Diel.Niche
-#'
+#' @title Data for Diel.Niche
+#' @description A multi-species dataset containing detection frequencies during the twilight, daytime, and nighttime. Data come from camera-trapping along an urban gradient in Chicago, Illinois, USA. 
 #' @format A data frame with 232 rows and 19 variables:
 #' \describe{
 #'   \item{scientificName}{Genus and species name}
@@ -25,9 +20,6 @@
 #'   \item{unit_type}{The length of the sampling period.}
 #'   \item{Common_name}{Common name for the species.}
 #'   \item{Activity_Literature}{Activity classification for the species from the literature; see Cox, D. T. C., Gardner, A. S., & Gaston, K. J. (2021). Diel niche variation in mammals associated with expanded trait space. Nature communications, 12(1), 1753.}
-#'   ...
 #' }
 #' @source \url{https://doi.org/10.1111/gcb.15800}
 "diel.data"
-
-
