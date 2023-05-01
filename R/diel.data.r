@@ -11,6 +11,7 @@
 #'   \item{max_date}{The last date of sampling in the sampling period.}
 #'   \item{mean_lat}{Avergage latitude of all camera locations during the sampling period.}
 #'   \item{mean_lon}{Avergage longtitude of all camera locations during the sampling period.}
+#'   \item{season}{Seasonal classification of the sampling period by summer, autumn, winter, and spring.}
 #'   \item{country}{Country where thes sampling occured.}
 #'   \item{phylum}{Phylum of the species.}
 #'   \item{class}{Class of the species.}

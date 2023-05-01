@@ -1,0 +1,96 @@
+---
+title: "Diel-Niche--Data-Example-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Diel-Niche-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{bayesplot,ggplot2,coda,Diel.Niche}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introducion
+
+We will use the Diel.Niche package to classify how urban wildlife from Chicago, IL USA are using time.
+
+```{r package}
+#Load the package
+library(Diel.Niche)
+```
+
+Look at the data
+```{r hyp}
+dim(diel.data)
+head(diel.data)
+
+#The number of analysis units for each species
+table(diel.data$scientificName)
+
+```
+
+Let's focus on the raccoon ('Procylon lotor').
+
+```{r hyp2}
+raccoon=  subset(diel.data, scientificName == "Procyon lotor")
+
+y.raccoon = cbind(raccoon$twilight,raccoon$day,raccoon$night)
+
+```
+
+We will fit each row of data (analysis unit) to evaluate which hypothesis is most supported from the Traditional hypothesis set
+
+```{r hyp3}
+  diel.plot(hyp=hyp.sets("Traditional"))
+```
+
+
+First, lets fit a single analysis unit
+
+```{r fit}
+  out = diel.fit(y.raccoon[1,, drop=FALSE],hyp.set=hyp.sets("Traditional"),
+                 post.fit = TRUE, n.chains = 3,
+                 n.mcmc=5000,burnin = 1000, prints=TRUE)
+
+#Call the model probabilities for each hypothesis in the set
+  out$bf.table
+```
+
+Evaluate convergence
+
+```{r results}
+plot(coda::as.mcmc(out$post.samp.ms.model))
+out$gelm.diag
+```
+# Plotting
+
+Using the packages bayesplot and ggplot2, we can examine our posterior distributions along with the true probabilities values, 
+
+```{r plot, eval = TRUE,fig.height = 4, fig.width = 6}
+library(ggplot2)
+library(bayesplot)
+library(coda)
+
+posteriors=coda::as.mcmc(out$post.samp.ms.model)
+p=apply(posteriors,2,median)
+plot_title <- ggtitle("Posterior distributions",
+                      "with medians and 80% intervals")
+mcmc_areas(posteriors, prob = 0.8) + plot_title
+
+
+```
+
+Or, we can plot the whole hypothesis set
+
+```{r 3dplot 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+diel.plot(hyp=hyp.sets("Traditional"),
+          posteriors=out$post.samp.ms.model)
+```
+
+
+
