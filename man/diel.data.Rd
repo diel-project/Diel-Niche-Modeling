@@ -3,7 +3,7 @@
 \docType{data}
 \name{diel.data}
 \alias{diel.data}
-\title{Example data for Diel.Niche}
+\title{Data for Diel.Niche}
 \format{
 A data frame with 232 rows and 19 variables:
 \describe{
@@ -16,6 +16,7 @@ A data frame with 232 rows and 19 variables:
   \item{max_date}{The last date of sampling in the sampling period.}
   \item{mean_lat}{Avergage latitude of all camera locations during the sampling period.}
   \item{mean_lon}{Avergage longtitude of all camera locations during the sampling period.}
+  \item{season}{Seasonal classification of the sampling period by summer, autumn, winter, and spring.}
   \item{country}{Country where thes sampling occured.}
   \item{phylum}{Phylum of the species.}
   \item{class}{Class of the species.}
@@ -25,7 +26,6 @@ A data frame with 232 rows and 19 variables:
   \item{unit_type}{The length of the sampling period.}
   \item{Common_name}{Common name for the species.}
   \item{Activity_Literature}{Activity classification for the species from the literature; see Cox, D. T. C., Gardner, A. S., & Gaston, K. J. (2021). Diel niche variation in mammals associated with expanded trait space. Nature communications, 12(1), 1753.}
-  ...
 }
 }
 \source{
@@ -35,10 +35,6 @@ A data frame with 232 rows and 19 variables:
 diel.data
 }
 \description{
-Urban Wildlife Information Network from Chicago, Illinois, USA of species detections classified in the categories of twilight, daytime, and nighttime
-}
-\details{
-A multi-species dataset containing detection frequencies during the twilight, daytime, and nighttime.
-Data come from camera-trapping along an urban gradient in Chicago, Illinois, USA.
+A multi-species dataset containing detection frequencies during the twilight, daytime, and nighttime. Data come from camera-trapping along an urban gradient in Chicago, Illinois, USA.
 }
 \keyword{datasets}
