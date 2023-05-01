@@ -1,18 +1,7 @@
 #' Urban Wildlife Information Network from Chicago, Illinois, USA of species detections classified in the categories of twilight, daytime, and nighttime 
 #'
-#' A dataset containing weekly detection / non-detection data
-#' of Virginia opossum (Didelphis virginiana) at 96 unique
-#' camera trapping locations during four primary sampling periods
-#' in 2019 throughout the Chicago greater metropolitan area.
-#' Camera traps were deployed for roughly 4 weeks over
-#' deployment in January, April, July, and October. This is a
-#' subset of the data used in a Urban Wildlife Information
-#' Network (UWIN) publication (see source for link to
-#' article). However, the data have been slightly formatted
-#' from the original data so that there are detection weeks (
-#' the UWIN publication used a Binomial distribution for the
-#' detection model not a Bernoulli like \code{\link{auto_occ}})
-#' does and so some formatting was needed).
+#' A multi-species dataset containing detection frequencies during the twilight, daytime, and nighttime.
+#' Data come from camera-trapping along an urban gradient in Chicago, Illinois, USA. 
 #'
 #' @format A data frame with 232 rows and 19 variables:
 #' \describe{
@@ -37,6 +26,6 @@
 #'   ...
 #' }
 #' @source \url{https://doi.org/10.1111/gcb.15800}
-"UWIN_data"
+"diel.data"
 
 
