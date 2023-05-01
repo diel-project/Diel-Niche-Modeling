@@ -26,6 +26,6 @@
 #'   ...
 #' }
 #' @source \url{https://doi.org/10.1111/gcb.15800}
-"diel.data"
+"diel_data"
 
 
