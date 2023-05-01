@@ -3,6 +3,8 @@
 #' A multi-species dataset containing detection frequencies during the twilight, daytime, and nighttime.
 #' Data come from camera-trapping along an urban gradient in Chicago, Illinois, USA. 
 #'
+#'@title Example data for Diel.Niche
+#'
 #' @format A data frame with 232 rows and 19 variables:
 #' \describe{
 #'   \item{scientificName}{Genus and species name}
@@ -26,6 +28,6 @@
 #'   ...
 #' }
 #' @source \url{https://doi.org/10.1111/gcb.15800}
-"diel_data"
+"diel.data"
 
 
