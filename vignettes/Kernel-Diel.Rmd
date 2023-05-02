@@ -46,7 +46,9 @@ We can use the Diel.Niche package to help classify the hypothesis that is most s
 
 ```{r integrate}
 #Using the object kernel.out, we integrate under the curve to estimate the three probabilities
-prob.integrated=prob.Overlap(kernel.out,dawn=c(6,7),dusk=c(17,18))
+prob.integrated=prob.Overlap(kernel.out,
+                             dawn=c(6,7),
+                             dusk=c(17,18))
 prob.integrated
 
 #We then pass the probabilities to this function to classify the hypothesis that is most supported under the Tradititional hypothesis set
