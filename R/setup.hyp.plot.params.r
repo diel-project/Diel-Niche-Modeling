@@ -11,66 +11,61 @@
 
 setup.hyp.plot.params=function(diel.setup,index.models,more.points=FALSE,...){
 
-#Loop through hypotheses and get many sample points  
-plot.points=vector("list",length(index.models))
-if(isFALSE(more.points)){load.points=p.options}
-if(isTRUE(more.points)){load.points=p.options2}
+#Loop through hypotheses and get sample points  
+  plot.points=vector("list",length(index.models))
+  if(isFALSE(more.points)){load.points=p.options}
+  if(isTRUE(more.points)){load.points=p.options2}
 for(i in 1:length(index.models)){
-
-if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
-  A=round(diel.setup[[index.models[i]]][[2]],digits=5)
-  b=round(diel.setup[[index.models[i]]][[3]],digits=5)
+  if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
+    A=round(diel.setup[[index.models[i]]][[2]],digits=5)
+    b=round(diel.setup[[index.models[i]]][[3]],digits=5)
+    
+    #Find all A %*% theta combinations
+    p.ineq= round(matrix(apply(load.points[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=6)
+    #find if that is <= b
+    p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})
+    index=which(p.ineq.logical)
   
-  #Find all A %*% theta combinations
-  #THIS IS AN ISSUE 
-  p.ineq= round(matrix(apply(load.points[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=6)
-  #find if that is <= b
-  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})
+   #These are the combinations of p's that match the constraints
+    p.plot=t(load.points[,index])
   
-  index=which(p.ineq.logical)
-
- #These are the combinations of p's that match the constraints
-  p.plot=t(load.points[,index])
-
-}#end if statement
+  }#end if statement
   
-if(diel.setup[[index.models[i]]]$func=="bf_equality"){  
-  A=diel.setup[[index.models[i]]][[2]]
-  b=diel.setup[[index.models[i]]][[3]]
-  C=diel.setup[[index.models[i]]][[4]]
-  d=diel.setup[[index.models[i]]][[5]]
-  
-  #Find all A %*% theta combinations
-  p.ineq= round(matrix(apply(p.options2[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=6)
+  if(diel.setup[[index.models[i]]]$func=="bf_equality"){  
+    A=diel.setup[[index.models[i]]][[2]]
+    b=diel.setup[[index.models[i]]][[3]]
+    C=diel.setup[[index.models[i]]][[4]]
+    d=diel.setup[[index.models[i]]][[5]]
+    
+    #Find all A %*% theta combinations
+    p.ineq= round(matrix(apply(p.options2[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=6)
     #apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
-  #find if that is <= b
-  p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+    #find if that is <= b
+    p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
+    
+    #Find all C %*% theta combinations
+    p.ineq2= round(matrix(apply(p.options2[1:2,],2,FUN=function(x){C%*%x}),nrow=nrow(C)),digits=6)
+      #apply(p.options2[1:2,],2,FUN=function(x){C%*%x})  
+    #find if abs(C*theta -d) < delta
+    delta=0.005
+    p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
+    
+    p.ineq.logical=apply(data.frame(p.ineq.logical,p.ineq.logical2),1,FUN=function(x){all(x)})
+    
+   index=which(p.ineq.logical)
   
-  #Find all C %*% theta combinations
-  p.ineq2= round(matrix(apply(p.options2[1:2,],2,FUN=function(x){C%*%x}),nrow=nrow(C)),digits=6)
-    #apply(p.options2[1:2,],2,FUN=function(x){C%*%x})  
-  #find if abs(C*theta -d) < delta
-  delta=0.005
-  p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
+   #These are the combinations of p's that match the constraints
+    p.plot=t(p.options2[,index])
   
-  p.ineq.logical=apply(data.frame(p.ineq.logical,p.ineq.logical2),1,FUN=function(x){all(x)})
-  
- index=which(p.ineq.logical)
-
- #These are the combinations of p's that match the constraints
-  p.plot=t(p.options2[,index])
-
-}
+  }
  
 if(diel.setup[[index.models[i]]]$func=="bf_nonlinear"){  
-p.plot=as.matrix(diel.setup[[index.models[i]]]$data,ncol=2)
-#probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
-#probs.out=matrix(probs.out,ncol=3)
-
+  p.plot=as.matrix(diel.setup[[index.models[i]]]$data,ncol=2)
+  #probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
+  #probs.out=matrix(probs.out,ncol=3)
 }  
  
   
-
   p.plot=cbind(p.plot,rep(diel.setup[[index.models[i]]]$Name,nrow(p.plot)))
   
   colnames(p.plot)=c("p.crep","p.day","p.night","hyp")
@@ -82,7 +77,8 @@ p.plot=as.matrix(diel.setup[[index.models[i]]]$data,ncol=2)
   
   plot.points[[i]]=p.plot
   
- }
+}
+  
   plot.points
   
-}
+} #end function

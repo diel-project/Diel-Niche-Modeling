@@ -2,23 +2,23 @@
 % Please edit documentation in R/find.prob.hyp.r
 \name{find.prob.hyp}
 \alias{find.prob.hyp}
-\title{Inequality Setup}
+\title{Finding probabilities for a given hypotheis}
 \usage{
 find.prob.hyp(hyp, diel.setup = NULL, fast = TRUE)
 }
 \arguments{
-\item{hyp}{Hypothesis name: D.th, D.max, D.var, Dn.th, Dn.max, Dn.var, Dc.th, Dc.max, Dc.var, Dcr.th, Dcr.max,Dcr.var, N.th, N.max, N.var, Nd.th, Nd.max, Nd.var, Nc.th, Nc.max, Nc.var, Ncr.th, Ncr.max, Ncr.var, CR.th, CR.max, CR.var,CRd.th,' CRd.max, CRd.var, CRn.th, CRn.max, CRn.var, CRc.th, CRc.max, CRc.var,'EC.th, EC.var, AC.var.}
+\item{hyp}{hypothesis name, for example, D.max}
 
-\item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'.}
+\item{diel.setup}{A list of created by diel.ineq(). Contains matrices A and vector b, or matrices A and C, and vectors b and d.}
 
-\item{fast}{Default is TRUE, which uses p.options2 instead of p.options3. Does not apply to equality hyps.}
+\item{fast}{Default is TRUE, which uses p.options2 instead of p.options3. Does not apply to equality hypotheses.}
 }
 \value{
-A matrix of probabilities that match hypothesis in variable hyp
+A matrix of probabilities that match hypothesis specified by hyp
 }
 \description{
 Function that inputs a given hypothesis and outputs as many possible
-probability sets that match the diel hypothesis (i.e., satisfies the inequality constrints).
+probability sets that match the diel hypothesis (i.e., satisfies the inequality constrints). Allows for inequalities, equalities, and non-linear inputs.
 }
 \examples{
 find.prob.hyp(hyp ="D.max")

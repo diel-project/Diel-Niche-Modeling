@@ -16,144 +16,243 @@ knitr::opts_chunk$set(
 ```
 
 # Introducion
-The Diel.Niche R pacakge is setup to evaluate how animals use the three fundamental light periods of twilight (dawn & dusk), daytime, and nighttime. First, we need to install and load the library
-```{r package}
-#devtools::install_github("diel-project/Diel-Niche-Modeling",ref="main")
 
+The Diel.Niche package is used to evaluate how animals use the three fundamental periods of light: twilight (dawn & dusk), daytime, and nighttime. First, install and load the library
+
+```{r package}
+#Install package from simplified repo.
+#Make sure to add your auth_token
+#devtools::install_github("diel-project/Diel-Niche-Modeling"
+#                         ,ref="Diel.Niche.Simplify"
+#                         ,auth_token = "")
+
+#Call the library
 library(Diel.Niche)
 ```
 
-To learn some basic information about the diel hypotheses you can call
+Diel.Niche specifies many diel hypotheses, which together are defined into five hypothesis sets. The code names for the hypotheses and sets are,
+
 ```{r hyp}
-  what.hyp()
+what.hyp()
 ```
 
-If you just need to remember the names of the hypotheses you can call
+A short description of each hypothesis is available by calling,
+
 ```{r hyp2}
-  what.hyp("?")
+  what.hyp("D")
 ```
 
-There is also a description for a specific hypothesis can also be called
+To list the hypotheses of a given set,
+
 ```{r hyp3}
-  what.hyp("D.max")
+  hyp.sets("Traditional")
+
+  hyp.sets("Threshold")
 ```
 
-There are three sets of complete hypotheses, which can be viewed
-```{r 3dplot1}
-#Hypotheses of D.max, N.max, and CR.max, which together evaluate a hypothesis set of which diel period is used the most. This set disregards the definition of cathemrality.
-diel.plot(hyp=hyp.sets("hyp.max"))
+The best way to understand each hypothesis set is by plotting all hypotheses. 
 
-#Hypotheses of D2, N2, CR2, and C2. This is the most fundamental hypothesis set. Diurnal, Nocturnal, and Crepsucaular modalities are separated by cathemerality by having >= 0.8 probability in their diel category, respectively. When two categories are used >= 0.2 probability, it is defined as cathemeral.
-diel.plot(hyp=hyp.sets("General2"))
+**Maximizing**
 
-#Hypotheses of  D.Gen, CR.Gen, N.Gen, C.Gen, DN.Gen, CRN.Gen, CRD.Gen. This set is simalar to General2, but separate cathemerality where two categories are used more than >0.1 probabilit and when three are used > 0.1 probability. 
+This hypothesis set is most useful if you are only interested in evaluating which diel modality (Diurnal, Nocturnal, Crepuscular) is used the most. There is no hypothesis associated to cathemerality, which is a combination of multiple modalities.
+```{r 3dplot1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+diel.plot(hyp=hyp.sets("Maximizing"))
+```
 
-diel.plot(hyp=hyp.sets("General3"))
+**Traditional**
+
+This hypothesis set uses the traditional combinations of the diel modalities of diurnal, nocturnal, crepuscular, and cathemeral. 
+
+```{r 3dplot2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+
+diel.plot(hyp=hyp.sets("Traditional"))
+```
+If left unspecified, default values are used to define the boundaries among these different hypotheses. The default value for being diurnal, nocturnal, or crepuscular is $\ge$ 0.8 probability. Cathemerality is defined as no modality has more than 0.8 probability and two or more modalities have$\ge$ 0.1 probability.
+
+**General** 
+
+This hypothesis set includes the Traditional definitions of diurnal, nocturnal, and crepuscular, as above, but cathemerality is defined more specifically in terms of whether two or three modalities have a high probabilty.
+```{r 3dplot3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+diel.plot(hyp=hyp.sets("General"))
+```
+
+**Threshold** 
+
+This hypothesis set is based on defining each modality in terms of lower thresholds. If the thresholds are not provided, default values ared used.
+```{r 3dplot4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+diel.plot(hyp=hyp.sets("Threshold"))
+```
+
+**Variation**
+
+This hypothesis set is based on defining the ranges (lower, uppper) of possible probability values. 
+```{r 3dplot5,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+diel.plot(hyp=hyp.sets("Variation"))
 ```
 
 We can also view specific hypotheses, as
-```{r 3dplot2}
-diel.plot("D2",more.points = TRUE)
 
-diel.plot("N.th",more.points = TRUE)
+```{r 3dplot6,fig.align = "center",fig.height = 8, fig.width = 8,out.width = "8.5in"}
+diel.plot("D",more.points = TRUE)
+
 ```
 
-# Simulate Data
-To simulate data based on a diel hypothesis, we need define a hypothesis using it's coded name. Pick a hypothesis to simulate data from and how many samples.
+# Simulating Data
+
+To simulate data based on a diel hypothesis, we need define a hypothesis using its coded name. Pick a hypothesis to simulate data from and how many samples.
+
 ```{r sim1}
   set.seed(45451)
-  hyp=c("CR2")
+  hyp=c("CR")
   sim=sim.diel(hyp=hyp,n.sample=100)
+  
+  #The probability value used to simulate data
   p=sim$p
+  p
+  
+  #The simulated data
   y=sim$y
+  y
 
 ```
 
-# Setup hypotheses set and fit models
+# Setup hypothesis set and fit models
 
-You can setup your own model set or use pre-defined model sets as
+You can setup your own model set or use the pre-defined model sets.
+
 ```{r hyp.set}
-  hyp.set = c("D2","CR2") #manual
-  hyp.set=hyp.sets("General2") #pre-defined
+  hyp.set = c("D","CR") #manual
+
+  hyp.set = hyp.sets("Traditional") #pre-defined
 ```
 
-Lastly, we fit our model and look at the model probabilities
+To fit the data to the hypothesis set, 
+
 ```{r fit}
   out = diel.fit(y,hyp.set)
+
+#Call the model probabilities for each hypothesis in the set
   out$bf.table
 ```
 
-You can discover the available outputs as
+To examine the available outputs from the fitted model object,
 
 ```{r results}
 attributes(out)
 
 ?diel.fit
 ```
+The function 'diel.fit' defaults to providing the model probabilities for each hypothesis set, but not the posterior samples of the parameters for each hypothesis. We can change this as, 
 
-The default is to not return posterior samples, so to change that we can do,
 ```{r results2}
   out = diel.fit(y,hyp.set,n.chains=2,post.fit = TRUE)
-
-#look at convergence
-out$gelm.diag
-#look at most supported models posteriors
-  plot(coda::as.mcmc(out$post.samp.ms.model))
 ```
+
+To look at convergence criteria for each hypothesis. Note that convergence can be very poor for models that do not fit the data well.
+```{r convergence}
+  out$gelm.diag
+```
+
+We can plot the posterior samples from the most supported model to check convergence/mixing as,
+```{r postcheck,eval = TRUE,fig.height = 6, fig.width = 6}
+ plot(coda::as.mcmc(out$post.samp.ms.model))
+```
+The posterior samples for all hypotheses are available in a list.
+```{r postsamp,eval = TRUE,fig.height = 6, fig.width = 6}
+ names(out$post.samp)
+
+#For each of these list is a list of chains
+
+length(out$post.samp[[1]])
+
+#Here are the means of the posterior samples of all hypotheses for chain 1
+lapply(out$post.samp,FUN=function(x){colMeans(x[[1]])})
+```
+
 
 # Plotting
 
-We can plot our most supported models posterior probability distribution a number of ways. Using ggplo2 and bayesplot:
+Using the packages bayesplot and ggplot2, we can examine our posterior distributions along with the true probabilities values, 
 
-```{r plot, eval = FALSE}
-library(bayesplot)
+```{r plot, eval = TRUE,fig.height = 4, fig.width = 6}
 library(ggplot2)
+library(bayesplot)
 
-if (require(coda,ggplot2,bayesplot)) {
-  posteriors=coda::as.mcmc(out$post.samp.ms.model)
+posteriors=coda::as.mcmc(out$post.samp.ms.model)
 
 plot_title <- ggtitle("Posterior distributions",
                       "with medians and 80% intervals")
 mcmc_areas(posteriors, prob = 0.8) + plot_title+ 
-  geom_vline(xintercept=p, linetype="dashed", 
-                color = c("red","green","purple"), size=1)
+  geom_vline(xintercept=p[1], linetype="dashed",color = c("red"), size=1)+
+  geom_vline(xintercept=p[2], linetype="dashed",color = c("purple"), size=1)+
+  geom_vline(xintercept=p[3], linetype="dashed",color = c("green"), size=1)
 
-}
+
 ```
 
-Another way to examine our hypothesis to plot the theoretical niche space for the hypothesis along with the posterior samples. Or, show the whole hypothesis set
+Another way to examine our hypothesis is to plot the theoretical niche space for the hypothesis along with the posterior samples from the most supported model. 
 
-```{r 3dplot}
+```{r 3dplot 1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 diel.plot(hyp=out$ms.model,more.points = TRUE,
           posteriors=out$post.samp.ms.model)
+```
 
+Or, we can plot the whole hypothesis set
 
+```{r 3dplot 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 diel.plot(hyp=hyp.set,
           posteriors=out$post.samp.ms.model)
-
 ```
 
-You do not need to rely on our definitions of diel hypotheses. If you are interested in categoriesing a diel modality based on 0.7 probabilty or higher, you could adjust the hypotheses using diel.inequaties()
-```{r manual example}
-diel.setup=diel.ineq(xi.min.dom = 0.7)
-diel.plot(hyp=hyp.sets("General2"),diel.setup=diel.setup)
+# User-specified Hypotheses
 
-#If you want to separate the hypotheses and reduce the parameter space of cathmerality,
+You do not need to rely on pre-set definitions of diel hypotheses. If you are interested in categorizing a diel modality based on 0.9 probability or higher, you can adjust the hypotheses using the function 'diel.ineq()' than pass this object to the plot function or model fitting function.
+
+```{r manual example 1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+  diel.setup=diel.ineq(xi.min.dom = c(0.9))
+  diel.plot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
+```
+
+If you want to separate the hypotheses and reduce the parameter space of cathmerality,
+
+```{r manual example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 diel.setup=diel.ineq(xi.min.dom = 0.7,separation=0.1)
-diel.plot(hyp=hyp.sets("General2"),diel.setup=diel.setup)
+diel.plot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 
 ```
-This new set could be used to simulate data from and fit the same models as, 
-```{r manual example2}
-y=sim.diel(hyp="CR2",n.sample = 100,diel.setup=diel.setup)$y
 
-  out = diel.fit(y,hyp.set=hyp.sets("General2"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
+When considering the General hypothesis set, you can adjust the lower probability value to define crepuscular, diurnal, and nocturnal, as well as adjust the definitions of Cathemeral General  vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular.
 
-diel.plot(hyp=hyp.sets("General2"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
+```{r manual2 example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+diel.setup=diel.ineq(xi.min.dom = c(0.9,0.05))
+diel.plot(hyp=hyp.sets("General"),diel.setup=diel.setup)
+```
+This new hypothesis set can be used to simulate data and fit the same models by passing the object diel.setup as an attribute of the functions sim.diel, diel.fit, and diel.plot.
+
+```{r manual example2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+
+y=sim.diel(hyp="D.CR",n.sample = 200,diel.setup=diel.setup)$y
+
+out = diel.fit(y,hyp.set=hyp.sets("General"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
+
+diel.plot(hyp=hyp.sets("General"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
   
 ```
+# The Unconstrained Model
 
-If you are using RStudio and no figure is opening
-Tools-->Global Options-->Advanced-->Rengering Engine
-Choose "Desktop OpenGL{}
-restart RStudio completely
+If interested in comparing the constrained hypotheses to an unconstrained model, you can do that by adding it into the hypothesis set
+
+```{r uncond,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+hyp.set.new=c(hyp.sets("General"),"Uncon")
+out = diel.fit(y,hyp.set=hyp.set.new,n.chains=2,post.fit = FALSE,diel.setup=diel.setup)
+
+#Compare the uncosntrained model to the rest of the models of the General hypothesis set
+out$bf.table
+
+```
+
+
+# Plotting Issues in RStudio
+
+Plotting is done using the package plotly. Plotly can have issues with RStudio. If you are using RStudio and no figures are opening then: Tools--\>Global Options--\>Advanced--\>Rendering Engine Choose "Desktop OpenGL{} and then restart RStudio.
+

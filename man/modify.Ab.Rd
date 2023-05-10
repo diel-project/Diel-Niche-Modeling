@@ -15,7 +15,7 @@ modify.Ab(y, idx.mod, reps, diel.setup, delta)
 
 \item{diel.setup}{provided by user or used default as 'diel.setup=diel.ineq()'}
 
-\item{delta}{error tolerance allowed}
+\item{delta}{error tolerance allowed for equalities}
 }
 \value{
 Internal list

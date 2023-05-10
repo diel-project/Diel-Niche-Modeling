@@ -2,7 +2,11 @@
 % Please edit documentation in R/globals.r
 \name{globalvars}
 \alias{globalvars}
+\alias{IsSmallerOrEqual}
 \title{Global Variables}
+\usage{
+IsSmallerOrEqual(a, b)
+}
 \description{
 Plots the diel niche space and posterior distribution of a fitted model.
 }

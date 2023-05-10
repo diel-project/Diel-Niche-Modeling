@@ -5,7 +5,7 @@
 #' @return Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned.
 #' @examples 
 #' hyp.sets()
-#' hyp.sets("hyp.th")
+#' hyp.sets("Traditional")
 #' @export
 
 # A function to simply call certain pre-defined hypotheses sets
@@ -17,62 +17,23 @@
 hyp.sets=function(hyp.in=NULL){
 
   #NEED TO INCLUDE C.th somewhere
-  hyp.set=vector("list",20)
+  hyp.set=vector("list",5)
   
- #General Hypotheses
-  hyp.set[[1]]=c("D.th","N.th","CR.th","EC.th")   
-  hyp.set[[2]]=c("D.th","N.th","CR.th","C.th")    
-  hyp.set[[3]]=c("D.max","N.max","CR.max")
-  hyp.set[[4]]=c("D.max","N.max","CR.max","AC")
-  hyp.set[[5]]=c("D.var","N.var","CR.var","EC.var") 
-  hyp.set[[6]]=c("D.var","N.var","CR.var","AC.var")
-  names(hyp.set)[1:6]=c("hyp.th","hyp.th2","hyp.max","hyp.max2",
-                        "hyp.var","hyp.var2")
-  
-  
-#Primary-secondary Hypotheses with strong constraints (3rd prob is zero)  
-  hyp.set[[7]]=c("Dn.th","Dcr.th","Nd.th","Ncr.th","CRd.th","CRn.th")          
-  hyp.set[[8]]=c("Dn.max","Dcr.max","Nd.max","Ncr.max","CRd.max","CRn.max") 
-  hyp.set[[9]]=c("Dn.var","Dcr.var","Nd.var","Ncr.var","CRd.var","CRn.var") 
-  names(hyp.set)[7:9]=c("hyp.Ps.th","hyp.Ps.max","hyp.Ps.var")
-  
-#Primary-secondary Hypotheses with weak constraints (3d prob is not zero)  
-  hyp.set[[10]]=c("Dn.th.wk","Dcr.th.wk","Nd.th.wk","Ncr.th.wk","CRd.th.wk","CRn.th.wk")          
-  hyp.set[[11]]=c("Dn.var.wk","Dcr.var.wk","Nd.var.wk","Ncr.var.wk","CRd.var.wk","CRn.var.wk") 
-  names(hyp.set)[10:11]=c("hyp.Ps.th.wk","hyp.Ps.var.wk")
+ #Hypothesis Sets
+  hyp.set[[1]]=c("D","N","CR","C")
+  hyp.set[[2]]=c("D","N","CR","C2","D.CR","D.N","CR.N")
+  hyp.set[[3]]=c("D.th","N.th","CR.th","C.th")
+  hyp.set[[4]]=c("D.max","N.max","CR.max")
+  hyp.set[[5]]=c("D.var","N.var","CR.var","C.var")
+  names(hyp.set)=c("Traditional","General","Threshold","Maximizing","Variation")
 
-#General & Primary-secondary Hypotheses with strong constraints
-  hyp.set[[12]]=c(hyp.set[[1]],hyp.set[[7]]) 
-  hyp.set[[13]]=c(hyp.set[[3]],hyp.set[[8]]) 
-  hyp.set[[14]]=c(hyp.set[[5]],hyp.set[[9]]) 
-  names(hyp.set)[12:14]=c("hyp.th.Ps.th","hyp.max.Ps.max","hyp.var.Ps.var")
-#General & Primary-secondary Hypotheses with strong constraints
-  hyp.set[[15]]=c(hyp.set[[1]],hyp.set[[10]]) 
-  hyp.set[[16]]=c(hyp.set[[3]],hyp.set[[11]]) 
-  names(hyp.set)[15:16]=c("hyp.th.Ps.th.wk","hyp.var.Ps.var.wk")
-
-  hyp.set[[17]]=c("D","N","C","CR")
-  names(hyp.set)[17]=c("General")
-
-  hyp.set[[18]]=c("D2","N2","C2","CR2")
-  names(hyp.set)[18]=c("General2")
-    
-  hyp.set[[19]]=c("C.full", "CR.full",  "D.CR.full","N.CR.full", "CRc.full","CRd.full" ,
-          "CRn.full", "D.full",  "D.N.full","Dc.full", "Dcr.full","Dn.full",  
-          "N.full",  "Nc.full", "Ncr.full", "Nd.full" )
-  
-  names(hyp.set)[19]=c("Full")
-  
-  hyp.set[[20]]=c("D.Gen","CR.Gen","N.Gen","C.Gen","DN.Gen","CRN.Gen","CRD.Gen")
-  names(hyp.set)[20]=c("General3")
-  
 if(is.null(hyp.in)){   
-  cat("Names of Hypotheses Sets: \n",names(hyp.set),sep="  ")
+  cat("Names of Hypothesis Sets: \n",names(hyp.set),sep="  ")
 }else{
-if(hyp.in=="list"){hyp.set}else{
-#match the model set called for and return it
-  hyp.set[[match(hyp.in,names(hyp.set))]]
-}  
+  if(hyp.in=="list"){hyp.set}else{
+  #match the model set called for and return it
+    hyp.set[[match(hyp.in,names(hyp.set))]]
+  }  
 }
 
-}#end of function
+}#End Function

@@ -27,7 +27,7 @@
 #' @importFrom MASS fractions
 #' @import multinomineq
 #' @examples 
-#' diel.fit(y=t(matrix(c(10,100,10))),hyp.set=hyp.sets("hyp.th"))
+#' out=diel.fit(y=t(matrix(c(10,100,10))),hyp.set=hyp.sets("Traditional"))
 #' @export
 
 diel.fit=function(y,
@@ -73,9 +73,9 @@ diel.fit=function(y,
   if(isTRUE(prints)){message(paste0("Data checks Complete."))}    
 ###################################    
 #setup data for model fitting
-    reps= nrow(y)
-    y.vec=c(t(y))
-    names(y.vec)=paste(rep(c("p_crep","p_day","p_night"), times = reps), rep(1:(reps),each=3), sep = "_")
+  reps= nrow(y)
+  y.vec=c(t(y))
+  names(y.vec)=paste(rep(c("p_crep","p_day","p_night"), times = reps), rep(1:(reps),each=3), sep = "_")
 ###################################      
 #These are the list items of A and b that need to be fit based on hyp.set
   idx.mod=match(hyp.set,names(diel.setup))
@@ -133,7 +133,10 @@ if(isTRUE(post.fit) & !is.null(bf)){
 
   
   if(prints==TRUE & isTRUE(bf.fit) & length(hyp.set)>1){
-    cat("The most supported model is: \n", ms.model,"\n")
+    print.name=print.hyp.name(ms.model)
+    if(is.null(print.name)){print.name=ms.model}
+
+    cat("The most supported model is: \n", print.name,"\n")
     if(sum(indicator)>0){
       warning("Models that were not fit: \n",
               paste(hyp.set[indicator==1],rep("\n",length(hyp.set[indicator==1]))),call.=FALSE)
