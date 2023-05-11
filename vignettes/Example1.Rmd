@@ -52,7 +52,7 @@ rownames(y)=winter$Common_name
 y
 ```
 
-# Model Comparison
+# Model Comparison and Parameter Estimation
 
 We are now ready to compare models using the  *Traditional* hypothesis set, which includes four models: diurnal, nocturnal, crepuscular, and Traditional Cathemeral. We can confirm that this is the hypothesis set of interest by plotting the set together as, 
 
@@ -61,10 +61,11 @@ diel.plot(hyp=hyp.sets("Traditional"))
 ```
 
 
-To fit our data (`y`), we use the function 'diel.fit', specifying the hypothesis set of interest. 
+To fit our data (`y`), we use the function 'diel.fit', specifying the hypothesis set of interest and MCMC inputs. 
 ```{r Analysis}
-out = diel.fit(y = as.matrix(y),
-               hyp.set=hyp.sets("Traditional"))
+out = diel.fit(y = as.matrix(y),hyp.set=hyp.sets("Traditional"),
+             post.fit = TRUE, 
+             n.chains = 3, n.mcmc=5000,burnin = 1000)
 ```
 
 The most supported model is Traditional Cathemeral. We can examine the posterior model probabilities for all models as, 
@@ -75,21 +76,13 @@ out$bf.table
 
 which indicate that we are very certain that Traditional Cathemeral  ('C') is supported. Notice that without specifying a prior probabilty for each model, it is assumed to be equal among the models.
 
-# Parameter Estimation
 
-Next, lets fit the most supported model and get posterior distributions of our parameters. We use the 'diel.fit' function again, but this time specifying 'post.fit = TRUE'. We can also change the the typical parameters when fitting a model using an MCMC algorithim: the number of chains, iterations, and burnin. 
-
-```{r ms.model.fit}
-fit.ms = diel.fit(y = as.matrix(y),hyp.set=out$ms.model,
-             post.fit = TRUE, 
-             n.chains = 3, n.mcmc=5000,burnin = 1000)
-```
 
 # Checks
 
-As long as we fit our model with multiple chains, we will get an estimate of the Gelman-Rubin convergence diagnostic, as
+As long as we fit our model with multiple chains, we will get an estimate of the Gelman-Rubin convergence diagnostic for our most supported model, as
 ```{r gelman.rubin}
-fit.ms$gelm.diag
+out$ms.gelm.diag
 ```
 
 Since the point estimate and upper intervals are at one, there is no evidence that the parameters have not converged to their posterior distributions. However, we should also plot the parameter chains to visually inspect this (next section).
@@ -98,10 +91,10 @@ Since the point estimate and upper intervals are at one, there is no evidence th
 We can also examine whether there is evidenve of lack of it betweem our most supported model and the data using a posterior predictive check, which provides a probability of fit ('ppp'). As long as this value is not near 0 or 1 then there is no evidence of departure of fit to the data.
 
 ```{r ppc}
-fit.ms$ppc
+out$ms.ppc
 ```
 
-This model indicates that it fits the data with a probability value of `r round(fit.ms$ppc[4],digits=2)`.
+This model indicates that it fits the data with a probability value of `r round(out$ms.ppc[4],digits=2)`.
 
 
 # Visualizations
@@ -109,7 +102,7 @@ This model indicates that it fits the data with a probability value of `r round(
 First, let's plot our parameter chains to confirm that posterior distributions are properly converged.
 
 ```{r chains,fig.height = 8, fig.width = 6}
-plot(fit.ms$post.samp[[1]])
+plot(coda::as.mcmc(out$post.samp.ms.model))
 ```
 
 We see that the chains are highly overlapping and thus confirm that posterior distributions have converged.
@@ -118,28 +111,38 @@ We see that the chains are highly overlapping and thus confirm that posterior di
 Next, lets examine the posterior probabilities of activity in the three diel periods,
 
 ```{r plot, eval = TRUE,fig.height = 4, fig.width = 6}
-# Combine chains
-  posteriors=do.call("rbind", fit.ms$post.samp[[1]])
-
-#Setup plotting
-p=apply(posteriors,2,median)
-plot_title <- ggplot2::ggtitle("Posterior distributions",
-                      "with medians and 95% intervals")
-bayesplot::mcmc_areas(posteriors, prob = 0.95) + plot_title
-
+# Plotting
+  plot_title <- ggplot2::ggtitle("Posterior distributions",
+                        "with medians and 95% intervals")
+  bayesplot::mcmc_areas(out$post.samp.ms.model, prob = 0.95) + plot_title
 ```
+
+
+Alternatively, using base R to plot the same posteriors,
+
+```{r plot2, eval = TRUE,fig.height = 4, fig.width = 6}
+# Plotting
+  plot(0,xlim=c(0,1),ylim=c(0,12),ylab="Probability Density", xlab="Probability of Activity",
+       main="Virginia Opossum \n Winter 2019")
+  polygon(density(out$post.samp.ms.model[,1]), col = "#A73030FF")
+  polygon(density(out$post.samp.ms.model[,2]), col = "#EFC000FF")
+  polygon(density(out$post.samp.ms.model[,3]), col = "#0073C2FF")
+  legend("topright", legend=c("P(twilight)","P(daytime)","P(nighttime)"),lwd=8,
+         col=c("#A73030FF","#EFC000FF","#0073C2FF"))
+```
+
 
 Alternatively, we can use the diel.plot function in the Diel.Niche package that uses plotly to output a 3d plot of the posterior samples on top of the hypothesis set,
 
 ```{r 3dplot 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 diel.plot(hyp=hyp.sets("Traditional"),
-          posteriors=posteriors)
+          posteriors=out$post.samp.ms.model, more.points = TRUE)
 ```
 
 The black dots are the entire posterior samples plotted within the Traditional Cathemeral hypothesis. This point cloud shows us that the Virginia Opossum is largely active during night and day. To look at the posterior median and 95\% credible intervals, we can extract these as,
 
 ```{r estimates}
-apply(posteriors,2,quantile, probs=c(0.025,0.5,0.975))
+apply(out$post.samp.ms.model,2,quantile, probs=c(0.025,0.5,0.975))
 ```
 
 # Conclusions
