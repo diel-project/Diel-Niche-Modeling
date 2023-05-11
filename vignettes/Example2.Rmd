@@ -1,9 +1,10 @@
 ---
-title: "Example 3: Multiple species with one data analysis unit"
-author: "Brian D. Gerber"
-date: "2023-05-10"
 output: html_document
 ---
+
+# Example 2: Multiple species with one data analysis unit
+#### Author: Brian D. Gerber
+#### Date: 2023-05-10
 
 ```{r start, include=FALSE}
 knitr::opts_chunk$set(
