@@ -1,3 +1,10 @@
+---
+title: "Example 3: Multiple species with one data analysis unit"
+author: "Brian D. Gerber"
+date: "2023-05-10"
+output: html_document
+---
+
 Commonly, researchers are interested in making inference on the spatial
 and temporal activity of an entire meso/large mammal community. Here, we
 will consider a camera trap study that is aimed at sampling multiple
@@ -29,20 +36,27 @@ literature designations of diel activity.
 
 # Data visual
   head(winter)
-#>             scientificName twilight day night trap_nights nsite  min_date  max_date mean_lat mean_lon season       country   phylum
-#> 118          Canis latrans        3   8    23         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata
-#> 119   Didelphis virginiana        0   7    18         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata
-#> 120 Odocoileus virginianus        4  39    20         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata
-#> 121          Procyon lotor        6   8   133         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata
-#> 122   Sciurus carolinensis        0 284     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata
-#> 123          Sciurus niger        0  49     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata
-#>        class           order      family             Project unit_type           Common_name Activity_Literature min_year
-#> 118 Mammalia       Carnivora     Canidae UWIN_Chicago_IL_USA     28day                Coyote          Cathemeral     2019
-#> 119 Mammalia Didelphimorphia Didelphidae UWIN_Chicago_IL_USA     28day      Virginia Opossum           Nocturnal     2019
-#> 120 Mammalia    Artiodactyla    Cervidae UWIN_Chicago_IL_USA     28day     White-tailed Deer         Crepuscular     2019
-#> 121 Mammalia       Carnivora Procyonidae UWIN_Chicago_IL_USA     28day      Northern Raccoon           Nocturnal     2019
-#> 122 Mammalia        Rodentia   Sciuridae UWIN_Chicago_IL_USA     28day Eastern Gray Squirrel             Diurnal     2019
-#> 123 Mammalia        Rodentia   Sciuridae UWIN_Chicago_IL_USA     28day  Eastern Fox Squirrel             Diurnal     2019
+#>             scientificName twilight day night trap_nights nsite  min_date  max_date mean_lat mean_lon season       country
+#> 118          Canis latrans        3   8    23         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
+#> 119   Didelphis virginiana        0   7    18         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
+#> 120 Odocoileus virginianus        4  39    20         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
+#> 121          Procyon lotor        6   8   133         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
+#> 122   Sciurus carolinensis        0 284     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
+#> 123          Sciurus niger        0  49     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
+#>       phylum    class           order      family             Project unit_type           Common_name Activity_Literature
+#> 118 Chordata Mammalia       Carnivora     Canidae UWIN_Chicago_IL_USA     28day                Coyote          Cathemeral
+#> 119 Chordata Mammalia Didelphimorphia Didelphidae UWIN_Chicago_IL_USA     28day      Virginia Opossum           Nocturnal
+#> 120 Chordata Mammalia    Artiodactyla    Cervidae UWIN_Chicago_IL_USA     28day     White-tailed Deer         Crepuscular
+#> 121 Chordata Mammalia       Carnivora Procyonidae UWIN_Chicago_IL_USA     28day      Northern Raccoon           Nocturnal
+#> 122 Chordata Mammalia        Rodentia   Sciuridae UWIN_Chicago_IL_USA     28day Eastern Gray Squirrel             Diurnal
+#> 123 Chordata Mammalia        Rodentia   Sciuridae UWIN_Chicago_IL_USA     28day  Eastern Fox Squirrel             Diurnal
+#>     min_year
+#> 118     2019
+#> 119     2019
+#> 120     2019
+#> 121     2019
+#> 122     2019
+#> 123     2019
 
 # Species observed
   unique(winter$scientificName)
@@ -101,8 +115,8 @@ supported model and its probability.
 
   round(sp.model.probs,digits=2)
 #>                       D    N CR    C
-#> Coyote                0 0.25  0 0.75
-#> Virginia Opossum      0 0.62  0 0.38
+#> Coyote                0 0.22  0 0.78
+#> Virginia Opossum      0 0.63  0 0.37
 #> White-tailed Deer     0 0.00  0 1.00
 #> Northern Raccoon      0 1.00  0 0.00
 #> Eastern Gray Squirrel 1 0.00  0 0.00
@@ -171,7 +185,7 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.00
+#> p1_1          1       1.01
 #> p1_2          1       1.01
 #> 
 #> 
@@ -181,7 +195,7 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.00
+#> p1_1          1       1.01
 #> p1_2          1       1.01
 #> 
 #> 
@@ -202,7 +216,7 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> 
 #>      Point est. Upper C.I.
 #> p1_1       1.01       1.02
-#> p1_2       1.01       1.01
+#> p1_2       1.01       1.02
 #> 
 #> 
 #> 
@@ -211,8 +225,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1       1.01       1.02
-#> p1_2       1.01       1.02
+#> p1_1          1       1.01
+#> p1_2          1       1.01
 #> 
 #> 
 #> 
@@ -221,8 +235,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.00
-#> p1_2          1       1.01
+#> p1_1          1          1
+#> p1_2          1          1
   
 # Seeing no convergence issues, we can combine our chains
   post.samples=lapply(sapply(out.multi2,function(x) x[1]), FUN=function(x){do.call("rbind",x)})
@@ -237,23 +251,23 @@ prob.quantiles=lapply(post.samples, FUN=function(x){apply(x,2,quantile,probs=c(0
 
 prob.quantiles$Coyote.post.samp
 #>         p_crep_1   p_day_1 p_night_1
-#> 2.5%  0.03081088 0.1246497 0.4884022
-#> 50%   0.10240268 0.2380041 0.6519782
-#> 97.5% 0.22828127 0.3919421 0.7799100
+#> 2.5%  0.03407176 0.1287160 0.4947588
+#> 50%   0.10258668 0.2430664 0.6502072
+#> 97.5% 0.22698219 0.3879680 0.7767613
 
 # Extract posterior medians fo each species
   prob.median=matrix(unlist(lapply(prob.quantiles, FUN = function(x){x[2,]})),ncol=3,byrow = TRUE)
   rownames(prob.median)=names(post.samples)
   colnames(prob.median)=colnames(prob.quantiles$Coyote.post.samp)
   prob.median
-#>                                    p_crep_1    p_day_1   p_night_1
-#> Coyote.post.samp                0.102402677 0.23800411 0.651978245
-#> Virginia Opossum.post.samp      0.013975060 0.15468152 0.823714389
-#> White-tailed Deer.post.samp     0.071611183 0.60748259 0.316243839
-#> Northern Raccoon.post.samp      0.044672292 0.05811606 0.895331700
-#> Eastern Gray Squirrel.post.samp 0.002423386 0.99418520 0.002434285
-#> Eastern Fox Squirrel.post.samp  0.013988292 0.96658606 0.013558926
-#> Eastern Cottontail.post.samp    0.093784372 0.04020720 0.862534134
+#>                                    p_crep_1    p_day_1  p_night_1
+#> Coyote.post.samp                0.102586680 0.24306637 0.65020723
+#> Virginia Opossum.post.samp      0.014963791 0.15444798 0.82431990
+#> White-tailed Deer.post.samp     0.071337545 0.60792332 0.31432996
+#> Northern Raccoon.post.samp      0.045205633 0.05814651 0.89489244
+#> Eastern Gray Squirrel.post.samp 0.002535095 0.99402727 0.00241451
+#> Eastern Fox Squirrel.post.samp  0.013294381 0.96702867 0.01406167
+#> Eastern Cottontail.post.samp    0.094676991 0.03935353 0.86416017
 ```
 
 # Plotting
@@ -282,7 +296,7 @@ each species during the three diel periods.
       p      
 ```
 
-![](C:\Users\bgerber\Google%20Drive\GITHUB\Diel.Niche\GitHub_vignettes\Example2_files/figure-markdown_github/plotting-1.png)
+![](C:\Users\bgerber\GOOGLE~1\GITHUB\DIEL~1.NIC\GITHUB~1\EXAMPL~3/figure-markdown_github/plotting-1.png)
 
 ``` r
 
