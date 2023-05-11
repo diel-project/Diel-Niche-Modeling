@@ -1,3 +1,9 @@
+# Example 4: Circular Kernel Analysis with Diel Hypotheses
+
+#### Author: Brian D. Gerber
+
+#### Date: 2023-05-10
+
 We will consider how the Diel.Niche package can support other diel
 activity analysis. One of the most common analyses of camera trap data
 to estimate animal diel activity is that of the circular kernel density

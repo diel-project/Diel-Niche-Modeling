@@ -1,9 +1,10 @@
 ---
-title: "Example 4: Circular Kernel Analysis with Diel Hypotheses"
-author: "Brian D. Gerber"
-date: "2023-05-01"
 output: html_document
 ---
+
+# Example 4: Circular Kernel Analysis with Diel Hypotheses
+#### Author: Brian D. Gerber
+#### Date: 2023-05-10
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(

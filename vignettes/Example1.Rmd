@@ -1,10 +1,11 @@
 ---
-title: "Example 1: Single Data Analysis Unit"
-author: "Brian D. Gerber"
-date: "2023-05-10"
 output: html_document
 always_allow_html: true
 ---
+
+# Example 2: Example 1: Single Data Analysis Unit
+#### Author: Brian D. Gerber
+#### Date: 2023-05-10
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
