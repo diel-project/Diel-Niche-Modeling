@@ -1,7 +1,3 @@
----
-output: html_document
----
-
 # Example 2: Multiple species with one data analysis unit
 
 #### Author: Brian D. Gerber
@@ -118,8 +114,8 @@ supported model and its probability.
 
   round(sp.model.probs,digits=2)
 #>                       D    N CR    C
-#> Coyote                0 0.34  0 0.66
-#> Virginia Opossum      0 0.63  0 0.37
+#> Coyote                0 0.32  0 0.68
+#> Virginia Opossum      0 0.67  0 0.33
 #> White-tailed Deer     0 0.00  0 1.00
 #> Northern Raccoon      0 1.00  0 0.00
 #> Eastern Gray Squirrel 1 0.00  0 0.00
@@ -178,7 +174,7 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.01
+#> p1_1          1       1.00
 #> p1_2          1       1.01
 #> 
 #> 
@@ -188,8 +184,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1          1
-#> p1_2          1          1
+#> p1_1          1       1.00
+#> p1_2          1       1.01
 #> 
 #> 
 #> 
@@ -198,8 +194,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.01
-#> p1_2          1       1.00
+#> p1_1          1          1
+#> p1_2          1          1
 #> 
 #> 
 #> 
@@ -218,8 +214,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1       1.01       1.02
-#> p1_2       1.01       1.02
+#> p1_1       1.01       1.01
+#> p1_2       1.00       1.01
 #> 
 #> 
 #> 
@@ -254,9 +250,9 @@ prob.quantiles=lapply(post.samples, FUN=function(x){apply(x,2,quantile,probs=c(0
 
 prob.quantiles$Coyote.post.samp
 #>         p_crep_1   p_day_1 p_night_1
-#> 2.5%  0.03092899 0.1235743 0.4878242
-#> 50%   0.10052746 0.2412860 0.6486326
-#> 97.5% 0.22094268 0.3942128 0.7749125
+#> 2.5%  0.03089292 0.1322832 0.4919516
+#> 50%   0.10255087 0.2386450 0.6504110
+#> 97.5% 0.22154337 0.3909390 0.7740760
 
 # Extract posterior medians fo each species
   prob.median=matrix(unlist(lapply(prob.quantiles, FUN = function(x){x[2,]})),ncol=3,byrow = TRUE)
@@ -264,13 +260,13 @@ prob.quantiles$Coyote.post.samp
   colnames(prob.median)=colnames(prob.quantiles$Coyote.post.samp)
   prob.median
 #>                                    p_crep_1    p_day_1   p_night_1
-#> Coyote.post.samp                0.100527461 0.24128597 0.648632594
-#> Virginia Opossum.post.samp      0.014215989 0.15555450 0.822968218
-#> White-tailed Deer.post.samp     0.069702625 0.60784882 0.316713695
-#> Northern Raccoon.post.samp      0.044817054 0.05842888 0.894096694
-#> Eastern Gray Squirrel.post.samp 0.002503131 0.99415231 0.002401736
-#> Eastern Fox Squirrel.post.samp  0.013312552 0.96759373 0.013427368
-#> Eastern Cottontail.post.samp    0.094823347 0.03946859 0.863626080
+#> Coyote.post.samp                0.102550870 0.23864499 0.650410988
+#> Virginia Opossum.post.samp      0.014667393 0.15418255 0.824114084
+#> White-tailed Deer.post.samp     0.070756691 0.60912605 0.315343872
+#> Northern Raccoon.post.samp      0.044799711 0.05810915 0.894365641
+#> Eastern Gray Squirrel.post.samp 0.002367993 0.99409848 0.002453539
+#> Eastern Fox Squirrel.post.samp  0.012801925 0.96760093 0.013356813
+#> Eastern Cottontail.post.samp    0.094786980 0.03943284 0.863876639
 ```
 
 # Plotting
