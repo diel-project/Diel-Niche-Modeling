@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Commonly, researchers are interested in making inference on the spatial and temporal activity of an entire meso/large mammal community. Here, we will consider a camera trap study that is aimed at sampling multiple animal species in an area to make inference on the diel niche of each species. We will use data available in the package ('diel.data') provided by the Urban Wildlife Information Network (https://www.urbanwildlifeinfo.org/). The specific data are camera trap detections of the urban mammal community during the winter of 2019 in Chicago, Illinois USA. The available data are aggregated independent counts from 131 camera locations. Our objective is to evaluate the support for the traditional diel hypotheses and compare the diel niche support of each species, as well as compare these results with literature designations of diel activity. 
+Commonly, researchers are interested in making inference on the spatial and temporal activity of an entire meso/large mammal community. Here, we will consider a camera trap study that is aimed at sampling multiple animal species in an area to make inference on the diel niche of each species. We will use data available in the package ('diel.data') provided by the Urban Wildlife Information Network (https://www.urbanwildlifeinfo.org/). The specific data are camera trap detections of the urban mammal community during the winter of 2019 in Chicago, Illinois USA. The available data are aggregated independent counts from 131 camera locations. Our objective is to evaluate the support for the Genearl diel hypotheses and compare the diel niche support of each species, as well as compare these results with literature designations of diel activity. 
 
 # The Setup
 
@@ -23,6 +23,7 @@ Commonly, researchers are interested in making inference on the spatial and temp
   library(lubridate)
   library(bayesplot)
   library(ggplot2)
+  library(ggthemes)
 
 # Define year variable
   diel.data$min_year = year(as.POSIXct(diel.data$min_date, format = "%m/%d/%Y"))
@@ -56,7 +57,7 @@ To get model probabilities for each species, we can define a new function that u
 
 ```{r Analysis}
 multi.fit.fun = function(y){
-    out = diel.fit(t(as.matrix(y)),hyp.set=hyp.sets("Traditional"),
+    out = diel.fit(t(as.matrix(y)),hyp.set=hyp.sets("General"),
                  post.fit = FALSE, prints=FALSE)
 
   list(ms.model=out$ms.model,prob=out$bf.table)
@@ -72,7 +73,7 @@ Next, we need to extract from our list the results of interest, including the mo
 
 #The probability set for each species
   temp=sapply(out.multi,function(x) x[2])
-  sp.model.probs=matrix(unlist(lapply(temp, "[", , 'Posterior')),ncol=4,byrow = TRUE)
+  sp.model.probs=matrix(unlist(lapply(temp, "[", , 'Posterior')),ncol=7,byrow = TRUE)
   rownames(sp.model.probs)=rownames(y)
   colnames(sp.model.probs)=rownames(temp[[1]])
 
@@ -86,7 +87,7 @@ Next, we need to extract from our list the results of interest, including the mo
   ms.hyps=data.frame(ms.hyps,prob.hyps)
 ```
 
-We find that there is clear evidence (model probability at/near 1.0) that White-tailed deer are cathemeral (Traditional), Northern Raccoon and Eastern Cottontail are nocturnal, and the two squirrel species are diurnal. We are less confident with model probabilities near 0.6 that Coyoyte are cathemeral (Traditional) and Virginia Opossum are nocturnal. 
+We find that there is clear evidence (model probability at/near 1.0) that White-tailed deer are cathemeral (Traditional), Northern Raccoon and Eastern Cottontail are nocturnal, and the two squirrel species are diurnal. We are less confident with model probabilities near 0.6 that Coyote are cathemeral (Traditional) and Virginia Opossum are nocturnal. 
 
 Comparing these results to the literature (Wilson et al. 2001-2019), we see agreement with regard to the Coyote, Virginia Opossum, Northern Raccoon, and both squirrel species. There is however disagreement regarding the White-tailed Deer and the Eastern cottontail, which are considered crepuscular. 
 
@@ -153,12 +154,13 @@ Lets create a straightforward plot of the probabilities of activity for each spe
         geom_linerange(aes(xmin = ll, xmax = hh),size=1,position=pos)+
         xlab("Probabilty")+ylab("")+xlim(0,1)+
         theme(text = element_text(size = 20))+ coord_flip()+
+         scale_colour_colorblind()+
         #geom_hline(yintercept=c(0.7,1.3,1.7,2.3,2.7,3.3),color="black",size=1.2)+ 
                 theme(panel.background = element_rect(fill='white', colour='black'), legend.key=element_rect(fill="white"))
       
       p      
 
-#ggsave(p, file="prob.plot.png",width=8, height=6, dpi=300)
+#ggsave(p, file="Example2.plot.png",width=8, height=6, dpi=300)
 ```
 
 We see that the the two species most active during twilight are the Eastern Cottontail and the Coyote. The Fox and Gray Squirrels are almost only active during the daytime, thus confirming why they were classifed as diurnal. The white-tailed deer is most active during the day but stilll about a 0.27 probability of being active at nighttime. The Eastern Cottontail, Virginia Opossum, and the Northern Raccoon are highly active during the nighttime with probabilities greater than 0.80. 
