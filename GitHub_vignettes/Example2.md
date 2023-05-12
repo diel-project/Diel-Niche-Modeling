@@ -108,13 +108,13 @@ supported model and its probability.
 
   round(sp.model.probs,digits=2)
 #>                       D    N CR   C2 D.CR  D.N CR.N
-#> Coyote                0 0.05  0 0.22    0 0.73 0.01
-#> Virginia Opossum      0 0.24  0 0.01    0 0.75 0.00
+#> Coyote                0 0.10  0 0.20    0 0.69 0.01
+#> Virginia Opossum      0 0.17  0 0.02    0 0.81 0.00
 #> White-tailed Deer     0 0.00  0 0.07    0 0.93 0.00
 #> Northern Raccoon      0 1.00  0 0.00    0 0.00 0.00
 #> Eastern Gray Squirrel 1 0.00  0 0.00    0 0.00 0.00
 #> Eastern Fox Squirrel  1 0.00  0 0.00    0 0.00 0.00
-#> Eastern Cottontail    0 1.00  0 0.00    0 0.00 0.00
+#> Eastern Cottontail    0 0.99  0 0.00    0 0.00 0.01
 
 #The probabilities of the most supported hypothesis
   ms.hyps=unlist(lapply(out.multi,'[',1))
@@ -198,8 +198,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.00
-#> p1_2          1       1.01
+#> p1_1          1       1.01
+#> p1_2          1       1.00
 #> 
 #> 
 #> 
@@ -208,8 +208,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1          1
-#> p1_2          1          1
+#> p1_1          1       1.01
+#> p1_2          1       1.01
 #> 
 #> 
 #> 
@@ -218,8 +218,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1          1
-#> p1_2          1          1
+#> p1_1          1       1.00
+#> p1_2          1       1.01
 #> 
 #> 
 #> 
@@ -228,8 +228,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1          1
-#> p1_2          1          1
+#> p1_1          1       1.01
+#> p1_2          1       1.00
   
 # Seeing no convergence issues, we can combine our chains
   post.samples=lapply(sapply(out.multi2,function(x) x[1]), FUN=function(x){do.call("rbind",x)})
@@ -244,9 +244,9 @@ prob.quantiles=lapply(post.samples, FUN=function(x){apply(x,2,quantile,probs=c(0
 
 prob.quantiles$Coyote.post.samp
 #>         p_crep_1   p_day_1 p_night_1
-#> 2.5%  0.02598084 0.1436869 0.5242645
-#> 50%   0.07153997 0.2547769 0.6770073
-#> 97.5% 0.09821263 0.4051272 0.7850410
+#> 2.5%  0.02561869 0.1469743 0.5169246
+#> 50%   0.07103665 0.2534888 0.6771571
+#> 97.5% 0.09864489 0.4121811 0.7852388
 
 # Extract posterior medians fo each species
   prob.median=matrix(unlist(lapply(prob.quantiles, FUN = function(x){x[2,]})),ncol=3,byrow = TRUE)
@@ -254,13 +254,13 @@ prob.quantiles$Coyote.post.samp
   colnames(prob.median)=colnames(prob.quantiles$Coyote.post.samp)
   prob.median
 #>                                    p_crep_1    p_day_1   p_night_1
-#> Coyote.post.samp                0.071539966 0.25477686 0.677007253
-#> Virginia Opossum.post.samp      0.025139111 0.28812135 0.681188306
-#> White-tailed Deer.post.samp     0.063308333 0.61624380 0.319767640
-#> Northern Raccoon.post.samp      0.044702645 0.05735396 0.895371486
-#> Eastern Gray Squirrel.post.samp 0.002249966 0.99439092 0.002302767
-#> Eastern Fox Squirrel.post.samp  0.013226945 0.96809555 0.013645340
-#> Eastern Cottontail.post.samp    0.094203263 0.04011700 0.863404506
+#> Coyote.post.samp                0.071036651 0.25348876 0.677157132
+#> Virginia Opossum.post.samp      0.025186500 0.29170838 0.678575200
+#> White-tailed Deer.post.samp     0.063288800 0.61470184 0.322149145
+#> Northern Raccoon.post.samp      0.044370800 0.05742054 0.895183500
+#> Eastern Gray Squirrel.post.samp 0.002492081 0.99416433 0.002397548
+#> Eastern Fox Squirrel.post.samp  0.014043341 0.96698602 0.014089973
+#> Eastern Cottontail.post.samp    0.094598071 0.03946156 0.862800513
 ```
 
 # Plotting
