@@ -1,6 +1,4 @@
 ---
-title: me
-author: this
 output: html_document
 ---
 

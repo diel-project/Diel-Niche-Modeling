@@ -1,4 +1,6 @@
 ---
+title: me
+author: this
 output: html_document
 always_allow_html: true
 ---
