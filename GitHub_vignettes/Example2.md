@@ -14,7 +14,7 @@ provided by the Urban Wildlife Information Network
 trap detections of the urban mammal community during the winter of 2019
 in Chicago, Illinois USA. The available data are aggregated independent
 counts from 131 camera locations. Our objective is to evaluate the
-support for the traditional diel hypotheses and compare the diel niche
+support for the Genearl diel hypotheses and compare the diel niche
 support of each species, as well as compare these results with
 literature designations of diel activity.
 
@@ -26,6 +26,7 @@ literature designations of diel activity.
   library(lubridate)
   library(bayesplot)
   library(ggplot2)
+  library(ggthemes)
 
 # Define year variable
   diel.data$min_year = year(as.POSIXct(diel.data$min_date, format = "%m/%d/%Y"))
@@ -35,32 +36,25 @@ literature designations of diel activity.
 
 # Data visual
   head(winter)
-#>             scientificName twilight day night trap_nights nsite  min_date  max_date mean_lat mean_lon season       country
-#> 118          Canis latrans        3   8    23         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
-#> 119   Didelphis virginiana        0   7    18         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
-#> 120 Odocoileus virginianus        4  39    20         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
-#> 121          Procyon lotor        6   8   133         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
-#> 122   Sciurus carolinensis        0 284     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
-#> 123          Sciurus niger        0  49     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States
-#>       phylum    class           order      family             Project unit_type           Common_name Activity_Literature
-#> 118 Chordata Mammalia       Carnivora     Canidae UWIN_Chicago_IL_USA     28day                Coyote          Cathemeral
-#> 119 Chordata Mammalia Didelphimorphia Didelphidae UWIN_Chicago_IL_USA     28day      Virginia Opossum           Nocturnal
-#> 120 Chordata Mammalia    Artiodactyla    Cervidae UWIN_Chicago_IL_USA     28day     White-tailed Deer         Crepuscular
-#> 121 Chordata Mammalia       Carnivora Procyonidae UWIN_Chicago_IL_USA     28day      Northern Raccoon           Nocturnal
-#> 122 Chordata Mammalia        Rodentia   Sciuridae UWIN_Chicago_IL_USA     28day Eastern Gray Squirrel             Diurnal
-#> 123 Chordata Mammalia        Rodentia   Sciuridae UWIN_Chicago_IL_USA     28day  Eastern Fox Squirrel             Diurnal
-#>     min_year
-#> 118     2019
-#> 119     2019
-#> 120     2019
-#> 121     2019
-#> 122     2019
-#> 123     2019
+#>             scientificName twilight day night trap_nights nsite  min_date  max_date mean_lat mean_lon season       country   phylum    class           order
+#> 118          Canis latrans        3   8    23         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia       Carnivora
+#> 119   Didelphis virginiana        0   7    18         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia Didelphimorphia
+#> 120 Odocoileus virginianus        4  39    20         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia    Artiodactyla
+#> 121          Procyon lotor        6   8   133         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia       Carnivora
+#> 122   Sciurus carolinensis        0 284     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia        Rodentia
+#> 123          Sciurus niger        0  49     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia        Rodentia
+#>          family             Project unit_type           Common_name Activity_Literature min_year
+#> 118     Canidae UWIN_Chicago_IL_USA     28day                Coyote          Cathemeral     2019
+#> 119 Didelphidae UWIN_Chicago_IL_USA     28day      Virginia Opossum           Nocturnal     2019
+#> 120    Cervidae UWIN_Chicago_IL_USA     28day     White-tailed Deer         Crepuscular     2019
+#> 121 Procyonidae UWIN_Chicago_IL_USA     28day      Northern Raccoon           Nocturnal     2019
+#> 122   Sciuridae UWIN_Chicago_IL_USA     28day Eastern Gray Squirrel             Diurnal     2019
+#> 123   Sciuridae UWIN_Chicago_IL_USA     28day  Eastern Fox Squirrel             Diurnal     2019
 
 # Species observed
   unique(winter$scientificName)
-#> [1] "Canis latrans"          "Didelphis virginiana"   "Odocoileus virginianus" "Procyon lotor"          "Sciurus carolinensis"  
-#> [6] "Sciurus niger"          "Sylvilagus floridanus"
+#> [1] "Canis latrans"          "Didelphis virginiana"   "Odocoileus virginianus" "Procyon lotor"          "Sciurus carolinensis"   "Sciurus niger"         
+#> [7] "Sylvilagus floridanus"
 ```
 
 We can extract all the species data into object `y` as,
@@ -90,7 +84,7 @@ new function using the ‘apply’ function.
 
 ``` r
 multi.fit.fun = function(y){
-    out = diel.fit(t(as.matrix(y)),hyp.set=hyp.sets("Traditional"),
+    out = diel.fit(t(as.matrix(y)),hyp.set=hyp.sets("General"),
                  post.fit = FALSE, prints=FALSE)
 
   list(ms.model=out$ms.model,prob=out$bf.table)
@@ -108,27 +102,27 @@ supported model and its probability.
 
 #The probability set for each species
   temp=sapply(out.multi,function(x) x[2])
-  sp.model.probs=matrix(unlist(lapply(temp, "[", , 'Posterior')),ncol=4,byrow = TRUE)
+  sp.model.probs=matrix(unlist(lapply(temp, "[", , 'Posterior')),ncol=7,byrow = TRUE)
   rownames(sp.model.probs)=rownames(y)
   colnames(sp.model.probs)=rownames(temp[[1]])
 
   round(sp.model.probs,digits=2)
-#>                       D    N CR    C
-#> Coyote                0 0.29  0 0.71
-#> Virginia Opossum      0 0.63  0 0.37
-#> White-tailed Deer     0 0.00  0 1.00
-#> Northern Raccoon      0 1.00  0 0.00
-#> Eastern Gray Squirrel 1 0.00  0 0.00
-#> Eastern Fox Squirrel  1 0.00  0 0.00
-#> Eastern Cottontail    0 1.00  0 0.00
+#>                       D    N CR   C2 D.CR  D.N CR.N
+#> Coyote                0 0.05  0 0.22    0 0.73 0.01
+#> Virginia Opossum      0 0.24  0 0.01    0 0.75 0.00
+#> White-tailed Deer     0 0.00  0 0.07    0 0.93 0.00
+#> Northern Raccoon      0 1.00  0 0.00    0 0.00 0.00
+#> Eastern Gray Squirrel 1 0.00  0 0.00    0 0.00 0.00
+#> Eastern Fox Squirrel  1 0.00  0 0.00    0 0.00 0.00
+#> Eastern Cottontail    0 1.00  0 0.00    0 0.00 0.00
 
 #The probabilities of the most supported hypothesis
   ms.hyps=unlist(lapply(out.multi,'[',1))
   ms.hyps
-#>                Coyote.ms.model      Virginia Opossum.ms.model     White-tailed Deer.ms.model      Northern Raccoon.ms.model 
-#>                            "C"                            "N"                            "C"                            "N" 
-#> Eastern Gray Squirrel.ms.model  Eastern Fox Squirrel.ms.model    Eastern Cottontail.ms.model 
-#>                            "D"                            "D"                            "N"
+#>                Coyote.ms.model      Virginia Opossum.ms.model     White-tailed Deer.ms.model      Northern Raccoon.ms.model Eastern Gray Squirrel.ms.model 
+#>                          "D.N"                          "D.N"                          "D.N"                            "N"                            "D" 
+#>  Eastern Fox Squirrel.ms.model    Eastern Cottontail.ms.model 
+#>                            "D"                            "N"
 
   prob.hyps=unlist(lapply(lapply(out.multi,'[',2), FUN=function(x){max(x$prob[,2])}))
   ms.hyps=data.frame(ms.hyps,prob.hyps)
@@ -138,7 +132,7 @@ We find that there is clear evidence (model probability at/near 1.0)
 that White-tailed deer are cathemeral (Traditional), Northern Raccoon
 and Eastern Cottontail are nocturnal, and the two squirrel species are
 diurnal. We are less confident with model probabilities near 0.6 that
-Coyoyte are cathemeral (Traditional) and Virginia Opossum are nocturnal.
+Coyote are cathemeral (Traditional) and Virginia Opossum are nocturnal.
 
 Comparing these results to the literature (Wilson et al. 2001-2019), we
 see agreement with regard to the Coyote, Virginia Opossum, Northern
@@ -170,27 +164,27 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 # We can extract the geman-rubin diagnostics to check for convergence issues
   sapply(out.multi2,function(x) x[2])
 #> $Coyote.gelman.diag
-#> $Coyote.gelman.diag$C
+#> $Coyote.gelman.diag$D.N
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.00
-#> p1_2          1       1.01
+#> p1_1          1          1
+#> p1_2          1          1
 #> 
 #> 
 #> 
 #> $`Virginia Opossum.gelman.diag`
-#> $`Virginia Opossum.gelman.diag`$N
+#> $`Virginia Opossum.gelman.diag`$D.N
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.01
-#> p1_2          1       1.01
+#> p1_1          1          1
+#> p1_2          1          1
 #> 
 #> 
 #> 
 #> $`White-tailed Deer.gelman.diag`
-#> $`White-tailed Deer.gelman.diag`$C
+#> $`White-tailed Deer.gelman.diag`$D.N
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
@@ -204,8 +198,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.01
-#> p1_2          1       1.00
+#> p1_1          1       1.00
+#> p1_2          1       1.01
 #> 
 #> 
 #> 
@@ -214,8 +208,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1       1.01       1.02
-#> p1_2       1.01       1.01
+#> p1_1          1          1
+#> p1_2          1          1
 #> 
 #> 
 #> 
@@ -234,8 +228,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.01
-#> p1_2          1       1.00
+#> p1_1          1          1
+#> p1_2          1          1
   
 # Seeing no convergence issues, we can combine our chains
   post.samples=lapply(sapply(out.multi2,function(x) x[1]), FUN=function(x){do.call("rbind",x)})
@@ -250,23 +244,23 @@ prob.quantiles=lapply(post.samples, FUN=function(x){apply(x,2,quantile,probs=c(0
 
 prob.quantiles$Coyote.post.samp
 #>         p_crep_1   p_day_1 p_night_1
-#> 2.5%  0.03241992 0.1261846 0.4919522
-#> 50%   0.10381897 0.2419075 0.6479056
-#> 97.5% 0.22381777 0.3942401 0.7771403
+#> 2.5%  0.02598084 0.1436869 0.5242645
+#> 50%   0.07153997 0.2547769 0.6770073
+#> 97.5% 0.09821263 0.4051272 0.7850410
 
 # Extract posterior medians fo each species
   prob.median=matrix(unlist(lapply(prob.quantiles, FUN = function(x){x[2,]})),ncol=3,byrow = TRUE)
   rownames(prob.median)=names(post.samples)
   colnames(prob.median)=colnames(prob.quantiles$Coyote.post.samp)
   prob.median
-#>                                    p_crep_1   p_day_1   p_night_1
-#> Coyote.post.samp                0.103818973 0.2419075 0.647905611
-#> Virginia Opossum.post.samp      0.013628600 0.1568084 0.822499294
-#> White-tailed Deer.post.samp     0.070836321 0.6055804 0.316579555
-#> Northern Raccoon.post.samp      0.044960553 0.0575473 0.895788925
-#> Eastern Gray Squirrel.post.samp 0.002546043 0.9940184 0.002390548
-#> Eastern Fox Squirrel.post.samp  0.012974075 0.9674741 0.013527538
-#> Eastern Cottontail.post.samp    0.095408803 0.0390165 0.863088976
+#>                                    p_crep_1    p_day_1   p_night_1
+#> Coyote.post.samp                0.071539966 0.25477686 0.677007253
+#> Virginia Opossum.post.samp      0.025139111 0.28812135 0.681188306
+#> White-tailed Deer.post.samp     0.063308333 0.61624380 0.319767640
+#> Northern Raccoon.post.samp      0.044702645 0.05735396 0.895371486
+#> Eastern Gray Squirrel.post.samp 0.002249966 0.99439092 0.002302767
+#> Eastern Fox Squirrel.post.samp  0.013226945 0.96809555 0.013645340
+#> Eastern Cottontail.post.samp    0.094203263 0.04011700 0.863404506
 ```
 
 # Plotting
@@ -289,6 +283,7 @@ each species during the three diel periods.
         geom_linerange(aes(xmin = ll, xmax = hh),size=1,position=pos)+
         xlab("Probabilty")+ylab("")+xlim(0,1)+
         theme(text = element_text(size = 20))+ coord_flip()+
+         scale_colour_colorblind()+
         #geom_hline(yintercept=c(0.7,1.3,1.7,2.3,2.7,3.3),color="black",size=1.2)+ 
                 theme(panel.background = element_rect(fill='white', colour='black'), legend.key=element_rect(fill="white"))
       
@@ -299,7 +294,7 @@ each species during the three diel periods.
 
 ``` r
 
-#ggsave(p, file="prob.plot.png",width=8, height=6, dpi=300)
+#ggsave(p, file="Example2.plot.png",width=8, height=6, dpi=300)
 ```
 
 We see that the the two species most active during twilight are the
