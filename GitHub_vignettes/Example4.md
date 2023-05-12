@@ -58,7 +58,7 @@ function ‘densityPlot’ with the times of detections in radians.
   kernel.out=densityPlot(y.radians,extend = NULL,main="",lwd=3,rug=TRUE,add=TRUE,n.grid=1000)
 ```
 
-![](C:\Users\bgerber\GOOGLE~1\GITHUB\DIEL~1.NIC\GITHUB~1\EXAMPL~2/figure-markdown_github/kernel-1.png)
+![](C:\Users\bgerber\GOOGLE~1\GITHUB\DIEL~1.NIC\GITHUB~1\EXAMPL~2/figure-gfm/kernel-1.png)<!-- -->
 
 From the plot we can see that the species is generally activity
 throughout the daytime with a peak in activity during the later part of

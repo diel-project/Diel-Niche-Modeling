@@ -108,9 +108,9 @@ supported model and its probability.
 
   round(sp.model.probs,digits=2)
 #>                       D    N CR   C2 D.CR  D.N CR.N
-#> Coyote                0 0.10  0 0.20    0 0.69 0.01
-#> Virginia Opossum      0 0.17  0 0.02    0 0.81 0.00
-#> White-tailed Deer     0 0.00  0 0.07    0 0.93 0.00
+#> Coyote                0 0.05  0 0.20    0 0.75 0.01
+#> Virginia Opossum      0 0.29  0 0.01    0 0.69 0.00
+#> White-tailed Deer     0 0.00  0 0.06    0 0.94 0.00
 #> Northern Raccoon      0 1.00  0 0.00    0 0.00 0.00
 #> Eastern Gray Squirrel 1 0.00  0 0.00    0 0.00 0.00
 #> Eastern Fox Squirrel  1 0.00  0 0.00    0 0.00 0.00
@@ -178,8 +178,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1          1
-#> p1_2          1          1
+#> p1_1          1       1.01
+#> p1_2          1       1.00
 #> 
 #> 
 #> 
@@ -198,8 +198,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.01
-#> p1_2          1       1.00
+#> p1_1          1          1
+#> p1_2          1          1
 #> 
 #> 
 #> 
@@ -208,8 +208,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.01
-#> p1_2          1       1.01
+#> p1_1       1.02       1.04
+#> p1_2       1.01       1.03
 #> 
 #> 
 #> 
@@ -218,8 +218,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.00
-#> p1_2          1       1.01
+#> p1_1          1          1
+#> p1_2          1          1
 #> 
 #> 
 #> 
@@ -228,8 +228,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.01
-#> p1_2          1       1.00
+#> p1_1          1          1
+#> p1_2          1          1
   
 # Seeing no convergence issues, we can combine our chains
   post.samples=lapply(sapply(out.multi2,function(x) x[1]), FUN=function(x){do.call("rbind",x)})
@@ -244,9 +244,9 @@ prob.quantiles=lapply(post.samples, FUN=function(x){apply(x,2,quantile,probs=c(0
 
 prob.quantiles$Coyote.post.samp
 #>         p_crep_1   p_day_1 p_night_1
-#> 2.5%  0.02561869 0.1469743 0.5169246
-#> 50%   0.07103665 0.2534888 0.6771571
-#> 97.5% 0.09864489 0.4121811 0.7852388
+#> 2.5%  0.02697982 0.1482512 0.5188806
+#> 50%   0.07097147 0.2532047 0.6785106
+#> 97.5% 0.09841826 0.4123019 0.7871139
 
 # Extract posterior medians fo each species
   prob.median=matrix(unlist(lapply(prob.quantiles, FUN = function(x){x[2,]})),ncol=3,byrow = TRUE)
@@ -254,13 +254,13 @@ prob.quantiles$Coyote.post.samp
   colnames(prob.median)=colnames(prob.quantiles$Coyote.post.samp)
   prob.median
 #>                                    p_crep_1    p_day_1   p_night_1
-#> Coyote.post.samp                0.071036651 0.25348876 0.677157132
-#> Virginia Opossum.post.samp      0.025186500 0.29170838 0.678575200
-#> White-tailed Deer.post.samp     0.063288800 0.61470184 0.322149145
-#> Northern Raccoon.post.samp      0.044370800 0.05742054 0.895183500
-#> Eastern Gray Squirrel.post.samp 0.002492081 0.99416433 0.002397548
-#> Eastern Fox Squirrel.post.samp  0.014043341 0.96698602 0.014089973
-#> Eastern Cottontail.post.samp    0.094598071 0.03946156 0.862800513
+#> Coyote.post.samp                0.070971471 0.25320474 0.678510625
+#> Virginia Opossum.post.samp      0.025330285 0.28853204 0.679249762
+#> White-tailed Deer.post.samp     0.062853070 0.61669178 0.320837010
+#> Northern Raccoon.post.samp      0.044223340 0.05833052 0.895318145
+#> Eastern Gray Squirrel.post.samp 0.002545524 0.99391968 0.002470577
+#> Eastern Fox Squirrel.post.samp  0.013019372 0.96825891 0.012833645
+#> Eastern Cottontail.post.samp    0.094737936 0.03911978 0.863302348
 ```
 
 # Plotting
@@ -290,7 +290,7 @@ each species during the three diel periods.
       p      
 ```
 
-![](C:\Users\bgerber\GOOGLE~1\GITHUB\DIEL~1.NIC\GITHUB~1\EXAMPL~3/figure-markdown_github/plotting-1.png)
+![](C:\Users\bgerber\GOOGLE~1\GITHUB\DIEL~1.NIC\GITHUB~1\EXAMPL~3/figure-gfm/plotting-1.png)<!-- -->
 
 ``` r
 
