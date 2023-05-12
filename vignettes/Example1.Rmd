@@ -3,7 +3,7 @@ output: html_document
 always_allow_html: true
 ---
 
-# Example 2: Example 1: Single Data Analysis Unit
+# Example 1: Single Data Analysis Unit
 #### Author: Brian D. Gerber
 #### Date: 2023-05-10
 
