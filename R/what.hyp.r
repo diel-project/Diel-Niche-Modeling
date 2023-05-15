@@ -11,9 +11,9 @@
 
 what.hyp=function(hyp.in=NULL){
 if(!is.null(hyp.in)){  
-  if(hyp.in=="D"){print("Traditional Diurnal")}
-  if(hyp.in=="N"){print("Traditional Nocturnal")}
-  if(hyp.in=="CR"){print("Traditional Crepuscular")}
+  if(hyp.in=="D"){print("Traditional/General Diurnal")}
+  if(hyp.in=="N"){print("Traditional/General Nocturnal")}
+  if(hyp.in=="CR"){print("Traditional/General Crepuscular")}
   if(hyp.in=="C"){print("Traditional Cathemeral")}
   
   if(hyp.in=="C2"){print("General Cathemeral")}

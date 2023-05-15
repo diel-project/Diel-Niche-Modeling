@@ -42,9 +42,26 @@ diel.plot=function(hyp,
   plot.points$hyp=as.factor(plot.points$hyp)
   
 #colors to use  
-
+  col.hyp=data.frame(D="#EFC000FF", N = "#0073C2FF", CR="#A73030FF",C="#868686FF", C2="#868686FF", D.CR="#CD534CFF",
+                     D.N = "#79AF97FF", CR.N="#8F7700FF",D.max="#EFC000FF", N.max="#0073C2FF", CR.max="#A73030FF",
+                     D.th="#EFC000FF", N.th="#0073C2FF",CR.th="#A73030FF", C.th="#868686FF", EC.th="black",
+                     D.var="#EFC000FF",N.var="#0073C2FF",CR.var="#A73030FF",C.var="#868686FF",AV.var="black",
+                     Uncon="black",C.max="#868686FF", EC="#868686FF",AV.EQ="black")
+  
+  col.hyp.match=match(hyp,names(col.hyp))
+  temp=col.hyp[col.hyp.match[!is.na(col.hyp.match)]]
+  
+  if(length(which(is.na(col.hyp.match)))>0){
+  extra.col=colours()[length(which(is.na(col.hyp.match)))]
+  temp=data.frame(temp,extra.col)
+  }
+  
+  names(temp)[is.na(col.hyp.match)]=hyp[which(is.na(col.hyp.match))]
+  
+  color.set.use=as.character(temp[order(hyp)])
+               
   color.set = c("#868686FF", "#A73030FF", "#EFC000FF", "#0073C2FF","#8F7700FF","#CD534CFF", "#79AF97FF", "#999999")
-  color.set.use=color.set[1:length(index.models)]
+  #color.set.use=color.set[1:length(index.models)]
   
 #Include posterior points if not null  
   if(!is.null(posteriors)){
