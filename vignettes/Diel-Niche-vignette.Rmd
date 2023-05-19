@@ -20,17 +20,14 @@ knitr::opts_chunk$set(
 The Diel.Niche package is used to evaluate how animals use the three fundamental periods of light: twilight (dawn & dusk), daytime, and nighttime. First, install and load the library
 
 ```{r package}
-#Install package from simplified repo.
-#Make sure to add your auth_token
-#devtools::install_github("diel-project/Diel-Niche-Modeling"
-#                         ,ref="Diel.Niche.Simplify"
-#                         ,auth_token = "")
+# Install package from GitHub via devtools.
+# devtools::install_github("diel-project/Diel-Niche-Modeling",ref="main")
 
-#Call the library
-library(Diel.Niche)
+# Load the pacakge
+  library(Diel.Niche)
 ```
 
-Diel.Niche specifies many diel hypotheses, which together are defined into five hypothesis sets. The code names for the hypotheses and sets are,
+The packages specifies many diel hypotheses, which together are defined into five hypothesis sets. The code names for the hypotheses and sets are,
 
 ```{r hyp}
 what.hyp()
@@ -39,7 +36,7 @@ what.hyp()
 A short description of each hypothesis is available by calling,
 
 ```{r hyp2}
-  what.hyp("D")
+  what.hyp("CR")
 ```
 
 To list the hypotheses of a given set,
@@ -47,14 +44,14 @@ To list the hypotheses of a given set,
 ```{r hyp3}
   hyp.sets("Traditional")
 
-  hyp.sets("Threshold")
+  hyp.sets("General")
 ```
 
-The best way to understand each hypothesis set is by plotting all hypotheses. 
+The best way to understand each hypothesis set is by plotting hypotheses from a set. 
 
 **Maximizing**
 
-This hypothesis set is most useful if you are only interested in evaluating which diel modality (Diurnal, Nocturnal, Crepuscular) is used the most. There is no hypothesis associated to cathemerality, which is a combination of multiple modalities.
+This hypothesis set is useful in evaluating which diel phenotype (Diurnal, Nocturnal, Crepuscular) is used the most. There is no hypothesis associated to cathemerality, which is a combination of multiple diel periods
 ```{r 3dplot1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 diel.plot(hyp=hyp.sets("Maximizing"))
 ```
@@ -67,21 +64,23 @@ This hypothesis set uses the traditional combinations of the diel modalities of 
 
 diel.plot(hyp=hyp.sets("Traditional"))
 ```
-If left unspecified, default values are used to define the boundaries among these different hypotheses. The default value for being diurnal, nocturnal, or crepuscular is $\ge$ 0.8 probability. Cathemerality is defined as no modality has more than 0.8 probability and two or more modalities have$\ge$ 0.1 probability.
+If left unspecified, default values are used to define the boundaries among these different hypotheses. The default value for being diurnal, nocturnal, or crepuscular is $\ge$ 0.80 probability. Cathemerality is defined as no diel period activity has more than 0.80 probability and two or more time periods have$\ge$ 0.1 probability.
 
 **General** 
 
-This hypothesis set includes the Traditional definitions of diurnal, nocturnal, and crepuscular, as above, but cathemerality is defined more specifically in terms of whether two or three modalities have a high probabilty.
+This hypothesis set aims to provide more specificity tha the Traditional hypothesis set. It includes the Traditional definitions of diurnal, nocturnal, and crepuscular, as above, but cathemerality is defined more specifically in terms of whether two or three diel periods are used moderately.
 ```{r 3dplot3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 diel.plot(hyp=hyp.sets("General"))
 ```
 
 **Threshold** 
 
-This hypothesis set is based on defining each modality in terms of lower thresholds. If the thresholds are not provided, default values ared used.
+This hypothesis set is based on defining each diel period in terms of lower thresholds. If the thresholds are not provided, default values are used.
 ```{r 3dplot4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 diel.plot(hyp=hyp.sets("Threshold"))
 ```
+
+Not that where there is no colored space indicates that these set of probabilities are not considered. 
 
 **Variation**
 
@@ -118,7 +117,7 @@ To simulate data based on a diel hypothesis, we need define a hypothesis using i
 
 # Setup hypothesis set and fit models
 
-You can setup your own model set or use the pre-defined model sets.
+You can setup your own model set by creating a vector of coded hypothesis names or use the pre-defined model sets.
 
 ```{r hyp.set}
   hyp.set = c("D","CR") #manual
@@ -142,13 +141,14 @@ attributes(out)
 
 ?diel.fit
 ```
+
 The function 'diel.fit' defaults to providing the model probabilities for each hypothesis set, but not the posterior samples of the parameters for each hypothesis. We can change this as, 
 
 ```{r results2}
   out = diel.fit(y,hyp.set,n.chains=2,post.fit = TRUE)
 ```
 
-To look at convergence criteria for each hypothesis. Note that convergence can be very poor for models that do not fit the data well.
+We can look at a convergence criteria for each hypothesis. Note that convergence can be very poor for models that do not meet the inequality constraints well.
 ```{r convergence}
   out$gelm.diag
 ```
@@ -206,7 +206,7 @@ diel.plot(hyp=hyp.set,
 
 # User-specified Hypotheses
 
-You do not need to rely on pre-set definitions of diel hypotheses. If you are interested in categorizing a diel modality based on 0.9 probability or higher, you can adjust the hypotheses using the function 'diel.ineq()' than pass this object to the plot function or model fitting function.
+You do not need to rely on pre-set definitions of diel hypotheses. If you are interested in categorizing a diel phenotype based on 0.90 probability or higher, you can adjust the hypotheses using the function 'diel.ineq()' than pass this object to the plot function or model fitting function.
 
 ```{r manual example 1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
   diel.setup=diel.ineq(xi.min.dom = c(0.9))
@@ -240,7 +240,7 @@ diel.plot(hyp=hyp.sets("General"),posteriors = out$post.samp.ms.model,diel.setup
 ```
 # The Unconstrained Model
 
-If interested in comparing the constrained hypotheses to an unconstrained model, you can do that by adding it into the hypothesis set
+If you are interested in comparing the constrained hypotheses to an unconstrained model, you can do that by adding it into the hypothesis set
 
 ```{r uncond,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 hyp.set.new=c(hyp.sets("General"),"Uncon")
@@ -250,6 +250,81 @@ out = diel.fit(y,hyp.set=hyp.set.new,n.chains=2,post.fit = FALSE,diel.setup=diel
 out$bf.table
 
 ```
+
+
+# Data availabilty and an unequal prior
+
+The package includes a set of available data that can be accessed as 
+
+```{r avail.data}
+head(diel.data)
+?diel.data
+```
+
+Here, we will use one of the data sets to fit a model with 1) equal weight on each hypotheses and 2) prior weight that is higher on the literature definition. 
+
+```{r prior}
+# Virginia Opossum data from the Urban Wildlife Information Network
+dat=diel.data[2,]
+
+dat
+
+y=data.frame(twilight=dat$twilight,
+             day=dat$day, 
+             night=dat$night)
+rownames(y)=dat$Common_name
+
+y
+
+# Model Comparison using equal eights
+out1 = diel.fit(as.matrix(y),hyp.set=hyp.sets("Traditional"),post.fit = FALSE)
+
+# Model Comparison using 0.8 probability weigh on the nocturnal hypothesis
+out2 = diel.fit(as.matrix(y),hyp.set=hyp.sets("Traditional"),post.fit = FALSE,
+                prior=c(0.2/3,0.8,0.2/3,0.2/3))
+
+# Results out1
+round(out1$bf.table,digits=2)
+
+# Results out 2
+round(out2$bf.table,digits=2)
+```
+We see that the model weight on the nocturnal hypotheis increase because of our prior weight. 
+
+
+Let's consider another case where we simulate 10 data sets with differing sample sizes to see how the prior weight affects the model weights. Specifically, we will put a high weight (0.95) on the Cathemeral Traditional hypothesis while the simulated data is from the Nocturnal hypothesis.
+
+```{r prior2,  eval = TRUE, fig.align = "center",fig.height = 5, fig.width = 5}
+set.seed(451)
+n=matrix(seq(10,200, 20))
+sim.dat=t(apply(n,1,FUN=function(x){sim.diel(n.sim=1, n.sample=x, hyp = "N")$y}))
+
+
+prior.func=function(x,prior){out= diel.fit(t(as.matrix(x)),hyp.set=hyp.sets("Traditional"),
+                                    post.fit = FALSE, print=FALSE,
+                                    prior=prior)
+                                    out$bf.table[,2]
+}
+
+#Equal priors
+results.prior1=apply(sim.dat,1,prior=c(0.25,0.25,0.25,0.25),
+                     FUN=prior.func)
+
+# Unequal priors
+results.prior2=apply(sim.dat,1,prior=c(0.05/3,0.05/3,0.05/3,0.95),
+                     FUN=prior.func)
+
+#par(mfrow=c(2,1))
+matplot(t(results.prior1),type="l",lwd=3,ylab="Model Probability",xaxt="n")
+axis(1,at=1:length(n),lab=n)
+legend("right", legend=rownames(results.prior2),col = 1:4,lwd=3,lty = 1:4)
+
+matplot(t(results.prior2),type="l",lwd=3,ylab="Model Probability",xaxt="n")
+axis(1,at=1:length(n),lab=n)
+legend("top", legend=rownames(results.prior2),col = 1:4,lwd=3,lty = 1:4)
+```
+
+The differences in the model probabilieis are entirely due to the prior weights on each hypothesis. In the second plot, the likelihood of the data is trying to overwhelm such a highly certain prior.
 
 
 # Plotting Issues in RStudio
