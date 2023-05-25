@@ -375,7 +375,7 @@ Looking at the model summary we can see that there is strong evidence that `noct
   )
 ```
 
-With these predictions we can easily plot out the probability of nocturnality as a function of ordinal day. You can see here that the probability of nocturnality greatly decreases at the start and end of the year. However, there is substantial uncertainty around this given that we had less data during the spring and winter. 
+With these predictions we can plot out the probability of nocturnality as a function of ordinal day. You can see here that the probability of nocturnality greatly decreases at the start and end of the year. However, there is substantial uncertainty around this given that we had less data during the spring and winter. 
 
 ```{r plot_results, align = "center", fig.cap = " Figure 3.1. Opossum are predominately nocturnal during the middle of the year, but this precipitously drops off at the start and end of a year. The solid black line represents the median probability of nocturnality while the shaded ribbon is the 95% credible interval."}
 {
