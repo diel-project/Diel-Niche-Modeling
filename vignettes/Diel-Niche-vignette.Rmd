@@ -1,5 +1,5 @@
 ---
-title: "Diel-Niche-vignette"
+title: "Diel.Niche Vignette"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Diel-Niche-vignette}
@@ -14,6 +14,9 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+#### Author: Brian Gerber
+#### Date: 2023-05-25
 
 # Introducion
 
@@ -49,14 +52,14 @@ To list the hypotheses of a given set,
 
 The best way to understand each hypothesis set is by plotting hypotheses from a set. 
 
-**Maximizing**
+## **Maximizing**
 
 This hypothesis set is useful in evaluating which diel phenotype (Diurnal, Nocturnal, Crepuscular) is used the most. There is no hypothesis associated to cathemerality, which is a combination of multiple diel periods
 ```{r 3dplot1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 diel.plot(hyp=hyp.sets("Maximizing"))
 ```
 
-**Traditional**
+## **Traditional**
 
 This hypothesis set uses the traditional combinations of the diel modalities of diurnal, nocturnal, crepuscular, and cathemeral. 
 
@@ -66,14 +69,14 @@ diel.plot(hyp=hyp.sets("Traditional"))
 ```
 If left unspecified, default values are used to define the boundaries among these different hypotheses. The default value for being diurnal, nocturnal, or crepuscular is $\ge$ 0.80 probability. Cathemerality is defined as no diel period activity has more than 0.80 probability and two or more time periods have$\ge$ 0.1 probability.
 
-**General** 
+## **General** 
 
 This hypothesis set aims to provide more specificity tha the Traditional hypothesis set. It includes the Traditional definitions of diurnal, nocturnal, and crepuscular, as above, but cathemerality is defined more specifically in terms of whether two or three diel periods are used moderately.
 ```{r 3dplot3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 diel.plot(hyp=hyp.sets("General"))
 ```
 
-**Threshold** 
+## **Threshold** 
 
 This hypothesis set is based on defining each diel period in terms of lower thresholds. If the thresholds are not provided, default values are used.
 ```{r 3dplot4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
@@ -82,7 +85,7 @@ diel.plot(hyp=hyp.sets("Threshold"))
 
 Not that where there is no colored space indicates that these set of probabilities are not considered. 
 
-**Variation**
+## **Variation**
 
 This hypothesis set is based on defining the ranges (lower, uppper) of possible probability values. 
 ```{r 3dplot5,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
@@ -321,7 +324,7 @@ legend("right", legend=rownames(results.prior2),col = 1:4,lwd=3,lty = 1:4)
 
 matplot(t(results.prior2),type="l",lwd=3,ylab="Model Probability",xaxt="n")
 axis(1,at=1:length(n),lab=n)
-legend("top", legend=rownames(results.prior2),col = 1:4,lwd=3,lty = 1:4)
+legend("right", legend=rownames(results.prior2),col = 1:4,lwd=3,lty = 1:4)
 ```
 
 The differences in the model probabilieis are entirely due to the prior weights on each hypothesis. In the second plot, the likelihood of the data is trying to overwhelm such a highly certain prior.
