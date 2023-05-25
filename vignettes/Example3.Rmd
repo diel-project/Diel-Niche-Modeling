@@ -72,7 +72,8 @@ As a first step, we therefore need to 1) load libraries, 2) load the data, 3) su
         ),
         n.chains = 2,
         burnin = 5000,
-        n.mcmc = 10000
+        n.mcmc = 10000,
+        prints = FALSE
       )
     # compile results into a data.frame
       diel_results[[i]] <- data.frame(

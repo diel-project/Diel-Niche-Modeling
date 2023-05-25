@@ -461,7 +461,8 @@ covariate in our secondary analysis.</p>
         ),
         n.chains = 2,
         burnin = 5000,
-        n.mcmc = 10000
+        n.mcmc = 10000,
+        prints = FALSE
       )
     # compile results into a data.frame
       diel_results[[i]] &lt;- data.frame(
@@ -473,60 +474,6 @@ covariate in our secondary analysis.</p>
         season = opossum$season[i]
       )
   }
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Cathemeral (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Cathemeral (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Cathemeral (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional) 
-#&gt; The most supported model is: 
-#&gt;  Nocturnal (Traditional)
 
 # bind all of the results together into a data.frame
   diel_results &lt;- do.call(
