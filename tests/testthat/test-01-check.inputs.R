@@ -96,7 +96,7 @@ test_that(
         diel.ineq()
       )
     )
-    # double number of hypotheses
+    # double number of hypotheses, needs to be fixed
     expect_error(
       f(
         y = cbind(10,10,10),
@@ -106,7 +106,57 @@ test_that(
         diel.setup = diel.ineq()
       )
     )
+    # Y needs to be number
+    expect_error(
+      f(
+        cbind("tomato","tomato","tomato"),
+        Diel.Niche::hyp.sets("Traditional"),
+        NULL,
+        TRUE,
+        diel.ineq()
+      )
+    )
+    # works, no BF
+    expect_null(
+      f(
+        cbind(10,10,10),
+        Diel.Niche::hyp.sets("Traditional"),
+        NULL,
+        FALSE,
+        diel.ineq()
+      )
+    )
+    #
+    expect_null(
+      f(
+        cbind(10,10,10),
+        Diel.Niche::hyp.sets("Traditional"),
+        NULL,
+        bf.fit = NULL,
+        diel.ineq()
+      )
+    )
     
+    # RETRY TEST AFTER FIX
+    expect_error(
+      f(
+        cbind(10,10,10),
+        Diel.Niche::hyp.sets("Traditional"),
+        c(0.5,0.5,-1,1),
+        TRUE,
+        diel.ineq()
+      )
+    )
+    
+    expect_null(
+      f(
+        cbind(10,10,10),
+        Diel.Niche::hyp.sets("Traditional"),
+        NULL,
+        bf.fit = FALSE,
+        diel.ineq()
+      )
+    )
     
 
   }
