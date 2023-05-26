@@ -6,11 +6,34 @@
 #' @param prior Prior used for bayes factors. NULL indicates equal weights.
 #' @param bf.fit Indicator whether to fit bayes factors
 #' @param diel.setup provided by user or used default as 'diel.setup=diel.ineq()'
+#' @param post.fit If TRUE, will fit posterior samples to all models in hyp.set. Default is FALSE. 
+#' @param n.chains the number of chains to use when fitting models
+#' @param n.mcmc Number of mcmc iterations.
+#' @param burnin Burn-in number of mcmc iterations.
+#' @param prints Whether to print messages about model fitting.
+#' @param alt.optim Default is FALSE. If TRUE, uses an alternative approach to derive the bayes factors. It can be more stable, but takes a bit longer.
+#' @param delta Error tolerance of equality constraints
 #' @return Internal list
 #' @export
 #' @keywords internal
 
-check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
+check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
+               n.mcmc,burnin,prints,alt.optim,delta){
+  
+  if(!is.logical(bf.fit)){
+    stop("bf.fit needs to be logical \n")
+  }
+  if(!is.logical(post.fit)){
+    stop("post.fit needs to be logical \n")
+  }
+  if(!is.logical(prints)){
+    stop("prints needs to be logical \n")
+  }
+  if(!is.logical(alt.optim)){
+    stop("prints needs to be logical \n")
+  }
+  
+  
   
   if(!is.null(prior) & isTRUE(bf.fit)){
     if(length(prior)!=length(hyp.set)){
@@ -25,19 +48,46 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup){
     if(!is.vector(prior)){
       stop("The prior is not a vector  \n")
     }
+    if(any(prior<0)){
+      stop("Model prior probabilities can not be negative \n")
+    }
+
   }
-  
+
+  if(!is.numeric(n.chains)){
+    stop("n.chains needs to be numeric  \n")
+  }
+  if(!is.numeric(n.mcmc)){
+    stop("n.mcmc needs to be numeric  \n")
+  }
+  if(!is.numeric(burnin)){
+    stop("burnin needs to be numeric  \n")
+  }
   
   if(!is.numeric(y)){
     stop("y needs to be numeric  \n")
   }
+ if(!is.numeric(delta)){
+    stop("delta needs to be numeric  \n")
+ }
+  if(delta<0 | delta>1){
+    stop("delta needs to be between 0 and 1  \n")
+ }
   
+  
+  
+  delta
   if(all(hyp.set%in%names(diel.setup))!=TRUE){
     stop("Check that hyp.set match names in diel.setup \n",
          "Cannot find ",paste(hyp.set[which(hyp.set%in%names(diel.setup)==FALSE)], collapse = ' '), "\n")
     
     
   }
+  
+  if(length(unique(hyp.set))!=length(hyp.set)){
+    stop("Hypothesis set needs to be a unique set with no duplicates  \n")
+  }
+  
   
   if(!is.character(hyp.set) | !is.vector(hyp.set)){
     stop("hyp.set is not a vector or are not characters  \n")

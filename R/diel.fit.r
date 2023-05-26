@@ -69,7 +69,9 @@ diel.fit=function(y,
   if(is.null(delta)){delta=0.05^(1:4)}
 ###################################    
 #Check the inputs  
-  check.inputs(y=y,hyp.set=hyp.set,bf.fit=bf.fit,prior=prior,diel.setup=diel.setup)
+  check.inputs(y=y,hyp.set=hyp.set,bf.fit=bf.fit,prior=prior,diel.setup=diel.setup,post.fit=post.fit,n.chains=n.chains,
+               n.mcmc=n.mcmc,burnin=burnin,prints=prints,alt.optim=alt.optim,delta=delta)
+
   if(isTRUE(prints)){message(paste0("Data checks Complete."))}    
 ###################################    
 #setup data for model fitting

@@ -1,3 +1,15 @@
+#' Sets inputs for multinomineq::postprob
+#'
+#' A function to setup the inputs needed to estimate model posterior probabilities
+#' @param bf bayes factor outputs
+#' @param hyp.set hypothesis set
+#' @param prior Prior used for bayes factors. NULL indicates equal weights.
+#' @param indicator identifies which algorithm/function was used to fit the data
+#' @return Internal list
+#' @export
+#' @keywords internal
+
+
 construct.post.prob=function(bf,hyp.set,prior,indicator){
   
     hyp.set2=hyp.set[indicator!=1]
