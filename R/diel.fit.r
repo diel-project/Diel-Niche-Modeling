@@ -164,6 +164,7 @@ if(isTRUE(post.fit) & !is.null(bf)){
        post.samp.ms.model=post.samp.ms.model,
        y=y,y.vec=y.vec,gelm.diag=gelm.diag,
        ms.gelm.diag=ms.gelm.diag,
-       bf.list=bf.list)
+       bf.list=bf.list,
+       diel.setup=diel.setup)
   
 }#end function
