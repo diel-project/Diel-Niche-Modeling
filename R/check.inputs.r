@@ -55,6 +55,11 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
     }
 
   }
+  
+  if(bf.fit==TRUE & length(hyp.set)==1){
+    warning("Model probabilities are not estimated when one hypothesis is provided. \n")
+  }
+  
 
   if(!is.numeric(n.chains)){
     stop("n.chains needs to be numeric  \n")
