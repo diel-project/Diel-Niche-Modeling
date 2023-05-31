@@ -8,6 +8,7 @@
 #' @return Internal list
 #' @export
 #' @keywords internal
+#' @noRd
 
 setup.hyp.plot.params=function(diel.setup,index.models,more.points=FALSE,...){
 

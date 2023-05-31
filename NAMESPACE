@@ -2,6 +2,7 @@
 
 S3method(print,hyp.name)
 export(check.inputs)
+export(construct.post.prob)
 export(diel.bf)
 export(diel.fit)
 export(diel.ineq)

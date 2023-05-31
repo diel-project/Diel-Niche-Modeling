@@ -5,10 +5,8 @@
 #' @param y a matrix of probabilities of twilight, daytime, and nightime (three columns). Each row is a replicate.
 #' @param hyp Vector of diel hypotheses names representing hypotheses set or individual hypotheses.
 #' @param diel.setup A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'. If not provided, it will use the defaults of the diel.ineq function.
-#' @return Internal list
 #' @export
-#' @keywords internal
-
+#' 
 posthoc.niche=function(y,
                        hyp,
                        diel.setup=NULL){

@@ -1,4 +1,4 @@
-#' Finding probabilities for a given hypotheis
+#' Finding probabilities for a given hypothesis
 #'
 #' Function that inputs a given hypothesis and outputs as many possible
 #' probability sets that match the diel hypothesis (i.e., satisfies the inequality constrints). Allows for inequalities, equalities, and non-linear inputs.

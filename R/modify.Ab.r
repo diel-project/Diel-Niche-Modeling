@@ -7,8 +7,8 @@
 #' @param diel.setup provided by user or used default as 'diel.setup=diel.ineq()'
 #' @param delta error tolerance allowed for equalities
 #' @return Internal list
-#' @export
 #' @keywords internal
+#' @noRd
 
 modify.Ab=function(y,idx.mod,reps,diel.setup,delta){
   

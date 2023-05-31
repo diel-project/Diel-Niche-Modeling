@@ -4,7 +4,20 @@
 \alias{check.inputs}
 \title{Check on inputs}
 \usage{
-check.inputs(y, hyp.set, prior, bf.fit, diel.setup)
+check.inputs(
+  y,
+  hyp.set,
+  prior,
+  bf.fit = TRUE,
+  diel.setup,
+  post.fit = FALSE,
+  n.chains = 1,
+  n.mcmc = 100,
+  burnin = 10,
+  prints = FALSE,
+  alt.optim = FALSE,
+  delta = c(0.001)
+)
 }
 \arguments{
 \item{y}{vector of frequencies}
@@ -16,6 +29,20 @@ check.inputs(y, hyp.set, prior, bf.fit, diel.setup)
 \item{bf.fit}{Indicator whether to fit bayes factors}
 
 \item{diel.setup}{provided by user or used default as 'diel.setup=diel.ineq()'}
+
+\item{post.fit}{If TRUE, will fit posterior samples to all models in hyp.set. Default is FALSE.}
+
+\item{n.chains}{the number of chains to use when fitting models}
+
+\item{n.mcmc}{Number of mcmc iterations.}
+
+\item{burnin}{Burn-in number of mcmc iterations.}
+
+\item{prints}{Whether to print messages about model fitting.}
+
+\item{alt.optim}{Default is FALSE. If TRUE, uses an alternative approach to derive the bayes factors. It can be more stable, but takes a bit longer.}
+
+\item{delta}{Error tolerance of equality constraints}
 }
 \value{
 Internal list

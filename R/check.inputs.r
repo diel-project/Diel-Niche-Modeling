@@ -16,10 +16,13 @@
 #' @return Internal list
 #' @export
 #' @keywords internal
+#' @noRd
 
-check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
-               n.mcmc,burnin,prints,alt.optim,delta){
+check.inputs=function(y,hyp.set,prior,bf.fit=TRUE,diel.setup,post.fit=FALSE,n.chains=1,
+               n.mcmc=100,burnin=10,prints=FALSE,alt.optim=FALSE,delta=c(0.001)){
+
   
+
   if(!is.logical(bf.fit)){
     stop("bf.fit needs to be logical \n")
   }
@@ -70,7 +73,8 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
  if(!is.numeric(delta)){
     stop("delta needs to be numeric  \n")
  }
-  if(delta<0 | delta>1){
+  #not sure why 'any' is needed
+  if(any(delta < 0) | any(delta > 1)){
     stop("delta needs to be between 0 and 1  \n")
  }
   

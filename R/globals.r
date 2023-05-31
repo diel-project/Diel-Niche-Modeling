@@ -4,7 +4,7 @@
 #' @importFrom utils globalVariables
 #' @keywords internal
 #' @name globalvars
-#' 
+#' @noRd
 
 IsSmallerOrEqual <- function(a,b) {   
 #if (   class(all.equal(a, b)) == "logical" && (a<b | all.equal(a, b))) { return(TRUE)

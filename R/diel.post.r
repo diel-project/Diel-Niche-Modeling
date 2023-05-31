@@ -16,6 +16,7 @@
 #' @return Internal list
 #' @export
 #' @keywords internal
+#' @noRd
 
 diel.post=function(y,idx.mod,diel.setup,bf.Ab.new,reps,
                    n.chains,n.mcmc,burnin,n.cpu,

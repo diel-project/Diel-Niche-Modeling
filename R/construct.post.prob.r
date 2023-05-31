@@ -8,6 +8,7 @@
 #' @return Internal list
 #' @export
 #' @keywords internal
+#' @noRd
 
 
 construct.post.prob=function(bf,hyp.set,prior,indicator){

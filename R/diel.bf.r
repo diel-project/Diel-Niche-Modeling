@@ -16,7 +16,8 @@
 #' @return Internal list
 #' @export
 #' @keywords internal
-
+#' @noRd
+#' 
 diel.bf=function(y,
                  idx.mod,
                  diel.setup,

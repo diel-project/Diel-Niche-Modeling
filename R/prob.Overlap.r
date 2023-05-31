@@ -4,11 +4,8 @@
 #' @param densityplot a densityPlot object from package Overlap.
 #' @param dawn begining and end numeric (0-24) times for dawn
 #' @param dusk begining and end numeric (0-24) times for dusk
-#' @return Internal list
 #' @export
-#' @keywords internal
 #' @import sfsmisc
-#' 
 
 prob.Overlap=function(densityplot,
                       dawn=c(6,7),
