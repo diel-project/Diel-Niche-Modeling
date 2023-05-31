@@ -72,6 +72,13 @@ diel.fit=function(y,
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   if(is.null(delta)){delta=0.05^(1:4)}
 ###################################    
+#if y is a vector and not a matrix and has 3 elements, then turn into matrix
+  if(length(y)==3 & is.matrix(y)==FALSE){
+    warning("y was chanaged to a matrix")
+    y=t(as.matrix(y))
+  }
+  
+###################################    
 #Check the inputs  
   check.inputs(y=y,hyp.set=hyp.set,bf.fit=bf.fit,prior=prior,diel.setup=diel.setup,post.fit=post.fit,n.chains=n.chains,
                n.mcmc=n.mcmc,burnin=burnin,prints=prints,alt.optim=alt.optim,delta=delta)
