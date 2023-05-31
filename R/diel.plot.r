@@ -20,7 +20,7 @@
 #' @export
 
 diel.plot=function(fit=NULL,
-                   hyp="Uncon", 
+                   hyp=NULL, 
                    diel.setup=NULL, 
                    posteriors=NULL,
                    more.points=FALSE,
@@ -33,7 +33,35 @@ diel.plot=function(fit=NULL,
   
 #x.scene=2.5; y.scene=1; z.scene=0.3; axis.size=16; axis.lab.size=18; legend.lab.size=15
 
-if(!is.null(fit)){hyp=fit$hyp.set; post=coda::as.mcmc(fit$post.samp.ms.model); diel.setup=out$diel.setup}
+if(!is.null(fit) & is.null(fit$post.samp.ms.model) & is.null(fit$post.samp) ){
+  stop("No plot. Make sure post.fit=TRUE in your diel.fit objective")
+}    
+
+  
+if(!is.null(fit) & !is.null(hyp)){
+  warning("The argument hyp is being ignored because a fit object from diel.fit has been entered and has the hypotheses used to fit the data")
+}    
+
+if(!is.null(fit) & !is.null(posteriors)){
+  warning("The argument 'posteriors' is being used for plotting; not post.samp.ms.model from the fit object")
+}    
+  
+
+  
+      
+if(!is.null(fit)){hyp=fit$hyp.set; diel.setup=out$diel.setup
+if(!is.null(fit$post.samp.ms.model)){post=coda::as.mcmc(fit$post.samp.ms.model)}else{
+  
+  if(length(fit$post.samp[[1]])>1){temp=do.call('rbind',fit$post.samp[[1]])}else{temp=fit$post.samp[[1]]}
+  post=coda::as.mcmc(temp)
+}
+
+}
+  
+
+  
+   
+  
   
 #Setup diel.setup and posterior samples    
   if(is.null(diel.setup) & is.null(fit)){diel.setup=diel.ineq()}
