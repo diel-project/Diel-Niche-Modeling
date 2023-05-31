@@ -19,7 +19,8 @@
 #' diel.plot(hyp="D",posteriors=out$post.samp.ms.model)
 #' @export
 
-diel.plot=function(hyp, 
+diel.plot=function(fit=NULL,
+                   hyp="Uncon", 
                    diel.setup=NULL, 
                    posteriors=NULL,
                    more.points=FALSE,
@@ -32,9 +33,18 @@ diel.plot=function(hyp,
   
 #x.scene=2.5; y.scene=1; z.scene=0.3; axis.size=16; axis.lab.size=18; legend.lab.size=15
 
+if(!is.null(fit)){hyp=fit$hyp.set; post=coda::as.mcmc(fit$post.samp.ms.model); diel.setup=out$diel.setup}
+  
 #Setup diel.setup and posterior samples    
-  if(is.null(diel.setup)){diel.setup=diel.ineq()}
-  if(!is.null(posteriors)){post=coda::as.mcmc(posteriors)}
+  if(is.null(diel.setup) & is.null(fit)){diel.setup=diel.ineq()}
+  if(!is.null(posteriors)){
+    
+    if(!is.list(posteriors)){post=coda::as.mcmc(posteriors)}else{
+      post=coda::as.mcmc(do.call("rbind",lapply(out$post.samp,FUN=function(x){x[[1]]})))
+    }
+    
+    
+    }
 
 #find models  and get points
   index.models=match(hyp,names(diel.setup))
@@ -64,7 +74,7 @@ diel.plot=function(hyp,
   #color.set.use=color.set[1:length(index.models)]
   
 #Include posterior points if not null  
-  if(!is.null(posteriors)){
+  if(!is.null(posteriors)| !is.null(fit)){
       post=data.frame(post,rep("posteriors",nrow(post)))
       colnames(post)=colnames(plot.points)
       plot.points2=rbind(plot.points,data.frame(post))
