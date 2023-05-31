@@ -3,9 +3,10 @@
 #' Plots the diel niche space and posterior disribution of a fitted model.
 #' @import plotly
 #' @import coda
+#' @param fit a list object output from the function 'diel.fit'. 
 #' @param hyp a vector of hypothesis code names (characters)
-#' @param diel.setup If NULL uses the default diel.ineq function. Otherwise, a list of multinomial inequalities (Matrix A and vector b) representing diel hypotheses and the function needed for model fitting.
-#' @param posteriors A single models MCMC output from the function 'diel.fit'.
+#' @param diel.setup If NULL uses the default diel.ineq function. If a fit object is provided it will come from this object. Otherwise, a list of multinomial inequalities (Matrix A and vector b) representing diel hypotheses and the function needed for model fitting.
+#' @param posteriors Posterior samples output from the function 'diel.fit'.
 #' @param more.points To use more points for hyps in plotting. Default is FALSE. 
 #' @param x.scene 3d graphical parameter
 #' @param y.scene 3d graphical parameter
@@ -16,7 +17,7 @@
 #' @return A plotly 3d plot
 #' @examples 
 #' out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)
-#' diel.plot(hyp="D",posteriors=out$post.samp.ms.model)
+#' diel.plot(out)
 #' @export
 
 diel.plot=function(fit=NULL,
@@ -43,7 +44,7 @@ if(!is.null(fit) & !is.null(hyp)){
 }    
 
 if(!is.null(fit) & !is.null(posteriors)){
-  warning("The argument 'posteriors' is being used for plotting; not post.samp.ms.model from the fit object")
+  warning("The argument 'posteriors' is being used for plotting, not post.samp.ms.model from the fit object")
 }    
   
 
