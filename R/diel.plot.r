@@ -15,7 +15,7 @@
 #' @param legend.lab.size 3d graphical parameter
 #' @return A plotly 3d plot
 #' @examples 
-#' out=diel.fit(y=t(matrix(c(11,87,2))),hyp="D",post.fit=TRUE)
+#' out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)
 #' diel.plot(hyp="D",posteriors=out$post.samp.ms.model)
 #' @export
 
@@ -46,7 +46,7 @@ diel.plot=function(hyp,
                      D.N = "#79AF97FF", CR.N="#8F7700FF",D.max="#EFC000FF", N.max="#0073C2FF", CR.max="#A73030FF",
                      D.th="#EFC000FF", N.th="#0073C2FF",CR.th="#A73030FF", C.th="#868686FF", EC.th="black",
                      D.var="#EFC000FF",N.var="#0073C2FF",CR.var="#A73030FF",C.var="#868686FF",AV.var="black",
-                     Uncon="black",C.max="#868686FF", EC="#868686FF",AV.EQ="black")
+                     Uncon="lightgray",C.max="#868686FF", EC="#868686FF",AV.EQ="black")
   
   col.hyp.match=match(hyp,names(col.hyp))
   temp=col.hyp[col.hyp.match[!is.na(col.hyp.match)]]
