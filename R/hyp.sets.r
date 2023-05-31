@@ -2,7 +2,7 @@
 #'
 #' Call defined hypotheses sets
 #' @param hyp.in Hypothesis set code names
-#' @return Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned.
+#' @return Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned. If "list", all hypotheses are printed.
 #' @examples 
 #' hyp.sets()
 #' hyp.sets("Traditional")
@@ -32,7 +32,8 @@ if(is.null(hyp.in)){
 }else{
   if(hyp.in=="list"){hyp.set}else{
   #match the model set called for and return it
-    hyp.set[[match(hyp.in,names(hyp.set))]]
+    x=hyp.set[[match(hyp.in,names(hyp.set))]]
+    if(is.null(x)){"Unknown Input. Input one: NULL, list, Traditional, General, Threshold, Maximizing, or Variation \n"}else{x}
   }  
 }
 

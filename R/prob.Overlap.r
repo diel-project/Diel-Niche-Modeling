@@ -4,6 +4,7 @@
 #' @param densityplot a densityPlot object from package Overlap.
 #' @param dawn begining and end numeric (0-24) times for dawn
 #' @param dusk begining and end numeric (0-24) times for dusk
+#' @return A matrix of three probabilities.
 #' @export
 #' @import sfsmisc
 
