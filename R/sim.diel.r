@@ -1,13 +1,13 @@
 #' Simulate 
 #'
 #' Simulate diel data
-#' @param n.sim The number of simulated datasets
-#' @param reps The number of sets of probabilities to use when simulating crepuscular, daytime, and nocturnal frequencies
-#' @param n.sample The number of total samples for a given simulation
-#' @param hyp The hypothesis to simulate data from
+#' @param n.sim The number of simulated datasets (integer)
+#' @param reps The number of sets (integer) of probabilities to use when simulating crepuscular, daytime, and nocturnal frequencies
+#' @param n.sample The number of total samples (integer) for a given simulation
+#' @param hyp The hypothesis code to simulate data from
 #' @param diel.setup Multinomial inequalities for hypotheses setup using function 'diel.ineq'.
 #' @param sd.error Normal distribution standard deviation to simulate error to add to the probabilities on the logit-scale. Default is 0
-#' @param fast Default is TRUE. Uses less preceise probs (0.005 vs 0.001). Does not apply to equality hyps.
+#' @param fast Default is TRUE, which uses a less precise probability interval sequence (0.005 vs 0.001). Does not apply to equality hyps.
 #' @param return.probs Default is FALSE. If TRUE, returns probabilities from the hypothesis.
 #' @return A list of outputs
 #' \item{y}{Matrix of simulated datasets}
@@ -19,14 +19,33 @@
 
 #n.sim=1;reps=1;n.sample=100;diel.setup=NULL;sd.error=0; fast=TRUE
 sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0,fast=TRUE,return.probs=FALSE){
+ 
+################################################   
+#if diel.setup not provided use defaults
+  if(is.null(diel.setup)){diel.setup=diel.ineq()}
+################################################   
+
   
-  
+# Checks  
   if(sd.error<0| !is.numeric(sd.error)){
     stop("sd.error need to be numeric and greater than or equal to zero.")
   }
+
+  if(!is.numeric(n.sim) | !is.numeric(reps) | !is.numeric(n.sample)){
+    stop("n.sim, reps, and n.sample all need to be numeric ")
+  }
+
+  if(n.sim%%1!=0 | reps%%1!=0 | n.sample%%1!=0){
+    stop("n.sim, reps, and n.sample all need to be integers")
+  }
+
+#Chek hyp  
+  check.inputs(y=cbind(0,0,0),hyp.set=hyp,bf.fit=FALSE,prior=NULL,diel.setup=diel.setup,post.fit=FALSE,n.chains=1,
+               n.mcmc=1,burnin=1,prints=FALSE,alt.optim=FALSE,delta=0)  
+
   
-  #if diel.setup not provided use defaults
-  if(is.null(diel.setup)){diel.setup=diel.ineq()}
+################################################
+    
   
   #Find appropriate probabilities of hyp using inequalities in diel.setup
   prob.hyp=find.prob.hyp(hyp,diel.setup,fast)

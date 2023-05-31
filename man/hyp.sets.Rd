@@ -10,7 +10,7 @@ hyp.sets(hyp.in = NULL)
 \item{hyp.in}{Hypothesis set code names}
 }
 \value{
-Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned.
+Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned. If "list", all hypotheses are printed.
 }
 \description{
 Call defined hypotheses sets

@@ -9,10 +9,13 @@ prob.Overlap(densityplot, dawn = c(6, 7), dusk = c(17, 18))
 \arguments{
 \item{densityplot}{a densityPlot object from package Overlap.}
 
-\item{dawn}{begining and end numeric (0-24) times for dawn}
+\item{dawn}{beginning and end numeric (0-24) times for dawn}
 
-\item{dusk}{begining and end numeric (0-24) times for dusk}
+\item{dusk}{beginning and end numeric (0-24) times for dusk}
+}
+\value{
+A matrix of three probabilities.
 }
 \description{
-Integrate kernel density to derieve probability of twilight, daytime, nighttime
+Integrate kernel density to derive probability of twilight, daytime, nighttime
 }

@@ -12,8 +12,8 @@ diel.fit(
   diel.setup = NULL,
   prior = NULL,
   n.chains = 1,
-  n.mcmc = 1000,
-  burnin = 200,
+  n.mcmc = 3000,
+  burnin = 500,
   prints = TRUE,
   alt.optim = FALSE,
   delta = NULL

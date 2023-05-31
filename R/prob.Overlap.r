@@ -1,9 +1,9 @@
 #' Kernel Overlap density integration
 #'
-#' Integrate kernel density to derieve probability of twilight, daytime, nighttime
+#' Integrate kernel density to derive probability of twilight, daytime, nighttime
 #' @param densityplot a densityPlot object from package Overlap.
-#' @param dawn begining and end numeric (0-24) times for dawn
-#' @param dusk begining and end numeric (0-24) times for dusk
+#' @param dawn beginning and end numeric (0-24) times for dawn
+#' @param dusk beginning and end numeric (0-24) times for dusk
 #' @return A matrix of three probabilities.
 #' @export
 #' @import sfsmisc
@@ -12,6 +12,18 @@ prob.Overlap=function(densityplot,
                       dawn=c(6,7),
                       dusk=c(17,18)){
 
+#########################
+#Checks
+
+  if(!is.data.frame(densityplot)  | ncol(densityplot)!=2 | any(colnames(densityplot)!=c("x","y"))| !is.numeric(densityplot$x) |  !is.numeric(densityplot$y)){
+   stop("densityplot needs to be a dataframe with numeric values organized into two columns labled 'x' and 'y'") 
+  }
+
+  if(length(dawn)!=2 | length(dusk)!=2 | !is.numeric(dawn)| !is.numeric(dusk)){
+   stop("dawn/dusk need to be vectors of length 2 with only numeric values")  
+  }
+    
+s#########################
   densityplot=densityplot[which(densityplot$x>=0 & densityplot$x<=24),]
   
   

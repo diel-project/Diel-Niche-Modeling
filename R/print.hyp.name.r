@@ -20,5 +20,11 @@ if(ms.model=="CR.N"){np="Crepuscular-Nocturnal (General)"}
 if(ms.model=="D.max"){np="Diurnal (Maximization)"}
 if(ms.model=="N.max"){np="Diurnal (Maximization)"}
 if(ms.model=="CR.max"){np="Diurnal (Maximization)"}
+
+
+if(is.null(np)){warning("Hypothesis code is not recognized")}
+
 np
+
 }#End function
+

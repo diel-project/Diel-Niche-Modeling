@@ -18,6 +18,12 @@ find.prob.hyp=function(hyp, diel.setup = NULL,fast=TRUE){
 # Which set of data to load for bf_multinom hypotheses  
   if(isFALSE(fast)){p.opts=p.options3}
   if(isTRUE(fast)){p.opts=p.options2}
+
+#Check hyp matching    
+check.inputs(y=cbind(0,0,0),hyp.set=hyp,bf.fit=FALSE,prior=NULL,diel.setup=diel.setup,post.fit=FALSE,n.chains=1,
+               n.mcmc=1,burnin=1,prints=FALSE,alt.optim=FALSE,delta=0)  
+  
+if(!is.logical(fast)){stop("fast needs to be logical")}
   
 # Find hypotheses in diel.setup
   index.models=match(hyp,names(diel.setup))

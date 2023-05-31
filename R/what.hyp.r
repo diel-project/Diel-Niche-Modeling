@@ -10,37 +10,31 @@
 #' @export
 
 what.hyp=function(hyp.in=NULL){
-if(!is.null(hyp.in)){  
-  if(hyp.in=="D"){print("Traditional/General Diurnal")}
-  if(hyp.in=="N"){print("Traditional/General Nocturnal")}
-  if(hyp.in=="CR"){print("Traditional/General Crepuscular")}
-  if(hyp.in=="C"){print("Traditional Cathemeral")}
+if(!is.null(hyp.in)){
   
-  if(hyp.in=="C2"){print("General Cathemeral")}
-  if(hyp.in=="D.CR"){print("General Crepuscular-Diurnal")}
-  if(hyp.in=="D.N"){print("General Diurnal-Nocturnal")}
-  if(hyp.in=="CR.N"){print("General Crepuscular-Nocturnal")}
+  mat.print=data.frame(hyp.opts=c("D","N","CR","C",
+                                 "C2","D.CR","D.N","CR.N",
+                                 "D.th","N.th","CR.th","C.th","EC.th",
+                                 "D.max","N.max","CR.max",
+                                 "D.var","N.var","CR.var","C.var","AV.var",
+                                 "Uncon","C.max","EC","AV.EQ"
+                                 ),
+                       
+                       print.desc=c("Traditional/General Diurnal", "Traditional/General Nocturnal", "Traditional/General Crepuscular","Traditional Cathemeral",
+                                  "General Cathemeral", "General Crepuscular-Diurnal", "General Diurnal-Nocturnal", "General Crepuscular-Nocturnal",
+                                  "Diurnal Threshold", "Nocturnal Threshold", "Crepuscular Threshold", "Cathemeral Threshold", "Even Cathemeral Threshold",
+                                  "Diurnal Maximizing", "Nocturnal Maximizing", "Crepuscular Maximizing",
+                                  "Diurnal Variation", "Nocturnal Variation", "Crepuscular Variation", "Cathemeral Variation", "Use is equivalent to Available Variation",
+                                  "Unconditional", "Cathemeral probabilities that are equivalent and exclude from maximizing hyps", "Even Cathemeral (Equivalent probabilities)", "Use is equivalent to availability)"
+                                  )
+  )
   
-  if(hyp.in=="D.th"){print("Diurnal Threshold")}
-  if(hyp.in=="N.th"){print("Nocturnal Threshold")}
-  if(hyp.in=="CR.th"){print("Crepuscular Threshold")}
-  if(hyp.in=="C.th"){print("Cathemeral Threshold")}
-  if(hyp.in=="EC.th"){print("Even Cathemeral Threshold")}
-
-  if(hyp.in=="D.max"){print("Diurnal Maximizing")}
-  if(hyp.in=="N.max"){print("Nocturnal Maximizing")}
-  if(hyp.in=="CR.max"){print("Crepuscular Maximizing")}
-
-  if(hyp.in=="D.var"){print("Diurnal Variation")}
-  if(hyp.in=="N.var"){print("Nocturnal Variation")}
-  if(hyp.in=="CR.var"){print("Crepuscular Variation")}
-  if(hyp.in=="C.var"){print("Cathemeral Variation")}
-  if(hyp.in=="AV.var"){print("Use is equivalent to Available Variation")}
-  
-  if(hyp.in=="Uncon"){print("Unconditional")}
-  if(hyp.in=="C.max"){print("Cathemeral probabilities that are equivalent and exclude from maximizing hyps")}
-  if(hyp.in=="EC"){print("Even Cathemeral (Equivalent probabilities)")}
-  if(hyp.in=="AV.EQ"){print("Use is equivalent to availability)")}
+  index=match(hyp.in,mat.print$hyp.opts)
+  print.out=mat.print[index,2]
+  if(is.na(print.out)){
+    stop("Hypothesis input does not match hypotheses codes")
+  }
+  print(print.out)
 
   
 }  
