@@ -13,11 +13,7 @@ posthoc.niche(y, hyp, diel.setup = NULL)
 
 \item{diel.setup}{A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'. If not provided, it will use the defaults of the diel.ineq function.}
 }
-\value{
-Internal list
-}
 \description{
 Diel model hypotheses based on posthoc probabilitiy values
 For each input of twilight, daytime, and nightime probabilities, the function will return the defined diel hyppthesis
 }
-\keyword{internal}

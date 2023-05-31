@@ -1,4 +1,4 @@
-#' Global Variables
+#' Global Variables (internal)
 #'
 #' Plots the diel niche space and posterior distribution of a fitted model.
 #' @importFrom utils globalVariables

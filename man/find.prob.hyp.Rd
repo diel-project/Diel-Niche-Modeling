@@ -2,7 +2,7 @@
 % Please edit documentation in R/find.prob.hyp.r
 \name{find.prob.hyp}
 \alias{find.prob.hyp}
-\title{Finding probabilities for a given hypotheis}
+\title{Finding probabilities for a given hypothesis}
 \usage{
 find.prob.hyp(hyp, diel.setup = NULL, fast = TRUE)
 }

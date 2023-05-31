@@ -13,10 +13,6 @@ prob.Overlap(densityplot, dawn = c(6, 7), dusk = c(17, 18))
 
 \item{dusk}{begining and end numeric (0-24) times for dusk}
 }
-\value{
-Internal list
-}
 \description{
 Integrate kernel density to derieve probability of twilight, daytime, nighttime
 }
-\keyword{internal}
