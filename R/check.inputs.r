@@ -50,8 +50,8 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
     if(!is.vector(prior)){
       stop("The prior is not a vector  \n")
     }
-    if(any(prior<0)){
-      stop("Model prior probabilities can not be negative \n")
+    if(any(prior<0)| any(prior>1)){
+      stop("Model prior probabilities can not be negative or greater tha one \n")
     }
 
   }
