@@ -18,8 +18,8 @@
 #' @keywords internal
 #' @noRd
 
-check.inputs=function(y,hyp.set,prior,bf.fit=TRUE,diel.setup,post.fit=FALSE,n.chains=1,
-               n.mcmc=100,burnin=10,prints=FALSE,alt.optim=FALSE,delta=c(0.001)){
+check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
+               n.mcmc,burnin,prints,alt.optim,delta){
 
   
 
