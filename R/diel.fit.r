@@ -165,6 +165,7 @@ if(isTRUE(post.fit) & !is.null(bf)){
        y=y,y.vec=y.vec,gelm.diag=gelm.diag,
        ms.gelm.diag=ms.gelm.diag,
        bf.list=bf.list,
-       diel.setup=diel.setup)
+       diel.setup=diel.setup,
+       hyp.set=hyp.set)
   
 }#end function
