@@ -1,4 +1,4 @@
-#' Check on inputs
+#' Check on inputs (internal)
 #'
 #' A function to check the inputs provided through the function 'diel.fit'
 #' @param y vector of frequencies
@@ -6,8 +6,6 @@
 #' @param reps replicate samples of three
 #' @param diel.setup provided by user or used default as 'diel.setup=diel.ineq()'
 #' @param delta error tolerance allowed for equalities
-#' @return Internal list
-#' @keywords internal
 #' @noRd
 
 modify.Ab=function(y,idx.mod,reps,diel.setup,delta){
