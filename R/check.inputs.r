@@ -1,4 +1,4 @@
-#' Check on inputs
+#' Check on inputs (internal)
 #'
 #' A function to check the inputs provided through the function 'diel.fit'
 #' @param y vector of frequencies
@@ -14,7 +14,6 @@
 #' @param alt.optim Default is FALSE. If TRUE, uses an alternative approach to derive the bayes factors. It can be more stable, but takes a bit longer.
 #' @param delta Error tolerance of equality constraints
 #' @return Internal list
-#' @export
 #' @keywords internal
 #' @noRd
 

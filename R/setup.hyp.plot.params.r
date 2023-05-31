@@ -6,7 +6,6 @@
 #' @param more.points which to use, p.options or p.options2
 #' @param ... Other parameters
 #' @return Internal list
-#' @export
 #' @keywords internal
 #' @noRd
 

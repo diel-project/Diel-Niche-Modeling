@@ -1,4 +1,4 @@
-#' Sets inputs for multinomineq::postprob
+#' Sets inputs for multinomineq::postprob (internal)
 #'
 #' A function to setup the inputs needed to estimate model posterior probabilities
 #' @param bf bayes factor outputs
@@ -6,7 +6,6 @@
 #' @param prior Prior used for bayes factors. NULL indicates equal weights.
 #' @param indicator identifies which algorithm/function was used to fit the data
 #' @return Internal list
-#' @export
 #' @keywords internal
 #' @noRd
 

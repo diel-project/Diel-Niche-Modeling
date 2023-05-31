@@ -1,4 +1,4 @@
-#' Samples posterior distributions
+#' Samples posterior distributions (internal)
 #'
 #' Wrapper for multinomineq::sampling_multinom
 #' @import multinomineq
@@ -14,7 +14,6 @@
 #' @param indicator Indicates failed bayes factor
 #' @param prints Whether to print information
 #' @return Internal list
-#' @export
 #' @keywords internal
 #' @noRd
 

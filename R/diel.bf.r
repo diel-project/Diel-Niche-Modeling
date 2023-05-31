@@ -1,4 +1,4 @@
-#' Calculate Bayes factor (internal function)
+#' Calculate Bayes factor (internal)
 #'
 #' Wrapper for multinomineq::bf_multinom 
 #' @import multinomineq
@@ -14,7 +14,6 @@
 #' @param prints Whether to print information
 #' @param delta vector of error tolerances for equality thresholds
 #' @return Internal list
-#' @export
 #' @keywords internal
 #' @noRd
 #' 
