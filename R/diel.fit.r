@@ -13,7 +13,7 @@
 #' @param burnin Burn-in number of mcmc iterations.
 #' @param prints Whether to print messages about model fitting.
 #' @param alt.optim Default is FALSE. If TRUE, uses an alternative approach to derive the bayes factors. It can be more stable, but takes a bit longer.
-#' @param delta Error tolerance of equality constraints
+#' @param delta Error tolerance of equality constraint hypotheses (e.g., AV.EQ). Does not apply to inequality constraint hypotheses. Needs to be >0 and <1, but ideally near zero. Default error tolernances to try are 0.05^(1:4)
 #' @return A list of outputs, including bayes factors for a model set, model bayes factor inputs, posterior samples, warning indicator, and posterior predictive checks.
 #' @return A list of outputs
 #' \item{bf.table}{Bayes factor for hyopthesis set}
@@ -23,6 +23,10 @@
 #' \item{ppc}{A list of ordered model posterior predictive check output}
 #' \item{ms.ppc}{Posterior predictive check output from the most supported model}    
 #' \item{post.samp.ms.model}{Posterior distributions of the most supported model}    
+#' \item{gelm.diag}{The Gelman-Rubin (Rhat) point and credible interval estimates to test converfence for parameters for all models fitted. Only provided when post.fit=TRUE and n.chains > 1.}    
+#' \item{ms.gelm.diag}{The Gelman-Rubin (Rhat) point and credible interval estimates for parameters for of the most supported model. Only provided when post.fit=TRUE, bf.fit=TRUE, and n.chains > 1.}    
+#' 
+#' 
 #' Required libraries:   multinomineq, retry, MASS
 #' @importFrom MASS fractions
 #' @import multinomineq

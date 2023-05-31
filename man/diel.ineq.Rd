@@ -34,7 +34,7 @@ diel.ineq(
 
 \item{e.AV}{Default is 0.10. A single value of variation for the Available Cathemeral hypothesis.}
 
-\item{xi.D}{Default c(0.90,0.95). A vector of the lower threshold value and the most likely value, respectively for the Diurnal hypothesis.}
+\item{xi.D}{Default c(0.80,0.90). A vector of the lower threshold value and the most likely value, respectively for the Diurnal hypothesis.}
 
 \item{xi.N}{Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Nocturnal hypothesis.}
 
