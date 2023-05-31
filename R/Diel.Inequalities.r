@@ -7,7 +7,7 @@
 #' @param e.CR Default is 0.05. A single value of variation for the Crepuscular hypothesis.
 #' @param e.EC  Default is 0.05. A single value of variation for the Evan Cathemeral hypothesis.
 #' @param e.AV   Default is 0.10. A single value of variation for the Available Cathemeral hypothesis.
-#' @param xi.D Default c(0.90,0.95). A vector of the lower threshold value and the most likely value, respectively for the Diurnal hypothesis.
+#' @param xi.D Default c(0.80,0.90). A vector of the lower threshold value and the most likely value, respectively for the Diurnal hypothesis.
 #' @param xi.N  Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Nocturnal hypothesis.
 #' @param xi.CR Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Crepuscular hypothesis.
 #' @param xi.C Default c(0.2). Lower value threshold to be cathemeral

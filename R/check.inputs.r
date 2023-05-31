@@ -41,14 +41,15 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
     if(length(prior)!=length(hyp.set)){
       stop("The prior is not the same length as hyp.set  \n")
     }
-    if(sum(prior)!=1){
-      stop("The sum of the prior vector has to be 1  \n")
-    }
     if(!is.numeric(prior)){
      stop("The prior is not numeric  \n")
     }
     if(!is.vector(prior)){
       stop("The prior is not a vector  \n")
+    }
+
+    if(sum(prior)!=1){
+      stop("The sum of the prior vector has to be 1  \n")
     }
     if(any(prior<0)| any(prior>1)){
       stop("Model prior probabilities can not be negative or greater than one \n")
@@ -93,7 +94,7 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
   }
   
   if(length(unique(hyp.set))!=length(hyp.set)){
-    stop("Hypothesis set needs to be a unique set with no duplicates  \n")
+    stop("You have included duplicate hypotheses in the hyp.set argument. \n  Use Diel.Niche::hyp.sets() to select which hypotheses you want to use.")
   }
   
   
