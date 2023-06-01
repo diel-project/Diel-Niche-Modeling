@@ -19,6 +19,7 @@
 #' out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)
 #' diel.plot(out)
 #' @export
+#' @export plot.diel
 
 plot.diel=function(fit=NULL,
                    hyp=NULL, 
@@ -39,7 +40,7 @@ if(is.null(fit) & is.null(hyp)){
 }
   
 if(!is.null(fit) & is.null(fit$post.samp.ms.model) & is.null(fit$post.samp) ){
-  stop("No plot. Make sure post.fit=TRUE in your diel.fit objective")
+  stop("No plot. Make sure post.fit=TRUE in your diel.fit object")
 }    
 
   
