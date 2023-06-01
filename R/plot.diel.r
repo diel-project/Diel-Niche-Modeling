@@ -34,6 +34,10 @@ plot.diel=function(fit=NULL,
   
 #x.scene=2.5; y.scene=1; z.scene=0.3; axis.size=16; axis.lab.size=18; legend.lab.size=15
 
+if(is.null(fit) & is.null(fit)){
+  stop("Please include objects for either argument 'fit' or 'hyp")
+}
+  
 if(!is.null(fit) & is.null(fit$post.samp.ms.model) & is.null(fit$post.samp) ){
   stop("No plot. Make sure post.fit=TRUE in your diel.fit objective")
 }    
