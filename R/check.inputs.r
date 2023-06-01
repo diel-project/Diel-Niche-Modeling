@@ -154,8 +154,8 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
      diel.setup$inputs$xi.EC[1]+diel.setup$inputs$e.EC >1){
     stop("xi.EC[3] \u00B1 e.EC has to be between 0-1 \n")
   }
-  if(diel.setup$inputs$xi.min.dom[1]<=0.5){
-    stop("xi.min.dom has to be greater that 0.5 \n")
+  if(diel.setup$inputs$xi[1]<=0.5){
+    stop("xi[1] has to be greater that 0.5 \n")
   }
   
 }#End function
