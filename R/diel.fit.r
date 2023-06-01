@@ -169,7 +169,7 @@ out <-  list(bf.table=bf.table,
              hyp.set=hyp.set
              )
 
-class(out) <- 'diel'
+class(out) <- c("list",'diel')
   
 out
 }#end function

@@ -305,7 +305,7 @@ diel.ineq=function(e=NULL,
     )
   
   #output from function
-  class(diel.hyp) <- 'diel'
+  class(diel.hyp) <- c("list",'diel')
   diel.hyp
   
   
