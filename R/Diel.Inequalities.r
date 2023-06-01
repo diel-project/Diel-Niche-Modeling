@@ -12,8 +12,8 @@
 #' @param xi.CR Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Crepuscular hypothesis.
 #' @param xi.C Default c(0.2). Lower value threshold to be cathemeral
 #' @param xi.EC Default c(0.33). A single value of the available amount of time in all three diel periods.
-#' @param xi.min.dom Default c(0.8). A single value of the min prob for a a dominant category 
-#' @param separation Default is 0. However, if you want to separate the hypotheses hyp.max, General2, and General 3, this will create separation and empty space
+#' @param xi Default c(0.8, 0.1). The first element is the minimum probability of a singular hypothesis (e.g., Diurnal). The second element is the minimum probability for Cathemeral Traditional or Cathemeral General, or binomial hypotheses.
+#' @param separation Default is 0. However, you can separate the hypotheses to create empty space between hypotheses probabilit space
 #' @param p.avail Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.
 #' 
 #' @return diel.hyp A list of diel hypotheses as multinomial inequalities.
@@ -63,7 +63,8 @@
 #           diel probs.
 
 #start function
-diel.ineq=function(e=NULL,
+diel.ineq=function(xi=NULL, 
+                   e=NULL,
                    e.D=NULL, 
                    e.N=NULL, 
                    e.CR=NULL,
@@ -75,7 +76,6 @@ diel.ineq=function(e=NULL,
                    xi.C=NULL,
                    xi.EC=NULL, 
                    p.avail=NULL,
-                   xi.min.dom=NULL, 
                    separation=NULL){
   
   #Default epsilon values for VARIATION hypotheses
@@ -89,13 +89,13 @@ diel.ineq=function(e=NULL,
   if(!is.null(e)){e.D=e.N=e.CR=e.EC=e.AV=e}
   
   # Defaults for threshold and variation models     
+  if(is.null(xi)){xi  = c(0.8,0.1)}else{xi  = c(xi,(1-xi)/2)}
   if(is.null(xi.D)){xi.D=c(0.8,0.9)} #lower threshold value, most likely value
   if(is.null(xi.N)){xi.N=c(0.8,0.9)}  #lower threshold value, most likely value
   if(is.null(xi.CR)){xi.CR=c(0.8,0.9)}#lower threshold value, most likely value
   if(is.null(xi.C)){xi.C=c(0.2)}      #lower threshold value
   if(is.null(xi.EC)){xi.EC  = c(0.33)}#Even cathemerality probability
   if(is.null(p.avail)){p.avail  = c(0.166666,0.4166667)} #crepuscular availability and diurnal availability
-  if(is.null(xi.min.dom)){xi.min.dom  = c(0.8,0.1)}else{xi.min.dom  = c(xi.min.dom,(1-xi.min.dom)/2)}
   if(is.null(separation)){separation  = c(0)}
   small.num=0.0001  
 
@@ -104,22 +104,22 @@ diel.ineq=function(e=NULL,
   #Traditional - 4 hypotheses
   #Diurnal
   A.D <- matrix(c(0,-1),ncol = 2, byrow = TRUE)
-  b.D <- c(-xi.min.dom[1])
+  b.D <- c(-xi[1])
   D=list(Name="Diurnal",A=A.D,b=b.D,func="bf_multinom")     
 
   #Nocturnal
   A.N <- matrix(c(1,1),ncol = 2, byrow = TRUE)
-  b.N <- c(-xi.min.dom[1]+1)
+  b.N <- c(-xi[1]+1)
   N=list(Name="Nocturnal",A=A.N,b=b.N,func="bf_multinom")     
   
   #Crepuscular
   A.CR <- matrix(c(-1,0),ncol = 2, byrow = TRUE)
-  b.CR <- c(-xi.min.dom[1])
+  b.CR <- c(-xi[1])
   CR=list(Name="Crepuscular",A=A.CR,b=b.CR,func="bf_multinom")     
 
   #Cathemeral
   A.C <- matrix(c(0,1,1,0,-1,-1),ncol = 2, byrow = TRUE)
-  b.C <- c(xi.min.dom[1]-small.num-separation,xi.min.dom[1]-small.num-separation,xi.min.dom[1]-small.num-1-separation)
+  b.C <- c(xi[1]-small.num-separation,xi[1]-small.num-separation,xi[1]-small.num-1-separation)
   C=list(Name="Cathemeral Traditional",A=A.C,b=b.C,func="bf_multinom")   
 
 #################################
@@ -137,23 +137,23 @@ diel.ineq=function(e=NULL,
   
   #Cathemeral
   A.C <- matrix(c(0,-1,1,1,-1,0,0,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.C <- c(-xi.min.dom[2]-separation,-xi.min.dom[2]+1-separation,-xi.min.dom[2]-separation,xi.min.dom[1]-small.num-separation,xi.min.dom[1]-small.num-1-separation)
+  b.C <- c(-xi[2]-separation,-xi[2]+1-separation,-xi[2]-separation,xi[1]-small.num-separation,xi[1]-small.num-1-separation)
   C2=list(Name="Cathemeral General",A=A.C,b=b.C,func="bf_multinom")   
   
  
   #CRD
   A.D.CR <- matrix(c(-1,-1,-1,0,1,0,0,-1,0,1),ncol = 2, byrow = TRUE)
-  b.D.CR <- c(xi.min.dom[2]-small.num-1,-xi.min.dom[2]-separation,xi.min.dom[1]-small.num-separation,-xi.min.dom[2],xi.min.dom[1]-small.num-separation)
+  b.D.CR <- c(xi[2]-small.num-1,-xi[2]-separation,xi[1]-small.num-separation,-xi[2],xi[1]-small.num-separation)
   D.CR=list(Name="Diurnal-Crepuscular",A=A.D.CR,b=b.D.CR,func="bf_multinom")   
 
   #DN
   A.D.N <- matrix(c(1,0,0,-1,0,1,1,1,-1,-1),ncol = 2, byrow = TRUE)
-  b.D.N <- c(xi.min.dom[2]-small.num,-xi.min.dom[2]-separation,xi.min.dom[1]-small.num-separation,-xi.min.dom[2]+1,xi.min.dom[1]-small.num-1-separation)
+  b.D.N <- c(xi[2]-small.num,-xi[2]-separation,xi[1]-small.num-separation,-xi[2]+1,xi[1]-small.num-1-separation)
   D.N=list(Name="Diurnal-Nocturnal",A=A.D.N,b=b.D.N,func="bf_multinom")   
   
   #CRN
   A.CR.N <- matrix(c(0,1,1,1,-1,-1,-1,0,1,0),ncol = 2, byrow = TRUE)
-  b.CR.N <- c(xi.min.dom[2]-small.num,-xi.min.dom[2]+1-separation,xi.min.dom[1]-small.num-1-separation,-xi.min.dom[2],xi.min.dom[1]-small.num-separation)
+  b.CR.N <- c(xi[2]-small.num,-xi[2]+1-separation,xi[1]-small.num-1-separation,-xi[2],xi[1]-small.num-separation)
   CR.N=list(Name="Crepuscular-Nocturnal",A=A.CR.N,b=b.CR.N,func="bf_multinom")   
   
   
@@ -287,7 +287,7 @@ diel.ineq=function(e=NULL,
   inputs=list(e.D=e.D, e.N=e.N, e.CR=e.CR, 
               e.EC=e.EC, e.AV=e.AV,
               xi.D=xi.D,xi.N=xi.N,xi.CR=xi.CR,xi.C=xi.C,
-              xi.min.dom=xi.min.dom,
+              xi=xi,
               xi.EC=xi.EC, p.avail=p.avail,separation=separation)  
   
   #package outputs  

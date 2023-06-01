@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 # Introducion
 
-The Diel.Niche package is used to evaluate how animals use the three fundamental periods of light: twilight (dawn & dusk), daytime, and nighttime. First, install and load the library
+The $\texttt{Diel.Niche}$ package is used to evaluate how animals use the three fundamental periods of light: twilight (dawn & dusk), daytime, and nighttime. First, install and load the library
 
 ```{r package}
 # Install package from GitHub via devtools.
@@ -51,42 +51,45 @@ The best way to understand each hypothesis set is by plotting hypotheses from a 
 
 **Maximizing**
 
-This hypothesis set is useful in evaluating which diel phenotype (Diurnal, Nocturnal, Crepuscular) is used the most. There is no hypothesis associated to cathemerality, which is a combination of multiple diel periods
+This hypothesis set includes three hypotheses (Crepuscular Max, Diurnal Max, and Nocturnal Max) with the objective to evaluate which time period is used most. As such, there is no hypothesis about activity across multiple time periods (i.e., cathemeral).
+
 ```{r 3dplot1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.sets("Maximizing"))
+plot.diel(hyp=hyp.sets("Maximizing"))
 ```
 
 **Traditional**
 
-This hypothesis set uses the traditional combinations of the diel modalities of diurnal, nocturnal, crepuscular, and cathemeral. 
+This hypothesis set includes four hypotheses (Crepuscular, Diurnal, Nocturnal, Traditional Cathemeral) that aim to capture the general interpretation of these hypotheses from the literature. Crepuscular, Diurnal, and Nocturnal are defined based on having at least 0.80 probability (threshold probability, $\xi_{1} = 0.80)$ in their respective diel periods (twilight, daytime, nighttime). If an animal is not mostly active in one period than it is defined as Traditional Cathemeral; this occurs when either two or three time periods are used more than $1-\xi_{1}$. The logic behind the threshold of 0.80 is that an animal uses a clear majority of time in one diel period, but is not so strict that there is not some moderate amount of activity outside of this period. While this is the default value we set for the traditional hypothesis set in $\texttt{Diel.Niche}$, it can easily be modified by a user when fitting these hypotheses to their data (see below).
 
 ```{r 3dplot2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-
-diel.plot(hyp=hyp.sets("Traditional"))
+plot.diel(hyp=hyp.sets("Traditional"))
 ```
-If left unspecified, default values are used to define the boundaries among these different hypotheses. The default value for being diurnal, nocturnal, or crepuscular is $\ge$ 0.80 probability. Cathemerality is defined as no diel period activity has more than 0.80 probability and two or more time periods have$\ge$ 0.1 probability.
 
 **General** 
 
-This hypothesis set aims to provide more specificity tha the Traditional hypothesis set. It includes the Traditional definitions of diurnal, nocturnal, and crepuscular, as above, but cathemerality is defined more specifically in terms of whether two or three diel periods are used moderately.
+This hypothesis set includes seven hypotheses. The Diurnal, Crepuscular, and Nocturnal hypotheses are defined the same as in Traditional. The main difference is the separation of the probability space of Traditional Cathemeral into four more specific hypotheses: General Cathemeral, Crepuscular-Nocturnal, Diurnal-Nocturnal, and Diurnal-Crepuscular. The General Cathemeral hypothesis---which represents a subset of the parameter space taken by the previously mentioned Traditional Cathemeral---aims to  define when an animal uses all three diel periods (twilight, daytime, nighttime) at equal to or more than a minimum amount (i.e., $p_{\text{tw}}, p_{\text{d}}, p_{\text{n}} \leq \xi_{1}$  and $p_{\text{tw}}, p_{\text{d}}, p_{\text{n}} \geq \xi_{2}$). We defined the lower threshold probability as $\xi_{2} = 0.10$, such that we consider it important to differentiate animal activity when a diel period is used at least this much. However, if only two diel periods are used above $\xi_{2}$ then we classify this activity using one of the binomial hypotheses (Crepuscular-Nocturnal, Diurnal-Nocturnal, and Diurnal-Crepuscular).  
+
+For an example, suppose a species is active mainly during the day with $p_{\text{d}} = 0.78$, but is also relatively active during twilight with $p_{\text{tw}} = 0.16$, and not very active at night with $p_{\text{n}} = 0.06$. We would define this activity as Diurnal-Crepuscular because $p_{\text{tw}}$ \& $p_{\text{d}} \geq \xi_{2}$, while $p_{\text{n}} < \xi_{2}$. However, if night activity was also higher than $\xi_{2}$, such that $p_{\text{d}} = 0.70$, and $ p_{\text{tw}} = p_{\text{n}} = 0.15$ then we classify this activity as General Cathemeral because a moderate to large amount of activity is occuring in all three diel periods. In summary, the Traditional hypothesis set distinguishes between unimodal and multi-modal diel activity, while the General set distinguishes among unimodal, bimodal, and trimodal activity.
+
 ```{r 3dplot3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.sets("General"))
+plot.diel(hyp=hyp.sets("General"))
 ```
+
 
 **Threshold** 
 
 This hypothesis set is based on defining each diel period in terms of lower thresholds. If the thresholds are not provided, default values are used.
 ```{r 3dplot4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.sets("Threshold"))
+plot.diel(hyp=hyp.sets("Threshold"))
 ```
 
-Not that where there is no colored space indicates that these set of probabilities are not considered. 
+Not that where there is no colored space indicates that this set of probabilities are not considered as possible parameter values. 
 
 **Variation**
 
-This hypothesis set is based on defining the ranges (lower, uppper) of possible probability values. 
+This hypothesis set is based on defining the ranges (lower, upper) of possible probability values. 
 ```{r 3dplot5,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.sets("Variation"))
+plot.diel(hyp=hyp.sets("Variation"))
 ```
 
 We can also view specific hypotheses, as
