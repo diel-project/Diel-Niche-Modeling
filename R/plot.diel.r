@@ -34,7 +34,7 @@ plot.diel=function(fit=NULL,
   
 #x.scene=2.5; y.scene=1; z.scene=0.3; axis.size=16; axis.lab.size=18; legend.lab.size=15
 
-if(is.null(fit) & is.null(fit)){
+if(is.null(fit) & is.null(hyp)){
   stop("Please include objects for either argument 'fit' or 'hyp")
 }
   
