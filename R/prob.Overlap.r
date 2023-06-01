@@ -23,7 +23,7 @@ prob.Overlap=function(densityplot,
    stop("dawn/dusk need to be vectors of length 2 with only numeric values")  
   }
     
-s#########################
+#########################
   densityplot=densityplot[which(densityplot$x>=0 & densityplot$x<=24),]
   
   
