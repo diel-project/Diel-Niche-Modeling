@@ -5,7 +5,8 @@
 \title{Plot Diel Hypothesis or Hypothesis Set Along with Posterior Samples}
 \usage{
 diel.plot(
-  hyp,
+  fit = NULL,
+  hyp = NULL,
   diel.setup = NULL,
   posteriors = NULL,
   more.points = FALSE,
@@ -18,11 +19,13 @@ diel.plot(
 )
 }
 \arguments{
+\item{fit}{a list object output from the function 'diel.fit'.}
+
 \item{hyp}{a vector of hypothesis code names (characters)}
 
-\item{diel.setup}{If NULL uses the default diel.ineq function. Otherwise, a list of multinomial inequalities (Matrix A and vector b) representing diel hypotheses and the function needed for model fitting.}
+\item{diel.setup}{If NULL uses the default diel.ineq function. If a fit object is provided it will come from this object. Otherwise, a list of multinomial inequalities (Matrix A and vector b) representing diel hypotheses and the function needed for model fitting.}
 
-\item{posteriors}{A single models MCMC output from the function 'diel.fit'.}
+\item{posteriors}{Posterior samples output from the function 'diel.fit'.}
 
 \item{more.points}{To use more points for hyps in plotting. Default is FALSE.}
 
@@ -45,6 +48,6 @@ A plotly 3d plot
 Plots the diel niche space and posterior disribution of a fitted model.
 }
 \examples{
-out=diel.fit(y=t(matrix(c(11,87,2))),hyp="D",post.fit=TRUE)
-diel.plot(hyp="D",posteriors=out$post.samp.ms.model)
+out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)
+diel.plot(out)
 }

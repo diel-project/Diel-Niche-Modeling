@@ -157,15 +157,19 @@ if(isTRUE(post.fit) & !is.null(bf)){
   }
 
   #Output list
-  list(bf.table=bf.table,
-       post.samp=post.samples$sampling.mcmc,
-       ms.model=ms.model,
-       ppc=post.samples$ppc,ms.ppc=ms.ppc,
-       post.samp.ms.model=post.samp.ms.model,
-       y=y,y.vec=y.vec,gelm.diag=gelm.diag,
-       ms.gelm.diag=ms.gelm.diag,
-       bf.list=bf.list,
-       diel.setup=diel.setup,
-       hyp.set=hyp.set)
+out <-  list(bf.table=bf.table,
+             post.samp=post.samples$sampling.mcmc,
+             ms.model=ms.model,
+             ppc=post.samples$ppc,ms.ppc=ms.ppc,
+             post.samp.ms.model=post.samp.ms.model,
+             y=y,y.vec=y.vec,gelm.diag=gelm.diag,
+             ms.gelm.diag=ms.gelm.diag,
+             bf.list=bf.list,
+             diel.setup=diel.setup,
+             hyp.set=hyp.set
+             )
+
+class(out) <- 'diel'
   
+out
 }#end function
