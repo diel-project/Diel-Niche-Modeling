@@ -44,7 +44,7 @@ Suggests:
     rmarkdown (>= 2.14),
     bayesplot (>= 1.9.0),
     ggplot2 (>= 3.3.6),
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
     overlap  (>= 0.3.4)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
