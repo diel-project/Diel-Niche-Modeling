@@ -26,7 +26,7 @@ hyp.sets=function(hyp.in=NULL){
   hyp.set[[4]]=c("D.max","N.max","CR.max")
   hyp.set[[5]]=c("D.var","N.var","CR.var","C.var")
   names(hyp.set)=c("Traditional","General","Threshold","Maximizing","Variation")
-
+  class(hyp.set) <- 'diel'
 if(is.null(hyp.in)){   
   cat("Names of Hypothesis Sets: \n",names(hyp.set),sep="  ")
 }else{
