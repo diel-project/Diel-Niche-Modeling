@@ -241,8 +241,8 @@ Using the packages bayesplot and ggplot2, we can examine our posterior
 distributions along with the true probabilities values,
 
 ``` r
-library(ggplot2)
-library(bayesplot)
+suppressMessages(library(ggplot2))
+suppressMessages(library(bayesplot))
 ```
 
     ## This is bayesplot version 1.10.0
