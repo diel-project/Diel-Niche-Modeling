@@ -5,6 +5,7 @@
 \title{Inequality Setup}
 \usage{
 diel.ineq(
+  xi = NULL,
   e = NULL,
   e.D = NULL,
   e.N = NULL,
@@ -17,11 +18,12 @@ diel.ineq(
   xi.C = NULL,
   xi.EC = NULL,
   p.avail = NULL,
-  xi.min.dom = NULL,
   separation = NULL
 )
 }
 \arguments{
+\item{xi}{Default c(0.8, 0.1). The first element is the minimum probability of a singular hypothesis (e.g., Diurnal). The second element is the minimum probability for Cathemeral Traditional or Cathemeral General, or binomial hypotheses.}
+
 \item{e}{Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified.}
 
 \item{e.D}{Default is 0.05. A single value of variation for the Diurnal hypothesis.}
@@ -46,9 +48,7 @@ diel.ineq(
 
 \item{p.avail}{Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.}
 
-\item{xi.min.dom}{Default c(0.8). A single value of the min prob for a a dominant category}
-
-\item{separation}{Default is 0. However, if you want to separate the hypotheses hyp.max, General2, and General 3, this will create separation and empty space}
+\item{separation}{Default is 0. However, you can separate the hypotheses to create empty space between hypotheses probabilit space}
 }
 \value{
 diel.hyp A list of diel hypotheses as multinomial inequalities.
