@@ -251,15 +251,10 @@ posteriors=coda::as.mcmc(out$post.samp.ms.model)
 plot_title <- ggtitle("Posterior distributions",
                       "with medians and 80% intervals")
 mcmc_areas(posteriors, prob = 0.8) + plot_title+ 
-  geom_vline(xintercept=p[1], linetype="dashed",color = c("red"), size=1)+
-  geom_vline(xintercept=p[2], linetype="dashed",color = c("purple"), size=1)+
-  geom_vline(xintercept=p[3], linetype="dashed",color = c("green"), size=1)
+  geom_vline(xintercept=p[1], linetype="dashed",color = c("red"), linewidth=1)+
+  geom_vline(xintercept=p[2], linetype="dashed",color = c("purple"), linewidth=1)+
+  geom_vline(xintercept=p[3], linetype="dashed",color = c("green"), linewidth=1)
 ```
-
-    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-    ## ℹ Please use `linewidth` instead.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 
 ![](README_files/figure-gfm/plot-1.png)<!-- -->
 
@@ -269,7 +264,7 @@ We can also plot the posteriors in 3D using ploty.
 plot(out)
 ```
 
-<img src="README_files/figure-gfm/3dplot 2-1.png" width="6.5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/plotlyPosteriores.png" />
 
 # Plotting Issues in RStudio
 
