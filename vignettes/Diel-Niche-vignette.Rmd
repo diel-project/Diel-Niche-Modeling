@@ -95,7 +95,7 @@ plot.diel(hyp=hyp.sets("Variation"))
 We can also view specific hypotheses, as
 
 ```{r 3dplot6,fig.align = "center",fig.height = 8, fig.width = 8,out.width = "8.5in"}
-diel.plot("D",more.points = TRUE)
+plot.diel(hyp="D",more.points = TRUE)
 
 ```
 
@@ -196,41 +196,41 @@ mcmc_areas(posteriors, prob = 0.8) + plot_title+
 Another way to examine our hypothesis is to plot the theoretical niche space for the hypothesis along with the posterior samples from the most supported model. 
 
 ```{r 3dplot 1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=out$ms.model,more.points = TRUE,
+plot.diel(hyp=out$ms.model,more.points = TRUE,
           posteriors=out$post.samp.ms.model)
 ```
 
 Or, we can plot the whole hypothesis set
 
 ```{r 3dplot 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.set,
-          posteriors=out$post.samp.ms.model)
+plot(out)
 ```
 
-# User-specified Hypotheses
+# User-modified Hypotheses
 
-You do not need to rely on pre-set definitions of diel hypotheses. If you are interested in categorizing a diel phenotype based on 0.90 probability or higher, you can adjust the hypotheses using the function 'diel.ineq()' than pass this object to the plot function or model fitting function.
+You do not need to rely on pre-set definitions of diel hypotheses. If you are interested in categorizing dominant diel phenotypes based on 0.90 probability or higher, you can adjust the hypotheses using the function 'diel.ineq()' than pass this object to the plot function or model fitting function. Here, we will just define the lower bount of each diurnal, nocturnal, and crepuscular using $\xi_{1} = 0.90$
 
 ```{r manual example 1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-  diel.setup=diel.ineq(xi.min.dom = c(0.9))
-  diel.plot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
+  diel.setup=diel.ineq(xi = c(0.90))
+  plot.diel(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 ```
 
-If you want to separate the hypotheses and reduce the parameter space of cathmerality,
+If you want to separate the hypotheses and reduce the parameter space of cathemerality,
 
 ```{r manual example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.setup=diel.ineq(xi.min.dom = 0.7,separation=0.1)
-diel.plot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
+diel.setup=diel.ineq(xi = 0.70,separation=0.10)
+plot.diel(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 
 ```
 
-When considering the General hypothesis set, you can adjust the lower probability value to define crepuscular, diurnal, and nocturnal, as well as adjust the definitions of Cathemeral General  vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular.
+When considering the General hypothesis set, you can adjust the lower probability value ($\xi_{1}$) to define crepuscular, diurnal, and nocturnal, as well as adjust the definitions of Cathemeral General  vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular ($\xi_{2}$). To do this, set $xi$ as a vector of two probabilities,
 
 ```{r manual2 example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.setup=diel.ineq(xi.min.dom = c(0.9,0.05))
-diel.plot(hyp=hyp.sets("General"),diel.setup=diel.setup)
+diel.setup=diel.ineq(xi = c(0.9,0.05))
+plot.diel(hyp=hyp.sets("General"),diel.setup=diel.setup)
 ```
-This new hypothesis set can be used to simulate data and fit the same models by passing the object diel.setup as an attribute of the functions sim.diel, diel.fit, and diel.plot.
+
+This new hypothesis set can be used to simulate data and fit the same models by passing the object diel.setup as an attribute of the functions sim.diel and diel.fit.
 
 ```{r manual example2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 
@@ -238,9 +238,161 @@ y=sim.diel(hyp="D.CR",n.sample = 200,diel.setup=diel.setup)$y
 
 out = diel.fit(y,hyp.set=hyp.sets("General"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
 
-diel.plot(hyp=hyp.sets("General"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
+plot.diel(out)
   
 ```
+
+There are additional defaults that could be changed, depending on your hypotheses of interest. 
+```{r manual other}
+#To see all the default inputs
+  defaults=diel.ineq()
+  defaults$inputs
+```
+
+For the **Variation** hypotheses, we can adjust the range of values for all hypotheses as,
+
+```{r manual variation, fig.height = 6, fig.width = 6}
+
+# Default
+  diel.plot(hyp =hyp.sets("Variation"))
+
+# New
+  diel.plot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e = 0.2))
+
+  
+# You can change individual hypotheses as well. Here, we are changing the range of the diurnal hypothesis only. This is not recommend. But, there is flexibility to be creative.
+
+  diel.plot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e.D = 0.4))
+  
+```
+
+For the **Threshold** hypotheses, we can adjust the lower probability similarly as,
+
+```{r manual threshold, fig.height = 6, fig.width = 6}
+  
+# Default
+  diel.plot(hyp =hyp.sets("Threshold"))
+
+# Adjusted
+  diel.plot(hyp =hyp.sets("Threshold"),diel.setup=diel.ineq(xi.D = 0.6, xi.N = 0.6, xi.CR = 0.6))
+  
+```
+
+# User-specified Hypotheses
+
+Next, we will demonstrate how to include additional diel hypotheses. This requires understanding the inequality constraint setup and then coding the results as additions to the 'diel.ineq' output. Let's consider two complementary hypotheses that account for the complete parameter space among the three fundamental probabilities. Our objective is to evaluate whether an animal is highly crepuscular or not. We will define highly crepuscular as $p_{tw} \geq 0.5$. The complementing hypothesis is that the animal does not have such high crepuscular activity $p_{tw} < 0.5$.
+
+
+### Hypothesis 1 Inequalities
+$$
+\begin{equation} 
+\begin{split}
+& p_{\text{tw}} \geq 0.5 \\
+\end{split}
+\end{equation}
+$$
+
+Next, we need to translate each inequality into the framework of $\mathbf{A} \boldsymbol{\theta} \leq \mathbf{b}$.
+
+$$
+\begin{equation} 
+\begin{split}
+& p_{\text{tw}} \geq 0.50 \\
+& -p_{\text{tw}} \leq -0.50 \\
+& (-1) \times p_{\text{tw}} + (0)\times p_{\text{d}} \leq -0.50 \\
+\end{split}
+\end{equation}
+$$
+Putting it together, we take the constants in parentheses left of the equal sign and package it into matrix $\mathbf{A}$ and take the constants on the right of the equal sign and package it into vector $\mathbf{b}$ as,
+
+$$
+\begin{equation} 
+\textbf{A} = \begin{bmatrix}
+-1 & 0 \\
+\end{bmatrix}, \textbf{b} = \begin{bmatrix} -0.50 \\ \end{bmatrix}.
+\end{equation}
+$$
+
+### Hypothesis 2 Inequalities
+
+The complementing low activity during twilight as,
+
+$$
+\begin{equation} 
+\begin{split}
+& p_{\text{tw}} \leq 0.49999 \\
+\end{split}
+\end{equation}
+$$
+Following the same procedure, we find that,
+
+$$
+\begin{equation} 
+\textbf{A} = \begin{bmatrix}
+1 & 0 \\
+\end{bmatrix}, \textbf{b} = \begin{bmatrix} 0.49999 \end{bmatrix}.
+\end{equation}
+$$
+### Coding
+
+Now, we need to code these hypotheses into $\texttt{Diel.Niche}$
+
+```{r user.spec}
+# First, we need to create new list elements. One for each new hypothesis, with these ordered elements in each list,
+
+# Element 1: Name 
+# Element 2:  A
+# Element 3:  b
+# Element 4:  func
+
+# Note, func - this should almost always be 'bf_multinom', unless an equality statement is specified, which required function 'bf_equality'
+
+  A <- matrix(c(-1,0),ncol = 2, byrow = TRUE)
+  b <- c(-0.5)
+  New1=list(Name="Highly Crepuscular",A=A,b=b,func="bf_multinom")  
+
+  A <- matrix(c(1,0),ncol = 2, byrow = TRUE)
+  b <- c(0.49999)
+  New2=list(Name="Not highly Crepuscular",A=A,b=b,func="bf_multinom")  
+
+#Second, include these new lists into diel.ineq() function as,
+  
+  diel.setup=diel.ineq()
+  diel.setup$New1=New1
+  diel.setup$New2=New2
+
+```
+
+
+We have setup our hypotheses. Now, we need to visualize them to check it's what we intended. Note that in each following, we pass our new diel.setup object to each function.
+
+
+```{r user.spec.visual,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+plot.diel(hyp=c("New1","New2"),diel.setup = diel.setup,more.points = TRUE)
+```
+
+### Simulating and Fitting
+
+Let's simulate data under the hypothesis that the animal is highly crepuscular.
+
+```{r user.spec.sim}
+set.seed(43243)
+dat=sim.diel(n.sample=85, hyp="New1",diel.setup = diel.setup)
+y=dat$y
+y
+```
+
+Next, let's compare our two models
+
+```{r user.spec.fit}
+#Note, that we get a warning, which is fine
+out <- diel.fit(y, hyp.set = c("New1","New2"),diel.setup=diel.setup)
+
+#Let's look at the model probabilities, where we find the model we simulated is highly supported
+out$bf.table
+
+```
+
 # The Unconstrained Model
 
 If you are interested in comparing the constrained hypotheses to an unconstrained model, you can do that by adding it into the hypothesis set
@@ -292,7 +444,7 @@ round(out1$bf.table,digits=2)
 # Results out 2
 round(out2$bf.table,digits=2)
 ```
-We see that the model weight on the nocturnal hypotheis increase because of our prior weight. 
+We see that the model weight on the nocturnal hypothesis increase because of our prior weight. 
 
 
 Let's consider another case where we simulate 10 data sets with differing sample sizes to see how the prior weight affects the model weights. Specifically, we will put a high weight (0.95) on the Cathemeral Traditional hypothesis while the simulated data is from the Nocturnal hypothesis.
