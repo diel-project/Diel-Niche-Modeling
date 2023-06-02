@@ -53,7 +53,7 @@ more than $1-\xi_{1}$.
 plot.diel(hyp=hyp.sets("Traditional"))
 ```
 
-<img src="README_files/figure-gfm/traditional.png" width="5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/traditional.png"/>
 
 ### **General**
 
@@ -80,7 +80,7 @@ Diurnal-Crepuscular).
 plot.diel(hyp=hyp.sets("General"))
 ```
 
-<img src="README_files/figure-gfm/general.png" width="5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/general.png"/>
 
 ### Hypothesis Codes
 
