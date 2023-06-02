@@ -53,17 +53,20 @@ The best way to understand each hypothesis set is by plotting hypotheses from a 
 
 This hypothesis set includes three hypotheses (Crepuscular Max, Diurnal Max, and Nocturnal Max) with the objective to evaluate which time period is used most. As such, there is no hypothesis about activity across multiple time periods (i.e., cathemeral).
 
-```{r 3dplot1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+
+```{r plotting 3d,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
 plot.diel(hyp=hyp.sets("Maximizing"))
 ```
+
 
 **Traditional**
 
 This hypothesis set includes four hypotheses (Crepuscular, Diurnal, Nocturnal, Traditional Cathemeral) that aim to capture the general interpretation of these hypotheses from the literature. Crepuscular, Diurnal, and Nocturnal are defined based on having at least 0.80 probability (threshold probability, $\xi_{1} = 0.80)$ in their respective diel periods (twilight, daytime, nighttime). If an animal is not mostly active in one period than it is defined as Traditional Cathemeral; this occurs when either two or three time periods are used more than $1-\xi_{1}$. The logic behind the threshold of 0.80 is that an animal uses a clear majority of time in one diel period, but is not so strict that there is not some moderate amount of activity outside of this period. While this is the default value we set for the traditional hypothesis set in $\texttt{Diel.Niche}$, it can easily be modified by a user when fitting these hypotheses to their data (see below).
 
-```{r 3dplot2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+```{r plotting3d 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
 plot.diel(hyp=hyp.sets("Traditional"))
 ```
+
 
 **General** 
 
@@ -71,7 +74,7 @@ This hypothesis set includes seven hypotheses. The Diurnal, Crepuscular, and Noc
 
 For an example, suppose a species is active mainly during the day with $p_{\text{d}} = 0.78$, but is also relatively active during twilight with $p_{\text{tw}} = 0.16$, and not very active at night with $p_{\text{n}} = 0.06$. We would define this activity as Diurnal-Crepuscular because $p_{\text{tw}}$ \& $p_{\text{d}} \geq \xi_{2}$, while $p_{\text{n}} < \xi_{2}$. However, if night activity was also higher than $\xi_{2}$, such that $p_{\text{d}} = 0.70$, and $ p_{\text{tw}} = p_{\text{n}} = 0.15$ then we classify this activity as General Cathemeral because a moderate to large amount of activity is occuring in all three diel periods. In summary, the Traditional hypothesis set distinguishes between unimodal and multi-modal diel activity, while the General set distinguishes among unimodal, bimodal, and trimodal activity.
 
-```{r 3dplot3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+```{r 3dplot3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
 plot.diel(hyp=hyp.sets("General"))
 ```
 
@@ -79,7 +82,7 @@ plot.diel(hyp=hyp.sets("General"))
 **Threshold** 
 
 This hypothesis set is based on defining each diel period in terms of lower thresholds. If the thresholds are not provided, default values are used.
-```{r 3dplot4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+```{r 3dplot4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
 plot.diel(hyp=hyp.sets("Threshold"))
 ```
 
@@ -94,7 +97,7 @@ plot.diel(hyp=hyp.sets("Variation"))
 
 We can also view specific hypotheses, as
 
-```{r 3dplot6,fig.align = "center",fig.height = 8, fig.width = 8,out.width = "8.5in"}
+```{r 3dplot6,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 plot.diel(hyp="D",more.points = TRUE)
 
 ```
