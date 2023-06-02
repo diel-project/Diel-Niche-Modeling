@@ -36,7 +36,7 @@ multiple time periods (i.e., cathemeral).
 plot.diel(hyp=hyp.sets("Maximizing"))
 ```
 
-<img src="README.GITHUB_files/figure-gfm/plotting 3d-1.png" width="5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/plotting 3d-1.png" width="5in" style="display: block; margin: auto;" />
 
 ### **Traditional**
 
@@ -54,7 +54,7 @@ more than $1-\xi_{1}$.
 plot.diel(hyp=hyp.sets("Traditional"))
 ```
 
-<img src="README.GITHUB_files/figure-gfm/plotting3d 2-1.png" width="5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/plotting3d 2-1.png" width="5in" style="display: block; margin: auto;" />
 
 ### **General**
 
@@ -81,7 +81,7 @@ Diurnal-Crepuscular).
 plot.diel(hyp=hyp.sets("General"))
 ```
 
-<img src="README.GITHUB_files/figure-gfm/3dplot3-1.png" width="5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/3dplot3-1.png" width="5in" style="display: block; margin: auto;" />
 
 ### Hypothesis Codes
 
@@ -198,7 +198,7 @@ convergence/mixing as,
  plot(coda::as.mcmc(out$post.samp.ms.model))
 ```
 
-![](README.GITHUB_files/figure-gfm/postcheck-1.png)<!-- -->
+![](README_files/figure-gfm/postcheck-1.png)<!-- -->
 
 The posterior samples for all hypotheses are available in a list.
 
@@ -272,7 +272,7 @@ mcmc_areas(posteriors, prob = 0.8) + plot_title+
     ## This warning is displayed once every 8 hours.
     ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 
-![](README.GITHUB_files/figure-gfm/plot-1.png)<!-- -->
+![](README_files/figure-gfm/plot-1.png)<!-- -->
 
 We can also plot the posteriors in 3D using ploty.
 
@@ -280,7 +280,7 @@ We can also plot the posteriors in 3D using ploty.
 plot(out)
 ```
 
-<img src="README.GITHUB_files/figure-gfm/3dplot 2-1.png" width="6.5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/3dplot 2-1.png" width="6.5in" style="display: block; margin: auto;" />
 
 # Plotting Issues in RStudio
 
@@ -291,13 +291,11 @@ OpenGL{} and then restart RStudio.
 
 # Badges
 
-[![GPLv3
-License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 
 # Acknowledgements
 
-- The many data contributors that supported the evaluation of this
-  framework.
+- The many data contributors that supported the evaluation of this framework.
 
 # Authors
 
