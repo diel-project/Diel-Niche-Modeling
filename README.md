@@ -36,7 +36,7 @@ multiple time periods (i.e., cathemeral).
 plot.diel(hyp=hyp.sets("Maximizing"))
 ```
 
-<img src="README_files/figure-gfm/plotting 3d-1.png" width="5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/maximizing.png" width="5in" style="display: block; margin: auto;" />
 
 ### **Traditional**
 
@@ -54,7 +54,7 @@ more than $1-\xi_{1}$.
 plot.diel(hyp=hyp.sets("Traditional"))
 ```
 
-<img src="README_files/figure-gfm/plotting3d 2-1.png" width="5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/traditional.png" width="5in" style="display: block; margin: auto;" />
 
 ### **General**
 
@@ -81,7 +81,7 @@ Diurnal-Crepuscular).
 plot.diel(hyp=hyp.sets("General"))
 ```
 
-<img src="README_files/figure-gfm/3dplot3-1.png" width="5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/general.png" width="5in" style="display: block; margin: auto;" />
 
 ### Hypothesis Codes
 
