@@ -21,6 +21,11 @@ First, install and load the library
 # You can view the main vignette as
   #vignette("Diel-Niche-vignette")
 
+# Or other vignette's
+  #vignette("Example1")
+  #vignette("Example2")
+  #vignette("Example4")
+
 ```
 
 ## Hypotheses
