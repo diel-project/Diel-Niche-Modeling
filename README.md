@@ -1,11 +1,10 @@
 # Diel.Niche
 
-An R package to evaluate hypotheses of diel modality based on empirical
+An R package to evaluate hypotheses of diel phenotypes based on empirical
 data and estimate the probabilitiy of activity during the crepuscular,
-daytime, and nighttime periods. The main idea of evaluating diel
-modality hypotheses as that a hypothesis can be expressed as inequality
-statements among the probability of crepuscular, daytime, and nocturnal
-activity.
+daytime, and nighttime periods. The main idea of evaluating diel phenotypes as hypotheses is that they can be expressed as inequality
+statements among the these three probabilities of activity.
+
 
 ## Install
 
