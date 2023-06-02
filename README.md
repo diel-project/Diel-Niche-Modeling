@@ -289,6 +289,7 @@ Tools–\>Global Options–\>Advanced–\>Rendering Engine Choose “Desktop
 OpenGL{} and then restart RStudio.
 
 # Badges
+
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
