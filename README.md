@@ -241,19 +241,9 @@ Using the packages bayesplot and ggplot2, we can examine our posterior
 distributions along with the true probabilities values,
 
 ``` r
-suppressMessages(library(ggplot2))
-suppressMessages(library(bayesplot))
+library(ggplot2)
+library(bayesplot)
 ```
-
-    ## This is bayesplot version 1.10.0
-
-    ## - Online documentation and vignettes at mc-stan.org/bayesplot
-
-    ## - bayesplot theme set to bayesplot::theme_default()
-
-    ##    * Does _not_ affect other ggplot2 plots
-
-    ##    * See ?bayesplot_theme_set for details on theme setting
 
 ``` r
 posteriors=coda::as.mcmc(out$post.samp.ms.model)
