@@ -63,11 +63,7 @@ if(!is.null(fit$post.samp.ms.model)){post=coda::as.mcmc(fit$post.samp.ms.model)}
 }
 
 }
-  
 
-  
-   
-  
   
 #Setup diel.setup and posterior samples    
   if(is.null(diel.setup) & is.null(fit)){diel.setup=diel.ineq()}
@@ -96,11 +92,13 @@ if(!is.null(fit$post.samp.ms.model)){post=coda::as.mcmc(fit$post.samp.ms.model)}
   temp=col.hyp[col.hyp.match[!is.na(col.hyp.match)]]
   
   if(length(which(is.na(col.hyp.match)))>0){
-  extra.col=colours()[length(which(is.na(col.hyp.match)))]
+  extra.col=t(data.frame(colours()[-1][1:length(which(is.na(col.hyp.match)))]))
+  colnames(extra.col)=hyp[which(is.na(col.hyp.match))]
   temp=data.frame(temp,extra.col)
+  rownames(temp)=NULL
   }
   
-  names(temp)[is.na(col.hyp.match)]=hyp[which(is.na(col.hyp.match))]
+
   
   color.set.use=as.character(temp[order(hyp)])
                
