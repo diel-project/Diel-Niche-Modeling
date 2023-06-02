@@ -35,7 +35,7 @@ multiple time periods (i.e., cathemeral).
 plot.diel(hyp=hyp.sets("Maximizing"))
 ```
 
-<img src="README_files/figure-gfm/maximizing.png" width="5in" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/maximizing.png" />
 
 ### **Traditional**
 
