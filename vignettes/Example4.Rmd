@@ -1,8 +1,15 @@
 ---
-output: html_document
+title: "Example 4"
+output: rmarkdown::html_vignette
+always_allow_html: true
+vignette: >
+  %\VignetteIndexEntry{Example 1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{overlap,Diel.Niche}
 ---
 
-# Example 4: Circular Kernel Analysis with Diel Hypotheses
+# Circular Kernel Analysis with Diel Hypotheses
 #### Author: Brian D. Gerber
 #### Date: 2023-05-10
 

@@ -1,8 +1,15 @@
 ---
-output: html_document
+title: "Example 2"
+output: rmarkdown::html_vignette
+always_allow_html: true
+vignette: >
+  %\VignetteIndexEntry{Example 2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{bayesplot,ggplot2,ggthemes,lubridate,Diel.Niche}
 ---
 
-# Example 2: Multiple species with one data analysis unit
+# Multiple species with one data analysis unit
 #### Author: Brian D. Gerber
 #### Date: 2023-05-10
 
