@@ -85,7 +85,7 @@ as,
 plot.diel(hyp=hyp.sets("Traditional"))
 ```
 
-![](Example1_files/figure-gfm/hyp.visual-1.png)<!-- -->
+![](Example1_files/figure-gfm/example1.md.github.png)<!-- -->
 
 To fit our data (`y`), we use the function ‘diel.fit’, specifying the
 hypothesis set of interest and MCMC inputs.
@@ -203,7 +203,7 @@ unique class identifier (diel).
 plot(out)
 ```
 
-<img src="Example1_files/figure-gfm/3dplot 2-1.png" width="6.5in" style="display: block; margin: auto;" />
+<img src="Example1_files/figure-gfm/example1.md.github.posteriors.png" width="6.5in" style="display: block; margin: auto;" />
 
 The black dots are the entire posterior samples plotted within the
 Traditional Cathemeral hypothesis. This point cloud shows us that the
