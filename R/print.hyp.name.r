@@ -21,8 +21,20 @@ if(ms.model=="D.max"){np="Diurnal (Maximization)"}
 if(ms.model=="N.max"){np="Diurnal (Maximization)"}
 if(ms.model=="CR.max"){np="Diurnal (Maximization)"}
 
+if(ms.model=="D.var"){np="Diurnal (Variation)"}
+if(ms.model=="N.var"){np="Nocturnal  (Variation)"}
+if(ms.model=="CR.var"){np="Crepuscular  (Variation)"}
+if(ms.model=="C.var"){np="Cathemeral  (Variation)"}
+if(ms.model=="A.AV.var"){np="Available (Variation)"}
 
-if(is.null(np)){warning("Hypothesis code is not recognized")}
+
+
+if(ms.model=="AV.EQ"){np="Available Equality"}
+if(ms.model=="EC"){np="Even Cathemeral Equality"}
+if(ms.model=="C.Max"){np="Even Cathemeral Equality Point"}
+if(ms.model=="Uncon"){np="Unconstrained"}
+
+if(is.null(np)){warning("Hypothesis code is not recognized \n")}
 
 np
 
