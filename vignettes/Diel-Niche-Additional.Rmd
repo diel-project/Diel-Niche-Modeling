@@ -36,7 +36,7 @@ This hypothesis set is based on defining each diel period in terms of lower thre
 plot.diel(hyp=hyp.sets("Threshold"))
 ```
 
-Not that where there is no colored space indicates that this set of probabilities are not considered as possible parameter values. 
+Not that where there is no colored space indicates that this set of probabilities are not considered as possible parameter values. Therefore, when using this hypothesis set you are deciding that these combinations of parameter values can not occur.
 
 **Variation**
 
@@ -231,5 +231,27 @@ out <- diel.fit(y, hyp.set = c("New1","New2"),diel.setup=diel.setup)
 #Let's look at the model probabilities, where we find the model we simulated is highly supported
 out$bf.table
 
+```
+
+# Additional Hypotheses
+
+We have included a few additional hypotheses that could be useful but don't fit nicely into a hypothesis set that is only made up of mutually exclusive hypotheses. This generally means that larger sample sizes will be needed to identify them as most supported within a set.
+
+## Even Cathemarlity
+
+A strict definition of cathemerality is that there is even amount of activity in all thre diel periods. Thus, the probabilities of activity of twilight, day, and night are all equal. We can consider this model by simulating data under this model and considering a combination of the Traditional hyptheses set and the even cathemarlity hypothesis('EC').
+
+```{r addhyp}
+set.seed(5452)
+dat = sim.diel(n.sim=1, n.sample=100, hyp="EC")
+
+y=dat$y
+
+out = diel.fit(y, hyp.set=c(hyp.sets("Traditional"),"EC"), post.fit = TRUE)
+
+out$bf.table
+
+#Notice how small the parameter space is for the posteriors
+plot(out)
 ```
 
