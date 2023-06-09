@@ -127,11 +127,11 @@ Pick a hypothesis to simulate data from and how many samples,
 
 ``` r
   set.seed(45451)
-  hyp=c("CR")
-  sim=sim.diel(hyp=hyp,n.sample=100)
+  hyp <- c("CR")
+  sim <- sim.diel(hyp=hyp,n.sample=100)
   
   #The probability value used to simulate data
-  p=sim$p
+  p <- sim$p
   p
 ```
 
@@ -140,7 +140,7 @@ Pick a hypothesis to simulate data from and how many samples,
 
 ``` r
   #The simulated data
-  y=sim$y
+  y <- sim$y
   y
 ```
 
@@ -153,8 +153,8 @@ Models are compared using Bayes factors, which are used to derive a
 posterior model probability
 
 ``` r
-  hyp.set=hyp.sets("Traditional")
-  out = diel.fit(y,hyp.set)
+  hyp.set <- hyp.sets("Traditional")
+  out <- diel.fit(y,hyp.set)
 ```
 
     ## Data checks Complete.
@@ -181,7 +181,7 @@ for each hypothesis. We can change this as well as include additional
 MCMC chains,
 
 ``` r
-  out = diel.fit(y,hyp.set,n.chains = 2,post.fit = TRUE)
+  out <- diel.fit(y,hyp.set,n.chains = 2,post.fit = TRUE)
 ```
 
     ## Data checks Complete.
@@ -261,7 +261,7 @@ library(bayesplot)
 ```
 
 ``` r
-posteriors=coda::as.mcmc(out$post.samp.ms.model)
+posteriors <- coda::as.mcmc(out$post.samp.ms.model)
 
 plot_title <- ggtitle("Posterior distributions",
                       "with medians and 80% intervals")
@@ -302,3 +302,5 @@ OpenGL{} and then restart RStudio.
 - [Kadambari Devarajan](https://github.com/kadambarid)
 - [Mason Fidino](https://masonfidino.com/)
 - [Zach Farris](https://hes.appstate.edu/faculty-staff/zachary-farris)
+
+If you are interested in contributing, see [Contributor Guidelines](CONTRIBUTING.md)
