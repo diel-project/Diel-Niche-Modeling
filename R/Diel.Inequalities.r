@@ -266,9 +266,9 @@ diel.ineq=function(xi=NULL,
   CR.avail=list(Name="Twilight Selection",A=A.CR.avail,b=b.CR.avail,func="bf_multinom")       
   
  #Selection for night > 1, all others are equal to or less than
-  A.CR.avail <- matrix(c(1,1,0,1,1,0),ncol = 2, byrow = TRUE)
-  b.CR.avail <- c(-1-small.num*(1-sum(p.avail))+1,p.avail[2],p.avail[1])
-  N.avail=list(Name="Night Selection",A=A.CR.avail,b=b.CR.avail,func="bf_multinom")       
+  A.N.avail <- matrix(c(1,1,0,1,1,0),ncol = 2, byrow = TRUE)
+  b.N.avail <- c(-1-small.num*(1-sum(p.avail))+1,p.avail[2],p.avail[1])
+  N.avail=list(Name="Night Selection",A=A.N.avail,b=b.N.avail,func="bf_multinom")       
   
 
  #Selection for daytime & Twilight > 1, night is equal to or less than
