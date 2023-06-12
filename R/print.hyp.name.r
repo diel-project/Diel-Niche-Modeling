@@ -27,9 +27,15 @@ if(ms.model=="CR.var"){np="Crepuscular  (Variation)"}
 if(ms.model=="C.var"){np="Cathemeral  (Variation)"}
 if(ms.model=="A.AV.var"){np="Available (Variation)"}
 
-
-
+if(ms.model=="D.avail"){np="Daytime Selection > Available"}
+if(ms.model=="CR.avail"){np="Twilight Selection > Available"}
+if(ms.model=="N.avail"){np="Night Selection > Available"}
+if(ms.model=="D.CR.avail"){np="Daytime/Twilight Selection > Available"}
+if(ms.model=="N.CR.avail"){np="Night/Twilight Selection > Available"}
+if(ms.model=="D.N.avail"){np="Daytime/Nigt Slection > Available"}
 if(ms.model=="AV.EQ"){np="Available Equality"}
+
+
 if(ms.model=="EC"){np="Even Cathemeral Equality"}
 if(ms.model=="C.Max"){np="Even Cathemeral Equality Point"}
 if(ms.model=="Uncon"){np="Unconstrained"}

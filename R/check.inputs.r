@@ -85,7 +85,6 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
   
   
   
-  delta
   if(all(hyp.set%in%names(diel.setup))!=TRUE){
     stop("Check that hyp.set match names in diel.setup \n",
          "Cannot find ",paste(hyp.set[which(hyp.set%in%names(diel.setup)==FALSE)], collapse = ' '), "\n")
@@ -157,5 +156,10 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
   if(diel.setup$inputs$xi[1]<=0.5){
     stop("xi[1] has to be greater that 0.5 \n")
   }
+  if(any(diel.setup$inputs$p.avail<0) | any(diel.setup$inputs$p.avail>1) | sum(diel.setup$inputs$p.avail)>=1 | sum(diel.setup$inputs$p.avail)>=0){
+    stop("p.avail elements need to be between 0 and 1 \n")
+  }
+
   
+    
 }#End function
