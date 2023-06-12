@@ -253,11 +253,11 @@ diel.ineq=function(xi=NULL,
 
 ##################################
 #################################
-# Availability/Selection Hyps  
+# Availability/Selection Hyps  - 7 hypotheses
   
  #Selection for daytime > 1, all others are equal to or less than
   A.D.avail <- matrix(c(0, -1/p.avail[2], 1/p.avail[1], 0, -1, -1),ncol = 2, byrow = TRUE)
-  b.D.avail <- c(-1+small.num,1, 1-sum(p.avail)-1)
+  b.D.avail <- c(-1-small.num,1, 1-sum(p.avail)-1)
   D.avail=list(Name="Day Selection",A=A.D.avail,b=b.D.avail,func="bf_multinom")       
 
  #Selection for Twilight > 1, all others are equal to or less than
