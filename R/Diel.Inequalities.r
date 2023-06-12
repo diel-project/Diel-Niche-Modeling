@@ -79,14 +79,14 @@ diel.ineq=function(xi=NULL,
                    separation=NULL){
   
   #Default epsilon values for VARIATION hypotheses
-  if(is.null(e.D)){e.D=0.1}
-  if(is.null(e.N)){e.N=0.1}
-  if(is.null(e.CR)){e.CR=0.1}
-  if(is.null(e.EC)){e.EC=0.1}
+  if(is.null(e.D)){e.D=0.05}
+  if(is.null(e.N)){e.N=0.05}
+  if(is.null(e.CR)){e.CR=0.05}
+  if(is.null(e.EC)){e.EC=0.05}
   if(is.null(e.AV)){e.AV=0.1}
-  
   # If e is entered then this forces all e's to be the same.  
   if(!is.null(e)){e.D=e.N=e.CR=e.EC=e.AV=e}
+  if(is.null(e)){e=0.05}
   
   # Defaults for threshold and variation models     
   if(is.null(xi)){xi  = c(0.8,0.1)}
