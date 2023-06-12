@@ -14,6 +14,13 @@ find.prob.hyp=function(hyp, diel.setup = NULL,fast=TRUE){
 
 # If diel.setup is not provided, the create it
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
+  if(
+    !all(
+      class(diel.setup) %in% c("list", "diel")
+    )
+  ){
+    stop("diel.setup must be created via diel.ineq()")
+  }
 
 # Which set of data to load for bf_multinom hypotheses  
   if(isFALSE(fast)){p.opts=p.options3}

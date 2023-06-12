@@ -1,6 +1,9 @@
 #' Inequality Setup
 #'
-#' Multinomial model inequalities for diel hypotheses
+#' 
+#' @description Multinomial model inequalities for diel hypotheses. Given a numeric set of values between 0 and 1, \code{diel.ineq()}
+#' will generate the inequality constraints that can be used within \code{\link{diel.fit}}.
+#' 
 #' @param e Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified. 
 #' @param e.D Default is 0.05. A single value of variation for the Diurnal hypothesis.
 #' @param e.N Default is 0.05. A single value of variation for the Nocturnal hypothesis.
@@ -12,14 +15,29 @@
 #' @param xi.CR Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Crepuscular hypothesis.
 #' @param xi.C Default c(0.2). Lower value threshold to be cathemeral
 #' @param xi.EC Default c(0.33). A single value of the available amount of time in all three diel periods.
-#' @param xi Default c(0.8, 0.1). The first element is the minimum probability of a singular hypothesis (e.g., Diurnal). The second element is the minimum probability for Cathemeral Traditional or Cathemeral General, or binomial hypotheses.
-#' @param separation Default is 0. However, you can separate the hypotheses to create empty space between hypotheses probabilit space
+#' @param xi Default c(0.8, 0.1). The first element is the minimum probability of a singular hypothesis (e.g., Diurnal). The second element is the minimum probability for Cathemeral Traditional or Cathemeral General, or binomial hypotheses. See details for additional information.
+#' @param separation Default is 0. However, you can separate the hypotheses to create empty space between hypotheses probability space
 #' @param p.avail Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.
 #' 
+#' @details 
+#'  In the event that xi is a scalar, the second value will be calculated as \code{(1-xi)/2},
+#'  where \code{xi} is the scalar provided by the user. 
+#'  
+#'  The values provided here generated the requisite matrix \eqn{\boldsymbol{A}}
+#'  and vector \eqn{\boldsymbol{b}}. For additional details on how these constraints
+#'  are used in a multinomial model, see Heck and Davis-Stober (2019).
+#'  
+#'  
 #' @return diel.hyp A list of diel hypotheses as multinomial inequalities.
 #' \item{inputs}{Includes all inputted values; epsilon, xi, and p.avail.} 
 #' \item{D.th, N.th, CR.th, EC.th, C.th, D.max, N.max, CR.max, D.var, N.var, CR.var, C.var, AC.var, AV.var,
 #'    Uncon, C.max, EC, EQ.avail, D.avail,CR.avail,N.avail, D.CR.avail, N.CR.avail, D.N.avail}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.} 
+#' 
+#' @references 
+#' Heck, D. W., & Davis-Stober, C. P. (2019). Multinomial models with linear inequality
+#'  constraints: Overview and improvements of computational methods for Bayesian
+#'  inference. Journal of mathematical psychology, 91, 70-87.
+#' 
 #' @examples 
 #' diel.ineq()
 #' diel.ineq(e=0.01) #To replace all epsilon values with 0.01.
@@ -85,13 +103,20 @@ diel.ineq=function(xi=NULL,
   if(is.null(e.EC)){e.EC=0.05}
   if(is.null(e.AV)){e.AV=0.1}
   # If e is entered then this forces all e's to be the same.  
-  if(!is.null(e)){e.D=e.N=e.CR=e.EC=e.AV=e}
+  if(!is.null(e) & is.numeric(e)){e.D=e.N=e.CR=e.EC=e.AV=e}
   if(is.null(e)){e=0.05}
   
   # Defaults for threshold and variation models     
   if(is.null(xi)){xi  = c(0.8,0.1)}
-  if(length(xi)==1){xi  = c(xi,(1-xi)/2)}
-  if(length(xi)>2){xi  = c(xi[1],xi[2])}
+  if(length(xi)==1 & is.numeric(xi)){
+    warning(
+      paste0(
+        "length(xi) == 1 when it should be 2.\nCalculated the second value as (1 - xi)/2,\n",
+        "where xi is the single value you provided."
+      )
+      
+    )
+    xi  = c(xi,(1-xi)/2)}
   if(is.null(xi.D)){xi.D=c(0.8,0.9)} #lower threshold value, most likely value
   if(is.null(xi.N)){xi.N=c(0.8,0.9)}  #lower threshold value, most likely value
   if(is.null(xi.CR)){xi.CR=c(0.8,0.9)}#lower threshold value, most likely value
@@ -100,6 +125,116 @@ diel.ineq=function(xi=NULL,
   if(is.null(p.avail)){p.avail  = c(0.166666,0.4166667)} #crepuscular availability and diurnal availability
   if(is.null(separation)){separation  = c(0)}
   small.num=0.0001  
+  
+  # put together arg list
+  arg_list <- list(
+    xi = xi,
+    e = e,
+    e.D = e.D,
+    e.N = e.N,
+    e.CR = e.CR,
+    e.EC = e.EC,
+    e.AV = e.AV,
+    xi.D = xi.D,
+    xi.N = xi.N,
+    xi.CR = xi.CR,
+    xi.C = xi.C,
+    xi.EC = xi.EC,
+    p.avail = p.avail,
+    separation = separation
+  )
+  # check if all numeric
+  if(
+    !all(
+       sapply(arg_list,is.numeric)
+    )
+  ){
+    error_locs <- which(
+      !sapply(arg_list,is.numeric)
+    )
+    my_error <- paste0(
+      "\nAll arguments must be numeric. The following arguments are not:",
+      "\n\n",
+      paste0(
+        names(arg_list)[error_locs],
+        collapse = "\n"
+      )
+    )
+    stop(my_error)
+  }
+  
+  if(
+    !all(
+      unlist(arg_list) >= 0 &
+      unlist(arg_list) <= 1
+    )
+  ){
+    error_locs <- which(
+      sapply(
+        arg_list,
+        function(x){!all(x >= 0 & x <= 1)}
+      )
+    )
+
+    my_error <- paste0(
+      "\nAll arguments must be >= 0 and <= 1. The following arguments are not:",
+      "\n\n",
+      paste0(
+        names(arg_list)[error_locs],
+        collapse = "\n"
+      )
+    )
+    stop(my_error)
+  }
+  if(!length(xi) == 2){
+    stop("xi must be a vector of length 2.")
+  }
+  if(!length(e) == 1){
+    stop("e must be a scalar.")
+  }
+  if(!length(e.D) == 1){
+    stop("e.D must be a scalar.")
+  }
+  if(!length(e.N) == 1){
+    stop("e.N must be a scalar.")
+  }
+  if(!length(e.CR) == 1){
+    stop("e.CR must be a scalar.")
+  }
+  if(!length(e.EC) == 1){
+    stop("e.EC must be a scalar.")
+  }
+  if(!length(e.AV) == 1){
+    stop("e.AV must be a scalar.")
+  }
+  if(!length(xi.D) == 2){
+    stop("xi.D must be a vector of length 2.")
+  }
+  if(!length(xi.N) == 2){
+    stop("xi.N must be a vector of length 2.")
+  }
+  if(!length(xi.CR) == 2){
+    stop("xi.CR must be a vector of length 2.")
+  }
+  if(!length(xi.C) == 1){
+    stop("xi.C must be a scalar.")
+  }
+  if(!length(xi.EC) == 1){
+    stop("xi.EC must be a scalar.")
+  }
+  if(!length(p.avail) == 2){
+    stop("p.avail must be a vector of length 2.")
+  }
+  # check if 1 - sum(p.avail) is between 0 and 1
+  if(
+    1 - sum(p.avail) < 0 |
+    1 - sum(p.avail) > 1
+  ){
+    stop("1 - sum(p.avail) must be between 0 and 1")
+  }
+  
+  
+  
 
   #################################
   #################################
