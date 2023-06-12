@@ -33,7 +33,7 @@ if(ms.model=="N.avail"){np="Night Selection > Available"}
 if(ms.model=="D.CR.avail"){np="Daytime/Twilight Selection > Available"}
 if(ms.model=="N.CR.avail"){np="Night/Twilight Selection > Available"}
 if(ms.model=="D.N.avail"){np="Daytime/Nigt Slection > Available"}
-if(ms.model=="AV.EQ"){np="Available Equality"}
+if(ms.model=="EQ.avail"){np="Available Equality"}
 
 
 if(ms.model=="EC"){np="Even Cathemeral Equality"}

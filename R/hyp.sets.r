@@ -25,7 +25,7 @@ hyp.sets=function(hyp.in=NULL){
   hyp.set[[3]]=c("D.th","N.th","CR.th","C.th")
   hyp.set[[4]]=c("D.max","N.max","CR.max")
   hyp.set[[5]]=c("D.var","N.var","CR.var","C.var")
-  hyp.set[[6]]=c("D.avail","CR.avail","N.avail","AV.EQ","D.CR.avail","N.CR.avail","D.N.avail")
+  hyp.set[[6]]=c("D.avail","CR.avail","N.avail","EQ.avail","D.CR.avail","N.CR.avail","D.N.avail")
   
   names(hyp.set)=c("Traditional","General","Threshold","Maximizing","Variation","Selection")
   class(hyp.set) <- c("list",'diel')

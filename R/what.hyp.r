@@ -17,7 +17,7 @@ if(!is.null(hyp.in)){
                                  "D.th","N.th","CR.th","C.th","EC.th",
                                  "D.max","N.max","CR.max",
                                  "D.var","N.var","CR.var","C.var","AV.var",
-                                 "Uncon","C.max","EC","AV.EQ",
+                                 "Uncon","C.max","EC","EQ.avail",
                                  "D.avail","CR.avail","N.avail","D.CR.avail","N.CR.avail","D.N.avail"
                                  ),
                        

@@ -19,7 +19,7 @@
 #' @return diel.hyp A list of diel hypotheses as multinomial inequalities.
 #' \item{inputs}{Includes all inputted values; epsilon, xi, and p.avail.} 
 #' \item{D.th, N.th, CR.th, EC.th, C.th, D.max, N.max, CR.max, D.var, N.var, CR.var, C.var, AC.var, AV.var,
-#'    Uncon, C.max, EC, AV.EQ}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.} 
+#'    Uncon, C.max, EC, EQ.avail, D.avail,CR.avail,N.avail, D.CR.avail, N.CR.avail, D.N.avail}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.} 
 #' @examples 
 #' diel.ineq()
 #' diel.ineq(e=0.01) #To replace all epsilon values with 0.01.
@@ -295,7 +295,7 @@ diel.ineq=function(xi=NULL,
     b.AV <- c(1,1)
     C.AV <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
     d.AV <- c(p.avail[1],p.avail[2])
-    AV.EQ=list(Name="Available Equality",A=A.AV,b=b.AV,C=C.AV,d=d.AV,func="bf_equality") 
+    EQ.avail=list(Name="Selection/Available Equality",A=A.AV,b=b.AV,C=C.AV,d=d.AV,func="bf_equality") 
   
   
 # SPECIAL Hypotheses
@@ -338,7 +338,7 @@ diel.ineq=function(xi=NULL,
     D.max=D.max,N.max=N.max, CR.max=CR.max,
     D.var=D.var,N.var=N.var,CR.var=CR.var,C.var=C.var,AV.var=AV.var, 
     EC=EC,
-    D.avail=D.avail,CR.avail=CR.avail,N.avail=N.avail,AV.EQ=AV.EQ,
+    D.avail=D.avail,CR.avail=CR.avail,N.avail=N.avail,EQ.avail=EQ.avail,
     D.CR.avail=D.CR.avail, N.CR.avail=N.CR.avail,D.N.avail=D.N.avail,
     Uncon=Uncon,
     C.max=C.max,
