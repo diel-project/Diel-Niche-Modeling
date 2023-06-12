@@ -266,8 +266,8 @@ diel.ineq=function(xi=NULL,
   CR.avail=list(Name="Twilight Selection",A=A.CR.avail,b=b.CR.avail,func="bf_multinom")       
   
  #Selection for night > 1, all others are equal to or less than
-  A.N.avail <- matrix(c(1,1,0,1,1,0),ncol = 2, byrow = TRUE)
-  b.N.avail <- c(-1-small.num*(1-sum(p.avail))+1,p.avail[2],p.avail[1])
+  A.N.avail <- matrix(c(1,1,0,1/p.avail[2],1/p.avail[1],0),ncol = 2, byrow = TRUE)
+  b.N.avail <- c(-small.num+(1+small.num)*sum(p.avail),1,1)
   N.avail=list(Name="Night Selection",A=A.N.avail,b=b.N.avail,func="bf_multinom")       
   
 
@@ -279,12 +279,12 @@ diel.ineq=function(xi=NULL,
   
  #Selection for nighttime & Twilight > 1, daytime is equal to or less than
   A.N.CR.avail <- matrix(c(1,1, -1/p.avail[1], 0, 0, 1/p.avail[2]),ncol = 2, byrow = TRUE)
-  b.N.CR.avail <- c(1,1,-1+small.num, 1 )
+  b.N.CR.avail <- c(-small.num+(1+small.num)*sum(p.avail),-1+small.num, 1 )
   N.CR.avail=list(Name="Night/Twilight Selection",A=A.N.CR.avail,b=b.N.CR.avail,func="bf_multinom")       
   
  #Selection for daytime & nighttime > 1, night is equal to or less than
   A.D.N.avail <- matrix(c(0, -1/p.avail[2], 1,1 ,1,0),ncol = 2, byrow = TRUE)
-  b.D.N.avail <- c(-1+small.num,-1-small.num*(1-sum(p.avail))+1, p.avail[1])
+  b.D.N.avail <- c(-1+small.num,-small.num+(1+small.num)*sum(p.avail), p.avail[1])
   D.N.avail=list(Name="Daytime/Night Selection",A=A.D.N.avail,b=b.D.N.avail,func="bf_multinom")       
   
   
