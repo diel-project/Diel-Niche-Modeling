@@ -258,7 +258,7 @@ diel.ineq=function(xi=NULL,
  #Selection for daytime > 1, all others are equal to or less than
   A.D.avail <- matrix(c(0, -1/p.avail[2], 1/p.avail[1], 0, -1, -1),ncol = 2, byrow = TRUE)
   b.D.avail <- c(-1+small.num,1, 1-sum(p.avail)-1)
-  D.avail=list(Name="Daytime Selection",A=A.D.avail,b=b.D.avail,func="bf_multinom")       
+  D.avail=list(Name="Day Selection",A=A.D.avail,b=b.D.avail,func="bf_multinom")       
 
  #Selection for Twilight > 1, all others are equal to or less than
   A.CR.avail <- matrix(c(-1/p.avail[1], 0, 0, 1/p.avail[2], -1, -1),ncol = 2, byrow = TRUE)
@@ -274,18 +274,18 @@ diel.ineq=function(xi=NULL,
  #Selection for daytime & Twilight > 1, night is equal to or less than
   A.D.CR.avail <- matrix(c(0, -1/p.avail[2], -1/p.avail[1], 0, -1, -1),ncol = 2, byrow = TRUE)
   b.D.CR.avail <- c(-1+small.num,-1+small.num, 1-sum(p.avail)-1)
-  D.CR.avail=list(Name="Daytime/Twilight Selection",A=A.D.CR.avail,b=b.D.CR.avail,func="bf_multinom")       
+  D.CR.avail=list(Name="Day-Twilight Selection",A=A.D.CR.avail,b=b.D.CR.avail,func="bf_multinom")       
   
   
  #Selection for nighttime & Twilight > 1, daytime is equal to or less than
   A.N.CR.avail <- matrix(c(1,1, -1/p.avail[1], 0, 0, 1/p.avail[2]),ncol = 2, byrow = TRUE)
   b.N.CR.avail <- c(-small.num+(1+small.num)*sum(p.avail),-1+small.num, 1 )
-  N.CR.avail=list(Name="Night/Twilight Selection",A=A.N.CR.avail,b=b.N.CR.avail,func="bf_multinom")       
+  N.CR.avail=list(Name="Night-Twilight Selection",A=A.N.CR.avail,b=b.N.CR.avail,func="bf_multinom")       
   
  #Selection for daytime & nighttime > 1, night is equal to or less than
   A.D.N.avail <- matrix(c(0, -1/p.avail[2], 1,1 ,1,0),ncol = 2, byrow = TRUE)
   b.D.N.avail <- c(-1+small.num,-small.num+(1+small.num)*sum(p.avail), p.avail[1])
-  D.N.avail=list(Name="Daytime/Night Selection",A=A.D.N.avail,b=b.D.N.avail,func="bf_multinom")       
+  D.N.avail=list(Name="Day-Night Selection",A=A.D.N.avail,b=b.D.N.avail,func="bf_multinom")       
   
   
       
@@ -295,7 +295,7 @@ diel.ineq=function(xi=NULL,
     b.AV <- c(1,1)
     C.AV <- matrix(c(1,0,0,1),ncol = 2, byrow = TRUE)
     d.AV <- c(p.avail[1],p.avail[2])
-    EQ.avail=list(Name="Selection/Available Equality",A=A.AV,b=b.AV,C=C.AV,d=d.AV,func="bf_equality") 
+    EQ.avail=list(Name="Selection-Available Equality",A=A.AV,b=b.AV,C=C.AV,d=d.AV,func="bf_equality") 
   
   
 # SPECIAL Hypotheses
