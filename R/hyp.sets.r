@@ -17,7 +17,7 @@
 hyp.sets=function(hyp.in=NULL){
 
   #NEED TO INCLUDE C.th somewhere
-  hyp.set=vector("list",5)
+  hyp.set=vector("list",6)
   
  #Hypothesis Sets
   hyp.set[[1]]=c("D","N","CR","C")
