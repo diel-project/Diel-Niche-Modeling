@@ -45,7 +45,12 @@ diel.plot(
 A plotly 3d plot
 }
 \description{
-Plots the diel niche space and posterior disribution of a fitted model.
+Plots the diel niche space and posterior distribution of a fitted model.
+}
+\details{
+This function can be a little more difficult to get running for users who 
+program in RStudio. Currently, a user would need to go to Tools > Global Options >
+General > Advanced, change the rendering engine to Desktop OpenGL, and then restart RStudio.
 }
 \examples{
 out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)

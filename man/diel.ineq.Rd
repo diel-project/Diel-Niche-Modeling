@@ -22,7 +22,7 @@ diel.ineq(
 )
 }
 \arguments{
-\item{xi}{Default c(0.8, 0.1). The first element is the minimum probability of a singular hypothesis (e.g., Diurnal). The second element is the minimum probability for Cathemeral Traditional or Cathemeral General, or binomial hypotheses.}
+\item{xi}{Default c(0.8, 0.1). The first element is the minimum probability of a singular hypothesis (e.g., Diurnal). The second element is the minimum probability for Cathemeral Traditional or Cathemeral General, or binomial hypotheses. See details for additional information.}
 
 \item{e}{Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified.}
 
@@ -48,19 +48,33 @@ diel.ineq(
 
 \item{p.avail}{Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.}
 
-\item{separation}{Default is 0. However, you can separate the hypotheses to create empty space between hypotheses probabilit space}
+\item{separation}{Default is 0. However, you can separate the hypotheses to create empty space between hypotheses probability space}
 }
 \value{
 diel.hyp A list of diel hypotheses as multinomial inequalities.
 \item{inputs}{Includes all inputted values; epsilon, xi, and p.avail.} 
 \item{D.th, N.th, CR.th, EC.th, C.th, D.max, N.max, CR.max, D.var, N.var, CR.var, C.var, AC.var, AV.var,
-   Uncon, C.max, EC, AV.EQ}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.}
+   Uncon, C.max, EC, EQ.avail, D.avail,CR.avail,N.avail, D.CR.avail, N.CR.avail, D.N.avail}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.}
 }
 \description{
-Multinomial model inequalities for diel hypotheses
+Multinomial model inequalities for diel hypotheses. Given a numeric set of values between 0 and 1, \code{diel.ineq()}
+will generate the inequality constraints that can be used within \code{\link{diel.fit}}.
+}
+\details{
+In the event that xi is a scalar, the second value will be calculated as \code{(1-xi)/2},
+ where \code{xi} is the scalar provided by the user. 
+ 
+ The values provided here generated the requisite matrix \eqn{\boldsymbol{A}}
+ and vector \eqn{\boldsymbol{b}}. For additional details on how these constraints
+ are used in a multinomial model, see Heck and Davis-Stober (2019).
 }
 \examples{
 diel.ineq()
 diel.ineq(e=0.01) #To replace all epsilon values with 0.01.
 #To replace the default values with a new epsilon value and a new xi value.
+}
+\references{
+Heck, D. W., & Davis-Stober, C. P. (2019). Multinomial models with linear inequality
+ constraints: Overview and improvements of computational methods for Bayesian
+ inference. Journal of mathematical psychology, 91, 70-87.
 }

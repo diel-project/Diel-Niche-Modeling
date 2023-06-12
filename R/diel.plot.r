@@ -1,6 +1,6 @@
 #' Plot Diel Hypothesis or Hypothesis Set Along with Posterior Samples
 #'
-#' Plots the diel niche space and posterior disribution of a fitted model.
+#' @description Plots the diel niche space and posterior distribution of a fitted model.
 #' @import plotly
 #' @import coda
 #' @param fit a list object output from the function 'diel.fit'. 
@@ -15,6 +15,13 @@
 #' @param axis.lab.size 3d graphical parameter
 #' @param legend.lab.size 3d graphical parameter
 #' @return A plotly 3d plot
+#' 
+#' @details 
+#' 
+#' This function can be a little more difficult to get running for users who 
+#' program in RStudio. Currently, a user would need to go to Tools > Global Options >
+#' General > Advanced, change the rendering engine to Desktop OpenGL, and then restart RStudio.
+#' 
 #' @examples 
 #' out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)
 #' diel.plot(out)
@@ -35,7 +42,7 @@ diel.plot=function(fit=NULL,
 #x.scene=2.5; y.scene=1; z.scene=0.3; axis.size=16; axis.lab.size=18; legend.lab.size=15
 
 if(!is.null(fit) & is.null(fit$post.samp.ms.model) & is.null(fit$post.samp) ){
-  stop("No plot. Make sure post.fit=TRUE in your diel.fit objective")
+  stop("No plot. Make sure post.fit=TRUE in your diel.fit object.")
 }    
 
   
