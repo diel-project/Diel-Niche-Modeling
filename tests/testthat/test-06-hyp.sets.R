@@ -28,5 +28,8 @@ test_that(
     expect_error(
       hyp.sets(c("Traditional", "General"))
     )
+    expect_error(
+      hyp.sets(3)
+    )
   }
 )

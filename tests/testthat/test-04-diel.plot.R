@@ -39,6 +39,14 @@ test_that(
         hyp = "CR"
       )
     )
+    out <- suppressWarnings(
+      diel.fit(
+        y=cbind(11,87,2),
+        hyp=hyp.sets("Traditional"),
+        prints = FALSE,
+        post.fit = TRUE
+      )
+    )
     expect_warning(
       diel.plot(
         out,

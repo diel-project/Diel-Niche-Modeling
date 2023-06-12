@@ -22,6 +22,11 @@
 #Need to create a call to provide a description of each hypothesis.
 
 hyp.sets=function(hyp.in=NULL){
+  if(!is.null(hyp.in)){
+    if(!is.character(hyp.in)){
+      stop("If hyp.in is not null, it must be a character object.")
+    }
+  }
 
   #NEED TO INCLUDE C.th somewhere
   hyp.set=vector("list",6)
