@@ -86,7 +86,9 @@ if(!is.null(fit$post.samp.ms.model)){post=coda::as.mcmc(fit$post.samp.ms.model)}
                      D.N = "#79AF97FF", CR.N="#8F7700FF",D.max="#EFC000FF", N.max="#0073C2FF", CR.max="#A73030FF",
                      D.th="#EFC000FF", N.th="#0073C2FF",CR.th="#A73030FF", C.th="#868686FF", EC.th="black",
                      D.var="#EFC000FF",N.var="#0073C2FF",CR.var="#A73030FF",C.var="#868686FF",AV.var="black",
-                     Uncon="lightgray",C.max="#868686FF", EC="#868686FF",AV.EQ="black")
+                     Uncon="lightgray",C.max="#868686FF", EC="#868686FF",
+                     CR.avail = "#A73030FF", D.Avail = "#EFC000FF", D.CR.avail = "#CD534CFF", D.N.avail = "#79AF97FF", EQ.avail = "black", N.avail = "#0073C2FF", N.CR.avail = "#8F7700FF" 
+                     )
   
   col.hyp.match=match(hyp,names(col.hyp))
   temp=col.hyp[col.hyp.match[!is.na(col.hyp.match)]]

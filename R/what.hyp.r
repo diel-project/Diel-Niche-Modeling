@@ -27,7 +27,7 @@ if(!is.null(hyp.in)){
                                   "Diurnal Maximizing", "Nocturnal Maximizing", "Crepuscular Maximizing",
                                   "Diurnal Variation", "Nocturnal Variation", "Crepuscular Variation", "Cathemeral Variation", "Use is equivalent to Available Variation",
                                   "Unconditional", "Cathemeral probabilities that are equivalent and exclude from maximizing hyps", "Even Cathemeral (Equivalent probabilities)", "Use is equivalent to availability",
-                                  "Daytime Selection", "Twilight Selection", "Night Selection", "Daytime/Twilight Selection", "Night/Twilight Selection","Daytime/Night Selection"
+                                  "Day Selection", "Twilight Selection", "Night Selection", "Day-Twilight Selection", "Night-Twilight Selection","Day-Night Selection"
                                   )
   )
   
