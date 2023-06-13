@@ -63,7 +63,7 @@ If you want to separate the hypotheses and reduce the parameter space of catheme
 
 ```
 
-When considering the General hypothesis set, you can adjust the lower probability value ($\xi_{1}$) to define crepuscular, diurnal, and nocturnal, as well as adjust the definitions of Cathemeral General  vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular ($\xi_{2}$). To do this, set $xi$ as a vector of two probabilities,
+When considering the General hypothesis set, you can adjust the lower threshold probability value ($\xi_{1}$) to define crepuscular, diurnal, and nocturnal, as well as adjust the definitions of Cathemeral General  vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular ($\xi_{2}$). To do this, set $xi$ as a vector of two probabilities,
 
 ```{r manual2 example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
   diel.setup=diel.ineq(xi = c(0.9,0.05))
@@ -114,7 +114,7 @@ For the **Threshold** hypotheses, we can adjust the lower probability similarly 
   diel.plot(hyp =hyp.sets("Threshold"))
 
 # Adjusted
-  diel.plot(hyp =hyp.sets("Threshold"),diel.setup=diel.ineq(xi.D = 0.6, xi.N = 0.6, xi.CR = 0.6))
+  diel.plot(hyp =hyp.sets("Threshold"),diel.setup=diel.ineq(xi.t.D = 0.6, xi.t.N = 0.6, xi.t.CR = 0.6))
   
 ```
 
