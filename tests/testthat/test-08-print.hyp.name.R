@@ -1,0 +1,167 @@
+test_that(
+  "print.hyp.name",{
+    expect_match(
+      print.hyp.name(
+        "D"
+      ),
+    "Diurnal \\(Traditional\\)"
+    )
+    
+    expect_match(
+      print.hyp.name(
+        "N"
+      ),
+      "Nocturnal \\(Traditional\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "CR"
+      ),
+      "Crepuscular \\(Traditional\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "C"
+      )
+      ,"Cathemeral \\(Traditional\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "C2"
+      )
+      ,"Cathemeral \\(General\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "D.CR"
+      )
+      ,"Diurnal-Crepuscular \\(General\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "D.N"
+      ),
+      "Diurnal-Nocturnal \\(General\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "CR.N"
+      )
+      ,"Crepuscular-Nocturnal \\(General\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "D.max"
+      )
+      ,"Diurnal \\(Maximization\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "N.max"
+      )
+      ,"Nocturnal \\(Maximization\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "CR.max"
+      )
+      ,"Crepuscular \\(Maximization\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "D.var"
+      )
+      ,"Diurnal \\(Variation\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "N.var"
+      )
+      ,"Nocturnal  \\(Variation\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "CR.var"
+      )
+      ,"Crepuscular  \\(Variation\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "C.var"
+      )
+      ,"Cathemeral  \\(Variation\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "A.AV.var"
+      )
+      ,"Available \\(Variation\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "D.avail"
+      )
+      ,"Day \\(Selection\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "CR.avail"
+      )
+      ,"Twilight \\(Selection\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "N.avail"
+      )
+      ,"Night \\(Selection\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "D.CR.avail"
+      )
+      ,"Day-Twilight \\(Selection\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "N.CR.avail"
+      )
+      ,"Night-Twilight \\(Selection\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "D.N.avail"
+      )
+      ,"Day-Night \\(Selection\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "EQ.avail"
+      )
+      ,"Available Equality \\(No Selection\\)"
+    )
+    expect_match(
+      print.hyp.name(
+        "EC"
+      )
+      ,"Even Cathemeral Equality"
+    )
+    expect_match(
+      print.hyp.name(
+        "C.Max"
+      )
+      ,"Even Cathemeral Equality Point"
+    )
+    expect_match(
+      print.hyp.name(
+        "Uncon"
+      )
+      ,"Unconstrained"
+    )
+    expect_warning(
+      print.hyp.name(
+        "shakabrah"
+      )
+    )
+    
+  }
+)

@@ -32,7 +32,7 @@ if(ms.model=="CR.avail"){np="Twilight (Selection)"}
 if(ms.model=="N.avail"){np="Night (Selection)"}
 if(ms.model=="D.CR.avail"){np="Day-Twilight (Selection)"}
 if(ms.model=="N.CR.avail"){np="Night-Twilight (Selection)"}
-if(ms.model=="D.N.avail"){np="Day-Nigt (Selection)"}
+if(ms.model=="D.N.avail"){np="Day-Night (Selection)"}
 if(ms.model=="EQ.avail"){np="Available Equality (No Selection)"}
 
 
