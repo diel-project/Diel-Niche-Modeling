@@ -113,8 +113,6 @@
 #'  )
 #'  }
 #'  
-#'  
-#'  
 #' 
 #' @export
 #' @import sfsmisc
@@ -132,6 +130,12 @@ prob.overlap=function(densityplot,
 
   if(length(dawn)!=2 | length(dusk)!=2 | !is.numeric(dawn)| !is.numeric(dusk)){
    stop("dawn/dusk need to be vectors of length 2 with only numeric values")  
+  }
+  if(dawn[1] > dawn[2]){
+    stop("the values of dawn should be the start and end of that diel period, in that order. The first value is currently greater than the second.")
+  }
+  if(dusk[1] > dusk[2]){
+    stop("the values of dusk should be the start and end of that diel period, in that order. The first value is currently greater than the second.")
   }
     
 #########################

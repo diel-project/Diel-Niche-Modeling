@@ -32,11 +32,14 @@ sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0,f
   }
 
   if(!is.numeric(n.sim) | !is.numeric(reps) | !is.numeric(n.sample)){
-    stop("n.sim, reps, and n.sample all need to be numeric ")
+    stop("n.sim, reps, and n.sample all need to be numeric.")
   }
 
   if(n.sim%%1!=0 | reps%%1!=0 | n.sample%%1!=0){
-    stop("n.sim, reps, and n.sample all need to be integers")
+    stop("n.sim, reps, and n.sample all need to be integers.")
+  }
+  if(n.sim<1 | reps<1 | n.sample<1){
+    stop("n.sim, reps, and n.sample must all be at least 1.")
   }
 
 #Chek hyp  
