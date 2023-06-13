@@ -5,17 +5,20 @@
 #' will generate the inequality constraints that can be used within \code{\link{diel.fit}}.
 #' 
 #' @param e Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified. 
-#' @param e.D Default is 0.05. A single value of variation for the Diurnal hypothesis.
-#' @param e.N Default is 0.05. A single value of variation for the Nocturnal hypothesis.
-#' @param e.CR Default is 0.05. A single value of variation for the Crepuscular hypothesis.
-#' @param e.EC  Default is 0.05. A single value of variation for the Evan Cathemeral hypothesis.
+#' @param e.D Default is 0.05. A single value of variation for the Diurnal hypothesis (Variation Hypothesis Set).
+#' @param e.N Default is 0.05. A single value of variation for the Nocturnal hypothesis (Variation Hypothesis Set).
+#' @param e.CR Default is 0.05. A single value of variation for the Crepuscular hypothesis (Variation Hypothesis Set).
+#' @param e.EC  Default is 0.05. A single value of variation for the Evan Cathemeral hypothesis (Variation Hypothesis Set).
 #' @param e.AV   Default is 0.10. A single value of variation for the Available Cathemeral hypothesis.
-#' @param xi.D Default c(0.80,0.90). A vector of the lower threshold value and the most likely value, respectively for the Diurnal hypothesis.
-#' @param xi.N  Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Nocturnal hypothesis.
-#' @param xi.CR Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Crepuscular hypothesis.
-#' @param xi.C Default c(0.2). Lower value threshold to be cathemeral
-#' @param xi.EC Default c(0.33). A single value of the available amount of time in all three diel periods.
-#' @param xi Default c(0.8, 0.1). The first element is the minimum probability of a singular hypothesis (e.g., Diurnal). The second element is the minimum probability for Cathemeral Traditional or Cathemeral General, or binomial hypotheses. See details for additional information.
+#' @param xi.t.D Default c(0.80). A single value of the lower threshold value for the Diurnal hypothesis (Threshold Hypothesis Set).
+#' @param xi.t.N  Default c(0.80). A single value of the lower threshold value for the Nocturnal hypothesis (Threshold Hypothesis Set)
+#' @param xi.t.CR Default c(0.80). A single value of the lower threshold value for the Crepuscular hypothesis (Threshold Hypothesis Set)
+#' @param xi.t.C Default c(0.2). A single value of the lower threshold value for the Cathemeral hypothesis (Threshold Hypothesis Set)
+#' @param eta.D Default c(0.90). A single value of the most probable value for the Diurnal hypothesis (Variation Hypothesis Set)
+#' @param eta.N Default c(0.90). A single value of the most probable value for the Nocturnal hypothesis (Variation Hypothesis Set)
+#' @param eta.CR Default c(0.90). A single value of the most probable value for the Crepuscular hypothesis (Variation Hypothesis Set)
+#' @param eta.C Default c(0.33). A single value of the most probable value for the Cathemeral hypothesis (Variation Hypothesis Set)
+#' @param xi Default c(0.8, 0.1). The first element is the minimum threshold probability of a singular hypothesis (e.g., Diurnal; Traditional Hypothesis set). The second element is the minimum probability for the General Hypothesis set. See details for additional information.
 #' @param separation Default is 0. However, you can separate the hypotheses to create empty space between hypotheses probability space
 #' @param p.avail Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.
 #' 
@@ -45,41 +48,6 @@
 #' @export
 ############################
 
-
-#################################
-#################################
-# Input variables
-
-# e  -  lower and upper difference to calculate range of probability values.
-
-# e varies by hypothesis, so:      e.D, 
-#                                  e.N, 
-#                                  e.CR,
-#                                  e.EC, e.AV
-
-# p.avail - (Available Cathemeral; length 2)
-#        [1] Available proportion of time in twilight time period
-#        [2] Available proportion of time in daytime period
-
-# xi.D - (Diurnal Hyp; length 2) 
-#        [1] lowest probability of p_d , 
-#        [2] most likely probability of p_d.
-
-
-# xi.N - (Nocturnal Hyp; length 2) 
-#        [1] lowest probability of p_n , 
-#        [2] most likely probability of p_n.
-
-
-# xi.CR - (Crepuscular Hyp; length 2) 
-#        [1] lowest probability of p_c , 
-#        [2] most likely probability of p_c.
-
-
-# xi.EC - (Even Cathemeral; length 1)
-#        [1] most likely probability, which is applied to all
-#           diel probs.
-
 #start function
 diel.ineq=function(xi=NULL, 
                    e=NULL,
@@ -88,11 +56,14 @@ diel.ineq=function(xi=NULL,
                    e.CR=NULL,
                    e.EC=NULL, 
                    e.AV=NULL,
-                   xi.D=NULL, 
-                   xi.N=NULL,
-                   xi.CR=NULL,
-                   xi.C=NULL,
-                   xi.EC=NULL, 
+                   xi.t.D=NULL, 
+                   xi.t.N=NULL,
+                   xi.t.CR=NULL,
+                   xi.t.C=NULL,
+                   eta.D=NULL,
+                   eta.N=NULL,
+                   eta.CR=NULL,
+                   eta.C=NULL,
                    p.avail=NULL,
                    separation=NULL){
   
@@ -117,14 +88,19 @@ diel.ineq=function(xi=NULL,
       
     )
     xi  = c(xi,(1-xi)/2)}
-  if(is.null(xi.D)){xi.D=c(0.8,0.9)} #lower threshold value, most likely value
-  if(is.null(xi.N)){xi.N=c(0.8,0.9)}  #lower threshold value, most likely value
-  if(is.null(xi.CR)){xi.CR=c(0.8,0.9)}#lower threshold value, most likely value
-  if(is.null(xi.C)){xi.C=c(0.2)}      #lower threshold value
-  if(is.null(xi.EC)){xi.EC  = c(0.33)}#Even cathemerality probability
+  if(is.null(xi.t.D)){xi.t.D=c(0.8)} #lower threshold value 
+  if(is.null(xi.t.N)){xi.t.N=c(0.8)}  #lower threshold value
+  if(is.null(xi.t.CR)){xi.t.CR=c(0.8)}#lower threshold value
+  if(is.null(xi.t.C)){xi.t.C=c(0.2)}      #lower threshold value
+  
+  if(is.null(eta.D)){eta.D=c(0.9)} #most likely value
+  if(is.null(eta.N)){eta.N=c(0.9)}  #most likely value
+  if(is.null(eta.CR)){eta.CR=c(0.9)}#most likely value
+  if(is.null(eta.C)){eta.C=c(0.333)}#most likely value
+
   if(is.null(p.avail)){p.avail  = c(0.166666,0.4166667)} #crepuscular availability and diurnal availability
   if(is.null(separation)){separation  = c(0)}
-  small.num=0.0001  
+  small.num=0.0001  #error tolerance
   
   # put together arg list
   arg_list <- list(
@@ -135,11 +111,14 @@ diel.ineq=function(xi=NULL,
     e.CR = e.CR,
     e.EC = e.EC,
     e.AV = e.AV,
-    xi.D = xi.D,
-    xi.N = xi.N,
-    xi.CR = xi.CR,
-    xi.C = xi.C,
-    xi.EC = xi.EC,
+    xi.t.D = xi.t.D,
+    xi.t.N = xi.t.N,
+    xi.t.CR = xi.t.CR,
+    xi.t.C = xi.t.C,
+    eta.D = eta.D,
+    eta.N = eta.N,
+    eta.CR = eta.CR,
+    eta.C = eta.C,
     p.avail = p.avail,
     separation = separation
   )
@@ -207,20 +186,29 @@ diel.ineq=function(xi=NULL,
   if(!length(e.AV) == 1){
     stop("e.AV must be a scalar.")
   }
-  if(!length(xi.D) == 2){
-    stop("xi.D must be a vector of length 2.")
+  if(!length(xi.t.D) == 1){
+    stop("xi.t.D must be a scalar.")
   }
-  if(!length(xi.N) == 2){
-    stop("xi.N must be a vector of length 2.")
+  if(!length(xi.t.N) == 1){
+    stop("xi.t.N must be a scalar.")
   }
-  if(!length(xi.CR) == 2){
-    stop("xi.CR must be a vector of length 2.")
+  if(!length(xi.t.CR) == 1){
+    stop("xi.t.CR must be a scalar.")
   }
-  if(!length(xi.C) == 1){
-    stop("xi.C must be a scalar.")
+  if(!length(xi.t.C) == 1){
+    stop("xi.t.C must be a scalar.")
   }
-  if(!length(xi.EC) == 1){
-    stop("xi.EC must be a scalar.")
+  if(!length(eta.C) == 1){
+    stop("eta.C must be a scalar.")
+  }
+  if(!length(eta.D) == 1){
+    stop("eta.D must be a scalar.")
+  }
+  if(!length(eta.N) == 1){
+    stop("eta.N must be a scalar.")
+  }
+  if(!length(eta.CR) == 1){
+    stop("eta.CR must be a scalar.")
   }
   if(!length(p.avail) == 2){
     stop("p.avail must be a vector of length 2.")
@@ -300,17 +288,17 @@ diel.ineq=function(xi=NULL,
   
   #Diurnal 
   A.D.th <- matrix(c(1,-1,-1,-2,0,-1),ncol = 2, byrow = TRUE)
-  b.D.th <- c(0,-1,-xi.D[1])
+  b.D.th <- c(0,-1,-xi.t.D[1])
   D.th=list(Name="Diurnal Threshold",A=A.D.th,b=b.D.th,func="bf_multinom")
   
   #Nocturnal 
   A.N.th <- matrix(c(1,2,2,1,1,1),ncol = 2, byrow = TRUE)
-  b.N.th <- c(1,1,-xi.N[1]+1)
+  b.N.th <- c(1,1,-xi.t.N[1]+1)
   N.th=list(Name="Nocturnal Threshold",A=A.N.th,b=b.N.th,func="bf_multinom")     
 
   #Crepuscular 
   A.CR.th <- matrix(c(-1,1,-2,-1,-1,0),ncol = 2, byrow = TRUE)
-  b.CR.th <- c(0,-1,-xi.CR[1])
+  b.CR.th <- c(0,-1,-xi.t.CR[1])
   CR.th=list(Name="Crepuscular Threshold",A=A.CR.th,b=b.CR.th,func="bf_multinom")     
   
   #Even Cathemeral 
@@ -324,7 +312,7 @@ diel.ineq=function(xi=NULL,
                     0, -1,
                     -1, 0),ncol = 2, byrow = TRUE)
   #b.C.th <- c(-0.2+1,-0.2,-0.2)
-  b.C.th <- c(-xi.C+1,-xi.C,-xi.C)
+  b.C.th <- c(-xi.t.C+1,-xi.t.C,-xi.t.C)
   C.th=list(Name="Cathemeral Threshold",A=A.C.th,b=b.C.th,func="bf_multinom")     
 
   
@@ -356,23 +344,23 @@ diel.ineq=function(xi=NULL,
   #VARIATION - 5 hypotheses
   #Diurnal
   A.D.var <- matrix(c(1,-1,-1,-2,0,-1,0,1),ncol = 2, byrow = TRUE)
-  b.D.var <- c(0,-1,-xi.D[2]+e.D,xi.D[2]+e.D)
+  b.D.var <- c(0,-1,-eta.D[1]+e.D,eta.D[1]+e.D)
   D.var=list(Name="Diurnal Var",A=A.D.var,b=b.D.var,func="bf_multinom")     
   
   #Nocturnal 
   A.N.var <- matrix(c(1,2,2,1,-1,-1,1,1),ncol = 2, byrow = TRUE)
-  b.N.var <- c(1, 1,xi.N[2]+e.N-1,-xi.N[2]+e.N+1)
+  b.N.var <- c(1, 1,eta.N[1]+e.N-1,-eta.N[1]+e.N+1)
   N.var=list(Name="Nocturnal Var",A=A.N.var,b=b.N.var,func="bf_multinom")     
 
   #Crepuscular 
   A.CR.var <- matrix(c(-1,1,-2,-1,-1,0,1,0),ncol = 2, byrow = TRUE)
-  b.CR.var <- c(0,-1,-xi.CR[2]+e.CR,xi.CR[2]+e.CR)
+  b.CR.var <- c(0,-1,-eta.CR[1]+e.CR,eta.CR[1]+e.CR)
   CR.var=list(Name="Crepuscular Var",A=A.CR.var,b=b.CR.var,func="bf_multinom")     
 
   #Cathemeral 
   A.C.var <- matrix(c(1,0,-1,0,0,1,0,-1,-1,-1,1,1),ncol = 2, byrow = TRUE)
-  b.C.var <- c(xi.EC[1]+e.EC,-xi.EC[1]+e.EC,xi.EC[1]+e.EC,
-                -xi.EC[1]+e.EC,xi.EC[1]+e.EC-1,-xi.EC[1]+e.EC+1)
+  b.C.var <- c(eta.C[1]+e.EC,-eta.C[1]+e.EC,eta.C[1]+e.EC,
+                -eta.C[1]+e.EC,eta.C[1]+e.EC-1,-eta.C[1]+e.EC+1)
   C.var=list(Name="Cathemeral Var",A=A.C.var,b=b.C.var,func="bf_multinom")     
 
   # Available Activity Variation
@@ -461,10 +449,12 @@ diel.ineq=function(xi=NULL,
   #Package Inputs
   inputs=list(e.D=e.D, e.N=e.N, e.CR=e.CR, 
               e.EC=e.EC, e.AV=e.AV,
-              xi.D=xi.D,xi.N=xi.N,xi.CR=xi.CR,xi.C=xi.C,
+              xi.t.D=xi.t.D,xi.t.N=xi.t.N,xi.t.CR=xi.t.CR,xi.t.C=xi.t.C,
+              eta.D=eta.D,eta.N=eta.N,eta.CR=eta.CR,eta.C=eta.C,
               xi=xi,
               xi.EC=xi.EC, p.avail=p.avail,separation=separation)  
-  
+
+
   #package outputs  
   diel.hyp=list(   
     D=D,N=N,CR=CR,C=C,
