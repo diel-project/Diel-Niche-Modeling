@@ -125,33 +125,29 @@ check.inputs=function(y,hyp.set,prior,bf.fit,diel.setup,post.fit,n.chains,
   if(diel.setup$inputs$e.AV<0.01 | diel.setup$inputs$e.AV>0.25){
     stop("diel.setup$inputs$e.AV needs to be between 0.01-0.25 \n")
   }
-  if(any(diel.setup$inputs$xi.D<0) | any(diel.setup$inputs$xi.D>1)){
-    stop("diel.setup$inputs$xi.D needs to be between 0-1 \n")
+  if(any(diel.setup$inputs$xi.t.D<0) | any(diel.setup$inputs$xi.t.D>1)){
+    stop("diel.setup$inputs$xi.t.D needs to be between 0-1 \n")
   }
-  if(any(diel.setup$inputs$xi.EC<0) | any(diel.setup$inputs$xi.EC>1)){
-    stop("diel.setup$inputs$xi.EC needs to be between 0-1 \n")
+  if(any(diel.setup$inputs$eta.C<0) | any(diel.setup$inputs$eta.C>1)){
+    stop("diel.setup$inputs$eta.C needs to be between 0-1 \n")
   }
-  if(any(diel.setup$inputs$xi.CR<0) | any(diel.setup$inputs$xi.CR>1)){
-    stop("diel.setup$inputs$xi.CR needs to be between 0-1 \n")
+  if(any(diel.setup$inputs$xi.t.CR<0) | any(diel.setup$inputs$xi.t.CR>1)){
+    stop("diel.setup$inputs$xi.t.CR needs to be between 0-1 \n")
   }
-  if(any(diel.setup$inputs$xi.N<0) | any(diel.setup$inputs$xi.N>1)){
-    stop("diel.setup$inputs$xi.N needs to be between 0-1 \n")
+  if(any(diel.setup$inputs$xi.t.N<0) | any(diel.setup$inputs$xi.t.N>1)){
+    stop("diel.setup$inputs$xi.t.N needs to be between 0-1 \n")
   }
-  if(diel.setup$inputs$xi.D[2]-diel.setup$inputs$e.D < 0 |
-     diel.setup$inputs$xi.D[2]+diel.setup$inputs$e.D >1){
-    stop("xi.D[2] \u00B1 e.D has to be between 0-1 \n")
+  if(diel.setup$inputs$eta.D-diel.setup$inputs$e.D < 0 |
+     diel.setup$inputs$eta.D+diel.setup$inputs$e.D >1){
+    stop("eta.D \u00B1 e.D has to be between 0-1 \n")
   }
-  if(diel.setup$inputs$xi.CR[2]-diel.setup$inputs$e.CR < 0 |
-     diel.setup$inputs$xi.CR[2]+diel.setup$inputs$e.CR >1){
-    stop("xi.CR[2] \u00B1 e.CR has to be between 0-1 \n")
+  if(diel.setup$inputs$eta.CR-diel.setup$inputs$e.CR < 0 |
+     diel.setup$inputs$eta.CR+diel.setup$inputs$e.CR >1){
+    stop("eta.CR \u00B1 e.CR has to be between 0-1 \n")
   }
-  if(diel.setup$inputs$xi.N[2]-diel.setup$inputs$e.N < 0 |
-     diel.setup$inputs$xi.N[2]+diel.setup$inputs$e.N >1){
-    stop("xi.N[2] \u00B1 e.N has to be between 0-1 \n")
-  }
-  if(diel.setup$inputs$xi.EC[1]-diel.setup$inputs$e.EC < 0 |
-     diel.setup$inputs$xi.EC[1]+diel.setup$inputs$e.EC >1){
-    stop("xi.EC[3] \u00B1 e.EC has to be between 0-1 \n")
+  if(diel.setup$inputs$eta.N-diel.setup$inputs$e.N < 0 |
+     diel.setup$inputs$eta.N+diel.setup$inputs$e.N >1){
+    stop("eta.N \u00B1 e.N has to be between 0-1 \n")
   }
   if(diel.setup$inputs$xi[1]<=0.5){
     stop("xi[1] has to be greater that 0.5 \n")

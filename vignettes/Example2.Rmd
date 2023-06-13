@@ -146,7 +146,7 @@ prob.quantiles$Coyote.post.samp
 
 Lets create a straightforward plot of the probabilities of activity for each species during the three diel periods.
 
-```{r plotting}
+```{r plotting, eval = TRUE,fig.height = 6, fig.width = 8}
 
       post=post.samples
       n.species=length(post)

@@ -12,39 +12,48 @@ diel.ineq(
   e.CR = NULL,
   e.EC = NULL,
   e.AV = NULL,
-  xi.D = NULL,
-  xi.N = NULL,
-  xi.CR = NULL,
-  xi.C = NULL,
-  xi.EC = NULL,
+  xi.t.D = NULL,
+  xi.t.N = NULL,
+  xi.t.CR = NULL,
+  xi.t.C = NULL,
+  eta.D = NULL,
+  eta.N = NULL,
+  eta.CR = NULL,
+  eta.C = NULL,
   p.avail = NULL,
   separation = NULL
 )
 }
 \arguments{
-\item{xi}{Default c(0.8, 0.1). The first element is the minimum probability of a singular hypothesis (e.g., Diurnal). The second element is the minimum probability for Cathemeral Traditional or Cathemeral General, or binomial hypotheses. See details for additional information.}
+\item{xi}{Default c(0.8, 0.1). The first element is the minimum threshold probability of singular hypotheses (e.g., Diurnal; Traditional Hypothesis set). The second element is the minimum probability for the General Hypothesis set. See details for additional information.}
 
 \item{e}{Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified.}
 
-\item{e.D}{Default is 0.05. A single value of variation for the Diurnal hypothesis.}
+\item{e.D}{Default is 0.05. A single value of variation for the Diurnal hypothesis (Variation Hypothesis Set).}
 
-\item{e.N}{Default is 0.05. A single value of variation for the Nocturnal hypothesis.}
+\item{e.N}{Default is 0.05. A single value of variation for the Nocturnal hypothesis (Variation Hypothesis Set).}
 
-\item{e.CR}{Default is 0.05. A single value of variation for the Crepuscular hypothesis.}
+\item{e.CR}{Default is 0.05. A single value of variation for the Crepuscular hypothesis (Variation Hypothesis Set).}
 
-\item{e.EC}{Default is 0.05. A single value of variation for the Evan Cathemeral hypothesis.}
+\item{e.EC}{Default is 0.05. A single value of variation for the Evan Cathemeral hypothesis (Variation Hypothesis Set).}
 
 \item{e.AV}{Default is 0.10. A single value of variation for the Available Cathemeral hypothesis.}
 
-\item{xi.D}{Default c(0.80,0.90). A vector of the lower threshold value and the most likely value, respectively for the Diurnal hypothesis.}
+\item{xi.t.D}{Default c(0.80). A single value of the lower threshold value for the Diurnal hypothesis (Threshold Hypothesis Set).}
 
-\item{xi.N}{Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Nocturnal hypothesis.}
+\item{xi.t.N}{Default c(0.80). A single value of the lower threshold value for the Nocturnal hypothesis (Threshold Hypothesis Set)}
 
-\item{xi.CR}{Default c(0.80,0.90). A vector of the lower threshold value and most likely value, respectively for the Crepuscular hypothesis.}
+\item{xi.t.CR}{Default c(0.80). A single value of the lower threshold value for the Crepuscular hypothesis (Threshold Hypothesis Set)}
 
-\item{xi.C}{Default c(0.2). Lower value threshold to be cathemeral}
+\item{xi.t.C}{Default c(0.2). A single value of the lower threshold value for the Cathemeral hypothesis (Threshold Hypothesis Set)}
 
-\item{xi.EC}{Default c(0.33). A single value of the available amount of time in all three diel periods.}
+\item{eta.D}{Default c(0.90). A single value of the most probable value for the Diurnal hypothesis (Variation Hypothesis Set)}
+
+\item{eta.N}{Default c(0.90). A single value of the most probable value for the Nocturnal hypothesis (Variation Hypothesis Set)}
+
+\item{eta.CR}{Default c(0.90). A single value of the most probable value for the Crepuscular hypothesis (Variation Hypothesis Set)}
+
+\item{eta.C}{Default c(0.33). A single value of the most probable value for the Cathemeral hypothesis (Variation Hypothesis Set)}
 
 \item{p.avail}{Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.}
 
