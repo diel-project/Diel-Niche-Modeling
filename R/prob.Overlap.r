@@ -106,7 +106,7 @@
 #'  
 #'  ### Step 3. Combining the kernel density estimate with overlap.
 #'  
-#'  diel_probs <- Diel.Niche::prob.Overlap(
+#'  diel_probs <- Diel.Niche::prob.overlap(
 #'    densityplot = tiger_kde,
 #'    dawn = my_dawn,
 #'    dusk = my_dusk
@@ -119,7 +119,7 @@
 #' @export
 #' @import sfsmisc
 
-prob.Overlap=function(densityplot,
+prob.overlap=function(densityplot,
                       dawn=c(6,7),
                       dusk=c(17,18)){
 

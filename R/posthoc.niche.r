@@ -16,7 +16,7 @@
 #' you could do. First, if you have the data in hand use \code{\link{diel.fit}}
 #' instead, and select the appropriate hypothesis set via \code{\link{hyp.sets}}.
 #' Second, if you want to use the output from \code{overlap}, then you could also
-#' bootstrap the kernel density estimate and use \code{\link{prob.Overlap}} in
+#' bootstrap the kernel density estimate and use \code{\link{prob.overlap}} in
 #' conjunction with \code{posthoc.niche} to get a distribution of classificaitons.
 #' Following this, you can calculate the proportion of times different diel phenotypes
 #' were selected.
@@ -119,7 +119,7 @@
 #' 
 #' ### Step 3. Combining the kernel density estimate with overlap.
 #' 
-#' diel_probs <- Diel.Niche::prob.Overlap(
+#' diel_probs <- Diel.Niche::prob.overlap(
 #'   densityplot = tiger_kde,
 #'   dawn = my_dawn,
 #'   dusk = my_dusk

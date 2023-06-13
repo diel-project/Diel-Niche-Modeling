@@ -54,7 +54,7 @@ function ‘densityPlot’ with the times of detections in radians.
   text(2,0.11,"Night",cex=2)
   text(22,0.11,"Night",cex=2)
 
-# Note that n.grid is specified to be larger than the default. A large number of density values are needed below when using the 'prob.Overlap' function.  
+# Note that n.grid is specified to be larger than the default. A large number of density values are needed below when using the 'prob.overlap' function.  
   kernel.out=densityPlot(y.radians,extend = NULL,main="",lwd=3,rug=TRUE,add=TRUE,n.grid=1000)
 ```
 
@@ -80,7 +80,7 @@ of dawn and dusk. Below, we assume a one hour period for dawn between
 
 ``` r
 # Using the object kernel.out, we integrate under the curve to estimate the three probabilities
-  prob.integrated=prob.Overlap(kernel.out,
+  prob.integrated=prob.overlap(kernel.out,
                              dawn=c(6,7),
                              dusk=c(17,18))
 
