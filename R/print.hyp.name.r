@@ -18,8 +18,8 @@ if(ms.model=="D.CR"){np="Diurnal-Crepuscular (General)"}
 if(ms.model=="D.N"){np="Diurnal-Nocturnal (General)"}
 if(ms.model=="CR.N"){np="Crepuscular-Nocturnal (General)"}
 if(ms.model=="D.max"){np="Diurnal (Maximization)"}
-if(ms.model=="N.max"){np="Diurnal (Maximization)"}
-if(ms.model=="CR.max"){np="Diurnal (Maximization)"}
+if(ms.model=="N.max"){np="Nocturnal (Maximization)"}
+if(ms.model=="CR.max"){np="Crepuscular (Maximization)"}
 
 if(ms.model=="D.var"){np="Diurnal (Variation)"}
 if(ms.model=="N.var"){np="Nocturnal  (Variation)"}
