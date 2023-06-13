@@ -1,12 +1,35 @@
 #' Posthoc diel niche
 #'
-#' Diel model hypotheses based on posthoc probabilitiy values
+#' @description Diel model hypotheses based on posthoc probabilitiy values
 #' For each input of twilight, daytime, and nightime probabilities, the function will return the defined diel hyppthesis
 #' @param y a matrix of probabilities of twilight, daytime, and nightime (three columns). Each row is a replicate.
 #' @param hyp Vector of diel hypotheses names representing hypotheses set or individual hypotheses.
 #' @param diel.setup A list of multinomial inequalities (Matrix A and vector b), representing diel hypotheses setup using the function 'diel.ineq'. If not provided, it will use the defaults of the diel.ineq function.
 #' @return data.frame of the probabilities of activity during twilight, daytime, nighttime, and matched hypothesis from the hypothesis set provided.
+#' @details
+#' 
+#' This function only uses the diel inequalities to provide a post-hoc estimate
+#' of which diel phenotype is associated to the data for a given species. As such,
+#' the output from this function is only a point estimate, and there is no 
+#' uncertainty associated to this estimate. If you are interested in the 
+#' uncertainty estimate (which we suggest you should be), there are two things
+#' you could do. First, if you have the data in hand use \code{\link{diel.fit}}
+#' instead, and select the appropriate hypothesis set via \code{\link{hyp.sets}}.
+#' Second, if you want to use the output from \code{overlap}, then you could also
+#' bootstrap the kernel density estimate and use \code{\link{prob.Overlap}} in
+#' conjunction with \code{posthoc.niche} to get a distribution of classificaitons.
+#' Following this, you can calculate the proportion of times different diel phenotypes
+#' were selected.
+#' 
+#' Furthermore, in order for \code{posthoc.niche} to work, we integrate under the
+#' kernel density estimate. Therefore, it is very important to increase the 
+#' \code{n.grid} argument in \code{overlap::densityPlot} to a sufficient number (
+#' e.g., over 10,000). 
+#' 
+#' 
 #' @export
+#' 
+#' 
 #' 
 #' @examples
 #' \dontrun{

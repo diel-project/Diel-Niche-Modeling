@@ -1,20 +1,26 @@
 test_that(
   "diel.plot",{
     
-    out <- suppressWarnings(
-      diel.fit(
-        y=cbind(11,87,2),
-        hyp="D",
-        post.fit=TRUE,
-        prints = FALSE
-      )
-    )
     # make sure it works
     expect_true(
-      all(class(diel.plot(out)) %in% c("plotly", "htmlwidget"))
+      all(
+        class(
+          diel.plot(
+            suppressWarnings(
+              diel.fit(
+                y=cbind(11,87,2),
+                hyp="D",
+                post.fit=TRUE,
+                prints = FALSE
+              )
+            )
+          )
+        ) %in% c("plotly", "htmlwidget")
+      )
     )
+
     # and now don't have a post.fit
-    out <- suppressWarnings(
+    out2 <- suppressWarnings(
       diel.fit(
         y=cbind(11,87,2),
         hyp="D",
@@ -22,10 +28,11 @@ test_that(
       )
     )
     expect_error(
-      diel.plot(out)
+      diel.plot(out2)
     )
+    rm(out2)
     # ignore hypes
-    out <- suppressWarnings(
+    out3 <- suppressWarnings(
       diel.fit(
         y=cbind(11,87,2),
         hyp=hyp.sets("Traditional"),
@@ -35,11 +42,12 @@ test_that(
     )
     expect_warning(
       diel.plot(
-        out,
+        out3,
         hyp = "CR"
       )
     )
-    out <- suppressWarnings(
+    rm(out3)
+    out4 <- suppressWarnings(
       diel.fit(
         y=cbind(11,87,2),
         hyp=hyp.sets("Traditional"),
@@ -49,10 +57,11 @@ test_that(
     )
     expect_warning(
       diel.plot(
-        out,
-        posteriors = out$post.samp
+        out4,
+        posteriors = out4$post.samp
       )
     )
+    rm(out4)
   }
 
 )
