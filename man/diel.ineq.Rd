@@ -25,7 +25,7 @@ diel.ineq(
 )
 }
 \arguments{
-\item{xi}{Default c(0.8, 0.1). The first element is the minimum threshold probability of a singular hypothesis (e.g., Diurnal; Traditional Hypothesis set). The second element is the minimum probability for the General Hypothesis set. See details for additional information.}
+\item{xi}{Default c(0.8, 0.1). The first element is the minimum threshold probability of singular hypotheses (e.g., Diurnal; Traditional Hypothesis set). The second element is the minimum probability for the General Hypothesis set. See details for additional information.}
 
 \item{e}{Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified.}
 

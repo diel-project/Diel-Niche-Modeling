@@ -18,7 +18,7 @@
 #' @param eta.N Default c(0.90). A single value of the most probable value for the Nocturnal hypothesis (Variation Hypothesis Set)
 #' @param eta.CR Default c(0.90). A single value of the most probable value for the Crepuscular hypothesis (Variation Hypothesis Set)
 #' @param eta.C Default c(0.33). A single value of the most probable value for the Cathemeral hypothesis (Variation Hypothesis Set)
-#' @param xi Default c(0.8, 0.1). The first element is the minimum threshold probability of a singular hypothesis (e.g., Diurnal; Traditional Hypothesis set). The second element is the minimum probability for the General Hypothesis set. See details for additional information.
+#' @param xi Default c(0.8, 0.1). The first element is the minimum threshold probability of singular hypotheses (e.g., Diurnal; Traditional Hypothesis set). The second element is the minimum probability for the General Hypothesis set. See details for additional information.
 #' @param separation Default is 0. However, you can separate the hypotheses to create empty space between hypotheses probability space
 #' @param p.avail Default c(0.166666,0.4166667). A vector of the available time in the periods of crepuscular and diurnal. Nighttime availability is found by subtraction.
 #' 
@@ -452,7 +452,7 @@ diel.ineq=function(xi=NULL,
               xi.t.D=xi.t.D,xi.t.N=xi.t.N,xi.t.CR=xi.t.CR,xi.t.C=xi.t.C,
               eta.D=eta.D,eta.N=eta.N,eta.CR=eta.CR,eta.C=eta.C,
               xi=xi,
-              xi.EC=xi.EC, p.avail=p.avail,separation=separation)  
+              p.avail=p.avail,separation=separation)  
 
 
   #package outputs  
