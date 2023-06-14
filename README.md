@@ -21,13 +21,16 @@ First, install and load the library
   library(Diel.Niche)
 
 # You can view the main vignette as
-  vignette("Diel-Niche-vignette")
+  vignette("Diel-Niche-Main")
 
 # Or other vignette's
   vignette("Example1")
   vignette("Example2")
   vignette("Example3")
   vignette("Example4")
+
+# To list all the available vignette's for the package
+  browseVignettes("Diel.Niche")
 
 # Listing the packages functions and help files
 
