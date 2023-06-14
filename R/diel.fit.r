@@ -146,7 +146,7 @@ if(isTRUE(post.fit) & !is.null(bf)){
 
   
   if(prints==TRUE & isTRUE(bf.fit) & length(hyp.set)>1){
-    print.name=print.hyp.name(ms.model)
+    print.name=full.hyp.name(ms.model)
     if(is.null(print.name)){print.name=ms.model}
 
     cat("The most supported model is: \n", print.name,"\n")

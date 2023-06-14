@@ -7,7 +7,7 @@
 #' @keywords internal
 #' 
 
-print.hyp.name=function(ms.model){
+full.hyp.name=function(ms.model){
 np=NULL
 if(ms.model=="D"){np="Diurnal (Traditional)"}
 if(ms.model=="N"){np="Nocturnal (Traditional)"}
