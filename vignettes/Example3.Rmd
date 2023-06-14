@@ -1,6 +1,14 @@
 ---
+title: "Example 3"
 output: rmarkdown::html_vignette
+always_allow_html: true
+vignette: >
+  %\VignetteIndexEntry{Example 3}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{MCMCvis, parallel,nimble,bbplot,lubridate,Diel.Niche}
 ---
+
 # Single species with multiple data analysis units
 #### Author: Mason Fidino
 #### Date: 2023-05-25
