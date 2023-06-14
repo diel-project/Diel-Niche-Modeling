@@ -90,9 +90,15 @@ plot.diel(hyp="D",more.points = TRUE)
 
 This hypothesis set includes seven diel phenotype hypotheses and are defined based on an inputted amount of proportional time available to an animal in each diel period ($\mathbf{p}_{\text{avail}} = [p_{av.tw},\;p_{av.d}]$). The available time in the night period does not need to be input as it is derived as $1 - p_{av.tw}, - p_{av.d}]$. The amount of time available in each diel period changes based on the day of the year and location.
 
-```{r 3dplot6,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+First, let's plot where day and night have equal availability as, 
+```{r 3dplot7,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 plot.diel(hyp=hyp.sets("Selection"),diel.setup = diel.ineq(p.avail=c(0.04,0.48)))
+```
 
+We can see the hypotheses change when we make an increasing amount of available time in the night period, such as during winter in the higher latitude areas,
+
+```{r 3dplot8,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+plot.diel(hyp=hyp.sets("Selection"),diel.setup = diel.ineq(p.avail=c(0.04,0.3)))
 ```
 
 
