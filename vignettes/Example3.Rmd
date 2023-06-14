@@ -6,7 +6,7 @@ vignette: >
   %\VignetteIndexEntry{Example 3}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{MCMCvis, parallel,nimble,bbplot,lubridate,Diel.Niche}
+  %\VignetteDepends{lubridate,Diel.Niche}
 ---
 
 # Single species with multiple data analysis units
@@ -28,7 +28,7 @@ As one example, Virginia opossum are a predominately nocturnal species that, wit
 
 As a first step, we therefore need to 1) load libraries, 2) load the data, 3) subset that data the opossum analysis units, and 4) classify the most likely diel phenotype for each analysis unit with `Diel.Niche::diel.fit()`. In addition to this we are also going to calculate the ordinal day an analysis unit started to use as a covariate in our secondary analysis.
 
-```{r setup, message = FALSE}
+```{r setup, message = FALSE, eval = FALSE}
 # Load packages
   library(Diel.Niche)
   library(lubridate)
@@ -101,6 +101,25 @@ As a first step, we therefore need to 1) load libraries, 2) load the data, 3) su
 
 ```
 
+```{r dresults, include = FALSE}
+# just read in diel results
+diel_results <- structure(list(choice = c("N", "N", "C", "N", "N", "N", "C", 
+"N", "N", "N", "N", "N", "C", "N", "N", "N", "N", "N", "N", "N", 
+"N", "N", "N", "N", "N", "N", "N"), prob = c(0.898977538798226, 
+0.999747655039128, 0.528243501159008, 0.540687625413645, 1, 1, 
+0.921170763791828, 0.978126388465138, 0.980305476361291, 0.999948461943259, 
+1, 0.999297167826952, 0.9978646460585, 0.641001732909826, 0.999603544069095, 
+0.991025898298865, 0.964596873436579, 0.831613083514967, 1, 0.998841562509205, 
+0.978928968607072, 0.50265164402921, 0.928658993859488, 0.999982233082603, 
+1, 0.999956056716404, 0.858593496906421), ord_day = c(164, 191, 
+96, 177, 258, 285, 1, 28, 163, 190, 271, 298, 363, 25, 79, 106, 
+160, 187, 268, 295, 92, 161, 187, 212, 276, 277, 303), season = c("Summer", 
+"Summer", "Spring", "Summer", "Autumn", "Autumn", "Winter", "Winter", 
+"Summer", "Summer", "Autumn", "Autumn", "Winter", "Winter", "Spring", 
+"Spring", "Summer", "Summer", "Autumn", "Autumn", "Spring", "Summer", 
+"Summer", "Summer", "Autumn", "Autumn", "Autumn")), row.names = c(NA, 
+-27L), class = "data.frame")
+```
 After this, we are only going to retain analysis units where 
 there is at least an $0.80$ probability of a diel phenotype classification. This leaves us with 23 analysis units, with most occurring in either Summer or Autumn. Furthermore, almost every analysis unit was classified as nocturnal (`N`), while two were classified as cathemeral (`C`) during the winter.
 
@@ -115,7 +134,7 @@ there is at least an $0.80$ probability of a diel phenotype classification. This
 
 The `nimble` code to fit the secondary model, as described in the paper, is:
 
-```{r nimble_model}
+```{r nimble_model, eval = FALSE}
 model_single_species <- nimble::nimbleCode(
   {
     for(i in 1:ndata){
@@ -167,7 +186,7 @@ This model requires us to get a few things together in order to fit the model to
 3. `ncov_unit`: The number of columns in `unit_dm`.
 4. `y`: A vector of integers that represents which diel phenotype was selected. In this case 1 = Cathemeral, 2 = Diurnal, and 3 = Nocturnal.
 
-```{r get_data_together}
+```{r get_data_together, eval = FALSE}
 
 # Step 1. Make the unit-level design matrix. The column
 #  of 1's is present for the model intercepts.
@@ -221,7 +240,7 @@ To fit this model to the data on multiple cores simultaneously,
 we need to bundle together all of the `nimble` code into data
 into a function. Here is how we would do that.
 
-```{r nimble_parallel_function}
+```{r nimble_parallel_function, eval = FALSE}
 run_MCMC_allcode <- function(
     seed, # random seed for each core.
     data, # data_list
@@ -288,9 +307,10 @@ run_MCMC_allcode <- function(
 
 ```
 
+
 And then we fit the model to the data and summarise it. This
 takes about one minute to run. 
-```{r fit_model}
+```{r fit_model, eval = FALSE}
 
 this_cluster <- parallel::makeCluster(4)
 
@@ -311,12 +331,19 @@ model_summary <- MCMCvis::MCMCsummary(
 )
 
 model_summary
-
+#>
+#>                     mean   sd  2.5%   50% 97.5% Rhat n.eff
+#>  diur_unit_beta[1] -1.40 1.63 -4.69 -1.36  1.66    1  7853
+#>  diur_unit_beta[2] -0.06 1.57 -3.18 -0.07  3.07    1  8287
+#>  diur_unit_beta[3] -1.89 1.34 -4.75 -1.76  0.37    1  8206
+#>  noct_unit_beta[1]  4.26 1.15  2.22  4.19  6.67    1  8000
+#>  noct_unit_beta[2] -0.58 0.71 -2.02 -0.57  0.80    1  8000
+#>  noct_unit_beta[3] -1.38 0.59 -2.61 -1.36 -0.27    1  7841
 ```
 
 Looking at the model summary we can see that there is strong evidence that `noct_unit_beta[3]`, which is the squared ordinal term, is negative. Let's generate the predictions for this across a full year.
 
-```{r get_predictions}
+```{r get_predictions, eval = FALSE}
 
 # sequence of days for predictions
   days <- 1:365
@@ -384,7 +411,7 @@ Looking at the model summary we can see that there is strong evidence that `noct
 
 With these predictions we can plot out the probability of nocturnality as a function of ordinal day. You can see here that the probability of nocturnality greatly decreases at the start and end of the year. However, there is substantial uncertainty around this given that we had less data during the spring and winter. 
 
-```{r plot_results, align = "center", fig.height = 6, fig.width = 8, fig.cap = " Figure 3.1. Opossum are predominately nocturnal during the middle of the year, but this precipitously drops off at the start and end of a year. The solid black line represents the median probability of nocturnality while the shaded ribbon is the 95% credible interval."}
+```{r plot_results, eval = FALSE}
 {
   # Set margins
     par(
@@ -461,6 +488,11 @@ With these predictions we can plot out the probability of nocturnality as a func
 
 ```
 
+```{r fig_out, echo = FALSE, align = "center", out.width = '70%', fig.cap = " Figure 3.1. Opossum are predominately nocturnal during the middle of the year, but this precipitously drops off at the start and end of a year. The solid black line represents the median probability of nocturnality while the shaded ribbon is the 95% credible interval."}
+
+knitr::include_graphics("img/opossum_nocturnal_time.png")
+
+```
 
 # References
 

@@ -4,7 +4,7 @@
 \alias{print.hyp.name}
 \title{Kernel Overlap density integration}
 \usage{
-\method{print}{hyp.name}(ms.model, ...)
+\method{print}{hyp.name}(ms.model)
 }
 \arguments{
 \item{ms.model}{most supported model/hypothesis}
