@@ -276,7 +276,7 @@ mcmc_areas(posteriors, prob = 0.8) + plot_title+
 We can also plot the posteriors in 3D using ploty.
 
 ``` r
-plot(out)
+triplot(out)
 ```
 
 <img src="README_files/figure-gfm/plotlyPosteriores.png" />

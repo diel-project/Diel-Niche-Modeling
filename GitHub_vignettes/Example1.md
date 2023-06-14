@@ -1,4 +1,4 @@
-# Example 1: Single Data Analysis Unit
+# Single Data Analysis Unit
 
 #### Author: Brian D. Gerber
 
@@ -38,6 +38,11 @@ of interest.
 #>     date, intersect, setdiff, union
   library(coda)
   library(ggplot2)
+#> 
+#> Attaching package: 'ggplot2'
+#> The following object is masked from 'package:Diel.Niche':
+#> 
+#>     last_plot
   library(bayesplot)
 #> This is bayesplot version 1.10.0
 #> - Online documentation and vignettes at mc-stan.org/bayesplot
@@ -53,10 +58,10 @@ of interest.
 
 # Visualize the data
   head(winter)
-#>           scientificName twilight day night trap_nights nsite   min_date  max_date mean_lat mean_lon season       country   phylum    class           order
-#> 111 Didelphis virginiana        5  20    39        1616   131 12/29/2018 1/24/2019 41.87236 -87.8423 Winter United States Chordata Mammalia Didelphimorphia
-#>          family             Project unit_type      Common_name Activity_Literature min_year
-#> 111 Didelphidae UWIN_Chicago_IL_USA     28day Virginia Opossum           Nocturnal     2018
+#>           scientificName twilight day night trap_nights nsite   min_date  max_date mean_lat mean_lon season       country   phylum    class
+#> 111 Didelphis virginiana        5  20    39        1616   131 12/29/2018 1/24/2019 41.87236 -87.8423 Winter United States Chordata Mammalia
+#>               order      family             Project unit_type      Common_name Activity_Literature min_year
+#> 111 Didelphimorphia Didelphidae UWIN_Chicago_IL_USA     28day Virginia Opossum           Nocturnal     2018
 ```
 
 For simplicity, we extract the count data and assign it to the object
@@ -78,14 +83,13 @@ y
 We are now ready to compare models using the *Traditional* hypothesis
 set, which includes four models: diurnal, nocturnal, crepuscular, and
 Traditional Cathemeral. We can confirm that this is the hypothesis set
-of interest by plotting the set together using the triplot function
-as,
+of interest by plotting the set together using the triplot function as,
 
 ``` r
 triplot(hyp=hyp.sets("Traditional"))
 ```
 
-![](Example1_files/figure-gfm/example1.md.github.png)<!-- -->
+![](Example1_files/figure-gfm/hyp.visual-1.png)<!-- -->
 
 To fit our data (`y`), we use the function ‘diel.fit’, specifying the
 hypothesis set of interest and MCMC inputs.
@@ -106,11 +110,11 @@ posterior model probabilities for all models as,
 
 ``` r
 out$bf.table
-#>    Prior   Posterior
-#> D   0.25 0.000000000
-#> N   0.25 0.005061461
-#> CR  0.25 0.000000000
-#> C   0.25 0.994938539
+#>    Prior  Posterior
+#> D   0.25 0.00000000
+#> N   0.25 0.00460474
+#> CR  0.25 0.00000000
+#> C   0.25 0.99539526
 ```
 
 which indicate that we are very certain that Traditional Cathemeral
@@ -146,7 +150,7 @@ data.
 ``` r
 out$ms.ppc
 #>    X2_obs   X2_pred       ppp 
-#> 1.9654604 1.9874865 0.5124167
+#> 2.0054899 1.9936601 0.5064167
 ```
 
 This model indicates that it fits the data with a probability value of
@@ -193,17 +197,15 @@ Alternatively, using base R to plot the same posteriors,
 
 ![](Example1_files/figure-gfm/plot2-1.png)<!-- -->
 
-Alternatively, we can use the triplot function in the Diel.Niche
-package that uses plotly to output a 3d plot of the posterior samples on
-top of the hypothesis set. We execute the ‘triplot’ function simply
-using the generic function ‘plot’ as the objecti out from diel.fit has a
-unique class identifier (diel).
+Alternatively, we can use the triplot function in the Diel.Niche package
+that uses plotly to output a 3d plot of the posterior samples on top of
+the hypothesis set.
 
 ``` r
-plot(out)
+triplot(out)
 ```
 
-<img src="Example1_files/figure-gfm/example1.md.github.posteriors.png">
+<img src="Example1_files/figure-gfm/3dplot 2-1.png" width="6.5in" style="display: block; margin: auto;" />
 
 The black dots are the entire posterior samples plotted within the
 Traditional Cathemeral hypothesis. This point cloud shows us that the
@@ -213,9 +215,9 @@ posterior median and 95% credible intervals, we can extract these as,
 ``` r
 apply(out$post.samp.ms.model,2,quantile, probs=c(0.025,0.5,0.975))
 #>         p_crep_1   p_day_1 p_night_1
-#> 2.5%  0.03424053 0.2110147 0.4779633
-#> 50%   0.08490342 0.3116711 0.5985416
-#> 97.5% 0.16706998 0.4294272 0.7083753
+#> 2.5%  0.03396205 0.2074043 0.4790741
+#> 50%   0.08552308 0.3106363 0.5988325
+#> 97.5% 0.16721113 0.4265793 0.7125295
 ```
 
 # Conclusions

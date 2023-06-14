@@ -1,4 +1,4 @@
-# Example 4: Circular Kernel Analysis with Diel Hypotheses
+# Circular Kernel Analysis with Diel Hypotheses
 
 #### Author: Brian D. Gerber
 
@@ -18,6 +18,8 @@ the kernel output.
 # Load packages
   library(Diel.Niche)
   library(overlap)
+#> This is overlap devel version 0.3.4.
+#> For overview type ?overlap; for changes do news(p='overlap').
 ```
 
 We will consider a set of observed data on a species of interest from
@@ -131,6 +133,6 @@ two diel periods, as supported by the Diurnal-Nocturnal hypothesis.
 
 # References
 
-Ridout, Martin S., and Matthew Linkie. “Estimating overlap of daily
-activity patterns from camera trap data.” Journal of Agricultural,
-Biological, and Environmental Statistics 14 (2009): 322-337.
+Ridout, M. S., and Linkie, M. Estimating overlap of daily activity
+patterns from camera trap data. Journal of Agricultural, Biological, and
+Environmental Statistics 14 (2009): 322-337.

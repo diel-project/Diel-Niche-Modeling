@@ -1,4 +1,4 @@
-# Example 2: Multiple species with one data analysis unit
+# Multiple species with one data analysis unit
 
 #### Author: Brian D. Gerber
 
@@ -36,25 +36,25 @@ literature designations of diel activity.
 
 # Data visual
   head(winter)
-#>             scientificName twilight day night trap_nights nsite  min_date  max_date mean_lat mean_lon season       country   phylum    class           order
-#> 118          Canis latrans        3   8    23         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia       Carnivora
-#> 119   Didelphis virginiana        0   7    18         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia Didelphimorphia
-#> 120 Odocoileus virginianus        4  39    20         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia    Artiodactyla
-#> 121          Procyon lotor        6   8   133         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia       Carnivora
-#> 122   Sciurus carolinensis        0 284     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia        Rodentia
-#> 123          Sciurus niger        0  49     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia        Rodentia
-#>          family             Project unit_type           Common_name Activity_Literature min_year
-#> 118     Canidae UWIN_Chicago_IL_USA     28day                Coyote          Cathemeral     2019
-#> 119 Didelphidae UWIN_Chicago_IL_USA     28day      Virginia Opossum           Nocturnal     2019
-#> 120    Cervidae UWIN_Chicago_IL_USA     28day     White-tailed Deer         Crepuscular     2019
-#> 121 Procyonidae UWIN_Chicago_IL_USA     28day      Northern Raccoon           Nocturnal     2019
-#> 122   Sciuridae UWIN_Chicago_IL_USA     28day Eastern Gray Squirrel             Diurnal     2019
-#> 123   Sciuridae UWIN_Chicago_IL_USA     28day  Eastern Fox Squirrel             Diurnal     2019
+#>             scientificName twilight day night trap_nights nsite  min_date  max_date mean_lat mean_lon season       country   phylum    class
+#> 118          Canis latrans        3   8    23         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia
+#> 119   Didelphis virginiana        0   7    18         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia
+#> 120 Odocoileus virginianus        4  39    20         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia
+#> 121          Procyon lotor        6   8   133         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia
+#> 122   Sciurus carolinensis        0 284     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia
+#> 123          Sciurus niger        0  49     0         995   131 1/25/2019 2/20/2019 41.87236 -87.8423 Winter United States Chordata Mammalia
+#>               order      family             Project unit_type           Common_name Activity_Literature min_year
+#> 118       Carnivora     Canidae UWIN_Chicago_IL_USA     28day                Coyote          Cathemeral     2019
+#> 119 Didelphimorphia Didelphidae UWIN_Chicago_IL_USA     28day      Virginia Opossum           Nocturnal     2019
+#> 120    Artiodactyla    Cervidae UWIN_Chicago_IL_USA     28day     White-tailed Deer         Crepuscular     2019
+#> 121       Carnivora Procyonidae UWIN_Chicago_IL_USA     28day      Northern Raccoon           Nocturnal     2019
+#> 122        Rodentia   Sciuridae UWIN_Chicago_IL_USA     28day Eastern Gray Squirrel             Diurnal     2019
+#> 123        Rodentia   Sciuridae UWIN_Chicago_IL_USA     28day  Eastern Fox Squirrel             Diurnal     2019
 
 # Species observed
   unique(winter$scientificName)
-#> [1] "Canis latrans"          "Didelphis virginiana"   "Odocoileus virginianus" "Procyon lotor"          "Sciurus carolinensis"   "Sciurus niger"         
-#> [7] "Sylvilagus floridanus"
+#> [1] "Canis latrans"          "Didelphis virginiana"   "Odocoileus virginianus" "Procyon lotor"          "Sciurus carolinensis"  
+#> [6] "Sciurus niger"          "Sylvilagus floridanus"
 ```
 
 We can extract all the species data into object `y` as,
@@ -108,9 +108,9 @@ supported model and its probability.
 
   round(sp.model.probs,digits=2)
 #>                       D    N CR   C2 D.CR  D.N CR.N
-#> Coyote                0 0.10  0 0.20    0 0.70 0.01
-#> Virginia Opossum      0 0.16  0 0.02    0 0.82 0.00
-#> White-tailed Deer     0 0.00  0 0.07    0 0.93 0.00
+#> Coyote                0 0.08  0 0.21    0 0.70 0.01
+#> Virginia Opossum      0 0.21  0 0.01    0 0.78 0.00
+#> White-tailed Deer     0 0.00  0 0.06    0 0.94 0.00
 #> Northern Raccoon      0 1.00  0 0.00    0 0.00 0.00
 #> Eastern Gray Squirrel 1 0.00  0 0.00    0 0.00 0.00
 #> Eastern Fox Squirrel  1 0.00  0 0.00    0 0.00 0.00
@@ -119,10 +119,10 @@ supported model and its probability.
 #The probabilities of the most supported hypothesis
   ms.hyps=unlist(lapply(out.multi,'[',1))
   ms.hyps
-#>                Coyote.ms.model      Virginia Opossum.ms.model     White-tailed Deer.ms.model      Northern Raccoon.ms.model Eastern Gray Squirrel.ms.model 
-#>                          "D.N"                          "D.N"                          "D.N"                            "N"                            "D" 
-#>  Eastern Fox Squirrel.ms.model    Eastern Cottontail.ms.model 
-#>                            "D"                            "N"
+#>                Coyote.ms.model      Virginia Opossum.ms.model     White-tailed Deer.ms.model      Northern Raccoon.ms.model 
+#>                          "D.N"                          "D.N"                          "D.N"                            "N" 
+#> Eastern Gray Squirrel.ms.model  Eastern Fox Squirrel.ms.model    Eastern Cottontail.ms.model 
+#>                            "D"                            "D"                            "N"
 
   prob.hyps=unlist(lapply(lapply(out.multi,'[',2), FUN=function(x){max(x$prob[,2])}))
   ms.hyps=data.frame(ms.hyps,prob.hyps)
@@ -160,6 +160,19 @@ multi.fit.fun2 = function(y.df){
 }
 
 out.multi2=apply(y.df,1, multi.fit.fun2)
+#> Warning in check.inputs(y = y, hyp.set = hyp.set, bf.fit = bf.fit, prior = prior, : Model probabilities are not estimated when one hypothesis is provided.
+
+#> Warning in check.inputs(y = y, hyp.set = hyp.set, bf.fit = bf.fit, prior = prior, : Model probabilities are not estimated when one hypothesis is provided.
+
+#> Warning in check.inputs(y = y, hyp.set = hyp.set, bf.fit = bf.fit, prior = prior, : Model probabilities are not estimated when one hypothesis is provided.
+
+#> Warning in check.inputs(y = y, hyp.set = hyp.set, bf.fit = bf.fit, prior = prior, : Model probabilities are not estimated when one hypothesis is provided.
+
+#> Warning in check.inputs(y = y, hyp.set = hyp.set, bf.fit = bf.fit, prior = prior, : Model probabilities are not estimated when one hypothesis is provided.
+
+#> Warning in check.inputs(y = y, hyp.set = hyp.set, bf.fit = bf.fit, prior = prior, : Model probabilities are not estimated when one hypothesis is provided.
+
+#> Warning in check.inputs(y = y, hyp.set = hyp.set, bf.fit = bf.fit, prior = prior, : Model probabilities are not estimated when one hypothesis is provided.
 
 # We can extract the geman-rubin diagnostics to check for convergence issues
   sapply(out.multi2,function(x) x[2])
@@ -168,8 +181,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1          1
-#> p1_2          1          1
+#> p1_1          1       1.00
+#> p1_2          1       1.01
 #> 
 #> 
 #> 
@@ -178,8 +191,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.01
-#> p1_2          1       1.01
+#> p1_1          1          1
+#> p1_2          1          1
 #> 
 #> 
 #> 
@@ -218,8 +231,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1       1.01       1.03
-#> p1_2       1.01       1.03
+#> p1_1          1          1
+#> p1_2          1          1
 #> 
 #> 
 #> 
@@ -228,8 +241,8 @@ out.multi2=apply(y.df,1, multi.fit.fun2)
 #> Potential scale reduction factors:
 #> 
 #>      Point est. Upper C.I.
-#> p1_1          1       1.00
-#> p1_2          1       1.02
+#> p1_1          1          1
+#> p1_2          1          1
   
 # Seeing no convergence issues, we can combine our chains
   post.samples=lapply(sapply(out.multi2,function(x) x[1]), FUN=function(x){do.call("rbind",x)})
@@ -244,9 +257,9 @@ prob.quantiles=lapply(post.samples, FUN=function(x){apply(x,2,quantile,probs=c(0
 
 prob.quantiles$Coyote.post.samp
 #>         p_crep_1   p_day_1 p_night_1
-#> 2.5%  0.02591763 0.1439491 0.5256897
-#> 50%   0.07040029 0.2506016 0.6798877
-#> 97.5% 0.09812505 0.4005481 0.7861015
+#> 2.5%  0.02595768 0.1456813 0.5200744
+#> 50%   0.07032938 0.2534031 0.6771548
+#> 97.5% 0.09840515 0.4117282 0.7856540
 
 # Extract posterior medians fo each species
   prob.median=matrix(unlist(lapply(prob.quantiles, FUN = function(x){x[2,]})),ncol=3,byrow = TRUE)
@@ -254,13 +267,13 @@ prob.quantiles$Coyote.post.samp
   colnames(prob.median)=colnames(prob.quantiles$Coyote.post.samp)
   prob.median
 #>                                    p_crep_1    p_day_1   p_night_1
-#> Coyote.post.samp                0.070400294 0.25060164 0.679887690
-#> Virginia Opossum.post.samp      0.024499847 0.28954046 0.679735797
-#> White-tailed Deer.post.samp     0.063514893 0.61401043 0.321630197
-#> Northern Raccoon.post.samp      0.044757666 0.05814631 0.895781598
-#> Eastern Gray Squirrel.post.samp 0.002322202 0.99426136 0.002386044
-#> Eastern Fox Squirrel.post.samp  0.013880784 0.96749613 0.013536350
-#> Eastern Cottontail.post.samp    0.095684179 0.03903004 0.862773497
+#> Coyote.post.samp                0.070329377 0.25340307 0.677154759
+#> Virginia Opossum.post.samp      0.024732771 0.29239978 0.676321483
+#> White-tailed Deer.post.samp     0.063996307 0.61630341 0.320916063
+#> Northern Raccoon.post.samp      0.045006675 0.05806385 0.895025438
+#> Eastern Gray Squirrel.post.samp 0.002341645 0.99422626 0.002325349
+#> Eastern Fox Squirrel.post.samp  0.013480516 0.96806748 0.013424993
+#> Eastern Cottontail.post.samp    0.094217440 0.03889043 0.864768316
 ```
 
 # Plotting
@@ -280,7 +293,7 @@ each species during the three diel periods.
       pos <- position_nudge(y = y.pos, x=rep(0,nrow(post)))
       p=ggplot(post, aes(x = m, y = parameter, color = Species)) + 
         geom_point(size=6,position=pos) +
-        geom_linerange(aes(xmin = ll, xmax = hh),size=1,position=pos)+
+        geom_linerange(aes(xmin = ll, xmax = hh),linewidth=1,position=pos)+
         xlab("Probabilty")+ylab("")+xlim(0,1)+
         theme(text = element_text(size = 20))+ coord_flip()+
          scale_colour_colorblind()+
