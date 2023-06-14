@@ -11,6 +11,7 @@ A data frame with 232 rows and 19 variables:
   \item{twilight}{Frequency of detections during the twilight period; sunrise and sunset.}
   \item{day}{Frequency of detections during the daytime period.}
   \item{night}{Frequency of detections during the nighttime period.}
+  \item{trap_nights}{The number of days all cameras were active.}
   \item{nsite}{The number of unique camera locations.}
   \item{min_date}{The first date of sampling in the sampling period.}
   \item{max_date}{The last date of sampling in the sampling period.}
@@ -26,6 +27,7 @@ A data frame with 232 rows and 19 variables:
   \item{unit_type}{The length of the sampling period.}
   \item{Common_name}{Common name for the species.}
   \item{Activity_Literature}{Activity classification for the species from the literature; see Cox, D. T. C., Gardner, A. S., & Gaston, K. J. (2021). Diel niche variation in mammals associated with expanded trait space. Nature communications, 12(1), 1753.}
+  \item{min_year}{The year that sampling began.}
 }
 }
 \source{
