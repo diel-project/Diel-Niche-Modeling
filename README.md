@@ -21,7 +21,7 @@ First, install and load the library
   library(Diel.Niche)
 
 # You can view the main vignette as
-  vignette("Diel-Niche-Main")
+  vignette("Diel-Niche-Vignette")
 
 # Or other vignette's
   vignette("Example1")
