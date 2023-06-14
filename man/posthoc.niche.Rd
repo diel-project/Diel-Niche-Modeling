@@ -40,6 +40,26 @@ kernel density estimate. Therefore, it is very important to increase the
 e.g., over 10,000).
 }
 \examples{
+
+#'  data("posthoc.example")
+ 
+ diel_probs <- prob.overlap(
+   posthoc.example$tiger.kde,
+   dawn = posthoc.example$dawn.range,
+   dusk = posthoc.example$dusk.range
+ )
+ 
+ tiger_niche <- Diel.Niche::posthoc.niche(
+  y = diel_probs,
+  hyp = hyp.sets("Traditional")
+)
+
+# look at output. 
+tiger_niche
+
+#       p.twi     p.day   p.night             Hypothesis
+#1 0.09626836 0.6007204 0.3027826 Cathemeral Traditional
+
 \dontrun{
 
 # NOTE:  For this example we have to make some assumptions

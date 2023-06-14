@@ -40,90 +40,11 @@ compute the associated probabilities. We suggest to start setting \code{n.grid}
  for some code on how to do this.
  
  @examples
- \dontrun{
+ data("posthoc.example")
  
- # NOTE: We have no clue really when the tiger data was collected
- #   so we chose a time around when the original overlap paper
- #   said the data was collected. With your own camera trap data
- #   this is something that you should know.
- 
- # load packages
- library(suncalc)
- library(lubridate)
- library(overlap)
- 
- ### Step 1. Get Kernel Density Estimate
- 
- # load data
- data("kerinci")
- 
- # subset to a single species
- tiger <- kerinci[kerinci$Sps == "tiger",]
- 
- # convert to Radians
- tiger$Rad <- tiger$Time * 2 * pi
- 
- # get kde, you need to increase the number
- #  of grid points in order to use
- #  Diel.Niche::posthoc.niche()
- tiger_kde <- overlap::densityPlot(
-   tiger$Rad,
-   extend = NULL,
-   n.grid = 10000
+ diel_probs <- prob.overlap(
+   posthoc.example$tiger.kde,
+   dawn = posthoc.example$dawn.range,
+   dusk = posthoc.example$dusk.range
  )
- 
- # Step 2. Calculate start and end of dawn / dusk
- 
- my_times <- suncalc::getSunlightTimes(
-   date = as.Date("2008-03-12"),
-   lat = -2.41,
-   lon =  101.4836,
-   keep = c("dusk", "night", "dawn","nightEnd"),
-   tz = "Asia/Jakarta"
- )
- 
- my_times$dusk <- lubridate::hms(
-   format(
-     my_times$dusk,
-     "%H:%M:%S"
-   )
- )
- 
- my_times$night <- lubridate::hms(
-   format(
-     my_times$night,
-     "%H:%M:%S"
-   )
- )
- my_times$dawn <- lubridate::hms(
-   format(
-     my_times$dawn,
-     "%H:%M:%S"
-   )
- )
- my_times$nightEnd <- lubridate::hms(
-   format(
-     my_times$nightEnd,
-     "%H:%M:%S"
-   )
- )
- 
- # calculate the time when dawn & dusk starts and stops
- my_dawn <- c(my_times$nightEnd, my_times$dawn)
- 
- my_dusk <- c(my_times$dusk, my_times$night)
- 
- # convert these to fractional hours, given that there
- #  are 86400 seconds in a day.
- my_dawn <- (as.numeric(my_dawn) / 86400) * 24
- my_dusk <- (as.numeric(my_dusk) / 86400) * 24
- 
- ### Step 3. Combining the kernel density estimate with overlap.
- 
- diel_probs <- Diel.Niche::prob.overlap(
-   densityplot = tiger_kde,
-   dawn = my_dawn,
-   dusk = my_dusk
- )
- }
 }

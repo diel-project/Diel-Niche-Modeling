@@ -27,7 +27,6 @@ A data frame with 232 rows and 19 variables:
   \item{unit_type}{The length of the sampling period.}
   \item{Common_name}{Common name for the species.}
   \item{Activity_Literature}{Activity classification for the species from the literature; see Cox, D. T. C., Gardner, A. S., & Gaston, K. J. (2021). Diel niche variation in mammals associated with expanded trait space. Nature communications, 12(1), 1753.}
-  \item{min_year}{The year that sampling began.}
 }
 }
 \source{
