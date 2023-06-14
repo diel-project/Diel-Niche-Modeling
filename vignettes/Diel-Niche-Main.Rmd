@@ -47,7 +47,7 @@ To list the hypotheses of a given set,
   hyp.sets("General")
 ```
 
-The best way to understand each hypothesis set is by plotting hypotheses from a set. For the three fundamental sets:
+The best way to understand each hypothesis set is by plotting hypotheses from a set. For the four fundamental sets:
 
 **Maximizing**
 
