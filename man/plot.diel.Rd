@@ -49,5 +49,5 @@ Plots the diel niche space and posterior disribution of a fitted model.
 }
 \examples{
 out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)
-diel.plot(out)
+plot(out)
 }
