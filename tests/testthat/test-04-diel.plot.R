@@ -1,6 +1,7 @@
 test_that(
   "diel.plot",{
     
+    
     # make sure it works
     expect_true(
       all(
@@ -10,6 +11,7 @@ test_that(
               diel.fit(
                 y=cbind(11,87,2),
                 hyp="D",
+                n.chains = 2,
                 post.fit=TRUE,
                 prints = FALSE
               )
@@ -58,7 +60,7 @@ test_that(
     expect_warning(
       diel.plot(
         out4,
-        posteriors = out4$post.samp
+        posteriors = out4$post.samp.ms.model
       )
     )
     rm(out4)
