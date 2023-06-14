@@ -47,7 +47,7 @@ is used most. As such, there is no hypothesis about activity across
 multiple time periods (i.e., cathemeral).
 
 ``` r
-plot.diel(hyp=hyp.sets("Maximizing"))
+triplot(hyp=hyp.sets("Maximizing"))
 ```
 
 <img src="README_files/figure-gfm/maximizing.png" />
@@ -65,7 +65,7 @@ Cathemeral; this occurs when either two or three time periods are used
 more than $1-\xi_{1}$.
 
 ``` r
-plot.diel(hyp=hyp.sets("Traditional"))
+triplot(hyp=hyp.sets("Traditional"))
 ```
 
 <img src="README_files/figure-gfm/traditional.png"/>
@@ -92,7 +92,7 @@ binomial hypotheses (Crepuscular-Nocturnal, Diurnal-Nocturnal, and
 Diurnal-Crepuscular).
 
 ``` r
-plot.diel(hyp=hyp.sets("General"))
+triplot(hyp=hyp.sets("General"))
 ```
 
 <img src="README_files/figure-gfm/general.png"/>

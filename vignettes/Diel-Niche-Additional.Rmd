@@ -33,7 +33,7 @@ Along with the three main hypotheses sets (*Maximizing*, *Traditioanl*, and *Gen
 
 This hypothesis set is based on defining each diel period in terms of lower thresholds. If the thresholds are not provided, default values are used.
 ```{r 3dplot4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
-plot.diel(hyp=hyp.sets("Threshold"))
+triplot(hyp=hyp.sets("Threshold"))
 ```
 
 Not that where there is no colored space indicates that this set of probabilities are not considered as possible parameter values. Therefore, when using this hypothesis set you are deciding that these combinations of parameter values can not occur.
@@ -42,7 +42,7 @@ Not that where there is no colored space indicates that this set of probabilitie
 
 This hypothesis set is based on defining the ranges (lower, upper) of possible probability values. 
 ```{r 3dplot5,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-plot.diel(hyp=hyp.sets("Variation"))
+triplot(hyp=hyp.sets("Variation"))
 ```
 
 
@@ -52,14 +52,14 @@ You do not need to rely on pre-set definitions of diel hypotheses. If you are in
 
 ```{r manual example 1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
   diel.setup=diel.ineq(xi = c(0.90))
-  plot.diel(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
+  triplot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 ```
 
 If you want to separate the hypotheses and reduce the parameter space of cathemerality,
 
 ```{r manual example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
   diel.setup=diel.ineq(xi = 0.70,separation=0.10)
-  plot.diel(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
+  triplot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 
 ```
 
@@ -67,7 +67,7 @@ When considering the General hypothesis set, you can adjust the lower threshold 
 
 ```{r manual2 example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
   diel.setup=diel.ineq(xi = c(0.9,0.05))
-  plot.diel(hyp=hyp.sets("General"),diel.setup=diel.setup)
+  triplot(hyp=hyp.sets("General"),diel.setup=diel.setup)
 ```
 
 This new hypothesis set can be used to simulate data and fit the same models by passing the object diel.setup as an attribute of the functions sim.diel and diel.fit.
@@ -78,7 +78,7 @@ y=sim.diel(hyp="D.CR",n.sample = 200,diel.setup=diel.setup)$y
 
 out = diel.fit(y,hyp.set=hyp.sets("General"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
 
-plot.diel(out)
+triplot(out)
   
 ```
 
@@ -94,15 +94,15 @@ For the **Variation** hypotheses, we can adjust the range of values for all hypo
 ```{r manual variation, fig.height = 6, fig.width = 6}
 
 # Default
-  plot.diel(hyp =hyp.sets("Variation"))
+  triplot(hyp =hyp.sets("Variation"))
 
 # New
-  plot.diel(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e = 0.2))
+  triplot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e = 0.2))
 
   
 # You can change individual hypotheses as well. Here, we are changing the range of the diurnal hypothesis only. This is not recommend. But, there is flexibility to be creative.
 
-  plot.diel(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e.D = 0.4))
+  triplot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e.D = 0.4))
   
 ```
 
@@ -111,11 +111,11 @@ For the **Threshold** hypotheses, we can adjust the lower probability similarly 
 ```{r manual threshold, fig.height = 6, fig.width = 6}
   
 # Default
-  plot.diel(hyp =hyp.sets("Threshold"))
+  triplot(hyp =hyp.sets("Threshold"))
 
 # Adjusted
 
-  plot.diel(
+  triplot(
     hyp =hyp.sets("Threshold"),
     diel.setup=diel.ineq(
       xi.t.D = 0.6, xi.t.N = 0.6, xi.t.CR = 0.6
@@ -214,7 +214,7 @@ We have setup our hypotheses. Now, we need to visualize them to check it's what 
 
 
 ```{r user.spec.visual,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-plot.diel(hyp=c("New1","New2"),diel.setup = diel.setup,more.points = TRUE)
+triplot(hyp=c("New1","New2"),diel.setup = diel.setup,more.points = TRUE)
 ```
 
 ### Simulating and Fitting

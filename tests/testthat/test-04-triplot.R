@@ -1,11 +1,11 @@
 test_that(
-  "plot.diel",{
+  "triplot",{
     
     # make sure it works
     expect_true(
       all(
         class(
-          plot.diel(
+          triplot(
             suppressWarnings(
               diel.fit(
                 y=cbind(11,87,2),
@@ -28,7 +28,7 @@ test_that(
       )
     )
     expect_error(
-      plot.diel(out2)
+      triplot(out2)
     )
     rm(out2)
     # ignore hypes
@@ -41,7 +41,7 @@ test_that(
       )
     )
     expect_warning(
-      plot.diel(
+      triplot(
         out3,
         hyp = "CR"
       )
@@ -56,7 +56,7 @@ test_that(
       )
     )
     expect_warning(
-      plot.diel(
+      triplot(
         out4,
         posteriors = out4$post.samp
       )

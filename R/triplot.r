@@ -20,9 +20,9 @@
 #' out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)
 #' plot(out)
 #' @export
-#' @export plot.diel
+#' @export triplot
 
-plot.diel=function(fit=NULL,
+triplot=function(fit=NULL,
                    hyp=NULL, 
                    diel.setup=NULL, 
                    posteriors=NULL,

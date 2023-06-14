@@ -60,10 +60,10 @@ y
 
 # Model Comparison and Parameter Estimation
 
-We are now ready to compare models using the  *Traditional* hypothesis set, which includes four models: diurnal, nocturnal, crepuscular, and Traditional Cathemeral. We can confirm that this is the hypothesis set of interest by plotting the set together using the plot.diel function as, 
+We are now ready to compare models using the  *Traditional* hypothesis set, which includes four models: diurnal, nocturnal, crepuscular, and Traditional Cathemeral. We can confirm that this is the hypothesis set of interest by plotting the set together using the triplot function as, 
 
 ```{r hyp.visual,fig.height = 6, fig.width = 6}
-plot.diel(hyp=hyp.sets("Traditional"))
+triplot(hyp=hyp.sets("Traditional"))
 ```
 
 
@@ -138,7 +138,7 @@ Alternatively, using base R to plot the same posteriors,
 ```
 
 
-Alternatively, we can use the plot.diel function in the Diel.Niche package that uses plotly to output a 3d plot of the posterior samples on top of the hypothesis set. We execute the 'plot.diel' function simply using the generic function 'plot' as the objecti out from diel.fit has a unique class identifier (diel).
+Alternatively, we can use the triplot function in the Diel.Niche package that uses plotly to output a 3d plot of the posterior samples on top of the hypothesis set. We execute the 'triplot' function simply using the generic function 'plot' as the objecti out from diel.fit has a unique class identifier (diel).
 
 ```{r 3dplot 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 plot(out)
