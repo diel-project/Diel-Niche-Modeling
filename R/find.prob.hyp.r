@@ -1,4 +1,4 @@
-#' Finding probabilities for a given hypotheis
+#' Finding probabilities for a given hypothesis
 #'
 #' Function that inputs a given hypothesis and outputs as many possible
 #' probability sets that match the diel hypothesis (i.e., satisfies the inequality constrints). Allows for inequalities, equalities, and non-linear inputs.
@@ -14,10 +14,23 @@ find.prob.hyp=function(hyp, diel.setup = NULL,fast=TRUE){
 
 # If diel.setup is not provided, the create it
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
+  if(
+    !all(
+      class(diel.setup) %in% c("list", "diel")
+    )
+  ){
+    stop("diel.setup must be created via diel.ineq()")
+  }
 
 # Which set of data to load for bf_multinom hypotheses  
   if(isFALSE(fast)){p.opts=p.options3}
   if(isTRUE(fast)){p.opts=p.options2}
+
+#Check hyp matching    
+check.inputs(y=cbind(0,0,0),hyp.set=hyp,bf.fit=FALSE,prior=NULL,diel.setup=diel.setup,post.fit=FALSE,n.chains=1,
+               n.mcmc=1,burnin=1,prints=FALSE,alt.optim=FALSE,delta=0)  
+  
+if(!is.logical(fast)){stop("fast needs to be logical")}
   
 # Find hypotheses in diel.setup
   index.models=match(hyp,names(diel.setup))

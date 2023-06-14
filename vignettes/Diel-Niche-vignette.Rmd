@@ -2,7 +2,7 @@
 title: "Diel.Niche Vignette"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Diel-Niche-vignette}
+  %\VignetteIndexEntry{Diel-Niche-Vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{bayesplot,ggplot2,coda,Diel.Niche}
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 # Introducion
 
-The Diel.Niche package is used to evaluate how animals use the three fundamental periods of light: twilight (dawn & dusk), daytime, and nighttime. First, install and load the library
+The $\texttt{Diel.Niche}$ package is used to evaluate how animals use the three fundamental periods of light: twilight (dawn & dusk), daytime, and nighttime. First, install and load the library
 
 ```{r package}
 # Install package from GitHub via devtools.
@@ -50,54 +50,62 @@ To list the hypotheses of a given set,
   hyp.sets("General")
 ```
 
-The best way to understand each hypothesis set is by plotting hypotheses from a set. 
+The best way to understand each hypothesis set is by plotting hypotheses from a set. For the four fundamental sets:
 
 ## **Maximizing**
 
-This hypothesis set is useful in evaluating which diel phenotype (Diurnal, Nocturnal, Crepuscular) is used the most. There is no hypothesis associated to cathemerality, which is a combination of multiple diel periods
-```{r 3dplot1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.sets("Maximizing"))
+This hypothesis set includes three hypotheses (Crepuscular Max, Diurnal Max, and Nocturnal Max) with the objective to evaluate which time period is used most. As such, there is no hypothesis about activity across multiple time periods (i.e., cathemeral).
+
+
+```{r plotting 3d,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
+triplot(hyp=hyp.sets("Maximizing"))
 ```
+
 
 ## **Traditional**
 
-This hypothesis set uses the traditional combinations of the diel modalities of diurnal, nocturnal, crepuscular, and cathemeral. 
 
-```{r 3dplot2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+This hypothesis set includes four hypotheses (Crepuscular, Diurnal, Nocturnal, Traditional Cathemeral) that aim to capture the general interpretation of these hypotheses from the literature. Crepuscular, Diurnal, and Nocturnal are defined based on having at least 0.80 probability (threshold probability, $\xi_{1} = 0.80)$ in their respective diel periods (twilight, daytime, nighttime). If an animal is not mostly active in one period than it is defined as Traditional Cathemeral; this occurs when either two or three time periods are used more than $1-\xi_{1}$. The logic behind the threshold of 0.80 is that an animal uses a clear majority of time in one diel period, but is not so strict that there is not some moderate amount of activity outside of this period. While this is the default value we set for the traditional hypothesis set in $\texttt{Diel.Niche}$, it can easily be modified by a user when fitting these hypotheses to their data (see below).
 
-diel.plot(hyp=hyp.sets("Traditional"))
+```{r plotting3d 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
+triplot(hyp=hyp.sets("Traditional"))
 ```
-If left unspecified, default values are used to define the boundaries among these different hypotheses. The default value for being diurnal, nocturnal, or crepuscular is $\ge$ 0.80 probability. Cathemerality is defined as no diel period activity has more than 0.80 probability and two or more time periods have$\ge$ 0.1 probability.
+
 
 ## **General** 
 
-This hypothesis set aims to provide more specificity tha the Traditional hypothesis set. It includes the Traditional definitions of diurnal, nocturnal, and crepuscular, as above, but cathemerality is defined more specifically in terms of whether two or three diel periods are used moderately.
-```{r 3dplot3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.sets("General"))
-```
+This hypothesis set includes seven hypotheses. The Diurnal, Crepuscular, and Nocturnal hypotheses are defined the same as in Traditional. The main difference is the separation of the probability space of Traditional Cathemeral into four more specific hypotheses: General Cathemeral, Crepuscular-Nocturnal, Diurnal-Nocturnal, and Diurnal-Crepuscular. The General Cathemeral hypothesis---which represents a subset of the parameter space taken by the previously mentioned Traditional Cathemeral---aims to  define when an animal uses all three diel periods (twilight, daytime, nighttime) at equal to or more than a minimum amount (i.e., $p_{\text{tw}}, p_{\text{d}}, p_{\text{n}} \leq \xi_{1}$  and $p_{\text{tw}}, p_{\text{d}}, p_{\text{n}} \geq \xi_{2}$). We defined the lower threshold probability as $\xi_{2} = 0.10$, such that we consider it important to differentiate animal activity when a diel period is used at least this much. However, if only two diel periods are used above $\xi_{2}$ then we classify this activity using one of the binomial hypotheses (Crepuscular-Nocturnal, Diurnal-Nocturnal, and Diurnal-Crepuscular).  
+For an example, suppose a species is active mainly during the day with $p_{\text{d}} = 0.78$, but is also relatively active during twilight with $p_{\text{tw}} = 0.16$, and not very active at night with $p_{\text{n}} = 0.06$. We would define this activity as Diurnal-Crepuscular because $p_{\text{tw}}$ \& $p_{\text{d}} \geq \xi_{2}$, while $p_{\text{n}} < \xi_{2}$. However, if night activity was also higher than $\xi_{2}$, such that $p_{\text{d}} = 0.70$, and $p_{\text{tw}} = p_{\text{n}} = 0.15$ then we classify this activity as General Cathemeral because a moderate to large amount of activity is occuring in all three diel periods. In summary, the Traditional hypothesis set distinguishes between unimodal and multi-modal diel activity, while the General set distinguishes among unimodal, bimodal, and trimodal activity.
 
 ## **Threshold** 
 
-This hypothesis set is based on defining each diel period in terms of lower thresholds. If the thresholds are not provided, default values are used.
-```{r 3dplot4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.sets("Threshold"))
+```{r 3dplot3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
+triplot(hyp=hyp.sets("General"))
 ```
 
-Not that where there is no colored space indicates that these set of probabilities are not considered. 
 
-## **Variation**
-
-This hypothesis set is based on defining the ranges (lower, uppper) of possible probability values. 
-```{r 3dplot5,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.sets("Variation"))
-```
 
 We can also view specific hypotheses, as
 
-```{r 3dplot6,fig.align = "center",fig.height = 8, fig.width = 8,out.width = "8.5in"}
-diel.plot("D",more.points = TRUE)
-
+```{r 3dplot6,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+triplot(hyp="D",more.points = TRUE)
 ```
+
+**Selection** 
+
+This hypothesis set includes seven diel phenotype hypotheses and are defined based on an inputted amount of proportional time available to an animal in each diel period ($\mathbf{p}_{\text{avail}} = [p_{av.tw},\;p_{av.d}]$). The available time in the night period does not need to be input as it is derived as $1 - p_{av.tw}, - p_{av.d}]$. The amount of time available in each diel period changes based on the day of the year and location.
+
+First, let's plot where day and night have equal availability as, 
+```{r 3dplot7,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+triplot(hyp=hyp.sets("Selection"),diel.setup = diel.ineq(p.avail=c(0.04,0.48)))
+```
+
+We can see the hypotheses change when we make an increasing amount of available time in the night period, such as during winter in the higher latitude areas,
+
+```{r 3dplot8,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+triplot(hyp=hyp.sets("Selection"),diel.setup = diel.ineq(p.avail=c(0.04,0.3)))
+```
+
 
 # Simulating Data
 
@@ -123,9 +131,11 @@ To simulate data based on a diel hypothesis, we need define a hypothesis using i
 You can setup your own model set by creating a vector of coded hypothesis names or use the pre-defined model sets.
 
 ```{r hyp.set}
-  hyp.set = c("D","CR") #manual
-
-  hyp.set = hyp.sets("Traditional") #pre-defined
+#Manual 
+  hyp.set = c("D","CR") 
+  
+#Pre-defined
+  hyp.set = hyp.sets("Traditional")
 ```
 
 To fit the data to the hypothesis set, 
@@ -196,58 +206,24 @@ mcmc_areas(posteriors, prob = 0.8) + plot_title+
 Another way to examine our hypothesis is to plot the theoretical niche space for the hypothesis along with the posterior samples from the most supported model. 
 
 ```{r 3dplot 1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=out$ms.model,more.points = TRUE,
+triplot(hyp=out$ms.model,more.points = TRUE,
           posteriors=out$post.samp.ms.model)
 ```
 
 Or, we can plot the whole hypothesis set
 
 ```{r 3dplot 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.set,
-          posteriors=out$post.samp.ms.model)
+triplot(out)
 ```
 
-# User-specified Hypotheses
 
-You do not need to rely on pre-set definitions of diel hypotheses. If you are interested in categorizing a diel phenotype based on 0.90 probability or higher, you can adjust the hypotheses using the function 'diel.ineq()' than pass this object to the plot function or model fitting function.
-
-```{r manual example 1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-  diel.setup=diel.ineq(xi.min.dom = c(0.9))
-  diel.plot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
-```
-
-If you want to separate the hypotheses and reduce the parameter space of cathmerality,
-
-```{r manual example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.setup=diel.ineq(xi.min.dom = 0.7,separation=0.1)
-diel.plot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
-
-```
-
-When considering the General hypothesis set, you can adjust the lower probability value to define crepuscular, diurnal, and nocturnal, as well as adjust the definitions of Cathemeral General  vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular.
-
-```{r manual2 example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.setup=diel.ineq(xi.min.dom = c(0.9,0.05))
-diel.plot(hyp=hyp.sets("General"),diel.setup=diel.setup)
-```
-This new hypothesis set can be used to simulate data and fit the same models by passing the object diel.setup as an attribute of the functions sim.diel, diel.fit, and diel.plot.
-
-```{r manual example2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-
-y=sim.diel(hyp="D.CR",n.sample = 200,diel.setup=diel.setup)$y
-
-out = diel.fit(y,hyp.set=hyp.sets("General"),n.chains=2,post.fit = TRUE,diel.setup=diel.setup)
-
-diel.plot(hyp=hyp.sets("General"),posteriors = out$post.samp.ms.model,diel.setup=diel.setup)
-  
-```
 # The Unconstrained Model
 
 If you are interested in comparing the constrained hypotheses to an unconstrained model, you can do that by adding it into the hypothesis set
 
 ```{r uncond,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 hyp.set.new=c(hyp.sets("General"),"Uncon")
-out = diel.fit(y,hyp.set=hyp.set.new,n.chains=2,post.fit = FALSE,diel.setup=diel.setup)
+out = diel.fit(y,hyp.set=hyp.set.new,n.chains=2,post.fit = FALSE)
 
 #Compare the uncosntrained model to the rest of the models of the General hypothesis set
 out$bf.table
@@ -292,7 +268,7 @@ round(out1$bf.table,digits=2)
 # Results out 2
 round(out2$bf.table,digits=2)
 ```
-We see that the model weight on the nocturnal hypotheis increase because of our prior weight. 
+We see that the model weight on the nocturnal hypothesis increase because of our prior weight. 
 
 
 Let's consider another case where we simulate 10 data sets with differing sample sizes to see how the prior weight affects the model weights. Specifically, we will put a high weight (0.95) on the Cathemeral Traditional hypothesis while the simulated data is from the Nocturnal hypothesis.

@@ -1,8 +1,15 @@
 ---
-output: html_document
+title: "Example 4"
+output: rmarkdown::html_vignette
+always_allow_html: true
+vignette: >
+  %\VignetteIndexEntry{Example 4}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{overlap,Diel.Niche}
 ---
 
-# Example 4: Circular Kernel Analysis with Diel Hypotheses
+# Circular Kernel Analysis with Diel Hypotheses
 #### Author: Brian D. Gerber
 #### Date: 2023-05-10
 
@@ -56,7 +63,7 @@ To estimate the smoothed kernel density estimate, we provide the function 'densi
   text(2,0.11,"Night",cex=2)
   text(22,0.11,"Night",cex=2)
 
-# Note that n.grid is specified to be larger than the default. A large number of density values are needed below when using the 'prob.Overlap' function.  
+# Note that n.grid is specified to be larger than the default. A large number of density values are needed below when using the 'prob.overlap' function.  
   kernel.out=densityPlot(y.radians,extend = NULL,main="",lwd=3,rug=TRUE,add=TRUE,n.grid=1000)
 ```
 
@@ -68,7 +75,7 @@ We can use the Diel.Niche package to help classify the hypothesis that is most s
 
 ```{r integrate}
 # Using the object kernel.out, we integrate under the curve to estimate the three probabilities
-  prob.integrated=prob.Overlap(kernel.out,
+  prob.integrated=prob.overlap(kernel.out,
                              dawn=c(6,7),
                              dusk=c(17,18))
 
@@ -98,4 +105,4 @@ By defining the diel hypotheses a priori and explicitly, we can more accurately 
 
 # References
 
-Ridout, Martin S., and Matthew Linkie. "Estimating overlap of daily activity patterns from camera trap data." Journal of Agricultural, Biological, and Environmental Statistics 14 (2009): 322-337.
+Ridout, M. S., and Linkie, M. Estimating overlap of daily activity patterns from camera trap data. Journal of Agricultural, Biological, and Environmental Statistics 14 (2009): 322-337.

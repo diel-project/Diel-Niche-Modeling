@@ -1,10 +1,10 @@
-#' Global Variables
+#' Global Variables (internal)
 #'
 #' Plots the diel niche space and posterior distribution of a fitted model.
 #' @importFrom utils globalVariables
 #' @keywords internal
 #' @name globalvars
-#' 
+#' @noRd
 
 IsSmallerOrEqual <- function(a,b) {   
 #if (   class(all.equal(a, b)) == "logical" && (a<b | all.equal(a, b))) { return(TRUE)

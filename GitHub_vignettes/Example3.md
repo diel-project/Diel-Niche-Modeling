@@ -1,4 +1,4 @@
-# Example 3: Single species with multiple data analysis units
+# Single species with multiple data analysis units
 
 #### Author: Mason Fidino
 
@@ -337,13 +337,14 @@ model_summary <- MCMCvis::MCMCsummary(
 )
 
 model_summary
-#>                    mean   sd  2.5%   50% 97.5% Rhat n.eff
-#> diur_unit_beta[1] -1.40 1.63 -4.69 -1.36  1.66    1  7853
-#> diur_unit_beta[2] -0.06 1.57 -3.18 -0.07  3.07    1  8287
-#> diur_unit_beta[3] -1.89 1.34 -4.75 -1.76  0.37    1  8206
-#> noct_unit_beta[1]  4.26 1.15  2.22  4.19  6.67    1  8000
-#> noct_unit_beta[2] -0.58 0.71 -2.02 -0.57  0.80    1  8000
-#> noct_unit_beta[3] -1.38 0.59 -2.61 -1.36 -0.27    1  7841
+#>
+#>                     mean   sd  2.5%   50% 97.5% Rhat n.eff
+#>  diur_unit_beta[1] -1.40 1.63 -4.69 -1.36  1.66    1  7853
+#>  diur_unit_beta[2] -0.06 1.57 -3.18 -0.07  3.07    1  8287
+#>  diur_unit_beta[3] -1.89 1.34 -4.75 -1.76  0.37    1  8206
+#>  noct_unit_beta[1]  4.26 1.15  2.22  4.19  6.67    1  8000
+#>  noct_unit_beta[2] -0.58 0.71 -2.02 -0.57  0.80    1  8000
+#>  noct_unit_beta[3] -1.38 0.59 -2.61 -1.36 -0.27    1  7841
 ```
 
 Looking at the model summary we can see that there is strong evidence
@@ -498,11 +499,17 @@ less data during the spring and winter.
 }
 ```
 
-![Figure 3.1. Opossum are predominately nocturnal during the middle of
-the year, but this precipitously drops off at the start and end of a
-year. The solid black line represents the median probability of
-nocturnality while the shaded ribbon is the 95% credible
-interval.](Example3_files/figure-gfm/plot_results-1.png)
+<div class="figure">
+
+<img src="img/opossum_nocturnal_time.png" alt=" Figure 3.1. Opossum are predominately nocturnal during the middle of the year, but this precipitously drops off at the start and end of a year. The solid black line represents the median probability of nocturnality while the shaded ribbon is the 95% credible interval." width="70%" />
+<p class="caption">
+Figure 3.1. Opossum are predominately nocturnal during the middle of the
+year, but this precipitously drops off at the start and end of a year.
+The solid black line represents the median probability of nocturnality
+while the shaded ribbon is the 95% credible interval.
+</p>
+
+</div>
 
 # References
 

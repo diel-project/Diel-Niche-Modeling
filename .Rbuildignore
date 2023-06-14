@@ -3,4 +3,8 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^GitHub_vignettes
+
+^README_files$
+^GitHub_vignettes$
+^CODE_OF_CONDUCT\.md$
+^CONTRIBUTING\.md$

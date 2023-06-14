@@ -1,19 +1,65 @@
 #' Kernel Overlap density integration
 #'
-#' Integrate kernel density to derieve probability of twilight, daytime, nighttime
-#' @param densityplot a densityPlot object from package Overlap.
-#' @param dawn begining and end numeric (0-24) times for dawn
-#' @param dusk begining and end numeric (0-24) times for dusk
-#' @return Internal list
-#' @export
-#' @keywords internal
-#' @import sfsmisc
+#' @description Integrate kernel density to derive probability of twilight, daytime, nighttime
+#' @param densityplot a densityPlot object from package overlap. See details for
+#' additional information.
+#' @param dawn beginning and end numeric (0-24) times for dawn. This is in
+#' proportional hours such that 12.5 would be 12:30. See details for additional
+#' information.
+#' @param dusk beginning and end numeric (0-24) times for dusk. This is in
+#' proportional hours such that 12.5 would be 12:30. See details for additional
+#' information.
+#' @return A matrix of three probabilities.
+#' @details
+#' When creating the density plot, it is important to increase the \code{n.grid}
+#' argument, because to this function integrates the area under the curve to
+#' compute the associated probabilities. We suggest to start setting \code{n.grid}
+#'  in \code{overlap::densityPlot} to at least 10000, but you may be able to do
+#'  less. Essentially, if the outputted sum is within about a thousandth from one
+#'  (e.g., 0.999) then the output from this function can be used in 
+#'  \code{\link{posthoc.niche}}.
+#'  
+#'  To compute proportional hours, you will need to start with a time object.
+#'  Changing that time to a numeric should convert it to
+#'  seconds from midnight. Given that there are 86,400 seconds in a day, divide
+#'  by that number and multiply by 24 to create the proportional hours. See examples
+#'  for some code on how to do this.
+#'  
+#'  @examples
+#'  data("posthoc.example")
+#'  
+#'  diel_probs <- prob.overlap(
+#'    posthoc.example$tiger.kde,
+#'    dawn = posthoc.example$dawn.range,
+#'    dusk = posthoc.example$dusk.range
+#'  )
+#'  
 #' 
+#' @export
+#' @import sfsmisc
 
-prob.Overlap=function(densityplot,
+prob.overlap=function(densityplot,
                       dawn=c(6,7),
                       dusk=c(17,18)){
 
+#########################
+#Checks
+
+  if(!is.data.frame(densityplot)  | ncol(densityplot)!=2 | any(colnames(densityplot)!=c("x","y"))| !is.numeric(densityplot$x) |  !is.numeric(densityplot$y)){
+   stop("densityplot needs to be a dataframe with numeric values organized into two columns labled 'x' and 'y'") 
+  }
+
+  if(length(dawn)!=2 | length(dusk)!=2 | !is.numeric(dawn)| !is.numeric(dusk)){
+   stop("dawn/dusk need to be vectors of length 2 with only numeric values")  
+  }
+  if(dawn[1] > dawn[2]){
+    stop("the values of dawn should be the start and end of that diel period, in that order. The first value is currently greater than the second.")
+  }
+  if(dusk[1] > dusk[2]){
+    stop("the values of dusk should be the start and end of that diel period, in that order. The first value is currently greater than the second.")
+  }
+    
+#########################
   densityplot=densityplot[which(densityplot$x>=0 & densityplot$x<=24),]
   
   

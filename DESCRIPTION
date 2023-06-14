@@ -14,16 +14,16 @@ Authors@R:
              email="kadambari.devarajan@gmail.com", 
              role = c("aut"),
              comment = c(ORCID = "0000-0002-9222-5404")),
-    person(given="Mason", 
-           family="Fidino", 
-           email="MFidino@lpzoo.org", 
-           role = c("aut"),
-           comment = c(ORCID = "0000-0002-8583-0307")),
     person(given="Zach", 
            family="Farris", 
            email="farriszj@appstate.edu", 
            role = c("aut"),
-           comment = c(ORCID = "0000-0003-0600-9682"))
+           comment = c(ORCID = "0000-0003-0600-9682")),
+    person(given="Mason", 
+           family="Fidino", 
+           email="MFidino@lpzoo.org", 
+           role = c("aut"),
+           comment = c(ORCID = "0000-0002-8583-0307"))
     )
 Maintainer: Brian Gerber <bgerber@uri.edu>
 RoxygenNote: 7.2.3
@@ -44,7 +44,11 @@ Suggests:
     rmarkdown (>= 2.14),
     bayesplot (>= 1.9.0),
     ggplot2 (>= 3.3.6),
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    overlap  (>= 0.3.4),
+    lubridate(>= 1.9.2),
+    ggthemes(>= 4.2.4),
+    suncalc(>= 0.5.1)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 LazyData: true

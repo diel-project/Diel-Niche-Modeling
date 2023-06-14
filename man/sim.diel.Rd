@@ -16,19 +16,19 @@ sim.diel(
 )
 }
 \arguments{
-\item{n.sim}{The number of simulated datasets}
+\item{n.sim}{The number of simulated datasets (integer)}
 
-\item{reps}{The number of sets of probabilities to use when simulating crepuscular, daytime, and nocturnal frequencies}
+\item{reps}{The number of sets (integer) of probabilities to use when simulating crepuscular, daytime, and nocturnal frequencies}
 
-\item{n.sample}{The number of total samples for a given simulation}
+\item{n.sample}{The number of total samples (integer) for a given simulation}
 
-\item{hyp}{The hypothesis to simulate data from}
+\item{hyp}{The hypothesis code to simulate data from}
 
 \item{diel.setup}{Multinomial inequalities for hypotheses setup using function 'diel.ineq'.}
 
 \item{sd.error}{Normal distribution standard deviation to simulate error to add to the probabilities on the logit-scale. Default is 0}
 
-\item{fast}{Default is TRUE. Uses less preceise probs (0.005 vs 0.001). Does not apply to equality hyps.}
+\item{fast}{Default is TRUE, which uses a less precise probability interval sequence (0.005 vs 0.001). Does not apply to equality hyps.}
 
 \item{return.probs}{Default is FALSE. If TRUE, returns probabilities from the hypothesis.}
 }

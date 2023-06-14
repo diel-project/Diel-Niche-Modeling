@@ -1,0 +1,48 @@
+---
+title: "Example 5"
+output: rmarkdown::html_vignette
+always_allow_html: true
+vignette: >
+  %\VignetteIndexEntry{Example 5}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{Diel.Niche}
+---
+
+# Diel Selection
+#### Author: Brian D. Gerber
+#### Date: 2023-05-10
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+We will consider the hypothesis set, *Selection*, to make inference on diel periods that are used more than the amount of time available. 
+
+
+# The Setup
+
+```{r load}
+# Load packages
+  library(Diel.Niche)
+  library(lubridate)
+```
+
+We will consider a set of observed data on a species of interest from camera traps. For each observation, the time of the event is recorded and then converted into radians.
+
+```{r data}
+
+# Define a year variable
+  diel.data$min_year = year(as.POSIXct(diel.data$min_date, format = "%m/%d/%Y"))
+
+# Extract winter data in 2018 for the Virginia Opossum
+  deer = subset(diel.data, min_year=="2020" & scientificName=="Odocoileus virginianus")
+
+# Visualize the data
+  head(deer)
+```
+

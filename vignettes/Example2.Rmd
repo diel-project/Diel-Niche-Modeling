@@ -1,8 +1,15 @@
 ---
-output: html_document
+title: "Example 2"
+output: rmarkdown::html_vignette
+always_allow_html: true
+vignette: >
+  %\VignetteIndexEntry{Example 2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{ggplot2,ggthemes,lubridate,Diel.Niche}
 ---
 
-# Example 2: Multiple species with one data analysis unit
+# Multiple species with one data analysis unit
 #### Author: Brian D. Gerber
 #### Date: 2023-05-10
 
@@ -139,7 +146,7 @@ prob.quantiles$Coyote.post.samp
 
 Lets create a straightforward plot of the probabilities of activity for each species during the three diel periods.
 
-```{r plotting}
+```{r plotting, eval = TRUE,fig.height = 6, fig.width = 8}
 
       post=post.samples
       n.species=length(post)
@@ -151,7 +158,7 @@ Lets create a straightforward plot of the probabilities of activity for each spe
       pos <- position_nudge(y = y.pos, x=rep(0,nrow(post)))
       p=ggplot(post, aes(x = m, y = parameter, color = Species)) + 
         geom_point(size=6,position=pos) +
-        geom_linerange(aes(xmin = ll, xmax = hh),size=1,position=pos)+
+        geom_linerange(aes(xmin = ll, xmax = hh),linewidth=1,position=pos)+
         xlab("Probabilty")+ylab("")+xlim(0,1)+
         theme(text = element_text(size = 20))+ coord_flip()+
          scale_colour_colorblind()+

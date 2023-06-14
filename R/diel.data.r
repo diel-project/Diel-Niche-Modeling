@@ -6,6 +6,7 @@
 #'   \item{twilight}{Frequency of detections during the twilight period; sunrise and sunset.}
 #'   \item{day}{Frequency of detections during the daytime period.}
 #'   \item{night}{Frequency of detections during the nighttime period.}
+#'   \item{trap_nights}{The number of days all cameras were active.}
 #'   \item{nsite}{The number of unique camera locations.}
 #'   \item{min_date}{The first date of sampling in the sampling period.}
 #'   \item{max_date}{The last date of sampling in the sampling period.}

@@ -1,4 +1,4 @@
-# Example 4: Circular Kernel Analysis with Diel Hypotheses
+# Circular Kernel Analysis with Diel Hypotheses
 
 #### Author: Brian D. Gerber
 
@@ -18,6 +18,8 @@ the kernel output.
 # Load packages
   library(Diel.Niche)
   library(overlap)
+#> This is overlap devel version 0.3.4.
+#> For overview type ?overlap; for changes do news(p='overlap').
 ```
 
 We will consider a set of observed data on a species of interest from
@@ -54,7 +56,7 @@ function ‘densityPlot’ with the times of detections in radians.
   text(2,0.11,"Night",cex=2)
   text(22,0.11,"Night",cex=2)
 
-# Note that n.grid is specified to be larger than the default. A large number of density values are needed below when using the 'prob.Overlap' function.  
+# Note that n.grid is specified to be larger than the default. A large number of density values are needed below when using the 'prob.overlap' function.  
   kernel.out=densityPlot(y.radians,extend = NULL,main="",lwd=3,rug=TRUE,add=TRUE,n.grid=1000)
 ```
 
@@ -80,7 +82,7 @@ of dawn and dusk. Below, we assume a one hour period for dawn between
 
 ``` r
 # Using the object kernel.out, we integrate under the curve to estimate the three probabilities
-  prob.integrated=prob.Overlap(kernel.out,
+  prob.integrated=prob.overlap(kernel.out,
                              dawn=c(6,7),
                              dusk=c(17,18))
 
@@ -131,6 +133,6 @@ two diel periods, as supported by the Diurnal-Nocturnal hypothesis.
 
 # References
 
-Ridout, Martin S., and Matthew Linkie. “Estimating overlap of daily
-activity patterns from camera trap data.” Journal of Agricultural,
-Biological, and Environmental Statistics 14 (2009): 322-337.
+Ridout, M. S., and Linkie, M. Estimating overlap of daily activity
+patterns from camera trap data. Journal of Agricultural, Biological, and
+Environmental Statistics 14 (2009): 322-337.

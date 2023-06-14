@@ -13,7 +13,7 @@
 #' @param burnin Burn-in number of mcmc iterations.
 #' @param prints Whether to print messages about model fitting.
 #' @param alt.optim Default is FALSE. If TRUE, uses an alternative approach to derive the bayes factors. It can be more stable, but takes a bit longer.
-#' @param delta Error tolerance of equality constraints
+#' @param delta Error tolerance of equality constraint hypotheses (e.g., AV.EQ). Does not apply to inequality constraint hypotheses. Needs to be >0 and <1, but ideally near zero. Default error tolernances to try are 0.05^(1:4)
 #' @return A list of outputs, including bayes factors for a model set, model bayes factor inputs, posterior samples, warning indicator, and posterior predictive checks.
 #' @return A list of outputs
 #' \item{bf.table}{Bayes factor for hyopthesis set}
@@ -23,6 +23,10 @@
 #' \item{ppc}{A list of ordered model posterior predictive check output}
 #' \item{ms.ppc}{Posterior predictive check output from the most supported model}    
 #' \item{post.samp.ms.model}{Posterior distributions of the most supported model}    
+#' \item{gelm.diag}{The Gelman-Rubin (Rhat) point and credible interval estimates to test converfence for parameters for all models fitted. Only provided when post.fit=TRUE and n.chains > 1.}    
+#' \item{ms.gelm.diag}{The Gelman-Rubin (Rhat) point and credible interval estimates for parameters for of the most supported model. Only provided when post.fit=TRUE, bf.fit=TRUE, and n.chains > 1.}    
+#' 
+#' 
 #' Required libraries:   multinomineq, retry, MASS
 #' @importFrom MASS fractions
 #' @import multinomineq
@@ -37,8 +41,8 @@ diel.fit=function(y,
                   diel.setup=NULL,
                   prior=NULL,
                   n.chains=1,
-                  n.mcmc=1000,
-                  burnin=200,
+                  n.mcmc=3000,
+                  burnin=500,
                   prints=TRUE,
                   alt.optim=FALSE,
                   delta=NULL){
@@ -68,8 +72,17 @@ diel.fit=function(y,
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   if(is.null(delta)){delta=0.05^(1:4)}
 ###################################    
+#if y is a vector and not a matrix and has 3 elements, then turn into matrix
+  if(length(y)==3 & is.matrix(y)==FALSE){
+    warning("y was chanaged to a matrix")
+    y=t(as.matrix(y))
+  }
+  
+###################################    
 #Check the inputs  
-  check.inputs(y=y,hyp.set=hyp.set,bf.fit=bf.fit,prior=prior,diel.setup=diel.setup)
+  check.inputs(y=y,hyp.set=hyp.set,bf.fit=bf.fit,prior=prior,diel.setup=diel.setup,post.fit=post.fit,n.chains=n.chains,
+               n.mcmc=n.mcmc,burnin=burnin,prints=prints,alt.optim=alt.optim,delta=delta)
+
   if(isTRUE(prints)){message(paste0("Data checks Complete."))}    
 ###################################    
 #setup data for model fitting
@@ -133,7 +146,7 @@ if(isTRUE(post.fit) & !is.null(bf)){
 
   
   if(prints==TRUE & isTRUE(bf.fit) & length(hyp.set)>1){
-    print.name=print.hyp.name(ms.model)
+    print.name=full.hyp.name(ms.model)
     if(is.null(print.name)){print.name=ms.model}
 
     cat("The most supported model is: \n", print.name,"\n")
@@ -144,13 +157,19 @@ if(isTRUE(post.fit) & !is.null(bf)){
   }
 
   #Output list
-  list(bf.table=bf.table,
-       post.samp=post.samples$sampling.mcmc,
-       ms.model=ms.model,
-       ppc=post.samples$ppc,ms.ppc=ms.ppc,
-       post.samp.ms.model=post.samp.ms.model,
-       y=y,y.vec=y.vec,gelm.diag=gelm.diag,
-       ms.gelm.diag=ms.gelm.diag,
-       bf.list=bf.list)
+out <-  list(bf.table=bf.table,
+             post.samp=post.samples$sampling.mcmc,
+             ms.model=ms.model,
+             ppc=post.samples$ppc,ms.ppc=ms.ppc,
+             post.samp.ms.model=post.samp.ms.model,
+             y=y,y.vec=y.vec,gelm.diag=gelm.diag,
+             ms.gelm.diag=ms.gelm.diag,
+             bf.list=bf.list,
+             diel.setup=diel.setup,
+             hyp.set=hyp.set
+             )
+
+class(out) <- c("list",'diel')
   
+out
 }#end function

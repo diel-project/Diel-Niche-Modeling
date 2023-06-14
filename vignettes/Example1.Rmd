@@ -1,9 +1,15 @@
 ---
-output: html_document
+title: "Example 1"
+output: rmarkdown::html_vignette
 always_allow_html: true
+vignette: >
+  %\VignetteIndexEntry{Example 1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{bayesplot,ggplot2,coda,lubridate,Diel.Niche}
 ---
 
-# Example 1: Single Data Analysis Unit
+# Single Data Analysis Unit
 #### Author: Brian D. Gerber
 #### Date: 2023-05-10
 
@@ -54,10 +60,10 @@ y
 
 # Model Comparison and Parameter Estimation
 
-We are now ready to compare models using the  *Traditional* hypothesis set, which includes four models: diurnal, nocturnal, crepuscular, and Traditional Cathemeral. We can confirm that this is the hypothesis set of interest by plotting the set together as, 
+We are now ready to compare models using the  *Traditional* hypothesis set, which includes four models: diurnal, nocturnal, crepuscular, and Traditional Cathemeral. We can confirm that this is the hypothesis set of interest by plotting the set together using the triplot function as, 
 
-```{r hyp.visual}
-diel.plot(hyp=hyp.sets("Traditional"))
+```{r hyp.visual,fig.height = 6, fig.width = 6}
+triplot(hyp=hyp.sets("Traditional"))
 ```
 
 
@@ -132,11 +138,10 @@ Alternatively, using base R to plot the same posteriors,
 ```
 
 
-Alternatively, we can use the diel.plot function in the Diel.Niche package that uses plotly to output a 3d plot of the posterior samples on top of the hypothesis set,
+Alternatively, we can use the triplot function in the Diel.Niche package that uses plotly to output a 3d plot of the posterior samples on top of the hypothesis set.
 
 ```{r 3dplot 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-diel.plot(hyp=hyp.sets("Traditional"),
-          posteriors=out$post.samp.ms.model, more.points = TRUE)
+triplot(out)
 ```
 
 The black dots are the entire posterior samples plotted within the Traditional Cathemeral hypothesis. This point cloud shows us that the Virginia Opossum is largely active during night and day. To look at the posterior median and 95\% credible intervals, we can extract these as,

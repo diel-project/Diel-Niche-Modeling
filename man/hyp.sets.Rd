@@ -7,13 +7,19 @@
 hyp.sets(hyp.in = NULL)
 }
 \arguments{
-\item{hyp.in}{Hypothesis set code names}
+\item{hyp.in}{Hypothesis set code names, see details for additional information.}
 }
 \value{
-Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned.
+Names of hypotheses for the set. If NULL, the names of all hypotheses sets are returned. If "list", all hypotheses are printed.
 }
 \description{
-Call defined hypotheses sets
+Call defined hypotheses sets within \code{Diel.Niche}
+}
+\details{
+To see all available hypothesis sets, set \code{hyp.in = NULL} to observe just the names of the available hypothesis sets or
+   \code{hyp.in = "list"} to see the hypothesis sets as well as codes for the competing hypotheses within each set. 
+  avaialable hypothesis sets include. Currently, the available hypothesis sets include Traditional, General, Threshold, Maximizing, Variation, and Selection.
+  When inputted into \code{hyp.in}, they must be a scalar character object and the first letter must be capitalized.
 }
 \examples{
 hyp.sets()
