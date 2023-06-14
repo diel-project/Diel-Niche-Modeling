@@ -55,7 +55,7 @@ if(!is.null(fit) & !is.null(posteriors)){
 
   
       
-if(!is.null(fit)){hyp=fit$hyp.set; diel.setup=out$diel.setup
+if(!is.null(fit)){hyp=fit$hyp.set; diel.setup=fit$diel.setup
 if(!is.null(fit$post.samp.ms.model)){post=coda::as.mcmc(fit$post.samp.ms.model)}else{
   
   if(length(fit$post.samp[[1]])>1){temp=do.call('rbind',fit$post.samp[[1]])}else{temp=fit$post.samp[[1]]}
@@ -70,7 +70,7 @@ if(!is.null(fit$post.samp.ms.model)){post=coda::as.mcmc(fit$post.samp.ms.model)}
   if(!is.null(posteriors)){
     
     if(!is.list(posteriors)){post=coda::as.mcmc(posteriors)}else{
-      post=coda::as.mcmc(do.call("rbind",lapply(out$post.samp,FUN=function(x){x[[1]]})))
+      post=coda::as.mcmc(do.call("rbind",lapply(fit$post.samp,FUN=function(x){x[[1]]})))
     }
     
     
