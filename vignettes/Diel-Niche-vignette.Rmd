@@ -1,5 +1,5 @@
 ---
-title: "Diel-Niche-Vignette"
+title: "Diel.Niche Vignette"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Diel-Niche-Vignette}
@@ -14,6 +14,9 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+#### Author: Brian Gerber
+#### Date: 2023-05-25
 
 # Introducion
 
@@ -49,7 +52,7 @@ To list the hypotheses of a given set,
 
 The best way to understand each hypothesis set is by plotting hypotheses from a set. For the four fundamental sets:
 
-**Maximizing**
+## **Maximizing**
 
 This hypothesis set includes three hypotheses (Crepuscular Max, Diurnal Max, and Nocturnal Max) with the objective to evaluate which time period is used most. As such, there is no hypothesis about activity across multiple time periods (i.e., cathemeral).
 
@@ -59,7 +62,8 @@ triplot(hyp=hyp.sets("Maximizing"))
 ```
 
 
-**Traditional**
+## **Traditional**
+
 
 This hypothesis set includes four hypotheses (Crepuscular, Diurnal, Nocturnal, Traditional Cathemeral) that aim to capture the general interpretation of these hypotheses from the literature. Crepuscular, Diurnal, and Nocturnal are defined based on having at least 0.80 probability (threshold probability, $\xi_{1} = 0.80)$ in their respective diel periods (twilight, daytime, nighttime). If an animal is not mostly active in one period than it is defined as Traditional Cathemeral; this occurs when either two or three time periods are used more than $1-\xi_{1}$. The logic behind the threshold of 0.80 is that an animal uses a clear majority of time in one diel period, but is not so strict that there is not some moderate amount of activity outside of this period. While this is the default value we set for the traditional hypothesis set in $\texttt{Diel.Niche}$, it can easily be modified by a user when fitting these hypotheses to their data (see below).
 
@@ -68,22 +72,23 @@ triplot(hyp=hyp.sets("Traditional"))
 ```
 
 
-**General** 
+## **General** 
 
 This hypothesis set includes seven hypotheses. The Diurnal, Crepuscular, and Nocturnal hypotheses are defined the same as in Traditional. The main difference is the separation of the probability space of Traditional Cathemeral into four more specific hypotheses: General Cathemeral, Crepuscular-Nocturnal, Diurnal-Nocturnal, and Diurnal-Crepuscular. The General Cathemeral hypothesis---which represents a subset of the parameter space taken by the previously mentioned Traditional Cathemeral---aims to  define when an animal uses all three diel periods (twilight, daytime, nighttime) at equal to or more than a minimum amount (i.e., $p_{\text{tw}}, p_{\text{d}}, p_{\text{n}} \leq \xi_{1}$  and $p_{\text{tw}}, p_{\text{d}}, p_{\text{n}} \geq \xi_{2}$). We defined the lower threshold probability as $\xi_{2} = 0.10$, such that we consider it important to differentiate animal activity when a diel period is used at least this much. However, if only two diel periods are used above $\xi_{2}$ then we classify this activity using one of the binomial hypotheses (Crepuscular-Nocturnal, Diurnal-Nocturnal, and Diurnal-Crepuscular).  
-
 For an example, suppose a species is active mainly during the day with $p_{\text{d}} = 0.78$, but is also relatively active during twilight with $p_{\text{tw}} = 0.16$, and not very active at night with $p_{\text{n}} = 0.06$. We would define this activity as Diurnal-Crepuscular because $p_{\text{tw}}$ \& $p_{\text{d}} \geq \xi_{2}$, while $p_{\text{n}} < \xi_{2}$. However, if night activity was also higher than $\xi_{2}$, such that $p_{\text{d}} = 0.70$, and $p_{\text{tw}} = p_{\text{n}} = 0.15$ then we classify this activity as General Cathemeral because a moderate to large amount of activity is occuring in all three diel periods. In summary, the Traditional hypothesis set distinguishes between unimodal and multi-modal diel activity, while the General set distinguishes among unimodal, bimodal, and trimodal activity.
+
+## **Threshold** 
 
 ```{r 3dplot3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
 triplot(hyp=hyp.sets("General"))
 ```
 
 
+
 We can also view specific hypotheses, as
 
 ```{r 3dplot6,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 triplot(hyp="D",more.points = TRUE)
-
 ```
 
 **Selection** 
@@ -295,7 +300,7 @@ legend("right", legend=rownames(results.prior2),col = 1:4,lwd=3,lty = 1:4)
 
 matplot(t(results.prior2),type="l",lwd=3,ylab="Model Probability",xaxt="n")
 axis(1,at=1:length(n),lab=n)
-legend("top", legend=rownames(results.prior2),col = 1:4,lwd=3,lty = 1:4)
+legend("right", legend=rownames(results.prior2),col = 1:4,lwd=3,lty = 1:4)
 ```
 
 The differences in the model probabilieis are entirely due to the prior weights on each hypothesis. In the second plot, the likelihood of the data is trying to overwhelm such a highly certain prior.
