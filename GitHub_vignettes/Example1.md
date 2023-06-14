@@ -89,7 +89,7 @@ of interest by plotting the set together using the triplot function as,
 triplot(hyp=hyp.sets("Traditional"))
 ```
 
-![](Example1_files/figure-gfm/hyp.visual-1.png)<!-- -->
+![](Example1_files/figure-gfm/example1.md.github.png)
 
 To fit our data (`y`), we use the function ‘diel.fit’, specifying the
 hypothesis set of interest and MCMC inputs.

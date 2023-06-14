@@ -24,6 +24,7 @@ First, install and load the library
 # Or other vignette's
   vignette("Example1")
   vignette("Example2")
+  vignette("Example3")
   vignette("Example4")
 
 # Listing the packages functions and help files
