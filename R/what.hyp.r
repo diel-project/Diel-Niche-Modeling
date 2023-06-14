@@ -46,6 +46,7 @@ if(!is.null(hyp.in)){
                       "Threshold : ", paste(hyp.sets("list")[[3]], collapse = ' '),"\n \n",
                       "Maximizing: ", paste(hyp.sets("list")[[4]], collapse = ' '),"\n \n",
                       "Variation: ", paste(hyp.sets("list")[[5]], collapse = ' '),"\n \n",
+                      "Selection: ", paste(hyp.sets("list")[[6]], collapse = ' '),"\n \n",
                       sep=" ")}
   
   

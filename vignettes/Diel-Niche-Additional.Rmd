@@ -114,7 +114,13 @@ For the **Threshold** hypotheses, we can adjust the lower probability similarly 
   plot.diel(hyp =hyp.sets("Threshold"))
 
 # Adjusted
-  plot.diel(hyp =hyp.sets("Threshold"),diel.setup=diel.ineq(xi.t.D = 0.6, xi.t.N = 0.6, xi.t.CR = 0.6))
+
+  plot.diel(
+    hyp =hyp.sets("Threshold"),
+    diel.setup=diel.ineq(
+      xi.t.D = 0.6, xi.t.N = 0.6, xi.t.CR = 0.6
+    )
+  )
   
 ```
 
