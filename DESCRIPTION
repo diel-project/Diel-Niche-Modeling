@@ -45,7 +45,12 @@ Suggests:
     bayesplot (>= 1.9.0),
     ggplot2 (>= 3.3.6),
     testthat (>= 3.0.0),
-    overlap  (>= 0.3.4)
+    overlap  (>= 0.3.4),
+    lubridate(>= 1.9.2),
+    ggthemes(>= 4.2.4),
+    MCMCvis(>= 0.15.5),
+    nimble(>= 1.0.0),
+    bbplot(>= 0.0.1)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 LazyData: true
