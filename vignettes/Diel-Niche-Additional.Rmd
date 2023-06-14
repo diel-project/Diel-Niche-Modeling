@@ -94,15 +94,15 @@ For the **Variation** hypotheses, we can adjust the range of values for all hypo
 ```{r manual variation, fig.height = 6, fig.width = 6}
 
 # Default
-  diel.plot(hyp =hyp.sets("Variation"))
+  plot.diel(hyp =hyp.sets("Variation"))
 
 # New
-  diel.plot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e = 0.2))
+  plot.diel(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e = 0.2))
 
   
 # You can change individual hypotheses as well. Here, we are changing the range of the diurnal hypothesis only. This is not recommend. But, there is flexibility to be creative.
 
-  diel.plot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e.D = 0.4))
+  plot.diel(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e.D = 0.4))
   
 ```
 
@@ -111,10 +111,15 @@ For the **Threshold** hypotheses, we can adjust the lower probability similarly 
 ```{r manual threshold, fig.height = 6, fig.width = 6}
   
 # Default
-  diel.plot(hyp =hyp.sets("Threshold"))
+  plot.diel(hyp =hyp.sets("Threshold"))
 
 # Adjusted
-  diel.plot(hyp =hyp.sets("Threshold"),diel.setup=diel.ineq(xi.t.D = 0.6, xi.t.N = 0.6, xi.t.CR = 0.6))
+  plot.diel(
+    hyp =hyp.sets("Threshold"),
+    diel.setup=diel.ineq(
+      xi.t.D = 0.6, xi.t.N = 0.6, xi.t.CR = 0.6
+    )
+  )
   
 ```
 
