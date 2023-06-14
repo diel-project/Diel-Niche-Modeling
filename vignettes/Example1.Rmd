@@ -138,10 +138,10 @@ Alternatively, using base R to plot the same posteriors,
 ```
 
 
-Alternatively, we can use the triplot function in the Diel.Niche package that uses plotly to output a 3d plot of the posterior samples on top of the hypothesis set. We execute the 'triplot' function simply using the generic function 'plot' as the objecti out from diel.fit has a unique class identifier (diel).
+Alternatively, we can use the triplot function in the Diel.Niche package that uses plotly to output a 3d plot of the posterior samples on top of the hypothesis set.
 
 ```{r 3dplot 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-plot(out)
+triplot(out)
 ```
 
 The black dots are the entire posterior samples plotted within the Traditional Cathemeral hypothesis. This point cloud shows us that the Virginia Opossum is largely active during night and day. To look at the posterior median and 95\% credible intervals, we can extract these as,

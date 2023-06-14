@@ -208,7 +208,7 @@ triplot(hyp=out$ms.model,more.points = TRUE,
 Or, we can plot the whole hypothesis set
 
 ```{r 3dplot 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
-plot(out)
+triplot(out)
 ```
 
 

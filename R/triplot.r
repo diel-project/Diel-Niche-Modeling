@@ -18,7 +18,7 @@
 #' @return A plotly 3d plot
 #' @examples 
 #' out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)
-#' plot(out)
+#' triplot(out)
 #' @export
 #' @export triplot
 

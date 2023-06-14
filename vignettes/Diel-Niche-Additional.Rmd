@@ -258,6 +258,6 @@ out = diel.fit(y, hyp.set=c(hyp.sets("Traditional"),"EC"), post.fit = TRUE)
 out$bf.table
 
 #Notice how small the parameter space is for the posteriors
-plot(out)
+triplot(out)
 ```
 
