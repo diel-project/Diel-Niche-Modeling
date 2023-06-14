@@ -15,7 +15,8 @@
   z.scene = 0.3,
   axis.size = 16,
   axis.lab.size = 18,
-  legend.lab.size = 15
+  legend.lab.size = 15,
+  .Last.error.trace
 )
 }
 \arguments{

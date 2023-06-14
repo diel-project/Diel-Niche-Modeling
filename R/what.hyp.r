@@ -1,12 +1,11 @@
 #' Hypothesis Codes
 #'
 #' Call defined hypotheses sets
-#' @param hyp.in hypothesis code name, NULL, or ?
-#' @return Full name of hypothesis if code name is provided. If NULL a general description of hypotheses is provided. If ? then hypotheses code names are provided.
+#' @param hyp.in hypothesis code name or NULL.
+#' @return Full name of hypothesis if code name is provided. If NULL a general description of hypotheses is provided. 
 #' @examples 
 #' what.hyp()
 #' what.hyp("D.th")
-#' what.hyp("?")
 #' @export
 
 what.hyp=function(hyp.in=NULL){
