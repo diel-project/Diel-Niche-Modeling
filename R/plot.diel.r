@@ -3,6 +3,7 @@
 #' Plots the diel niche space and posterior disribution of a fitted model.
 #' @import plotly
 #' @import coda
+#' @import grDevices
 #' @param fit a list object output from the function 'diel.fit'. 
 #' @param hyp a vector of hypothesis code names (characters)
 #' @param diel.setup If NULL uses the default diel.ineq function. If a fit object is provided it will come from this object. Otherwise, a list of multinomial inequalities (Matrix A and vector b) representing diel hypotheses and the function needed for model fitting.
@@ -17,7 +18,7 @@
 #' @return A plotly 3d plot
 #' @examples 
 #' out=diel.fit(y=cbind(11,87,2),hyp="D",post.fit=TRUE)
-#' diel.plot(out)
+#' plot(out)
 #' @export
 #' @export plot.diel
 
@@ -54,14 +55,15 @@ if(!is.null(fit) & !is.null(posteriors)){
   
 
   
-      
-if(!is.null(fit)){hyp=fit$hyp.set; diel.setup=fit$diel.setup
-if(!is.null(fit$post.samp.ms.model)){post=coda::as.mcmc(fit$post.samp.ms.model)}else{
+#if fitted object is supplied take the hyp and diel.setup from it      
+if(!is.null(fit)){
+                  hyp=fit$hyp.set; diel.setup=fit$diel.setup
   
-  if(length(fit$post.samp[[1]])>1){temp=do.call('rbind',fit$post.samp[[1]])}else{temp=fit$post.samp[[1]]}
-  post=coda::as.mcmc(temp)
+                  if(!is.null(fit$post.samp.ms.model)){post=coda::as.mcmc(fit$post.samp.ms.model)}else{
+      
+                  if(length(fit$post.samp[[1]])>1){temp=do.call('rbind',fit$post.samp[[1]])}else{temp=fit$post.samp[[1]][[1]]}
+                      post=coda::as.mcmc(temp)
 }
-
 }
 
   
@@ -95,7 +97,7 @@ if(!is.null(fit$post.samp.ms.model)){post=coda::as.mcmc(fit$post.samp.ms.model)}
   
   if(length(which(is.na(col.hyp.match)))>0){
   #extra.col=t(data.frame(colours()[-1][1:length(which(is.na(col.hyp.match)))]))
-    extra.col=t(data.frame(rainbow(length(which(is.na(col.hyp.match))))))
+    extra.col=t(data.frame(grDevices::rainbow(length(which(is.na(col.hyp.match))))))
   colnames(extra.col)=hyp[which(is.na(col.hyp.match))]
   temp=data.frame(temp,extra.col)
   rownames(temp)=NULL
