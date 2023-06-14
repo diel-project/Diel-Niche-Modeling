@@ -6,7 +6,7 @@ test_that(
                  "D.max","N.max","CR.max",
                  "D.var","N.var","CR.var","C.var","AV.var",
                  "Uncon","C.max","EC","EQ.avail",
-                 "D.avail","CR.avail","N.avail","D.CR.avail","N.CR.avail","D.N.avail"
+                 "D.avail","TW.avail","N.avail","D.TW.avail","N.TW.avail","D.N.avail"
     )
     my_answers <- c("Traditional/General Diurnal", "Traditional/General Nocturnal", "Traditional/General Crepuscular","Traditional Cathemeral",
                     "General Cathemeral", "General Crepuscular-Diurnal", "General Diurnal-Nocturnal", "General Crepuscular-Nocturnal",

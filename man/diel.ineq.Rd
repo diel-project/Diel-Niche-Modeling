@@ -63,7 +63,7 @@ diel.ineq(
 diel.hyp A list of diel hypotheses as multinomial inequalities.
 \item{inputs}{Includes all inputted values; epsilon, xi, and p.avail.} 
 \item{D.th, N.th, CR.th, EC.th, C.th, D.max, N.max, CR.max, D.var, N.var, CR.var, C.var, AC.var, AV.var,
-   Uncon, C.max, EC, EQ.avail, D.avail,CR.avail,N.avail, D.CR.avail, N.CR.avail, D.N.avail}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.}
+   Uncon, C.max, EC, EQ.avail, D.avail,TW.avail,N.avail, D.TW.avail, N.TW.avail, D.N.avail}{Each is a list of three elements: Hypotheis Descriptive Name, A matrix, and b vector.}
 }
 \description{
 Multinomial model inequalities for diel hypotheses. Given a numeric set of values between 0 and 1, \code{diel.ineq()}
