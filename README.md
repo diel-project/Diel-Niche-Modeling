@@ -36,8 +36,8 @@ First, install and load the library
 
 ## Hypotheses
 
-There are three fundamental hypothesis sets: *Maximizing*,
-*Traditional*, and *General*. Additional hypotheses available are
+There are four fundamental hypothesis sets: *Maximizing*,
+*Traditional*, *General*, and *Selection*. Additional hypotheses available are
 described in the ‘Diel-Niche-Vignette.Rmd’
 
 ### **Maximizing**
@@ -98,6 +98,23 @@ triplot(hyp=hyp.sets("General"))
 
 <img src="README_files/figure-gfm/general.png"/>
 
+
+### **Selection**
+
+The \emph{Selection} hypothesis set includes seven diel phenotype hypotheses (Figure~\ref{fig:selection}) that are defined based on the inputted 
+(i.e., not estimated) amount of proportional time available to an animal in each diel period ($\mathbf{p}_{\text{avail}} = [p_{\text{av.tw}},\;p_{\text{av.d}}]$); 
+the available time in the night period is derived as, $1 - p_{\text{av.tw}} - p_{\text{av.d}}$. The amount of time available in each diel period will depend on 
+the day of the year and location of sampling. Each hypothesis is defined based on a single diel period or multiple diel periods being used greater than available. 
+For example, diurnal selection occurs when $\frac{p_{\text{d}}}{p_{\text{av.d}}} > 1$ and $\frac{p_{\text{tw}}}{p_{\text{av.tw}}}, \frac{p_{n}}{p_{\text{av.n}}} \leq 1$. 
+
+
+``` r
+triplot(hyp=hyp.sets("Selection"), diel.setup=diel.ineq(p.avail=c(0.04,0.48))
+```
+
+<img src="README_files/figure-gfm/selection.png"/>
+
+
 ### Hypothesis Codes
 
 Data simulation, model fitting, and plotting are done based on a
@@ -121,6 +138,14 @@ codes, but can call them as,
 ```
 
     ## [1] "D"    "N"    "CR"   "C2"   "D.CR" "D.N"  "CR.N"
+
+
+``` r
+  hyp.sets("Selection")
+```
+
+    ## [1] "D.avail"    "CR.avail"   "N.avail"    "EQ.avail"   "D.CR.avail" "N.CR.avail" "D.N.avail"
+
 
 # Simulating Data
 
