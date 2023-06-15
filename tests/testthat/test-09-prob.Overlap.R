@@ -64,6 +64,29 @@ test_that(
         dusk = c("18.8", "19.6")
       )
     )
+    # do it again with fewer points
+    tiger_kde2 <- overlap::densityFit(
+      tiger$rads,
+      grid = seq(
+        0, 
+        2 * pi,
+        length.out = 100
+      ),
+      getBandWidth(tiger$rads,3)
+    )
+    tiger_kde2 <- tiger_kde2 / (24 / (2 * pi))
+    tiger_kde2 <- data.frame(
+      x = seq(0,24,length.out = 100),
+      y = tiger_kde2
+    )
+    
+    expect_warning(
+      prob.overlap(
+        tiger_kde2,
+        dawn = c(5,6),
+        dusk = c(18.8, 19.6)
+      )
+    )
 
   }
 )

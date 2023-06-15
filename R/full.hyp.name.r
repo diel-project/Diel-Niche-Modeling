@@ -30,8 +30,8 @@ if(ms.model=="A.AV.var"){np="Available (Variation)"}
 if(ms.model=="D.avail"){np="Day (Selection)"}
 if(ms.model=="CR.avail"){np="Twilight (Selection)"}
 if(ms.model=="N.avail"){np="Night (Selection)"}
-if(ms.model=="D.CR.avail"){np="Day-Twilight (Selection)"}
-if(ms.model=="N.CR.avail"){np="Night-Twilight (Selection)"}
+if(ms.model=="D.TW.avail"){np="Day-Twilight (Selection)"}
+if(ms.model=="N.TW.avail"){np="Night-Twilight (Selection)"}
 if(ms.model=="D.N.avail"){np="Day-Night (Selection)"}
 if(ms.model=="EQ.avail"){np="Available Equality (No Selection)"}
 
