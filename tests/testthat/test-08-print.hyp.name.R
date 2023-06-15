@@ -117,13 +117,13 @@ test_that(
     )
     expect_match(
       full.hyp.name(
-        "D.CR.avail"
+        "D.TW.avail"
       )
       ,"Day-Twilight \\(Selection\\)"
     )
     expect_match(
       full.hyp.name(
-        "N.CR.avail"
+        "N.TW.avail"
       )
       ,"Night-Twilight \\(Selection\\)"
     )
