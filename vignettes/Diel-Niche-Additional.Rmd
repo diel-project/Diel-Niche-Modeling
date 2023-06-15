@@ -36,7 +36,9 @@ This hypothesis set is based on defining each diel period in terms of lower thre
 triplot(hyp=hyp.sets("Threshold"))
 ```
 
-Not that where there is no colored space indicates that this set of probabilities are not considered as possible parameter values. Therefore, when using this hypothesis set you are deciding that these combinations of parameter values can not occur.
+The blank space in this figure indicates that these probabilities are not considered as art of the parameter space. Therefore, when using this hypothesis set you are deciding that these combinations of parameter values can not occur. To control this threshold probability via the `diel.ineq()` function you would want to modify `xi.t.D`, `xi.t.N`, `xi.t.CR`, and `xi.t.C`.
+ 
+ This specific hypothesis set might be used because of the difficultly in estimating a given diel phenotype when the probabilities are at the boundaries of a given hypothesis. However, We do not encourage the use of this hypothesis set to falsely increase the precision of your estimates. Instead, this hypothesis set could be used if aligns with the natural history of a given species. 
 
 **Variation**
 
