@@ -10,7 +10,7 @@ vignette: >
 ---
 
 # Diel Selection
-#### Author: Mason Fidino
+#### Author: Mason Fidino, Aka Dr. Rockstar
 #### Date: 2023-06-15
 
 ```{r setup, include=FALSE}

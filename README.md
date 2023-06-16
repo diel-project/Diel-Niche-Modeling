@@ -6,7 +6,8 @@ daytime, and nighttime periods. The main idea of evaluating diel phenotypes as h
 statements among the these three probabilities of activity. The core modeling and estimation functions of this packages are wrapper 
 functions to gibbs MCMC algorithms provided by the R package $\texttt{multinomineq}$: [https://www.dwheck.de/software/multinomineq/](https://www.dwheck.de/software/multinomineq/).
 
-Example Vignette's can be found on Github: [Example 1](./GitHub_vignettes/Example1.md), [Example 2](./GitHub_vignettes/Example2.md), [Example 3](./GitHub_vignettes/Example3.md), and [Example 4](./GitHub_vignettes/Example4.md).
+Example Vignette's can be found on Github: [Example 1](./GitHub_vignettes/Example1.md), [Example 2](./GitHub_vignettes/Example2.md), [Example 3](./GitHub_vignettes/Example3.md), [Example 4](./GitHub_vignettes/Example4.md), and
+and [Example5 ](./GitHub_vignettes/Example5.md).
 
 
 ## Install
