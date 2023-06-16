@@ -4,11 +4,11 @@
 #' @description Multinomial model inequalities for diel hypotheses. Given a numeric set of values between 0 and 1, \code{diel.ineq()}
 #' will generate the inequality constraints that can be used within \code{\link{diel.fit}}.
 #' 
-#' @param e Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified. 
-#' @param e.D Default is 0.05. A single value of variation for the Diurnal hypothesis (Variation Hypothesis Set).
-#' @param e.N Default is 0.05. A single value of variation for the Nocturnal hypothesis (Variation Hypothesis Set).
-#' @param e.CR Default is 0.05. A single value of variation for the Crepuscular hypothesis (Variation Hypothesis Set).
-#' @param e.EC  Default is 0.05. A single value of variation for the Evan Cathemeral hypothesis (Variation Hypothesis Set).
+#' @param e Default is 0.10. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified. 
+#' @param e.D Default is 0.10. A single value of variation for the Diurnal hypothesis (Variation Hypothesis Set).
+#' @param e.N Default is 0.10. A single value of variation for the Nocturnal hypothesis (Variation Hypothesis Set).
+#' @param e.CR Default is 0.10. A single value of variation for the Crepuscular hypothesis (Variation Hypothesis Set).
+#' @param e.EC  Default is 0.10. A single value of variation for the Evan Cathemeral hypothesis (Variation Hypothesis Set).
 #' @param e.AV   Default is 0.10. A single value of variation for the Available Cathemeral hypothesis.
 #' @param xi.t.D Default c(0.80). A single value of the lower threshold value for the Diurnal hypothesis (Threshold Hypothesis Set).
 #' @param xi.t.N  Default c(0.80). A single value of the lower threshold value for the Nocturnal hypothesis (Threshold Hypothesis Set)
@@ -68,14 +68,14 @@ diel.ineq=function(xi=NULL,
                    separation=NULL){
   
   #Default epsilon values for VARIATION hypotheses
-  if(is.null(e.D)){e.D=0.05}
-  if(is.null(e.N)){e.N=0.05}
-  if(is.null(e.CR)){e.CR=0.05}
-  if(is.null(e.EC)){e.EC=0.05}
+  if(is.null(e.D)){e.D=0.1}
+  if(is.null(e.N)){e.N=0.1}
+  if(is.null(e.CR)){e.CR=0.1}
+  if(is.null(e.EC)){e.EC=0.1}
   if(is.null(e.AV)){e.AV=0.1}
   # If e is entered then this forces all e's to be the same.  
   if(!is.null(e) & is.numeric(e)){e.D=e.N=e.CR=e.EC=e.AV=e}
-  if(is.null(e)){e=0.05}
+  if(is.null(e)){e=0.1}
   
   # Defaults for threshold and variation models     
   if(is.null(xi)){xi  = c(0.8,0.1)}
