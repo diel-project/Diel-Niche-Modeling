@@ -111,7 +111,7 @@ out = diel.fit(y,hyp.set=hyp.sets("General"),n.chains=2,post.fit = TRUE,diel.set
 triplot(out)
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual example4-1.add.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualexample4-1.add.png)
 
 There are additional defaults that could be changed, depending on your
 hypotheses of interest.
