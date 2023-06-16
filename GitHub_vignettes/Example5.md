@@ -13,11 +13,6 @@ diel periods that are used more than the amount of time available.
 # Load packages
   library(Diel.Niche)
   library(lubridate)
-#> 
-#> Attaching package: 'lubridate'
-#> The following objects are masked from 'package:base':
-#> 
-#>     date, intersect, setdiff, union
   library(suncalc)
 ```
 
@@ -53,12 +48,12 @@ data(diel.data)
 
 # Visualize the data
   head(deer)
-#>             scientificName twilight day night trap_nights nsite  min_date   max_date mean_lat mean_lon season       country   phylum    class        order
-#> 193 Odocoileus virginianus       33 241   232        2211   131  7/5/2020  7/29/2020 41.87236 -87.8423 Summer United States Chordata Mammalia Artiodactyla
-#> 211 Odocoileus virginianus        3  46    47         903   131 10/2/2020 10/29/2020 41.87236 -87.8423 Autumn United States Chordata Mammalia Artiodactyla
-#>       family             Project unit_type       Common_name Activity_Literature min_year
-#> 193 Cervidae UWIN_Chicago_IL_USA     28day White-tailed Deer         Crepuscular     2020
-#> 211 Cervidae UWIN_Chicago_IL_USA     28day White-tailed Deer         Crepuscular     2020
+#>             scientificName twilight day night trap_nights nsite  min_date   max_date mean_lat mean_lon season       country   phylum    class        order   family             Project
+#> 193 Odocoileus virginianus       33 241   232        2211   131  7/5/2020  7/29/2020 41.87236 -87.8423 Summer United States Chordata Mammalia Artiodactyla Cervidae UWIN_Chicago_IL_USA
+#> 211 Odocoileus virginianus        3  46    47         903   131 10/2/2020 10/29/2020 41.87236 -87.8423 Autumn United States Chordata Mammalia Artiodactyla Cervidae UWIN_Chicago_IL_USA
+#>     unit_type       Common_name Activity_Literature min_year
+#> 193     28day White-tailed Deer         Crepuscular     2020
+#> 211     28day White-tailed Deer         Crepuscular     2020
 ```
 
 One small complication that makes the selection hypothesis set different
@@ -66,8 +61,8 @@ from the other hypothesis sets is that it requires you to input the
 proportion of time each diel period takes up during a given time of
 year. This can be done using the `suncalc` package in `R` via
 `getSunlightTimes()`. This function allows a vector of dates but only a
-single latitude and longitude. Fortuantely, `diel.data` already has the
-average location of Chicago, Illinois. For you own work, you could
+single latitude and longitude. Fortunately, `diel.data` already has the
+average location of Chicago, Illinois. For your own work, you could
 likely just take the average of all your camera traps in a given study
 area.
 
@@ -123,8 +118,14 @@ For this first dataset, the `triplot` looks like
 
 ![](Example5_files/figure-gfm/selection.plotting1.png)<!-- -->
 
-and the second `triplot`, which has less `Night-Twilight` but more
-`Twilight` is:
+Notice that the largest parameter spaces are defined by the
+`Night-Twilight`, `Night`, and `Twilight` hypotheses. This is because
+twilight and then night have lower available time and thus more
+combinations of parameters in which use can be greater than
+availability.
+
+The second `triplot` shows the changing availability reduces the
+`Night-Twilight` hypothesis and increases ore `Twilight` hypothesis:
 
 ``` r
   selection.ineq2 <- diel.ineq(
@@ -263,17 +264,17 @@ fall, where we find slightly different results!
 #>            Prior Posterior
 #> D.avail     0.14      0.01
 #> TW.avail    0.14      0.00
-#> N.avail     0.14      0.24
-#> EQ.avail    0.14      0.04
+#> N.avail     0.14      0.27
+#> EQ.avail    0.14      0.02
 #> D.TW.avail  0.14      0.00
 #> N.TW.avail  0.14      0.00
-#> D.N.avail   0.14      0.71
+#> D.N.avail   0.14      0.70
 ```
 
 For this analysis, Day-Night Selection (`D.N.avail`) was the most
-supported hypothesis, though support for it was much weaker with a Bayes
-factor of 0.71. For this dataset, it appears that deer spent most of
-their time active during either the day or night, which together
+supported hypothesis, though support for it was much weaker with a model
+probability of 0.71. For this dataset, it appears that deer spent most
+of their time active during either the day or night, which together
 represented about 91% of a given day.
 
 ``` r
@@ -293,31 +294,39 @@ round(
 #> 211          0.09     0.53       0.38
 ```
 
-Plotting out selection for these two diel periods is a bit trickier, but
-it could be done in two ways. First, you could sum the two MCMC chains
-together or you could look at selection for each one on their own.
+For plotting out selection, we need to do so separately for each diel
+period as,
 
 ``` r
+hist(
+     out2$post.samp.ms.model[,c("p_day_1")]/deer$prop_day[2],
+     freq = FALSE,
+     xlim=c(0.8,1.5),
+     main="",
+     col="yellow",
+     las=1,
+     xlab = "Selection for day and nighttime activity relative to availability"
+)
 
 hist(
-  rowSums(
-    out1$post.samp.ms.model[,c("p_day_1", "p_night_1")]
-  )/ (deer$prop_day[2] + deer$prop_night[2]),
-  main = "",
-  las = 1,
-  xlab = "Selection for day or nighttime activity relative to availability"
+     out2$post.samp.ms.model[,c("p_night_1")]/deer$prop_night[2],
+     freq = FALSE,
+     col="blue",
+     add=TRUE
 )
-abline(v = 1, lty = 2)
 ```
 
 ![](Example5_files/figure-gfm/avail_plot2-1.png)<!-- -->
 
-In this case, there does appear to be some amount of selection in that
-most of the posterior is above 1. However, the selection for these two
-time periods is incredibly small for this specific dataset (i.e., this
-may be ‘biologically significant’). Plotting this out on via `triplot()`
-you can see that the entire `Day-Night (Selection)` parameter space is
-filled with the posterior.
+The first noticeable thing is the hard constraint at 1, truncating the
+posterior distributions. This makes sense why the model probability
+support was not that high. The posteriors are near 1 and relatively
+variable. However, given this model, both day and night are to a small
+degree being selected for more than available. However, this selection
+may be ‘biologically significant’ when placed in the larger context of
+their overall behavior and life history pattern. Plotting this out on
+via `triplot()` you can see that the entire `Day-Night (Selection)`
+parameter space is filled with the posterior.
 
 ``` r
 
@@ -338,10 +347,11 @@ functions. This additional nuance allows users of `Diel.Niche` to not
 only classify the diel phenotype of a given species, but also to
 determine if there are specific diel periods that are used more than
 they are available. This could be of particular interest for species
-that are classified as Crepuscular, given that this diel period is
-relatively small. While White-tailed deer are considered crepuscular,
-our analysis showed that they actually used night much more than other
-diel periods, which may be the result of deer modifying their activity
-levels throughout urban Chicago. Conversely, deer may be selecting for
-night during the summer given how hot it can get throughout Chicago as a
-way to better regulate their body temperature.
+that are classified as Crepuscular, given that the available time in
+this diel period will usually be relatively small. While White-tailed
+deer are considered crepuscular, our analysis showed that they actually
+used night much more than other diel periods, which may be the result of
+deer modifying their activity levels throughout urban Chicago.
+Conversely, deer may be selecting for night during the summer given how
+hot it can get throughout Chicago as a way to better regulate their body
+temperature.
