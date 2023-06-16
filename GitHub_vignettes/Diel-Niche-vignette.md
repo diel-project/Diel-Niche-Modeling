@@ -147,7 +147,6 @@ triplot(
 ```
 ![](Diel-Niche-vignette_files/figure-gfm/plotting3dGeneral 2-1.add.png)
 
-
 For example, suppose a species is active mainly during the day with
 $p_{\text{d}} = 0.78$, relatively active during twilight with
 $p_{\text{tw}} = 0.16$, and not very active at night with
