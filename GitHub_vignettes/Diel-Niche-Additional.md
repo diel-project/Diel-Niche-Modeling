@@ -178,7 +178,7 @@ all hypotheses as,
   triplot(hyp =hyp.sets("Variation"))
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual variation3-1.add.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualvariation3-1.add.png)
 
 
 ``` r
@@ -187,7 +187,7 @@ all hypotheses as,
   triplot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e = 0.2))
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual variation3-2.add.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualvariation3-1.add.png)
 
 
 ``` r
@@ -198,7 +198,7 @@ all hypotheses as,
   triplot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e.D = 0.4))
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual variation3-3.add.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualvariation3-3.add.png)
 
 
 For the **Threshold** hypotheses, we can adjust the lower probability
@@ -210,7 +210,7 @@ similarly as,
   triplot(hyp =hyp.sets("Threshold"))
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual threshold-1.add.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualthreshold-1.add.png)
 
 
 ``` r
