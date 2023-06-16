@@ -74,7 +74,7 @@ triplot(
 )
 ```
 
-<img src="Diel-Niche-vignette_files/figure-gfm/plotting 3d-1.add.png" width="5in" style="display: block; margin: auto;" />
+<img src="Diel-Niche-vignette_files/figure-gfm/plotting 3d-1.add.png" width="5in"/>
 
 Because `Diel.Niche()` quantifies how a species uses three separate diel
 periods (twilight, day, and night), `triplot()` plots the proportion of
