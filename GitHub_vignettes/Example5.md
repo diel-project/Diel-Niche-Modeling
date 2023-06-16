@@ -121,7 +121,7 @@ For this first dataset, the `triplot` looks like
   )
 ```
 
-![](Example5_files/figure-gfm/first_triplot-1.png)<!-- -->
+![](Example5_files/figure-gfm/selection.plotting1.png)<!-- -->
 
 and the second `triplot`, which has less `Night-Twilight` but more
 `Twilight` is:
@@ -140,7 +140,7 @@ and the second `triplot`, which has less `Night-Twilight` but more
   )
 ```
 
-![](Example5_files/figure-gfm/triplot2-1.png)<!-- -->
+![](Example5_files/figure-gfm/selection.plotting2.png)<!-- -->
 
 And now, to the analysis. For the first dataset we could use the already
 created `selection.ineq1` {
@@ -231,7 +231,7 @@ triplot(
 )
 ```
 
-![](Example5_files/figure-gfm/triplot_posterior1-1.png)<!-- -->
+![](Example5_files/figure-gfm/selection.plotting3.png)<!-- -->
 
 And here is the same analysis, but with the second dataset from the
 fall, where we find slightly different results!
@@ -327,7 +327,7 @@ triplot(
 )
 ```
 
-![](Example5_files/figure-gfm/triplot_posterior2-1.png)<!-- -->
+![](Example5_files/figure-gfm/selection.plotting4.png)<!-- -->
 
 # Conclusion
 

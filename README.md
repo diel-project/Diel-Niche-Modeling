@@ -16,7 +16,10 @@ First, install and load the library
 
 ``` r
 # Install package from GitHub via the devtools package.
-# devtools::install_github("diel-project/Diel-Niche-Modeling", ref="main",  build_vignettes = TRUE)
+# devtools::install_github("diel-project/Diel-Niche-Modeling",
+#                         ref="main",
+#                         build_vignettes = TRUE
+# )
 
 # Load the pacakge
   library(Diel.Niche)
