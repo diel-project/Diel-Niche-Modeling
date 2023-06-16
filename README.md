@@ -327,10 +327,7 @@ OpenGL{} and then restart RStudio.
 
 # Badges
 
-![alt text](https://img.shields.io/badge/license-GPL--3-blue.svg)
-
-
-[![License](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+`[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)`
 
 # Acknowledgements
 
