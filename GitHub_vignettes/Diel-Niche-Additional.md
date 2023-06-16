@@ -64,7 +64,7 @@ each diurnal, nocturnal, and crepuscular using $\xi_{1} = 0.90$
   triplot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual example 1-1.add.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualexample1-1.add.png)
 
 If you want to separate the hypotheses and reduce the parameter space of
 cathemerality,
@@ -77,7 +77,7 @@ cathemerality,
   triplot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual example 2-1.add.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualexample2-1.add.png)
 
 When considering the General hypothesis set, you can adjust the lower
 threshold probability value ($\xi_{1}$) to define crepuscular, diurnal,
@@ -90,7 +90,7 @@ vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular
   triplot(hyp=hyp.sets("General"),diel.setup=diel.setup)
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual example 3-1.add.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualexample3-1.add.png)
 
 
 This new hypothesis set can be used to simulate data and fit the same
