@@ -225,7 +225,7 @@ similarly as,
   )
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manualthreshold-2.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualthreshold-2.add.png)
 
 
 # User-specified Hypotheses
