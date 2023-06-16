@@ -115,8 +115,7 @@ triplot(
   )
 )
 ```
-
-<img src="Diel-Niche-vignette_files/figure-gfm/plotting3d-2-1.add.png" width="5in" style="display: block; margin: auto;" />
+![](Diel-Niche-vignette_files/figure-gfm/plotting3d-2-1.add.png)
 
 ## **General**
 
@@ -146,8 +145,8 @@ triplot(
   )
 )
 ```
+![](Diel-Niche-vignette_files/figure-gfm/plotting3dGeneral 2-1.add.png)
 
-<img src="Diel-Niche-vignette_files/figure-gfm/plotting3dGeneral 2-1.add.png" width="5in" style="display: block; margin: auto;" />
 
 For example, suppose a species is active mainly during the day with
 $p_{\text{d}} = 0.78$, relatively active during twilight with
@@ -199,7 +198,8 @@ triplot(
 )
 ```
 
-<img src="Diel-Niche-vignette_files/figure-gfm/3dplot7-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-vignette_files/figure-gfm/3dplot7-1.add.png)
+
 
 We can see the hypotheses change when we make an increasing amount of
 available time in the night period, such as during winter in the higher
@@ -216,7 +216,8 @@ triplot(
 )
 ```
 
-<img src="Diel-Niche-vignette_files/figure-gfm/3dplot8-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-vignette_files/figure-gfm/3dplot8-1.add.png)
+
 
 Because of the shift in availability throughout a year, researchers may
 want to discretize longer time periods into smaller pieces to determine
@@ -234,7 +235,8 @@ triplot(
 )
 ```
 
-<img src="Diel-Niche-vignette_files/figure-gfm/3dplot6-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-vignette_files/figure-gfm/3dplot6-1.add.png)
+
 
 Note that while this looks like a full triangle, the axes are quite
 different ( i.e., this is zoomed in on the part of the diel parameter
@@ -485,8 +487,7 @@ bayesplot::mcmc_areas(
     size = 1
   )
 ```
-
-![](Diel-Niche-vignette_files/figure-gfm/plot-1.add.png)<!-- -->
+![](Diel-Niche-vignette_files/figure-gfm/plot-1.png)
 
 Another way to examine our hypothesis is to plot the theoretical niche
 space for the hypothesis along with the posterior samples from the most
@@ -502,7 +503,7 @@ triplot(
 )
 ```
 
-<img src="Diel-Niche-vignette_files/figure-gfm/3dplot 1-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-vignette_files/figure-gfm/3dplot 1-1.add.png)
 
 Or we can plot the posteriors out on the whole hypothesis set. Unlike
 the previous plot this is done by default if you supply the fitted diel
@@ -512,7 +513,7 @@ list object.
 triplot(out)
 ```
 
-<img src="Diel-Niche-vignette_files/figure-gfm/3dplot 2-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-vignette_files/figure-gfm/3dplot 2-1.add.png)
 
 # The Unconstrained Model
 
@@ -729,8 +730,7 @@ legend(
   lty = 1:4
 )
 ```
-
-<img src="Diel-Niche-vignette_files/figure-gfm/prior2-1.add.png" style="display: block; margin: auto;" />
+![](Diel-Niche-vignette_files/figure-gfm/prior2-1.png)
 
 ``` r
 
@@ -756,7 +756,7 @@ legend(
 )
 ```
 
-<img src="Diel-Niche-vignette_files/figure-gfm/prior2-2.add.png" style="display: block; margin: auto;" />
+![](Diel-Niche-vignette_files/figure-gfm/prior2-2.png)
 
 The differences in the model probabilities are entirely due to the prior
 weights on each hypothesis. In the second plot, the likelihood of the
