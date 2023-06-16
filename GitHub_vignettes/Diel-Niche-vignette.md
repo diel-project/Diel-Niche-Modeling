@@ -514,7 +514,7 @@ list object.
 triplot(out)
 ```
 
-![](Diel-Niche-vignette_files/figure-gfm/3dplot 2-1.add.png)
+![](Diel-Niche-vignette_files/figure-gfm/3dplot21.add.png)
 
 # The Unconstrained Model
 
