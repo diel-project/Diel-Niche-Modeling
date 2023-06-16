@@ -2,7 +2,7 @@
 title: "Diel.Niche Vignette"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Diel-Niche-Vignette}
+  %\VignetteIndexEntry{Diel.Niche Vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{bayesplot,ggplot2,coda,Diel.Niche}
@@ -99,6 +99,14 @@ triplot(
 ## **General** 
 
 This hypothesis set includes seven hypotheses. The Diurnal (`D`), Crepuscular (`CR`), and Nocturnal (`N`) hypotheses are defined the same as in Traditional. The main difference is the separation of the probability space of Traditional Cathemeral into four more specific hypotheses: General Cathemeral (`C2`), Crepuscular-Nocturnal (`CR.N`), Diurnal-Nocturnal (`D.N`), and Diurnal-Crepuscular (`D.CR`). The General Cathemeral hypothesis (`C2`)---which represents a subset of the parameter space taken by the previously mentioned Traditional Cathemeral (`C`)---aims to  define when an animal uses all three diel periods (twilight, daytime, nighttime) at equal to or more than a minimum amount (i.e., $p_{\text{tw}}, p_{\text{d}}, p_{\text{n}} \leq \xi_{1}$  and $p_{\text{tw}}, p_{\text{d}}, p_{\text{n}} \geq \xi_{2}$). We defined the lower threshold probability as $\xi_{2} = 0.10$, such that we consider it important to differentiate animal activity when a diel period is used at least this much. However, if only two diel periods are used above $\xi_{2}$ then we classify this activity using one of the binomial hypotheses (Crepuscular-Nocturnal, Diurnal-Nocturnal, and Diurnal-Crepuscular). 
+
+```{r plotting3dGeneral 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
+triplot(
+  hyp = hyp.sets(
+    "General"
+  )
+)
+```
 
 For example, suppose a species is active mainly during the day with $p_{\text{d}} = 0.78$, relatively active during twilight with $p_{\text{tw}} = 0.16$, and not very active at night with $p_{\text{n}} = 0.06$. We would define this activity as Diurnal-Crepuscular because $p_{\text{tw}}$ \& $p_{\text{d}} \geq \xi_{2}$, while $p_{\text{n}} < \xi_{2}$. However, if night activity was also higher than $\xi_{2}$, such that $p_{\text{d}} = 0.70$, and $p_{\text{tw}} = p_{\text{n}} = 0.15$ then we classify this activity as General Cathemeral because a moderate to large amount of activity occurs in all three diel periods. In summary, the Traditional hypothesis set distinguishes between unimodal and multi-modal diel activity, while the General set distinguishes among unimodal, bimodal, and trimodal activity. 
 

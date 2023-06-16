@@ -32,7 +32,7 @@ Along with the three main hypotheses sets (*Maximizing*, *Traditioanl*, and *Gen
 **Threshold** 
 
 This hypothesis set is based on defining each diel period in terms of lower thresholds. If the thresholds are not provided, default values are used.
-```{r 3dplot4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
+```{r ThresholdTriplot1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "5in"}
 triplot(hyp=hyp.sets("Threshold"))
 ```
 
@@ -43,7 +43,7 @@ The blank space in this figure indicates that these probabilities are not consid
 **Variation**
 
 This hypothesis set is based on defining the ranges (lower, upper) of possible probability values. 
-```{r 3dplot5,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+```{r VariationTriplot1,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 triplot(hyp=hyp.sets("Variation"))
 ```
 
@@ -67,14 +67,14 @@ If you want to separate the hypotheses and reduce the parameter space of catheme
 
 When considering the General hypothesis set, you can adjust the lower threshold probability value ($\xi_{1}$) to define crepuscular, diurnal, and nocturnal, as well as adjust the definitions of Cathemeral General  vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular ($\xi_{2}$). To do this, set $xi$ as a vector of two probabilities,
 
-```{r manual2 example 2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+```{r manual example 3,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
   diel.setup=diel.ineq(xi = c(0.9,0.05))
   triplot(hyp=hyp.sets("General"),diel.setup=diel.setup)
 ```
 
 This new hypothesis set can be used to simulate data and fit the same models by passing the object diel.setup as an attribute of the functions sim.diel and diel.fit.
 
-```{r manual example2,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+```{r manual example4,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 
 y=sim.diel(hyp="D.CR",n.sample = 200,diel.setup=diel.setup)$y
 
@@ -93,7 +93,7 @@ There are additional defaults that could be changed, depending on your hypothese
 
 For the **Variation** hypotheses, we can adjust the range of values for all hypotheses as,
 
-```{r manual variation, fig.height = 6, fig.width = 6}
+```{r manual variation3, fig.height = 6, fig.width = 6}
 
 # Default
   triplot(hyp =hyp.sets("Variation"))
@@ -215,7 +215,7 @@ Now, we need to code these hypotheses into $\texttt{Diel.Niche}$
 We have setup our hypotheses. Now, we need to visualize them to check it's what we intended. Note that in each following, we pass our new diel.setup object to each function.
 
 
-```{r user.spec.visual,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
+```{r user.spec.triplot,fig.align = "center",fig.height = 6, fig.width = 6,out.width = "6.5in"}
 triplot(hyp=c("New1","New2"),diel.setup = diel.setup,more.points = TRUE)
 ```
 
@@ -249,7 +249,7 @@ We have included a few additional hypotheses that could be useful but don't fit 
 
 A strict definition of cathemerality is that there is even amount of activity in all thre diel periods. Thus, the probabilities of activity of twilight, day, and night are all equal. We can consider this model by simulating data under this model and considering a combination of the Traditional hyptheses set and the even cathemarlity hypothesis('EC').
 
-```{r addhyp}
+```{r addhypTriplot}
 set.seed(5452)
 dat = sim.diel(n.sim=1, n.sample=100, hyp="EC")
 
