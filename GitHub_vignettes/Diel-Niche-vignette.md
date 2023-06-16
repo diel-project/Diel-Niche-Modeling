@@ -503,7 +503,8 @@ triplot(
 )
 ```
 
-![](Diel-Niche-vignette_files/figure-gfm/3dplot 1-1.add.png)
+![](Diel-Niche-vignette_files/figure-gfm/3dplot1-1.add.png)
+
 
 Or we can plot the posteriors out on the whole hypothesis set. Unlike
 the previous plot this is done by default if you supply the fitted diel
