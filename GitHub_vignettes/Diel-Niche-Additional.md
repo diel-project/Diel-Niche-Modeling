@@ -20,7 +20,7 @@ used.
 triplot(hyp=hyp.sets("Threshold"))
 ```
 
-<img src="Diel-Niche-Additional_files/figure-gfm/ThresholdTriplot1-1.add.png" width="5in" style="display: block; margin: auto;" />
+![](Diel-Niche-Additional_files/figure-gfm/ThresholdTriplot1-1.add.png)
 
 The blank space in this figure indicates that these probabilities are
 not considered as art of the parameter space. Therefore, when using this
@@ -45,7 +45,7 @@ possible probability values.
 triplot(hyp=hyp.sets("Variation"))
 ```
 
-<img src="Diel-Niche-Additional_files/figure-gfm/VariationTriplot1-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-Additional_files/figure-gfm/VariationTriplot1-1.add.png)
 
 # User-modified Hypotheses
 
@@ -64,7 +64,7 @@ each diurnal, nocturnal, and crepuscular using $\xi_{1} = 0.90$
   triplot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 ```
 
-<img src="Diel-Niche-Additional_files/figure-gfm/manual example 1-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-Additional_files/figure-gfm/manual example 1-1.add.png)
 
 If you want to separate the hypotheses and reduce the parameter space of
 cathemerality,
@@ -77,7 +77,7 @@ cathemerality,
   triplot(hyp=hyp.sets("Traditional"),diel.setup=diel.setup)
 ```
 
-<img src="Diel-Niche-Additional_files/figure-gfm/manual example 2-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-Additional_files/figure-gfm/manual example 2-1.add.png)
 
 When considering the General hypothesis set, you can adjust the lower
 threshold probability value ($\xi_{1}$) to define crepuscular, diurnal,
@@ -90,7 +90,8 @@ vs Diurnal-Nocturnal, Crepuscular-Nocturnal, and Diurnal-Crepuscular
   triplot(hyp=hyp.sets("General"),diel.setup=diel.setup)
 ```
 
-<img src="Diel-Niche-Additional_files/figure-gfm/manual example 3-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-Additional_files/figure-gfm/manual example 3-1.add.png)
+
 
 This new hypothesis set can be used to simulate data and fit the same
 models by passing the object diel.setup as an attribute of the functions
@@ -110,7 +111,7 @@ out = diel.fit(y,hyp.set=hyp.sets("General"),n.chains=2,post.fit = TRUE,diel.set
 triplot(out)
 ```
 
-<img src="Diel-Niche-Additional_files/figure-gfm/manual example4-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-Additional_files/figure-gfm/manual example4-1.add.png)
 
 There are additional defaults that could be changed, depending on your
 hypotheses of interest.
@@ -177,7 +178,8 @@ all hypotheses as,
   triplot(hyp =hyp.sets("Variation"))
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual%20variation3-1.add.png)<!-- -->
+![](Diel-Niche-Additional_files/figure-gfm/manual variation3-1.add.png)
+
 
 ``` r
 
@@ -185,7 +187,8 @@ all hypotheses as,
   triplot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e = 0.2))
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual%20variation3-2.add.png)<!-- -->
+![](Diel-Niche-Additional_files/figure-gfm/manual variation3-2.add.png)
+
 
 ``` r
 
@@ -195,7 +198,8 @@ all hypotheses as,
   triplot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e.D = 0.4))
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual%20variation3-3.add.png)<!-- -->
+![](Diel-Niche-Additional_files/figure-gfm/manual variation3-3.add.png)
+
 
 For the **Threshold** hypotheses, we can adjust the lower probability
 similarly as,
@@ -206,7 +210,8 @@ similarly as,
   triplot(hyp =hyp.sets("Threshold"))
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual%20threshold-1.add.png)<!-- -->
+![](Diel-Niche-Additional_files/figure-gfm/manual threshold-1.add.png)
+
 
 ``` r
 
@@ -220,7 +225,8 @@ similarly as,
   )
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manual%20threshold-2.add.png)<!-- -->
+![](Diel-Niche-Additional_files/figure-gfm/manual threshold-2.add.png)
+
 
 # User-specified Hypotheses
 
@@ -323,7 +329,8 @@ diel.setup object to each function.
 triplot(hyp=c("New1","New2"),diel.setup = diel.setup,more.points = TRUE)
 ```
 
-<img src="Diel-Niche-Additional_files/figure-gfm/user.spec.triplot-1.add.png" width="6.5in" style="display: block; margin: auto;" />
+![](Diel-Niche-Additional_files/figure-gfm/user.spec.triplot-1.add.png)
+
 
 ### Simulating and Fitting
 
@@ -397,4 +404,5 @@ out$bf.table
 triplot(out)
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/addhypTriplot-1.add.png)<!-- -->
+![](Diel-Niche-Additional_files/figure-gfm/addhypTriplot-1.add.png)
+
