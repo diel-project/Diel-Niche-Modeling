@@ -187,7 +187,7 @@ all hypotheses as,
   triplot(hyp =hyp.sets("Variation"),diel.setup=diel.ineq(e = 0.2))
 ```
 
-![](Diel-Niche-Additional_files/figure-gfm/manualvariation3-1.add.png)
+![](Diel-Niche-Additional_files/figure-gfm/manualvariation-2.png)
 
 
 ``` r
