@@ -74,7 +74,7 @@ triplot(
 )
 ```
 
-![](Diel-Niche-vignette_files/figure-gfm/plotting 3d-1.add.png)
+![](Diel-Niche-vignette_files/figure-gfm/plotting3d-1.add.png)
 
 
 Because `Diel.Niche()` quantifies how a species uses three separate diel
@@ -116,7 +116,7 @@ triplot(
 )
 ```
 
-<img src="Diel-Niche-vignette_files/figure-gfm/plotting3d 2-1.add.png" width="5in" style="display: block; margin: auto;" />
+<img src="Diel-Niche-vignette_files/figure-gfm/plotting3d-2-1.add.png" width="5in" style="display: block; margin: auto;" />
 
 ## **General**
 
