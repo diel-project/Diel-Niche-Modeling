@@ -17,7 +17,6 @@
 #' sim.diel(n.sim=1,reps=1,n.sample=100,hyp="D.th")
 #' @export
 
-#n.sim=1;reps=1;n.sample=100;diel.setup=NULL;sd.error=0; fast=TRUE
 sim.diel<- function(n.sim=1,reps=1,n.sample=100,hyp,diel.setup=NULL,sd.error=0,fast=TRUE,return.probs=FALSE){
  
 ################################################   

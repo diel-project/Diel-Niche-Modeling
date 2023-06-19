@@ -12,7 +12,7 @@
 
 find.prob.hyp=function(hyp, diel.setup = NULL,fast=TRUE){
 
-# If diel.setup is not provided, the create it
+# If diel.setup is not provided, then create it
   if(is.null(diel.setup)){diel.setup=diel.ineq()}
   if(
     !all(
@@ -26,7 +26,7 @@ find.prob.hyp=function(hyp, diel.setup = NULL,fast=TRUE){
   if(isFALSE(fast)){p.opts=p.options3}
   if(isTRUE(fast)){p.opts=p.options2}
 
-#Check hyp matching    
+# Check hyp matching    
 check.inputs(y=cbind(0,0,0),hyp.set=hyp,bf.fit=FALSE,prior=NULL,diel.setup=diel.setup,post.fit=FALSE,n.chains=1,
                n.mcmc=1,burnin=1,prints=FALSE,alt.optim=FALSE,delta=0)  
   
@@ -75,7 +75,7 @@ if(!is.logical(fast)){stop("fast needs to be logical")}
     #Find where they are true
     index=which(p.ineq.logical)
 
- #These are the combinations of p's that match the constraints
+# These are the combinations of p's that match the constraints
   probs.out=t(p.options3[,index])
   
 }
@@ -83,9 +83,6 @@ if(!is.logical(fast)){stop("fast needs to be logical")}
 # Non-linear models - the data is stored in diel.setup  
   if(diel.setup[[index.models]]$func=="bf_nonlinear"){  
     probs.out=as.matrix(diel.setup[[index.models]]$data,ncol=3)
-    #probs.out=as.matrix(diel.setup[[index.models]]$data,ncol=2)
-    #probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
-    #probs.out=matrix(probs.out,ncol=3)
   }
   
 # output  

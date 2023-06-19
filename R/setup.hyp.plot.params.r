@@ -15,7 +15,8 @@ setup.hyp.plot.params=function(diel.setup,index.models,more.points=FALSE,...){
   plot.points=vector("list",length(index.models))
   if(isFALSE(more.points)){load.points=p.options}
   if(isTRUE(more.points)){load.points=p.options2}
-for(i in 1:length(index.models)){
+
+  for(i in 1:length(index.models)){
   if(diel.setup[[index.models[i]]]$func=="bf_multinom"){
     A=round(diel.setup[[index.models[i]]][[2]],digits=5)
     b=round(diel.setup[[index.models[i]]][[3]],digits=5)
@@ -39,13 +40,13 @@ for(i in 1:length(index.models)){
     
     #Find all A %*% theta combinations
     p.ineq= round(matrix(apply(p.options2[1:2,],2,FUN=function(x){A%*%x}),nrow=nrow(A)),digits=6)
-    #apply(p.options2[1:2,],2,FUN=function(x){A%*%x})  
+
     #find if that is <= b
     p.ineq.logical= apply(p.ineq,2,FUN=function(x){all(x<=b)})  
     
     #Find all C %*% theta combinations
     p.ineq2= round(matrix(apply(p.options2[1:2,],2,FUN=function(x){C%*%x}),nrow=nrow(C)),digits=6)
-      #apply(p.options2[1:2,],2,FUN=function(x){C%*%x})  
+
     #find if abs(C*theta -d) < delta
     delta=0.005
     p.ineq.logical2= apply(p.ineq2,2,FUN=function(x){all(abs(x-d)<delta)})  
@@ -61,16 +62,13 @@ for(i in 1:length(index.models)){
  
 if(diel.setup[[index.models[i]]]$func=="bf_nonlinear"){  
   p.plot=as.matrix(diel.setup[[index.models[i]]]$data,ncol=2)
-  #probs.out=cbind(probs.out,1-apply(probs.out,1,sum))
-  #probs.out=matrix(probs.out,ncol=3)
 }  
  
   
   p.plot=cbind(p.plot,rep(diel.setup[[index.models[i]]]$Name,nrow(p.plot)))
   
   colnames(p.plot)=c("p.crep","p.day","p.night","hyp")
-  #head(p.plot)
-  
+
   #make sure there are not mistakes
   index.remove=which(p.plot[,3]<0 | p.plot[,3]>1)
   if(length(index.remove)>0){p.plot=p.plot[-index.remove,]}

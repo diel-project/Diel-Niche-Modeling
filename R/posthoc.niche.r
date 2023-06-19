@@ -172,19 +172,17 @@ posthoc.niche=function(y,
     y=t(as.matrix(y))
   }
   
-if(is.null(diel.setup)){diel.setup=diel.ineq()}
+  if(is.null(diel.setup)){diel.setup=diel.ineq()}
   
-check.inputs(y=y,hyp.set=hyp,bf.fit=FALSE,prior=NULL,diel.setup=diel.setup,post.fit=FALSE,n.chains=1,
+  check.inputs(y=y,hyp.set=hyp,bf.fit=FALSE,prior=NULL,diel.setup=diel.setup,post.fit=FALSE,n.chains=1,
                n.mcmc=1,burnin=1,prints=FALSE,alt.optim=FALSE,delta=0)  
   
 
-tol = 0.01 
-if(!all(apply(y,1,sum) >= 1-tol)){
-  stop("all rows need to sum to 1 \n")
-}  
-
-###################################
-#  y=matrix(y,ncol=3)
+# Allowable tolerance
+  tol = 0.01 
+  if(!all(apply(y,1,sum) >= 1-tol)){
+    stop("all rows need to sum to 1 \n")
+  }  
 
 
   index.models=match(hyp,names(diel.setup))

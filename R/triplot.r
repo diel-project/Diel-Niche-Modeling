@@ -34,8 +34,9 @@ triplot=function(fit=NULL,
                    axis.lab.size=18,
                    legend.lab.size=15){
   
-#x.scene=2.5; y.scene=1; z.scene=0.3; axis.size=16; axis.lab.size=18; legend.lab.size=15
 
+#checks   
+  
 if(is.null(fit) & is.null(hyp)){
   stop("Please include objects for either argument 'fit' or 'hyp")
 }
@@ -130,17 +131,6 @@ if(!is.null(fit)){
                   marker = list(symbol = 'circle', sizemode = 'diameter', size = 3))
 
   fig <- fig %>% add_markers()
-
-#margins
-# m <- list(
-#   l = 0,
-#   r = 0,
-#   b = 1,
-#   t = 0,
-#   pad = 0
-# )
-
-#fig <- fig %>% layout(autosize = F, margin = m)
 
 
 #Setup layout

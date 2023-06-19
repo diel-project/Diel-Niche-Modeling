@@ -47,8 +47,6 @@ diel.fit=function(y,
                   alt.optim=FALSE,
                   delta=NULL){
 
-#post.fit=TRUE;bf.fit=TRUE; diel.setup=NULL; prior=NULL; n.chains=2; n.mcmc=50000; burnin=10000;prints=TRUE;alt.optim=FALSE;delta=NULL
-
 ###################################
 #Setup variables  
   n.cpu=1

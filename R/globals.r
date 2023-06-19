@@ -7,7 +7,6 @@
 #' @noRd
 
 IsSmallerOrEqual <- function(a,b) {   
-#if (   class(all.equal(a, b)) == "logical" && (a<b | all.equal(a, b))) { return(TRUE)
   if ( inherits(all.equal(a, b),"logical") && (a<b | all.equal(a, b))) { return(TRUE)
  } else if (a < b) { return(TRUE)
      } else { return(FALSE) }

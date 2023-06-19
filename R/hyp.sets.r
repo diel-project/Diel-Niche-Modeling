@@ -14,7 +14,7 @@
 #' hyp.sets("Traditional")
 #' @export
 
-# A function to simply call certain pre-defined hypotheses sets
+# A function to simply call pre-defined hypotheses sets
 # Each name here is defined in the Diel.Inequalities.r function where the inequality constraints
 # are defined and named by hypothesis. 
 
@@ -28,7 +28,6 @@ hyp.sets=function(hyp.in=NULL){
     }
   }
 
-  #NEED TO INCLUDE C.th somewhere
   hyp.set=vector("list",6)
   
  #Hypothesis Sets
@@ -41,6 +40,7 @@ hyp.sets=function(hyp.in=NULL){
   
   names(hyp.set)=c("Traditional","General","Threshold","Maximizing","Variation","Selection")
   class(hyp.set) <- c("list",'diel')
+  
 if(is.null(hyp.in)){   
   cat("Names of Hypothesis Sets: \n",names(hyp.set),sep="  ")
 }else{
