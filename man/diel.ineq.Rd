@@ -27,15 +27,15 @@ diel.ineq(
 \arguments{
 \item{xi}{Default c(0.8, 0.1). The first element is the minimum threshold probability of singular hypotheses (e.g., Diurnal; Traditional Hypothesis set). The second element is the minimum probability for the General Hypothesis set. See details for additional information.}
 
-\item{e}{Default is 0.05. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified.}
+\item{e}{Default is 0.10. A single value of variation for probabilities. If specified, it will be applied to all hypotheses, regardless of whether individual epsilon hypotheses values are specified.}
 
-\item{e.D}{Default is 0.05. A single value of variation for the Diurnal hypothesis (Variation Hypothesis Set).}
+\item{e.D}{Default is 0.10. A single value of variation for the Diurnal hypothesis (Variation Hypothesis Set).}
 
-\item{e.N}{Default is 0.05. A single value of variation for the Nocturnal hypothesis (Variation Hypothesis Set).}
+\item{e.N}{Default is 0.10. A single value of variation for the Nocturnal hypothesis (Variation Hypothesis Set).}
 
-\item{e.CR}{Default is 0.05. A single value of variation for the Crepuscular hypothesis (Variation Hypothesis Set).}
+\item{e.CR}{Default is 0.10. A single value of variation for the Crepuscular hypothesis (Variation Hypothesis Set).}
 
-\item{e.EC}{Default is 0.05. A single value of variation for the Evan Cathemeral hypothesis (Variation Hypothesis Set).}
+\item{e.EC}{Default is 0.10. A single value of variation for the Evan Cathemeral hypothesis (Variation Hypothesis Set).}
 
 \item{e.AV}{Default is 0.10. A single value of variation for the Available Cathemeral hypothesis.}
 

@@ -48,7 +48,8 @@ Suggests:
     overlap  (>= 0.3.4),
     lubridate(>= 1.9.2),
     ggthemes(>= 4.2.4),
-    suncalc(>= 0.5.1)
+    suncalc(>= 0.5.1),
+    devtools(>= 2.4.5)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 LazyData: true
