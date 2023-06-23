@@ -11,7 +11,7 @@ The main package vignettes can be found on Github here: [Main Vignette](./GitHub
 Case study example vignette's can be found on Github here: [Example 1](./GitHub_vignettes/Example1.md), [Example 2](./GitHub_vignettes/Example2.md), [Example 3](./GitHub_vignettes/Example3.md), 
 [Example 4](./GitHub_vignettes/Example4.md), and [Example5 ](./GitHub_vignettes/Example5.md).
 
-The package manual can be found on Github here: [Manual](./man/Diel.Niche.pdf).
+The package manual can be found on Github here: [Manual PDF](./man/Diel.Niche.pdf).
 
 
 ## Install
