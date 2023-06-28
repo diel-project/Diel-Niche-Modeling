@@ -321,7 +321,7 @@ triplot(out)
 
 Plotting is done using the package plotly. Plotly can have issues with
 RStudio. If you are using RStudio and no figures are opening then:
-Tools–\>Global Options–\>Advanced–\>Rendering Engine Choose “Desktop
+Tools–\>Global Options–\>Advanced–\>Rendering Engine Choose Desktop
 OpenGL{} and then restart RStudio.
 
 # Badges
