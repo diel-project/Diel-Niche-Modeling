@@ -335,7 +335,7 @@ OpenGL{} and then restart RStudio.
 # Authors
 
 - [Brian Gerber](https://github.com/bgerber123)
-- [Kadambari Devarajan](https://github.com/kadambarid)
+- [Kadambari Devarajan](http://kadambarid.in/)
 - [Mason Fidino](https://masonfidino.com/)
 - [Zach Farris](https://hes.appstate.edu/faculty-staff/zachary-farris)
 
