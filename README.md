@@ -114,10 +114,7 @@ triplot(hyp=hyp.sets("General"))
 
 ### **Selection**
 
-The \emph{Selection} hypothesis set includes seven diel phenotype hypotheses (Figure~\ref{fig:selection}) that are defined based on the inputted 
-(i.e., not estimated) amount of proportional time available to an animal in each diel period ($\mathbf{p}_{\text{avail}} = [p_{\text{av.tw}},\;p_{\text{av.d}}]$); 
-the available time in the night period is derived as, $1 - p_{\text{av.tw}} - p_{\text{av.d}}$. The amount of time available in each diel period will depend on 
-the day of the year and location of sampling. Each hypothesis is defined based on a single diel period or multiple diel periods being used greater than available. 
+The Selection hypothesis set includes seven diel phenotype hypotheses  (Day, Day-Night, Day-Twilight, Equal, Night, Night-Twilight, and Twilight Selection) that are defined based on the inputted (i.e., not estimated) amount of proportional time available to an animal in each diel period  ($p_{\text{avail}} = [p_{\text{av.tw}},p_{\text{av.d}}]$; the available time in the night period is derived as, $1 - p_{\text{av.tw}} - p_{\text{av.d}}$). The amount of time available in each diel period will depend on the day of the year and location of sampling. Each hypothesis is defined based on a single diel period or multiple diel periods being used greater than available. 
 For example, diurnal selection occurs when $\frac{p_{\text{d}}}{p_{\text{av.d}}} > 1$ and $\frac{p_{\text{tw}}}{p_{\text{av.tw}}}, \frac{p_{n}}{p_{\text{av.n}}} \leq 1$. 
 
 
