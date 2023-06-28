@@ -167,9 +167,9 @@ unimodal, bimodal, and trimodal activity.
 This hypothesis set includes seven diel phenotype hypotheses and are
 defined based on an inputted amount of proportional time available to an
 animal in each diel period
-($\mathbf{p}_{\text{avail}} = [p_{av.tw},\;p_{av.d}]$). The available
+($p_{\text{avail}} = [p_{av.tw},p_{av.d}]$). The available
 time in the night period does not need to be input as it is derived as
-$1 - p_{av.tw}, - p_{av.d}]$.
+$1 - p_{av.tw} - p_{av.d}$.
 
 The hypotheses in this set are Day Selection (`D.avail`), Twilight
 Selection (`TW.avail`), Night Selection (`N.avail`), use equivalent to
@@ -767,5 +767,5 @@ data is trying to overwhelm such a highly certain prior.
 
 Plotting is done using the package `plotly`, which can have issues with
 RStudio. If you are using RStudio and no figures are opening then:
-Tools–\>Global Options–\>Advanced–\>Rendering Engine Choose “Desktop
+Tools–\>Global Options–\>Advanced–\>Rendering Engine Choose Desktop
 OpenGL{} and then restart RStudio.
