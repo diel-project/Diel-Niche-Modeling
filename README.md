@@ -31,7 +31,7 @@ First, install and load the library
 # You can view the main vignette as
   vignette("Diel-Niche-Vignette")
 
-# Or other vignette's
+# Or other vignettes
   vignette("Example1")
   vignette("Example2")
   vignette("Example3")
