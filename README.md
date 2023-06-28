@@ -37,7 +37,7 @@ First, install and load the library
   vignette("Example3")
   vignette("Example4")
 
-# To list all the available vignette's for the package
+# To list all the available vignettes for the package
   browseVignettes("Diel.Niche")
 
 # Listing the packages functions and help files
