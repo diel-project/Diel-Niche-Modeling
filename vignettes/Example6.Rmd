@@ -25,7 +25,7 @@ load("Example6.RData")
 
 ```
 
-We will consider how to use an animal movement behavior analysis to provide inference on diel activity using the $\texttt{Diel.Niche}$ R package. This is by no means the only way to think about animal movement and diel activity. Specifically, we use the R package $\texttt{momentuHMM}$ to fit a hidden Markov model that considers animal animal location data as a bivariate time series to estimate step lengths and turning angle's at each time point. We will consider state-dependent movement, where we will estimate the behavioral state (e.g., foraging or traveling) of each location based on step lengths and turning angles. We also consider diel cycles of temperature as a covariate when modeling movement parameters. 
+In this example We consider how to use an animal movement behavior analysis to provide inference on diel activity using the $\texttt{Diel.Niche}$ R package. This is by no means the only way to think about animal movement and diel activity. Specifically, we use the R package $\texttt{momentuHMM}$ to fit a hidden Markov model that assumes animal location data is a bivariate time series to estimate step lengths and turning angle's at each time point. We will consider state-dependent movement, where we estimate the behavioral state (e.g., foraging or traveling) of each location based on step lengths and turning angles. We also consider diel cycles of temperature as a covariate when modeling movement parameters. 
 
 
 # The Setup
@@ -51,37 +51,48 @@ First, we need to load the data and setup the data structure for animal movement
 
 ```{r data, eval = TRUE, echo = TRUE}
 # Read the data locally - NEEDS TO BE CHANGED
-  rawData<- read.csv("Wall et al. 2014 African Elephant Dataset (Source-Save the Elephants).csv")
+  rawData<- read.csv(
+    "Wall et al. 2014 African Elephant Dataset (Source-Save the Elephants).csv"
+  )
 ```
 
 ```{r Movement Model Setup from momentuHMM, eval = TRUE, echo = TRUE}
 
 # Select and rename relevant columns
-  rawData <- rawData[,c(11,3,4,5,6)]
+  rawData <- rawData[,
+    c(
+      "individual.local.identifier",
+      "timestamp",
+      "location.long",
+      "location.lat",
+      "external.temperature"
+    )
+  ]
   colnames(rawData) <- c("ID","time","lon","lat","temp")
 
 # There are two individual's tracks. Only keep the  first track - named, "Salif Keita"
-  rawData <- subset(rawData,ID==unique(ID)[1])
+  rawData <- subset(
+    rawData,
+    ID==unique(ID)[1]
+  )
 
 # Convert times from factors to POSIX
-  rawData$time <- as.POSIXct(rawData$time,tz="GMT")
+  rawData$time <- as.POSIXct(
+    rawData$time,
+    tz="GMT"
+  )
 
   
-# Project to UTM coordinates using package sp
-
-#Original Code that uses R package sp which is being deprecated for sf
-  # llcoord <- SpatialPoints(rawData[,3:4], 
-  #                          proj4string=CRS("+proj=longlat +datum=WGS84"))
-  # utmcoord <- spTransform(llcoord,CRS("+proj=utm +zone=30 ellps=WGS84"))
-  #
-  # Add UTM locations to data frame
-  # rawData$x <- attr(utmcoord,"coords")[,1]
-  # rawData$y <- attr(utmcoord,"coords")[,2]
-
-  
-# Adapted to use package sf (BDG)
-  llcoord <- sf::st_as_sf(rawData[,3:4], coords = c("lon","lat"), crs="+proj=longlat +datum=WGS84")
-  utmcoord <- sf::st_transform(llcoord,crs="+proj=utm +zone=30 ellps=WGS84")
+# Project to UTM coordinates using sf
+  llcoord <- sf::st_as_sf(
+    rawData[,3:4],
+    coords = c("lon","lat"),
+    crs="+proj=longlat +datum=WGS84"
+  )
+  utmcoord <- sf::st_transform(
+    llcoord,
+    crs="+proj=utm +zone=30 ellps=WGS84"
+  )
 
 # Add UTM locations to data frame
   rawData$x <-  sf::st_coordinates(utmcoord)[,1]
@@ -93,31 +104,43 @@ Now with the data all setup, we can standardize the location intervals at hour i
 
 ```{r crawl, eval = FALSE, echo = TRUE}
 # Model and Predict locations using crawl - accomadates missing data at one hour intervals
-  crwOut<-crawlWrap(rawData,timeStep="hour",theta=c(6.855, -0.007),fixPar=c(NA,NA))
+  crwOut <- momentuHMM::crawlWrap(
+    rawData,
+    timeStep="hour",
+    theta=c(6.855, -0.007),
+    fixPar=c(NA,NA)
+  )
 ```
 
 
 Using the output, we can plot the observed and predicted standardized locations.
 
 ```{r movement plot1, fig.width = 6, fig.height = 6, eval = TRUE, echo = TRUE}
-  plot(crwOut,ask = FALSE)
+  plot(
+    crwOut,
+    ask = FALSE
+  )
 ```
 
 # Fitting hidden Markov Models
 
-Now that we have standardized fixed-location intervals, we can estimate state-dependent turning angles and step lengths. First, we will setup our data for model fitting in momentuHMM.
-
-consider a relatively simple model with no covariates.
+Now that we have standardized fixed-location intervals, we can estimate state-dependent turning angles and step lengths. First, we will setup our data for model fitting in `momentuHMM`. Overall, we are going to fit three models to these data. The first is a null model (`m1`), the second incorporates some covariates on transition probabilities (`m2`), and the third incorporates covariates onto multiple parameters (`m3`; i.e., transition probabilities, variation in step length, and turning angle concentration).
 
 ```{r HMM1 setup, eval = TRUE, echo = TRUE}
 # Create momentuHMMData object from crwData object
-  elephantData <- prepData(data=crwOut, covNames="temp")
+  elephantData <- momentuHMM::prepData(
+    data=crwOut,
+    covNames="temp"
+  )
 
 # Add cosinor covariate based on hour of day
-  elephantData$hour <- as.integer(strftime(elephantData$time, format = "%H", tz="GMT"))
-
-# acf plot of step lengths
-#  acf(elephantData$step[!is.na(elephantData$step)],lag.max=300)
+  elephantData$hour <- as.integer(
+    strftime(
+      elephantData$time,
+      format = "%H",
+      tz="GMT"
+      )
+  )
 
 # Label states
   stateNames <- c("encamped","exploratory")
@@ -126,56 +149,89 @@ consider a relatively simple model with no covariates.
   dist = list(step = "gamma", angle = "wrpcauchy")
 
 # Initial parameters
-  Par0_m1 <- list(step=c(100,500,100,200),angle=c(0.3,0.7))
+  Par0_m1 <- list(
+    step=c(100,500,100,200),
+    angle=c(0.3,0.7)
+  )
 ```
 
-We are now ready to fit this model where there are two assumbed behavioral states and no covariates on any model parameters.
+The code to fit the null model is... 
 
 ```{r fit HMM1, eval = FALSE, echo = TRUE}
 # Fit hidden markov model with 2 states
-  m1 <- fitHMM(data = elephantData, nbStates = 2, dist = dist, Par0 = Par0_m1, 
-             estAngleMean = list(angle=FALSE), stateNames = stateNames)
+  m1 <- momentuHMM::fitHMM(
+    data = elephantData,
+    nbStates = 2,
+    dist = dist,
+    Par0 = Par0_m1, 
+    estAngleMean = list(angle=FALSE),
+    stateNames = stateNames
+  )
 ```
 
-Next, let's consider a model (m2) where the transition probabilities between states vary by temperature and the interaction with a cyclical function based on the hour of the day. See [https://cran.r-project.org/web/packages/momentuHMM/vignettes/momentuHMM.pdf](momentuHMM vignette) for more details. 
+Next, let's consider a model (`m2`) where the transition probabilities between states vary by temperature and the interaction with a cyclical function based on the hour of the day. See [https://cran.r-project.org/web/packages/momentuHMM/vignettes/momentuHMM.pdf](momentuHMM vignette) for more details. 
 
 ```{r HMM2 setup, eval = TRUE, echo = TRUE}
 # Formula for transition probabilities
   formula <- ~ temp * cosinor(hour, period = 24)
 
 # Initial parameters (obtained from nested model m1)
-  Par0_m2 <- getPar0(model=m1, formula=formula)
+  Par0_m2 <- momentuHMM::getPar0(
+    model=m1,
+    formula=formula
+  )
+  
+  # And fit the model
+  m2 <- momentuHMM::fitHMM(
+    data = elephantData,
+    nbStates = 2,
+    dist = dist,
+    Par0 = Par0_m2$Par, 
+    beta0=Par0_m2$beta,
+    stateNames = stateNames,
+    formula=formula
+  )
 
-```
-
-Now, are ready to fit m2...
-
-```{r fit HMM2, eval = FALSE, echo = TRUE}
-# Fit model 2
-  m2 <- fitHMM(data = elephantData, nbStates = 2, dist = dist, Par0 = Par0_m2$Par, 
-             beta0=Par0_m2$beta, stateNames = stateNames, formula=formula)
 ```
 
 Lastly, we will consider a more complex model (m3) where the transition probabilities and mean and standard deviation of step lengths vary by the cyclicality of temperature, and the concentration of the turning angle varies by temperature. See [https://cran.r-project.org/web/packages/momentuHMM/vignettes/momentuHMM.pdf](momentuHMM vignette) for more details on using cyclical or spline functions to model complex non-linear variation. 
 
-First, let's setup the model...
 ```{r HMM3 setup, eval = TRUE, echo = TRUE}
 # Formulas for parameters of state-dependent observation distributions
-  DM <- list(step = list(mean = ~ temp * cosinor(hour, period = 24),
-                       sd = ~ temp * cosinor(hour, period = 24)),
-           angle = list(concentration = ~ temp))
+  DM <- list(
+    step = list(
+      mean = ~ temp * cosinor(hour, period = 24),
+      sd = ~ temp * cosinor(hour, period = 24)
+    ),
+    angle = list(
+      concentration = ~ temp
+    )
+  )
 
 # Initial parameters (obtained from nested model m2)
-  Par0_m3 <- getPar0(model=m2, formula=formula, DM=DM)
+  Par0_m3 <- momentuHMM::getPar0(
+    model=m2,
+    formula=formula, DM=DM
+  )
+
+# And fit the model
+  m3 <- momentuHMM::fitHMM(
+    data = elephantData,
+    nbStates = 2,
+    dist = dist,
+    Par0 = Par0_m3$Par, 
+    beta0 = Par0_m3$beta,
+    DM = DM,
+    stateNames = stateNames,
+    formula = formula
+  )
 ```
 
 Now we can fit m3....
 
 ```{r fit HMM3, eval = FALSE, echo = TRUE}
 # fit model 3
-  m3 <- fitHMM(data = elephantData, nbStates = 2, dist = dist, Par0 = Par0_m3$Par, 
-             beta0 = Par0_m3$beta, DM = DM, stateNames = stateNames,
-             formula = formula)
+
 ```
 
 We can compare the three models using Akaike's Information Criterion (AIC). 
