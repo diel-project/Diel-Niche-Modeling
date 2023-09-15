@@ -39,6 +39,7 @@ In this example We consider how to use an animal movement behavior analysis to p
   library(sf)
   library(ggplot2)
   library(ggpubr)
+  library(conicfit)
 ```
 
 We will use African Elephant (*Loxodonta africana*) data available from Wall et al. 2014 and published online at [MoveBank](http://dx.doi.org/10.5441/001/1.f321pf80). 
@@ -171,7 +172,7 @@ The code to fit the null model is...
 
 Next, let's consider a model (`m2`) where the transition probabilities between states vary by temperature and the interaction with a cyclical function based on the hour of the day. See [https://cran.r-project.org/web/packages/momentuHMM/vignettes/momentuHMM.pdf](momentuHMM vignette) for more details. 
 
-```{r HMM2 setup, eval = TRUE, echo = TRUE}
+```{r HMM2 setup, eval = FALSE, echo = TRUE}
 # Formula for transition probabilities
   formula <- ~ temp * cosinor(hour, period = 24)
 
@@ -196,7 +197,7 @@ Next, let's consider a model (`m2`) where the transition probabilities between s
 
 Lastly, we will consider a more complex model (m3) where the transition probabilities and mean and standard deviation of step lengths vary by the cyclicality of temperature, and the concentration of the turning angle varies by temperature. See [https://cran.r-project.org/web/packages/momentuHMM/vignettes/momentuHMM.pdf](momentuHMM vignette) for more details on using cyclical or spline functions to model complex non-linear variation. 
 
-```{r HMM3 setup, eval = TRUE, echo = TRUE}
+```{r HMM3 setup, eval = FALSE, echo = TRUE}
 # Formulas for parameters of state-dependent observation distributions
   DM <- list(
     step = list(
@@ -227,25 +228,49 @@ Lastly, we will consider a more complex model (m3) where the transition probabil
   )
 ```
 
-Now we can fit m3....
-
-```{r fit HMM3, eval = FALSE, echo = TRUE}
-# fit model 3
-
-```
 
 We can compare the three models using Akaike's Information Criterion (AIC). 
 ```{r HMM model commparison, eval = TRUE, echo = TRUE}
 # Calculate and compare AIC
-  AIC(m1,m2,m3)
+  aic_table <- AIC(m1,m2,m3)
+# calculate delta AIC
+  aic_table$deltaAIC <- round(aic_table$AIC - min(aic_table$AIC),2)
+  aic_table[order(aic_table$deltaAIC),]
 ```
 
 Using AIC as an estimate of the Expected Kullback-Leibler discrepancy, we see that the most complex model, model 3, is the most supported. This is because it is has the lowest AIC value, which means it is the model with the minimum difference from the theoretical generating model, relative to the other two models in the model set. 
 
+
+
 ```{r HMM3 parameters, eval = TRUE, echo = TRUE}
-# Show model parameters
-  m3
+# Show model parameters, but clean them up a bit so it's easier to read
+
+m3_results <- list(
+  step_coefs = data.frame(
+    parameter = colnames(m3$mle$step),
+    estimate = round(as.numeric(m3$mle$step),2)
+  ),
+  step_params = data.frame(
+    state = c("encamped", "exploratory"),
+    mean = m3$CIreal$step$est["mean",],
+    sd = m3$CIreal$step$est["sd",]
+  ),
+  angle_coefs = data.frame(
+    parameter = colnames(m3$mle$angle),
+    estimate = round(as.numeric(m3$mle$angle),2)
+  ),
+  angle_params = data.frame(
+    state = c("encamped", "exploratory"),
+    concentration = as.numeric(unname(m3$CIreal$angle$est))
+  ),
+  transition_coefs =  round(m3$mle$beta,2),
+  transition_matrix = round(m3$CIreal$gamma$est,2),
+  initial_distribution = round(m3$mle$delta,2)
+)
+
+m3_results
 ```
+
 
 
 
@@ -270,7 +295,7 @@ Before leaving the hidden Markov model, we need to derive the states associated 
 
 ```{r HMM states, eval = TRUE, echo = TRUE}
 # Decode most likely state sequence
-  states <- viterbi(m3)
+  states <- momentuHMM::viterbi(m3)
   states[which(states==1)] <- "encamped"
   states[which(states==2)] <- "exploratory"
 
@@ -293,55 +318,99 @@ Let's turn to the $\texttt{Diel.Niche}$ R package and estimate the diel phenotyp
   )  
 
 # Take these and extract the hours, minutes, and seconds    
-  time.subset=data.frame(apply(tod[,4:7],2,strftime,format="%H:%M:%S"))
+  time.subset <- data.frame(
+    apply(
+      tod[,4:7],
+      2,
+      strftime,format="%H:%M:%S"
+    )
+  )
 
 # Get Elephant times in hours, minutes, seconds
-  elephant.times=strftime(elephantData$time, format="%H:%M:%S")
+  elephant.times <- strftime(
+    elephantData$time,
+    format="%H:%M:%S"
+  )
 
 # These should be the same length  
   length(elephant.times)==nrow(time.subset)
   
 # Create a vector to store how each observation is defined- twilight, daytime, and nighttime.
-  time.cat=rep("nighttime",nrow(time.subset))
+  time.cat <- rep(
+    "nighttime",
+    nrow(time.subset)
+  )
 
 # Find times that are b/w dawn and dusk and define that as daytime  
-  index.day=which(elephant.times>time.subset$dawn & elephant.times<time.subset$dusk)
+  index.day <- which(
+    elephant.times > time.subset$dawn & elephant.times < time.subset$dusk
+  )
 
 # Find times that are before dawn (begining of daytime) and after the nightEnds
-  index.dawn=which(elephant.times<time.subset$dawn & elephant.times>time.subset$nightEnd)
+  index.dawn <- which(
+    elephant.times < time.subset$dawn & elephant.times > time.subset$nightEnd
+  )
   
 # Find times that are after dusk and before the begining of night
-  index.dusk=which(elephant.times>time.subset$dusk & elephant.times<time.subset$night)
+  index.dusk <- which(
+    elephant.times>time.subset$dusk & elephant.times<time.subset$night
+  )
 
 # Change vector elements correspond to daytime and twilight  
-  time.cat[index.day]="daytime"  
-  time.cat[c(index.dawn,index.dusk)]="twilight"  
+  time.cat[index.day] <- "daytime"  
+  time.cat[c(index.dawn,index.dusk)] <- "twilight"  
 
 # For the entire smapling period this is the frequency of classifications, disregarding particular sampling periods and behavioral state
   table(time.cat)
   
 # Create a new data.frame of dates, states, and time category and then split data into a list of elements
 # Month and Year of sampling
-  Month.Year <- paste(month(elephantData$time),"/",year(elephantData$time),sep="")
+  Month.Year <- paste(
+    lubridate::month(elephantData$time),
+    "/",
+    lubridate::year(elephantData$time),
+    sep=""
+  )
 
-  time.cat.dates=data.frame(Month.Year,states,time.cat)
+  time.cat.dates <- data.frame(
+    Month.Year,
+    states,
+    time.cat
+  )
 
-  dat.list <- split( time.cat.dates$time.cat , f = as.factor(paste(time.cat.dates$Month.Year,time.cat.dates$states, sep="-")))
+  dat.list <- split(
+    time.cat.dates$time.cat ,
+    f = as.factor(
+      paste(
+        time.cat.dates$Month.Year,
+        time.cat.dates$states,
+        sep="-"
+      )
+    )
+  )
   
 # Here is the sample size per month and behavioral state of sampling period  
-  n.obs <-  as.vector(unlist(lapply(dat.list,FUN=length)))
+  n.obs <-  as.vector(
+    unlist(
+      lapply(
+        dat.list,
+        FUN=length
+      )
+    )
+  )
   n.obs
 
 # The General hypothesis set requires a fairly reasonable sample size. Let's drop sampling periods with < 50 observations.
-  dat.list=dat.list[-which(n.obs<50)]
+  dat.list <- dat.list[-which(n.obs<50)]
   
   
 # Create a frequency table  and arrange columns in the order: Twilight, Daytime, and Nighttime 
-  dat.table <- lapply(dat.list,FUN=function(x)table(x)[c(3,1,2)])
+  dat.table <- lapply(
+    dat.list,
+    FUN=function(x)table(x)[c(3,1,2)]
+  )
+  
   n.units <- length(dat.table)
-
-# Check to make sure there are there are no missing values
-  unlist(lapply(dat.table, FUN=function(x){which(is.na(x))}))
 
 ```
 
@@ -352,21 +421,32 @@ Next, we need to use the `diel.fit` function to estimate the most probable hypot
 
 ```{r Diel.Niche model fitting, eval = TRUE, echo = TRUE}
 # For each list element, fit the General hypothesis set and extract the most probable hypothesis
-    elephant.hyps <- lapply(dat.table, FUN=function(x){
-                           fit = diel.fit(t(matrix(x)),
-                                          hyp.set = hyp.sets("General"),
-                                          post.fit=FALSE,
-                                          prints = FALSE
-                                         )
-                            fit$ms.model
-})
+  elephant.hyps <- lapply(
+    dat.table,
+    FUN=function(x){
+      fit = diel.fit(
+        t(matrix(x)),
+        hyp.set = hyp.sets("General"),
+        post.fit=FALSE,
+        prints = FALSE
+      )
+    fit$ms.model
+    }
+  )
   
 
 #  Grab the state names
-  states.by.hyp = sub('.*-', '', as.character(names(elephant.hyps)))
+  states.by.hyp <- sub(
+    '.*-',
+    '',
+    as.character(names(elephant.hyps))
+  )
   
 # Frequency table of Supported Hypotheses by Behavioral States where each sampling period is 1 month from March 2008 to September 2010. 
-  table(states.by.hyp,unlist(elephant.hyps))
+  table(
+    states.by.hyp,
+    unlist(elephant.hyps)
+  )
 
 # This individual is always following a Diurnal-Nocturnal strategy. 
 ```
@@ -377,43 +457,96 @@ Now that we have the most supported model, we can use the `diel.fit` function to
 
   # For each list element, get the posterior distributions from the most probable hypothesis. probable hypothesis
 
-  crep = day = night =NULL
+  crep <- day <- night <- matrix(
+    NA, 
+    ncol = 3,
+    nrow = length(elephant.hyps)
+  )
   for(i in 1:length(elephant.hyps)){
-    out <-   diel.fit(t(matrix(dat.table[[i]])),
-                     hyp.set = unlist(elephant.hyps)[i],
-                     post.fit=TRUE,
-                     bf.fit = FALSE,
-                     prints = FALSE
-                    )
-    #print(i)
+    out <- diel.fit(
+      t(matrix(dat.table[[i]])),
+      hyp.set = unlist(elephant.hyps)[i],
+      post.fit=TRUE,
+      bf.fit = FALSE,
+      prints = FALSE
+    )
 
-    temp=t(apply(out$post.samp[[1]][[1]],2,quantile, probs=c(0.025,0.5,0.975)))
-    crep=rbind(crep,temp[1,])
-    day=rbind(day,temp[2,])
-    night=rbind(night,temp[3,])
+    temp <- t(
+      apply(
+        out$post.samp[[1]][[1]],
+        2,
+        quantile,
+        probs=c(0.025,0.5,0.975)
+      )
+    )
+    crep[i,] <- temp[1,]
+    day[i,] <- temp[2,]
+    night[i,] <- temp[3,]
   }
   
 
 # get year and month order for plotting
-   month <-  as.integer(sub("/.*", "", names(elephant.hyps)))
-   month <- sprintf("%02d", month)
-   year <- sub('.*/', '', as.character(names(elephant.hyps)))
-   year <- as.integer(sub("-.*", "", year))
+   month <-  as.integer(
+     sub(
+       "/.*",
+       "",
+       names(elephant.hyps)
+     )
+   )
+   month <- sprintf(
+     "%02d",
+     month
+   )
+   year <- sub(
+     '.*/',
+     '',
+     as.character(names(elephant.hyps))
+   )
+   year <- as.integer(
+     sub(
+       "-.*",
+       "",
+       year
+     )
+   )
    
-   Sampling <- as.Date(paste(rep("01",length(month)),month,year,sep="/"), format = "%d/%m/%Y")
+   Sampling <- as.Date(
+     paste(
+       rep(
+         "01",
+         length(month)
+        ),
+       month,
+       year,
+       sep= "/"
+     ),
+     format = "%d/%m/%Y"
+    )
 
 # Arrange the data for plotting
-  crep.plot <- data.frame(crep, states.by.hyp,Sampling)
+  crep.plot <- data.frame(
+    crep,
+    states.by.hyp,
+    Sampling
+  )
   colnames(crep.plot) <- c("LCL","median", "UCL", "State", "Sampling") 
   crep.plot <- crep.plot[order(Sampling),]
   crep.plot$Sampling <- factor(crep.plot$Sampling, ordered = TRUE)
   
-  day.plot <- data.frame(day, states.by.hyp,Sampling)
+  day.plot <- data.frame(
+    day,
+    states.by.hyp,
+    Sampling
+  )
   colnames(day.plot) <- c("LCL","median", "UCL", "State", "Sampling") 
   day.plot <- day.plot[order(Sampling),]
   day.plot$Sampling <- factor(day.plot$Sampling, ordered = TRUE)
 
-  night.plot <- data.frame(night, states.by.hyp,Sampling)
+  night.plot <- data.frame(
+    night,
+    states.by.hyp,
+    Sampling
+  )
   colnames(night.plot) <- c("LCL","median", "UCL", "State", "Sampling") 
   night.plot <- night.plot[order(Sampling),]
   night.plot$Sampling <- factor(night.plot$Sampling, ordered = TRUE)
