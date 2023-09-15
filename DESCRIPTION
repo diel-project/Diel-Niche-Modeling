@@ -49,7 +49,11 @@ Suggests:
     lubridate(>= 1.9.2),
     ggthemes(>= 4.2.4),
     suncalc(>= 0.5.1),
-    devtools(>= 2.4.5)
+    devtools(>= 2.4.5),
+    sf,
+    momentuHMM,
+    ggpubr,
+    conicfit
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 LazyData: true
