@@ -19,13 +19,10 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-#save(crwOut, m1, m2, m3, file="Example6.RData")
-
-load("Example6.RData")
-
+load('../data/example6.rda')
 ```
 
-In this example We consider how to use an animal movement behavior analysis to provide inference on diel activity using the $\texttt{Diel.Niche}$ R package. This is by no means the only way to think about animal movement and diel activity. Specifically, we use the R package $\texttt{momentuHMM}$ to fit a hidden Markov model that assumes animal location data is a bivariate time series to estimate step lengths and turning angle's at each time point. We will consider state-dependent movement, where we estimate the behavioral state (e.g., foraging or traveling) of each location based on step lengths and turning angles. We also consider diel cycles of temperature as a covariate when modeling movement parameters. 
+In this example we consider how to use an animal movement behavior analysis to provide inference on diel activity using the $\texttt{Diel.Niche}$ R package. This is by no means the only way to think about animal movement and diel activity. Specifically, we use the R package $\texttt{momentuHMM}$ to fit a hidden Markov model that assumes animal location data are a bivariate time series to estimate step lengths and turning angle's at each time point. We will consider state-dependent movement, where we estimate the behavioral state (e.g., foraging or traveling) of each location based on step lengths and turning angles. We also consider diel cycles of temperature as a covariate when modeling movement parameters. 
 
 
 # The Setup
@@ -50,14 +47,15 @@ The animal movement script that fits the hidden Markov model is adapted from the
 
 First, we need to load the data and setup the data structure for animal movement modeling. 
 
-```{r data, eval = TRUE, echo = TRUE}
-# Read the data locally - NEEDS TO BE CHANGED
+```{r data, eval = FALSE, echo = TRUE}
+# We will load data via RData file, but you may also wish to download the data and read it in this way
+# CODE NOT RUN
   rawData<- read.csv(
     "Wall et al. 2014 African Elephant Dataset (Source-Save the Elephants).csv"
   )
 ```
 
-```{r Movement Model Setup from momentuHMM, eval = TRUE, echo = TRUE}
+```{r Movement Model Setup from momentuHMM, eval = FALSE, echo = TRUE}
 
 # Select and rename relevant columns
   rawData <- rawData[,
@@ -102,7 +100,6 @@ First, we need to load the data and setup the data structure for animal movement
 
 Now with the data all setup, we can standardize the location intervals at hour intervals by using the function `crawlWrap` which implements a continuous-time correlated random walk model.
 
-
 ```{r crawl, eval = FALSE, echo = TRUE}
 # Model and Predict locations using crawl - accomadates missing data at one hour intervals
   crwOut <- momentuHMM::crawlWrap(
@@ -127,7 +124,7 @@ Using the output, we can plot the observed and predicted standardized locations.
 
 Now that we have standardized fixed-location intervals, we can estimate state-dependent turning angles and step lengths. First, we will setup our data for model fitting in `momentuHMM`. Overall, we are going to fit three models to these data. The first is a null model (`m1`), the second incorporates some covariates on transition probabilities (`m2`), and the third incorporates covariates onto multiple parameters (`m3`; i.e., transition probabilities, variation in step length, and turning angle concentration).
 
-```{r HMM1 setup, eval = TRUE, echo = TRUE}
+```{r HMM1 setup, eval = FALSE, echo = TRUE}
 # Create momentuHMMData object from crwData object
   elephantData <- momentuHMM::prepData(
     data=crwOut,
