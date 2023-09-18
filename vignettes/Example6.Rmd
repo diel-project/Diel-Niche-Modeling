@@ -6,7 +6,7 @@ vignette: >
   %\VignetteIndexEntry{Example 6}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{Diel.Niche, suncalc, lubridate, momentuHMM, sf, ggplot2, ggpubr,conicfit}
+  %\VignetteDepends{Diel.Niche, suncalc, lubridate, ggplot2, ggpubr}
 ---
 
 # Diel Activity from State-Dependent Animal Movement  
@@ -14,6 +14,8 @@ vignette: >
 #### Date: 2023-09-12
 
 ```{r setup, include=FALSE, eval=TRUE}
+
+#vignette depends on these additional packages: momentuHMM, sf, conicfit
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -27,7 +29,16 @@ In this example we consider how to use an animal movement behavior analysis to p
 
 # The Setup
 
-```{r load, message=FALSE}
+```{r load, message=FALSE,, eval = TRUE, echo = FALSE}
+# Load packages
+  library(Diel.Niche)
+  library(lubridate)
+  library(suncalc)
+  library(ggplot2)
+  library(ggpubr)
+```
+
+```{r load2, message=FALSE, eval = FALSE, echo = TRUE}
 # Load packages
   library(Diel.Niche)
   library(lubridate)
