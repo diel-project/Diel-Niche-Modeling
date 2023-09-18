@@ -29,7 +29,7 @@ In this example we consider how to use an animal movement behavior analysis to p
 
 # The Setup
 
-```{r load, message=FALSE,, eval = TRUE, echo = FALSE}
+```{r load, message=FALSE, eval = TRUE, echo = FALSE}
 # Load packages
   library(Diel.Niche)
   library(lubridate)
