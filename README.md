@@ -8,8 +8,13 @@ functions to gibbs MCMC algorithms provided by the R package $\texttt{multinomin
 
 The main package vignettes can be found on Github here: [Main Vignette](./GitHub_vignettes/Diel-Niche-vignette.md) and [Additional Vignette](./GitHub_vignettes/Diel-Niche-Additional.md)
 
-Case study example vignette's can be found on Github here: [Example 1](./GitHub_vignettes/Example1.md), [Example 2](./GitHub_vignettes/Example2.md), [Example 3](./GitHub_vignettes/Example3.md), 
-[Example 4](./GitHub_vignettes/Example4.md), [Example5 ](./GitHub_vignettes/Example5.md), and [Example6 ](./GitHub_vignettes/Example6.md).
+Case study example vignette's can be found on Github here: 
+[Example 1: Single Data Analysis Unit](./GitHub_vignettes/Example1.md)
+[Example 2: Multiple species with one data analysis unit](./GitHub_vignettes/Example2.md)
+[Example 3: Single species with multiple data analysis units](./GitHub_vignettes/Example3.md)
+[Example 4: Circular Kernel Analysis with Diel Hypotheses](./GitHub_vignettes/Example4.md)
+[Example 5: Diel Selection ](./GitHub_vignettes/Example5.md)
+[Example 6: Diel Activity from State-Dependent Animal Movement ](./GitHub_vignettes/Example6.md).
 
 The package manual can be found on Github here: [Manual PDF](./man/Diel.Niche.pdf).
 
