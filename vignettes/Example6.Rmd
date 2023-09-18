@@ -60,9 +60,10 @@ First, we need to load the data and setup the data structure for animal movement
 
 ```{r data, eval = FALSE, echo = TRUE}
 # We will load data via RData file, but you may also wish to download the data and read it in this way
+# This file can be also be found here: /inst/extdata/Wall_et_al_2014_African_Elephant_Dataset_Source_Save_the_Elephants.csv
 # CODE NOT RUN
   rawData<- read.csv(
-    "Wall et al. 2014 African Elephant Dataset (Source-Save the Elephants).csv"
+    "Wall_et_al_2014_African_Elephant_Dataset_Source_Save_the_Elephants.csv"
   )
 ```
 
