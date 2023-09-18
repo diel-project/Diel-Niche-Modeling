@@ -36,7 +36,8 @@ First, install and load the library
   vignette("Example2")
   vignette("Example3")
   vignette("Example4")
-
+  vignette("Example5")
+  vignette("Example6")
 # To list all the available vignettes for the package
   browseVignettes("Diel.Niche")
 
