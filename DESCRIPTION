@@ -6,7 +6,7 @@ Version: 0.0.1.0
 Authors@R: 
     c(person(given="Brian", 
              family="Gerber", 
-             email="bgerber@uri.edu", 
+             email="brian.gerber@colostate.edu", 
              role = c("aut","cre"),
              comment = c(ORCID = "0000-0001-9285-9784")),
       person(given="Kadambari", 
@@ -25,7 +25,7 @@ Authors@R:
            role = c("aut"),
            comment = c(ORCID = "0000-0002-8583-0307"))
     )
-Maintainer: Brian Gerber <bgerber@uri.edu>
+Maintainer: Brian Gerber <brian.gerber@colostate.edu>
 RoxygenNote: 7.2.3
 Encoding: UTF-8
 License: GPL-3
