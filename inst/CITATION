@@ -1,0 +1,14 @@
+bibentry(
+  bibtype  = "Article",
+  title    = "A model-based hypothesis framework to define and estimate the diel niche via the Diel.Niche’ R package",
+  author   = c(person(c("Brian", "D."), "Gerber"),
+               person(c("Kadambari"), "Devarajan"),
+               person(c("Zach", "J."), "Farris"),
+               person(c("Mason"), "Fidino")),
+  journal  = "bioRxiv",
+  year     = "2023",
+  volume   = ,
+  number   = ,
+  pages    = ,
+  doi      = "https://doi.org/10.1101/2023.06.21.545898"
+)
