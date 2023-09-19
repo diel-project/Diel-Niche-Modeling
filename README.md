@@ -25,6 +25,14 @@ Case study example vignette's can be found on Github here:
 The package manual can be found on Github here: [Manual PDF](./man/Diel.Niche.pdf).
 
 
+## Citation
+To cite this package, please use
+
+citation("Diel.Niche")
+
+Gerber BD, Devarajan K, Farris ZJ, Fidino M (2023). A model-based hypothesis framework to define and estimate the
+  diel niche via the Diel.Niche’ R package. bioRxiv. doi:10.1101/2023.06.21.545898  <https://doi.org/10.1101/2023.06.21.545898>.
+
 ## Install
 
 First, install and load the library
