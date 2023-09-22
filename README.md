@@ -20,9 +20,9 @@ Case study example vignette's can be found on Github here:
 
 * [Example 5: Diel Selection ](./GitHub_vignettes/Example5.md)
 
-* [Example 6: Diel Activity from State-Dependent Animal Movement ](./GitHub_vignettes/Example6.md).
+* [Example 6: Diel Activity from State-Dependent Animal Movement ](./GitHub_vignettes/Example6.md)
 
-The package manual can be found on Github here: [Manual PDF](./man/Diel.Niche.pdf).
+The package manual can be found on Github here: [Manual PDF](./man/Diel.Niche.pdf)
 
 
 ## Citation
