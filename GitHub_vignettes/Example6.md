@@ -420,7 +420,7 @@ daytime, and nocturnal bins.
     date = date(date(elephantData$time)),
     lat = mean(elephantData$lat,na.rm=TRUE),
     lon =  mean(elephantData$lon,na.rm=TRUE),
-    keep = c("dusk", "night", "dawn","nightEnd"),
+    keep = c("sunset", "night", "sunrise","nightEnd"),
     tz = "GMT"
   )  
 
@@ -451,17 +451,17 @@ daytime, and nocturnal bins.
 
 # Find times that are b/w dawn and dusk and define that as daytime  
   index.day <- which(
-    elephant.times > time.subset$dawn & elephant.times < time.subset$dusk
+    elephant.times > time.subset$sunrise & elephant.times < time.subset$sunset
   )
 
 # Find times that are before dawn (begining of daytime) and after the nightEnds
   index.dawn <- which(
-    elephant.times < time.subset$dawn & elephant.times > time.subset$nightEnd
+    elephant.times < time.subset$sunrise & elephant.times > time.subset$nightEnd
   )
   
 # Find times that are after dusk and before the begining of night
   index.dusk <- which(
-    elephant.times>time.subset$dusk & elephant.times<time.subset$night
+    elephant.times>time.subset$sunset & elephant.times<time.subset$night
   )
 
 # Change vector elements correspond to daytime and twilight  
@@ -472,7 +472,7 @@ daytime, and nocturnal bins.
   table(time.cat)
 #> time.cat
 #>   daytime nighttime  twilight 
-#>     11956      8551      1627
+#>     11399      8549      2186
   
 # Create a new data.frame of dates, states, and time category and then split data into a list of elements
 # Month and Year of sampling
@@ -510,8 +510,9 @@ daytime, and nocturnal bins.
     )
   )
   n.obs
-#>  [1] 501 243 555 189 347 397 434 310 508 212 484 236 607 137 637 107 520 152 483 189 212  11 635 109 692  52 600 120 601 119 701  19
-#> [33] 620 124 490 254 631 113 409 311 520 200 558 162 650  94 663  81 701  43 531 213 402 342 629 115 337 383 363 357 312 407
+#>  [1] 501 243 555 189 347 397 434 310 508 212 484 236 607 137 637 107 520 152 483 189 212  11 635 109 692  52 600 120
+#> [29] 601 119 701  19 620 124 490 254 631 113 409 311 520 200 558 162 650  94 663  81 701  43 531 213 402 342 629 115
+#> [57] 337 383 363 357 312 407
 
 # The General hypothesis set requires a fairly reasonable sample size. Let's drop sampling periods with < 50 observations.
   dat.list <- dat.list[-which(n.obs<50)]
@@ -563,12 +564,17 @@ probable hypothesis within the General hypothesis set. Using the
     unlist(elephant.hyps)
   )
 #>              
-#> states.by.hyp D.N
-#>   encamped     31
-#>   exploratory  28
-
-# This individual is always following a Diurnal-Nocturnal strategy. 
+#> states.by.hyp C2 D.N
+#>   encamped    13  18
+#>   exploratory  3  25
 ```
+
+This individual elephant was more Diurnal-Nocturnal overall. Only in
+three sampling months were they Cathemeral in the `exploratory` movement
+state, while 13 months were Cathemeral in the `encamped` state. The
+difference in diel activity between these phenotpyes is more twilight
+activity in the Cathemeral phenotype. Thus, this individual was more
+active during twilight while `encamped` than `exploratory`.
 
 Now that we have the most supported model, we can use the `diel.fit`
 function to estimate the posterior distributions of activity for each
@@ -724,15 +730,19 @@ individual African Elephant was one that allowed two movement states
 where the transition probabilities, step lengths, and turning angle
 parameters varied by the diel cycle and temperature. In regard to diel
 activity, we found that over more than two years of continuous sampling
-that this individual exclusively followed a Diurnal-Nocturnal diel
-phenotype. In one sampling month (3/2008) there was high nocturnal
-activity when in the `exploratory` movement state (~0.78 probability),
-but this was not enough to be classified as nocturnal. We also only
-found fairly smaller differences in diel activity between the two
-movement states (`encamped` and `exploratory`) across the entire
-sampling period. Twilight activity was also similar between the two
-movement states and had the least variability across monthly sampling
-periods.
+that this individual mostly followed a Diurnal-Nocturnal diel phenotype,
+but when `encamped` they were at times General Cathemeral. In three
+sampling months (4/2008, 4/2009, and 12/2009) there were peaks of
+nocturnal activity when in the `exploratory` movement state, but this
+was not enough to be classified as striclty nocturnal (i.e., probability
+was less than 0.80). We also only found fairly small differences in diel
+activity between the two movement states (`encamped` and `exploratory`)
+across the entire sampling period. Twilight activity was also mostly
+similar between the two movement states and had the least variability
+across monthly sampling periods. In the months and states where
+Cathemeral activity was more supported over Diurnal-Nocturnal, it
+appears that twilight activity only increased a small degree to be over
+the 0.10 probability threshold.
 
 # References
 

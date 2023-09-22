@@ -31,7 +31,7 @@ When we generated this kernel density estimate we set the \code{n.grid} argument
 We did this because to get the probability of each diel period we must integrate under the curve, which needs a lot of samples to do
 accurately. To get dawn and dusk range we used the \code{suncalc} package with the general area of the
 Kerinci Seblat National Park (where the tiger data came from), used \code{Asia/Jakarta} as the local time zone,
-and chose \code{2008-03-12} as the date to query \code{c("dusk", "night", "dawn","nightEnd")}. As this area is
+and chose \code{2008-03-12} as the date to query \code{c("sunset", "night", "sunrise","nightEnd")}. As this area is
 close to the equator there is little variation over the year in when dawn and dusk start, so the time of year matters
 less in this specific case. In our case, dawn occurred between nightEnd and dawn whereas dusk occurred between dusk and night.
 
