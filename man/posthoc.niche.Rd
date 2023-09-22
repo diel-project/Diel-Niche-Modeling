@@ -52,13 +52,13 @@ e.g., over 10,000).
  tiger_niche <- Diel.Niche::posthoc.niche(
   y = diel_probs,
   hyp = hyp.sets("Traditional")
-)
+ )
 
 # look at output. 
 tiger_niche
 
 #       p.twi     p.day   p.night             Hypothesis
-#1 0.09626836 0.6007204 0.3027826 Cathemeral Traditional
+#1  0.1409727 0.5557304 0.3027171 Cathemeral Traditional
 
 \dontrun{
 
@@ -104,14 +104,14 @@ my_times <- suncalc::getSunlightTimes(
   date = as.Date("2008-03-12"),
   lat = -2.41,
   lon =  101.4836,
-  keep = c("dusk", "night", "dawn","nightEnd"),
+  keep = c("sunset", "night", "sunrise","nightEnd"),
   tz = "Asia/Jakarta"
 )
 
 # strip the month / year from these times
-my_times$dusk <- lubridate::hms(
+my_times$sunset <- lubridate::hms(
   format(
-    my_times$dusk,
+    my_times$sunset,
     "\%H:\%M:\%S"
   )
 )
@@ -122,9 +122,9 @@ my_times$night <- lubridate::hms(
     "\%H:\%M:\%S"
   )
 )
-my_times$dawn <- lubridate::hms(
+my_times$sunrise <- lubridate::hms(
   format(
-    my_times$dawn,
+    my_times$sunrise,
     "\%H:\%M:\%S"
   )
 )
@@ -136,9 +136,9 @@ my_times$nightEnd <- lubridate::hms(
 )
 
 # calculate the time when dawn & dusk starts and stops
-my_dawn <- c(my_times$nightEnd, my_times$dawn)
+my_dawn <- c(my_times$nightEnd, my_times$sunrise)
 
-my_dusk <- c(my_times$dusk, my_times$night)
+my_dusk <- c(my_times$sunset, my_times$night)
 
 # convert these to fractional hours, given that there
 #  are 86400 seconds in a day.
@@ -164,7 +164,7 @@ tiger_niche <- Diel.Niche::posthoc.niche(
 tiger_niche
 
 #       p.twi     p.day   p.night             Hypothesis
-#1 0.09626836 0.6007204 0.3027826 Cathemeral Traditional
+#1  0.1409727 0.5557304 0.3027171 Cathemeral Traditional
 }
 
 }
