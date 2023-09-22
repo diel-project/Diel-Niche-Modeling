@@ -119,7 +119,7 @@ For this first dataset, the `triplot` looks like
   )
 ```
 
-![](Example5_files/figure-gfm/Rplot1.png)<!-- -->
+![](Example5_files/figure-gfm/selection.plotting1.png)<!-- -->
 
 Notice that the largest parameter spaces are defined by the
 `Night-Twilight`, `Night`, and `Twilight` hypotheses. This is because
@@ -144,7 +144,7 @@ The second `triplot` shows the changing availability reduces the
   )
 ```
 
-![](Example5_files/figure-gfm/Rplot2.png)<!-- -->
+![](Example5_files/figure-gfm/selection.plotting2.png)<!-- -->
 
 And now, to the analysis. For the first dataset we could use the already
 created `selection.ineq1` {
@@ -235,7 +235,7 @@ triplot(
 )
 ```
 
-![](Example5_files/figure-gfm/Rplot3.png)<!-- -->
+![](Example5_files/figure-gfm/selection.plotting3.png)<!-- -->
 
 And here is the same analysis, but with the second dataset from the
 fall, where we find slightly different results!
@@ -339,7 +339,7 @@ triplot(
 )
 ```
 
-![](Example5_files/figure-gfm/Rplot4.png)<!-- -->
+![](Example5_files/figure-gfm/selection.plotting4.png)<!-- -->
 # Conclusion
 
 The Selection hypothesis set is unlike all the other flavors of
