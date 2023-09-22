@@ -46,9 +46,10 @@ movement modeling.
 
 ``` r
 # We will load data via RData file, but you may also wish to download the data and read it in this way
+# This file can be also be found here: /inst/extdata/Wall_et_al_2014_African_Elephant_Dataset_Source_Save_the_Elephants.csv
 # CODE NOT RUN
   rawData<- read.csv(
-    "Wall et al. 2014 African Elephant Dataset (Source-Save the Elephants).csv"
+    "Wall_et_al_2014_African_Elephant_Dataset_Source_Save_the_Elephants.csv"
   )
 ```
 
@@ -509,9 +510,8 @@ daytime, and nocturnal bins.
     )
   )
   n.obs
-#>  [1] 501 243 555 189 347 397 434 310 508 212 484 236 607 137 637 107 520 152 483 189 212  11 635 109 692  52
-#> [27] 600 120 601 119 701  19 620 124 490 254 631 113 409 311 520 200 558 162 650  94 663  81 701  43 531 213
-#> [53] 402 342 629 115 337 383 363 357 312 407
+#>  [1] 501 243 555 189 347 397 434 310 508 212 484 236 607 137 637 107 520 152 483 189 212  11 635 109 692  52 600 120 601 119 701  19
+#> [33] 620 124 490 254 631 113 409 311 520 200 558 162 650  94 663  81 701  43 531 213 402 342 629 115 337 383 363 357 312 407
 
 # The General hypothesis set requires a fairly reasonable sample size. Let's drop sampling periods with < 50 observations.
   dat.list <- dat.list[-which(n.obs<50)]
