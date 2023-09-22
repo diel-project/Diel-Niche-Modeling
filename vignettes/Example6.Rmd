@@ -457,8 +457,9 @@ Next, we need to use the `diel.fit` function to estimate the most probable hypot
     unlist(elephant.hyps)
   )
 
-# This individual is almost always following a Diurnal-Nocturnal strategy. 
 ```
+
+This individual elephant was more Diurnal-Nocturnal overall. Only in three sampling months were they Cathemeral in the `exploratory` movement state, while 13 months were Cathemeral in the `encamped` state. The difference in diel activity between these phenotpyes is more twilight activity in the Cathemeral phenotype. Thus, this individual was more active during twilight while `encamped` than `exploratory`.
 
 Now that we have the most supported model, we can use the `diel.fit` function to estimate the posterior distributions of activity for each sampling period and behavioral state. To change it up, lets use a for loop to loop through each data set, saving the posterior median and quantiles that will then use for plotting.
 
@@ -603,7 +604,7 @@ ggarrange(p1, p2, p3, ncol=1, nrow=3, widths = c(1,1,1))
 
 # Conclusion
 
-We found that the most supported animal movement model for this individual African Elephant was one that allowed two movement states where the transition probabilities, step lengths, and turning angle parameters varied by the diel cycle and temperature. In regard to diel activity, we found that over more than two years of continuous sampling that this individual mostly followed a Diurnal-Nocturnal diel phenotype, but when encamped they were at times General Cathemeral. In one sampling month (3/2008) there was high nocturnal activity when in the `exploratory` movement state, but this was not enough to be classified as nocturnal. We also only found fairly smaller differences in diel activity between the two movement states (`encamped` and `exploratory`) across the entire sampling period. Twilight activity was also similar between the two movement states and had the least variability across monthly sampling periods.
+We found that the most supported animal movement model for this individual African Elephant was one that allowed two movement states where the transition probabilities, step lengths, and turning angle parameters varied by the diel cycle and temperature. In regard to diel activity, we found that over more than two years of continuous sampling that this individual mostly followed a Diurnal-Nocturnal diel phenotype, but when `encamped` they were at times General Cathemeral. In three sampling months (4/2008, 4/2009, and 12/2009) there were peaks of nocturnal activity when in the `exploratory` movement state, but this was not enough to be classified as striclty nocturnal (i.e., probability was less than 0.80). We also only found fairly small differences in diel activity between the two movement states (`encamped` and `exploratory`) across the entire sampling period. Twilight activity was also mostly similar between the two movement states and had the least variability across monthly sampling periods. In the months and states where Cathemeral activity was more supported over Diurnal-Nocturnal, it appears that twilight activity only increased a small degree to be over the 0.10 probability threshold. 
 
 # References
 
