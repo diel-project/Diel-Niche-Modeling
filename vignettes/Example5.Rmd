@@ -72,14 +72,14 @@ study area.
     date = lubridate::mdy(deer$min_date),
     lat = unique(deer$mean_lat),
     lon =  unique(deer$mean_lon),
-    keep = c("dusk", "night", "dawn","nightEnd"),
+    keep = c("sunset", "night", "sunrise","nightEnd"),
     tz = "US/Central"
   )
 
 # calculate the hours in each diel period
-twilight.hours <- (chicago.hours$dawn - chicago.hours$nightEnd) +
-  (chicago.hours$night - chicago.hours$dusk)
-day.hours <- chicago.hours$dusk - chicago.hours$dawn
+twilight.hours <- (chicago.hours$sunrise - chicago.hours$nightEnd) +
+  (chicago.hours$night - chicago.hours$sunset)
+day.hours <- chicago.hours$sunset - chicago.hours$sunrise
 night.hours <- 24 - (twilight.hours + day.hours)
 
 # Add some new columns to diel.data, but also make these hours
@@ -226,7 +226,7 @@ And here is the same analysis, but with the second dataset from the fall, where 
 
 ```
 
-For this analysis, Day-Night Selection (`D.N.avail`) was the most supported hypothesis, though support for it was much weaker with a model probability of 0.71. For this dataset, it appears that deer spent most of their time active during either the day or night, which together represented about 91% of a given day. 
+For this analysis, Day-Night Selection (`D.N.avail`) was the most supported hypothesis, though support for it was much weaker with a model probability of 0.84. For this dataset, it appears that deer spent most of their time active during either the day or night, which together represented about 87% of a given day. 
 
 
 ```{r}

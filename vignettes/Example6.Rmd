@@ -322,7 +322,7 @@ Let's turn to the $\texttt{Diel.Niche}$ R package and estimate the diel phenotyp
     date = date(date(elephantData$time)),
     lat = mean(elephantData$lat,na.rm=TRUE),
     lon =  mean(elephantData$lon,na.rm=TRUE),
-    keep = c("dusk", "night", "dawn","nightEnd"),
+    keep = c("sunset", "night", "sunrise","nightEnd"),
     tz = "GMT"
   )  
 
@@ -352,17 +352,17 @@ Let's turn to the $\texttt{Diel.Niche}$ R package and estimate the diel phenotyp
 
 # Find times that are b/w dawn and dusk and define that as daytime  
   index.day <- which(
-    elephant.times > time.subset$dawn & elephant.times < time.subset$dusk
+    elephant.times > time.subset$sunrise & elephant.times < time.subset$sunset
   )
 
 # Find times that are before dawn (begining of daytime) and after the nightEnds
   index.dawn <- which(
-    elephant.times < time.subset$dawn & elephant.times > time.subset$nightEnd
+    elephant.times < time.subset$sunrise & elephant.times > time.subset$nightEnd
   )
   
 # Find times that are after dusk and before the begining of night
   index.dusk <- which(
-    elephant.times>time.subset$dusk & elephant.times<time.subset$night
+    elephant.times>time.subset$sunset & elephant.times<time.subset$night
   )
 
 # Change vector elements correspond to daytime and twilight  
@@ -457,7 +457,7 @@ Next, we need to use the `diel.fit` function to estimate the most probable hypot
     unlist(elephant.hyps)
   )
 
-# This individual is always following a Diurnal-Nocturnal strategy. 
+# This individual is almost always following a Diurnal-Nocturnal strategy. 
 ```
 
 Now that we have the most supported model, we can use the `diel.fit` function to estimate the posterior distributions of activity for each sampling period and behavioral state. To change it up, lets use a for loop to loop through each data set, saving the posterior median and quantiles that will then use for plotting.
@@ -603,7 +603,7 @@ ggarrange(p1, p2, p3, ncol=1, nrow=3, widths = c(1,1,1))
 
 # Conclusion
 
-We found that the most supported animal movement model for this individual African Elephant was one that allowed two movement states where the transition probabilities, step lengths, and turning angle parameters varied by the diel cycle and temperature. In regard to diel activity, we found that over more than two years of continuous sampling that this individual exclusively followed a Diurnal-Nocturnal diel phenotype. In one sampling month (3/2008) there was high nocturnal activity when in the `exploratory` movement state (~0.78 probability), but this was not enough to be classified as nocturnal. We also only found fairly smaller differences in diel activity between the two movement states (`encamped` and `exploratory`) across the entire sampling period. Twilight activity was also similar between the two movement states and had the least variability across monthly sampling periods.
+We found that the most supported animal movement model for this individual African Elephant was one that allowed two movement states where the transition probabilities, step lengths, and turning angle parameters varied by the diel cycle and temperature. In regard to diel activity, we found that over more than two years of continuous sampling that this individual mostly followed a Diurnal-Nocturnal diel phenotype, but when encamped they were at times General Cathemeral. In one sampling month (3/2008) there was high nocturnal activity when in the `exploratory` movement state, but this was not enough to be classified as nocturnal. We also only found fairly smaller differences in diel activity between the two movement states (`encamped` and `exploratory`) across the entire sampling period. Twilight activity was also similar between the two movement states and had the least variability across monthly sampling periods.
 
 # References
 
