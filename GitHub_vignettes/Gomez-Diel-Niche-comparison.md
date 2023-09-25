@@ -45,8 +45,8 @@ descriptions of Haysom et al. 2023 these are defined as:
   $p_d < 0.70$
 
 The one difference between Gomez et al. 2005 and Haysom et al. 2023 is
-that Haysom and colleagues defined the Cathemal phenotype with
-contraints (above), while Gomez et al. 2005 defined it as all
+that Haysom and colleagues defined the Cathemeral phenotype with
+constraints (above), while Gomez et al. 2005 defined it as all
 combinations that were not nocturnal, diurnal, or crepuscular. We will
 use the Haysom et al. 2023 definition of Cathemeral.
 
