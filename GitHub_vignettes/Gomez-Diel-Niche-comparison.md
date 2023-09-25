@@ -154,7 +154,7 @@ $$
 In the next section, we show how to put these inequality values into
 $\texttt{Diel.Niche}$, along with all other phenotype hypotheses.
 
-## Gomez Implementation into Diel.Niche
+## Gomez Implementation in Diel.Niche
 
 ``` r
 # Use the diel.ineq() function to setup an object to add multinomial inequalities too.
@@ -426,7 +426,7 @@ primary activity identified by Haysom et al. 2023.
                 "G.strict.D", "G.mostly.D")
   )
 
-#Get the most supported hypotheses codes
+# Get the most supported hypotheses codes
   ms.hyps.gomez <- unlist(
     lapply(
       multi.fit.gomez,'[',1)
@@ -694,12 +694,12 @@ of the different thresholds used.
 # Conclusion
 
 We implemented the Gomez et al. 2005 phenotypes to be provide another
-hypothesis set that for researchers to consider. The walk through
+hypothesis set for researchers to consider. The walk through
 hopefully helped demonstrate how to implement a set of hypotheses and
 how to visualize hypotheses to match one’s expectation. We found some
 important differences in how the Traditional hypothesis set defined
 Cathemeral compared to Gomez’s ‘mostly’ diurnal and nocturnal. There
-were more difference when comparing the the primary and secondary
+were more difference when comparing the primary and secondary
 activity pattern results from Haysom et al. 2023 with the General
 hypothesis set.
 
