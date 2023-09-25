@@ -335,7 +335,7 @@ To address the issues we identified, we could consider a few modifications to th
 ```
 
 
-This modified hypothesis set is now similar to the Traditional hypothesis set, but more specificity in 'strictly' and 'mostly' singular phenotypes. The threshold is a little bet smaller, 0.70 or more to be called diurnal/nocturnal/crepuscular, while in the Traditional hypothesis set this threshold probability is 0.80.
+This modified hypothesis set is now similar to the Traditional hypothesis set, but more specificity in 'strictly' and 'mostly' singular phenotypes. The threshold is a little bit smaller, 0.70 or more to be called diurnal/nocturnal/crepuscular, while in the Traditional hypothesis set this threshold probability is 0.80.
 
 ```{r traditional hyps, fig.align = "center",fig.height = 8, fig.width = 8,out.width = "8in"}
 triplot(hyp=hyp.sets("Traditional"))
