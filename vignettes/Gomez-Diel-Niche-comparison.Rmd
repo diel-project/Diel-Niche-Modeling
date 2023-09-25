@@ -1,10 +1,10 @@
 ---
-title: "Gomez-et-al-2005-DielNiche-Comparison"
+title: "Gomez-Diel-Niche-comparison"
 author: "Brian D. Gerber"
 date: "2023-09-22"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Gomez-et-al-2005-DielNiche-Comparison}
+  %\VignetteIndexEntry{Gomez-Diel-Niche-comparison}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{ggplot2,Diel.Niche}
@@ -16,12 +16,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r libraries}
-library(ggplot2)
-library(Diel.Niche)
-haysom <- readRDS("HaysomData.rda")
+# Load Libraries and Data
+  library(ggplot2)
+  library(Diel.Niche)
+  haysom <- readRDS("../vignettes/HaysomData.rda")
 ```
 
-Gomez et al. 2005 offered a set of criteria to define six diel phenotypes. These definitions were used by Haysom et al. 2023 and well described in their Table 1. Our goal is to implement the Gomez phenotypes within the $\texttt{Diel.Niche}$ package and apply it to data from Haysom et al. 2023 (Supplementary material, Table S2). We can then compare results between the Traditional and General hypothesis sets with that of the Gomez hypothesis set.
+Gomez et al. 2005 offered a set of criteria to define six diel phenotypes. These definitions were used by Haysom et al. 2023 and well described in their Table 1. Our goal is to implement the Gomez phenotypes within the $\texttt{Diel.Niche}$ package and apply it to data from Haysom et al. 2023 (Supplementary material, Table S2; stored in /vignettes/HaysomData.rda" with a modified .csv file located /inst/extdata/haysom.data.supp.table.modified.csv). We can then compare results between the Traditional and General hypothesis sets with that of the Gomez hypothesis set.
 
 
 *Objectives*
