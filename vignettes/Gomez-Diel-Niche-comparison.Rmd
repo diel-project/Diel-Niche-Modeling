@@ -3,6 +3,7 @@ title: "Gomez-Diel-Niche-comparison"
 author: "Brian D. Gerber"
 date: "2023-09-22"
 output: rmarkdown::html_vignette
+always_allow_html: true
 vignette: >
   %\VignetteIndexEntry{Gomez-Diel-Niche-comparison}
   %\VignetteEngine{knitr::rmarkdown}
@@ -112,12 +113,12 @@ $$
 \end{equation}
 $$
 
-Now let's take the second inequality where $\epsilon$ is a very small number (0.0001), as <MASON NOTE: PROVIDE LOGIC ABOUT WHY WE ARE ADDING IN EPSILON HERE, ALSO NOT SURE HOW YOU GO FROM STEP 2 TO 3 IN THE NEXT SET OF EQUATIONS, BUT THAT IS PROBABLY RELATED TO THE EPSILON TERM>
+Now let's take the second inequality where $\epsilon$ is a very small number (0.0001) so that we can change the less than  operation to the less than or equal operation, which is required in this framework.
 
 $$
 \begin{equation} 
 \begin{split}
- p_{\text{d}} &< 0.90 \\
+ p_{\text{d}} & < 0.90 \\
  p_{\text{d}} &\leq 0.90 - \epsilon \\
  -p_{\text{d}} &\leq 0.90 \\
  (0) \times p_{\text{tw}} + (1)\times p_{\text{d}} &\leq 0.90 - \epsilon \\
@@ -403,7 +404,7 @@ Lets see if our hypothesis set results in agreement with that of the primary act
   )
 ```
 
-There seems to be some discrepancies with respect to some of the 'mostly' phenotype classifications. 
+There seems to be some differences with respect to some of the 'mostly' phenotype classifications. 
 
 
 |Row number| Diel.Niche classification | Haysom et al. classification | Sample size |
@@ -421,7 +422,7 @@ There seems to be some discrepancies with respect to some of the 'mostly' phenot
 |92  |  G.strict.N|        mostly nocturnal| 66|
 |94  |  G.strict.N|        mostly nocturnal|129|
 
-Out of 99 comparisons, there appears to be 12 (12\%) discrepancies between the results of Haysome et al. 2023 and our implementation of the Gomez et al. 2005 hypotheses. These appear to be largely due to small sample size leading to higher model uncertainty between models in a set. In a few cases (e.g., 37 and 38), it looks like the threshold to meet the 'mostly nocturnal' phenotype for Greater  mousedeer in unlogged and logged may not have been actually been met (53\% and 61\%, respectively), and thus is more appropriately Cathemeral. 
+Out of 99 comparisons, there appears to be 12 (12\%) differences between the results of Haysom et al. 2023 and our implementation of the Gomez et al. 2005 hypotheses. These appear to be largely due to small sample size leading to higher model uncertainty between models in a set. In a few cases (e.g., 37 and 38), it looks like the threshold to meet the 'mostly nocturnal' phenotype for Greater  mousedeer in unlogged and logged may not have been actually been met (53\% and 61\%, respectively), and thus is more appropriately Cathemeral. 
 
 
 # Haysom et al. 2023 Results Comparison (Traditional)
@@ -445,7 +446,7 @@ Let's now use the  Gomez hypothesis set (unmodified) and compare it to the Tradi
   )
 ```
 
-Let's plot these results along with those from the Primary Activity from Haysom et al. 2023.
+Let's plot these results along with those from the Primary Activity from Haysom et al. 2023 to see how they line up. Meaning, we want to see how the different datasets are called one hypothesis in their results with what they would be called using the Traditional hypothesis sets. 
 
 ```{r plotting hyps, fig.height = 6, fig.width = 8}
 dat.comp <- data.frame(
@@ -467,7 +468,7 @@ Haysom et al. 2023 took an interesting approach to expand on the primary activit
 
 "Once primary activity patterns had been defined, we assessed the significance of the deviation from expected proportions using a binomial test (following Van Schaik & Griffiths, 1996). Any secondary patterns were noted where, after the primary pattern had been determined, the proportion of remaining detections showed a clear tendency toward activity during another period. For example, a species with the majority of detections during twilight and the remainder during daylight would be categorized as “crepuscular with diurnal tendencies.”
 
-The combination of the primary and secondary activity patterns are akin to the goal of the General hypothesis set. We can compare findings by concatenating finding of the primary and secondary results and fitting the General hypothesis set to the data
+The combination of the primary and secondary activity patterns are akin to the goal of the General hypothesis set. We can compare findings by concatenating findings of the primary and secondary results and fitting the General hypothesis set to the data.
 
 ```{r fitting general}
 
@@ -486,7 +487,7 @@ The combination of the primary and secondary activity patterns are akin to the g
   )
 ```
 
-Now, lets plot to compare the results
+Now, lets plot to compare the Primary-secondary results with that of the results you would get using the General hypothesis set.
 
 ```{r plot general, fig.height = 6, fig.width = 8}
 haysom.combined <- paste(
@@ -512,7 +513,7 @@ The General hypothesis set does not have a binomial hypothesis of cathemeral and
 
 # Conclusion
 
-We implemented the Gomez et al. 2005 phenotypes to be provide another hypothesis set that for researchers to consider. The walk through hopefully helped demonstrate how to implement a set of hypotheses and how to visualize hypotheses to match one's expectation. We found some important differences in how the Traditional hypothesis set defined Cathemeral compared to Gomez's 'mostly' diurnal and nocturnal. There were more difference when comparing the the primary and secondary activity pattern results from Haysom et al. 2023 with the General hypotheis set. 
+We implemented the Gomez et al. 2005 phenotypes to be provide another hypothesis set that for researchers to consider. The walk through hopefully helped demonstrate how to implement a set of hypotheses and how to visualize hypotheses to match one's expectation. We found some important differences in how the Traditional hypothesis set defined Cathemeral compared to Gomez's 'mostly' diurnal and nocturnal. There were more difference when comparing the the primary and secondary activity pattern results from Haysom et al. 2023 with the General hypothesis set. 
 
 
 
