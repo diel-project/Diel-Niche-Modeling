@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
   haysom <- readRDS("../vignettes/HaysomData.rda")
 ```
 
-Gomez et al. 2005 offered a set of criteria to define six diel phenotypes. These definitions were used by Haysom et al. 2023 and well described in their Table 1. Our goal is to implement the Gomez phenotypes within the $\texttt{Diel.Niche}$ package and apply it to data from Haysom et al. 2023 (Supplementary material, Table S2; stored in /vignettes/HaysomData.rda" with a modified .csv file located /inst/extdata/haysom.data.supp.table.modified.csv). We can then compare results between the Traditional and General hypothesis sets with that of the Gomez hypothesis set.
+Gomez et al. 2005 offered a set of criteria to define six diel phenotypes. These definitions were used by Haysom et al. 2023 and well described in their Table 1. Our goal is to implement the Gomez phenotypes within the $\texttt{Diel.Niche}$ package and apply it to data from Haysom et al. 2023 (Supplementary material, Table S2; the modified csv file located at /inst/extdata/haysom.data.supp.table.modified.csv and stored in /vignettes/HaysomData.rda"). We can then compare results between the Traditional and General hypothesis sets with that of the Gomez hypothesis set.
 
 
 *Objectives*
