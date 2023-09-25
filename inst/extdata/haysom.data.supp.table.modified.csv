@@ -1,0 +1,100 @@
+Common,Species,Dataset,daylight    ,twilight,darkness,Primary.Activity,Secondary.Activity,Secondary.Activity.Simple
+Sunda clouded  leopard,Neofelis diardi,all,5,4,12,cathemeral,nocturnal  tendencies,nocturnal
+Leopard cat,Prionailurus bengalensis,all,5,8,10,cathemeral,nocturnal  tendencies,nocturnal
+Leopard cat,Prionailurus bengalensis,unlogged,2,4,5,cathemeral,nocturnal  tendencies,nocturnal
+Leopard cat,Prionailurus bengalensis,logged,3,4,5,cathemeral,nocturnal  tendencies,nocturnal
+Short-tailed mongoose,Herpestes brachyurus,all,21,8,1,mostly diurnal,NA,
+Short-tailed mongoose,Herpestes brachyurus,unlogged,18,5,0,mostly diurnal,NA,
+Short-tailed mongoose,Herpestes brachyurus,logged,3,3,1,mostly diurnal,crepuscular  tendencies,crepuscular
+Yellow-throated marten,Martes flavigula,all,12,15,1,crepuscular,diurnal  tendencies,diurnal
+Yellow-throated marten,Martes flavigula,unlogged,8,9,1,crepuscular,diurnal  tendencies,diurnal
+Yellow-throated marten,Martes flavigula,logged,4,6,0,crepuscular,diurnal  tendencies,diurnal
+Yellow-throated marten,Martes flavigula,canopy,8,7,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Yellow-throated marten,Martes flavigula,terrestrial,4,8,1,crepuscular,diurnal  tendencies,diurnal
+Binturong,Arctictis binturong,all,12,1,11,cathemeral,NA,NA
+Binturong,Arctictis binturong,unlogged,9,1,7,cathemeral,NA,NA
+Binturong,Arctictis binturong,logged,3,0,4,cathemeral,NA,NA
+Binturong,Arctictis binturong,canopy,12,0,7,cathemeral,NA,NA
+Binturong,Arctictis binturong,terrestrial,0,1,4,mostly nocturnal,NA,NA
+Small-toothed palm  civet,Arctogalidia trivirgata,all,1,10,69,mostly nocturnal,NA,NA
+Small-toothed palm  civet,Arctogalidia trivirgata,unlogged,0,3,31,strictly nocturnal,NA,NA
+Small-toothed palm  civet,Arctogalidia trivirgata,logged,1,7,38,mostly nocturnal,NA,NA
+Banded civet,Hemigalus derbyanus,all,0,26,133,mostly nocturnal,NA,NA
+Banded civet,Hemigalus derbyanus,unlogged,0,24,97,mostly nocturnal,NA,NA
+Banded civet,Hemigalus derbyanus,logged,0,2,36,strictly nocturnal,NA,NA
+Masked palm civet,Paguma larvata,all,0,2,9,mostly nocturnal,NA,NA
+Masked palm civet,Viverra tangalunga,all,6,65,205,mostly nocturnal,NA,NA
+Masked palm civet,Viverra tangalunga,unlogged,4,37,103,mostly nocturnal,NA,NA
+Masked palm civet,Viverra tangalunga,logged,2,28,102,mostly nocturnal,NA,NA
+Sun bear,Helarctos malayanus,all,33,42,18,cathemeral,crepuscular  tendencies,crepuscular
+Sun bear,Helarctos malayanus,unlogged,12,23,11,crepuscular,cathemeral  tendencies,cathemeral
+Sun bear,Helarctos malayanus,logged,21,19,7,cathemeral,diurnal  tendencies,diurnal
+Bearded pig,Sus barbatus,all,379,161,68,cathemeral,diurnal  tendencies,diurnal
+Bearded pig,Sus barbatus,unlogged,141,66,17,mostly diurnal,crepuscular  tendencies,crepuscular
+Bearded pig,Sus barbatus,logged,238,95,51,mostly diurnal,cathemeral  tendencies,cathemeral
+Lesser mousedeer,Tragulus kanchil,all,90,168,47,crepuscular,cathemeral  tendencies,cathemeral
+Lesser mousedeer,Tragulus kanchil,unlogged,39,60,4,crepuscular,diurnal  tendencies,diurnal
+Lesser mousedeer,Tragulus kanchil,logged,51,108,43,crepuscular,cathemeral  tendencies,cathemeral
+Greater mousedeer,Tragulus napu,all,56,309,467,mostly nocturnal,crepuscular  tendencies,crepuscular
+Greater mousedeer,Tragulus napu,unlogged,42,215,295,mostly nocturnal,crepuscular  tendencies,crepuscular
+Greater mousedeer,Tragulus napu,logged:  ,1,94,172,mostly nocturnal,crepuscular  tendencies,crepuscular
+Bornean yellow muntjac,Muntiacus atherodes,all,554,267,90,cathemeral,diurnal  tendencies,diurnal
+Bornean yellow muntjac,Muntiacus atherodes,unlogged,293,132,24,mostly diurnal,crepuscular  tendencies,crepuscular
+Bornean yellow muntjac,Muntiacus atherodes,logged,261,135,66,cathemeral,diurnal  tendencies,diurnal
+Red muntjac,Muntiacus muntjak,all,375,242,103,cathemeral,diurnal  tendencies,diurnal
+Red muntjac,Muntiacus muntjak,unlogged,279,160,75,cathemeral,diurnal  tendencies,diurnal
+Red muntjac,Muntiacus muntjak,logged,96,82,28,cathemeral,diurnal  tendencies,diurnal
+Sambar deer,Rusa unicolor,all,36,47,39,cathemeral,crepuscular  tendencies,crepuscular
+Sambar deer,Rusa unicolor,unlogged,8,19,14,cathemeral,crepuscular  tendencies,crepuscular
+Sambar deer,Rusa unicolor,logged,28,28,25,cathemeral,NA,
+Moonrat,Echinosorex gymnura,all,0,2,26,strictly nocturnal,NA,
+Sunda pangolin,Manis javanica,all,0,0,10,strictly nocturnal,NA,
+Maroon langur,Presbytis rubicunda,all,27,53,0,crepuscular,diurnal  tendencies,diurnal
+Maroon langur,Presbytis rubicunda,unlogged,23,48,0,crepuscular,diurnal  tendencies,diurnal
+Maroon langur,Presbytis rubicunda,logged,4,5,0,crepuscular,diurnal  tendencies,diurnal
+Sabah grey langur,Presbytis sabana,all,19,21,0,crepuscular,diurnal  tendencies,diurnal
+Long-tailed macaque,Macaca fascicularis,all,41,27,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Long-tailed macaque,Macaca fascicularis,canopy,36,27,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Long-tailed macaque,Macaca fascicularis,terrestrial,5,0,0,strictly diurnal,NA,
+Pig-tailed macaque,Macaca nemestrina,all,399,108,0,mostly diurnal,NA,
+Pig-tailed macaque,Macaca nemestrina,unlogged,264,62,0,mostly diurnal,NA,
+Pig-tailed macaque,Macaca nemestrina,logged,135,46,0,mostly diurnal,NA,
+Pig-tailed macaque,Macaca nemestrina,canopy,24,40,0,crepuscular,diurnal  tendencies,diurnal
+Pig-tailed macaque,Macaca nemestrina,terrestrial,375,68,0,mostly diurnal,NA,
+Bornean gibbon,Hylobates funereus,all,33,23,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Bornean gibbon,Hylobates funereus,unlogged,24,19,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Bornean gibbon,Hylobates funereus,logged,9,4,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Bornean  orangutan,Pongo pygmaeus,all,35,11,0,mostly diurnal,NA,
+Bornean  orangutan,Pongo pygmaeus,canopy,22,6,0,mostly diurnal,NA,
+Bornean  orangutan,Pongo pygmaeus,terrestrial,13,5,0,mostly diurnal,NA,
+Black flying squirrel,Aeromys tephromelas,all,0,4,13,mostly nocturnal,NA,
+Black flying squirrel,Aeromys tephromelas,unlogged,0,3,7,mostly nocturnal,NA,
+Black flying squirrel,Aeromys tephromelas,logged,0,1,6,mostly nocturnal,NA,
+Thomas' flying squirrel,Aeromys thomasi,all,0,7,52,mostly nocturnal,NA,
+Ear-spot squirrel,Callosciurus adamsi,all,10,3,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Prevost's squirrel,Callosciurus prevostii,all,217,109,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Prevost's squirrel,Callosciurus prevostii,unlogged,114,40,0,mostly diurnal,NA,
+Prevost's squirrel,Callosciurus prevostii,logged,103,69,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Red giant flying squirrel,Petaurista petaurista,all,0,7,30,mostly nocturnal,NA,
+Giant squirrel,Ratufa affinis,all,95,5,0,strictly diurnal,NA,
+Giant squirrel,Ratufa affinis,unlogged,67,1,0,strictly diurnal,NA,
+Giant squirrel,Ratufa affinis,logged,28,4,0,mostly diurnal,NA,
+Tufted ground squirrel,Rheithrosciurus macrotis,all,46,7,0,mostly diurnal,NA,
+Tufted ground squirrel,Rheithrosciurus macrotis,unlogged,37,7,0,mostly diurnal,NA,
+Tufted ground squirrel,Rheithrosciurus macrotis,logged,9,0,0,strictly diurnal,NA,
+Horse-tailed squirrel,Sundasciurus hippurus,all,4,10,0,crepuscular,diurnal  tendencies,diurnal
+Horse-tailed squirrel,Sundasciurus hippurus,unlogged,1,4,0,crepuscular,diurnal  tendencies,diurnal
+Horse-tailed squirrel,Sundasciurus hippurus,logged,3,6,0,crepuscular,diurnal  tendencies,diurnal
+Horse-tailed squirrel,Sundasciurus hippurus,canopy,0,8,0,crepuscular,NA,
+Horse-tailed squirrel,Sundasciurus hippurus,terrestrial,4,2,0,mostly diurnal,crepuscular  tendencies,crepuscular
+Long-tailed giant rat,Leopoldamys sabanus,all,0,2,11,mostly nocturnal,NA,
+Brown spiny rat,Maxomys rajah,all,0,2,32,strictly nocturnal,NA,
+Malay porcupine,Hystrix brachyura,all,0,12,103,strictly nocturnal,NA,
+Malay porcupine,Hystrix brachyura,unlogged,0,7,59,mostly nocturnal,NA,
+Malay porcupine,Hystrix brachyura,logged,0,5,44,strictly nocturnal,NA,
+Thick-spined porcupine,Hystrix crassispinis,all,0,14,115,mostly nocturnal,NA,
+Thick-spined porcupine,Hystrix crassispinis,unlogged,0,10,107,strictly nocturnal,NA,
+Thick-spined porcupine,Hystrix crassispinis,logged,0,4,8,mostly nocturnal,NA,
+Long-tailed porcupine,Trichys fasciculata,all,0,8,41,mostly nocturnal,NA,
+Long-tailed porcupine,Trichys fasciculata,unlogged,0,8,33,mostly nocturnal,NA,
+Long-tailed porcupine,Trichys fasciculata,logged,0,0,8,strictly nocturnal,NA,
