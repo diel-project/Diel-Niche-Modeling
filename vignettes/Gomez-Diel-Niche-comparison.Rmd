@@ -71,9 +71,9 @@ Next, we need to translate the inequality into the framework of $\mathbf{A} \bol
 $$
 \begin{equation} 
 \begin{aligned}
- p_{\text{tw}} &\geq 0.50 \\
- -p_{\text{tw}} &\leq -0.50 \\
- (-1) \times p_{\text{tw}} + (0)\times p_{\text{d}} &\leq -0.50 \\
+ p_{\text{tw}} & \geq 0.50 \\
+ -p_{\text{tw}} & \leq -0.50 \\
+ (-1) \times p_{\text{tw}} + (0)\times p_{\text{d}} & \leq -0.50 \\
 \end{aligned}
 \end{equation}
 $$
