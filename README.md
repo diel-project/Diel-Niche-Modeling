@@ -35,7 +35,7 @@ Gerber BD, Devarajan K, Farris ZJ, Fidino M (2023). A model-based hypothesis fra
 
 ## Install
 
-First, install and load the library
+First, install Diel.Niche using the devtools package:
 
 ``` r
 # Install package from GitHub via the devtools package.
@@ -43,7 +43,11 @@ First, install and load the library
                          ref="main", dependencies = TRUE,
                          build_vignettes = TRUE
  )
+``` r
 
+Check out the vignette's,
+
+``` r
 # Load the pacakge
   library(Diel.Niche)
 
@@ -64,8 +68,6 @@ First, install and load the library
 # Listing the packages functions and help files
 
   help(package="Diel.Niche")
-
-
 ```
 
 ## Hypotheses
