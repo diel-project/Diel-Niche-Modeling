@@ -45,7 +45,7 @@ First, install Diel.Niche using the devtools package:
  )
 ```
 
-Check out the vignette's,
+Check out the availble vignettes:
 
 ``` r
 # Load the pacakge
