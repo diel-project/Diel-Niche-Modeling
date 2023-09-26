@@ -43,7 +43,7 @@ First, install Diel.Niche using the devtools package:
                          ref="main", dependencies = TRUE,
                          build_vignettes = TRUE
  )
-``` r
+```
 
 Check out the vignette's,
 
