@@ -54,6 +54,6 @@ Suggests:
     momentuHMM,
     ggpubr,
     conicfit
-VignetteBuilder: knitr
+VignetteBuilder: knitr, rmarkdown, bayesplot, overlap, lubridate, ggthemes, suncalc, devtools, sf, momentuHMM, ggpubr, conicfit
 Config/testthat/edition: 3
 LazyData: true

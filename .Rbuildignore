@@ -8,3 +8,5 @@
 ^GitHub_vignettes$
 ^CODE_OF_CONDUCT\.md$
 ^CONTRIBUTING\.md$
+^doc$
+^Meta$
