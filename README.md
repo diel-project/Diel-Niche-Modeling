@@ -40,7 +40,7 @@ First, install and load the library
 ``` r
 # Install package from GitHub via the devtools package.
  devtools::install_github("diel-project/Diel-Niche-Modeling",
-                         ref="main",
+                         ref="main", dependencies = TRUE,
                          build_vignettes = TRUE
  )
 
