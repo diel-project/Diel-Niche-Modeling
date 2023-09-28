@@ -1,3 +1,11 @@
+# Gomez Diel-Niche comparison
+
+#### Author: Brian D. Gerber
+
+#### Reviewed by Jessica K. Haysom
+
+#### Date: 2023-05-10
+
 ``` r
 # Load Libraries and Data
   library(ggplot2)
