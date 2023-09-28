@@ -22,6 +22,9 @@ Case study example vignette's can be found on Github here:
 
 * [Example 6: Diel Activity from State-Dependent Animal Movement ](./GitHub_vignettes/Example6.md)
 
+* [Example 7: Implementing Gomez et al. 2005 diel phenotypes in Diel.Niche](./GitHub_vignettes/Gomez-Diel-Niche-comparison.md)
+
+
 The package manual can be found on Github here: [Manual PDF](./man/Diel.Niche.pdf)
 
 
