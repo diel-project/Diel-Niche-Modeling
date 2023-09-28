@@ -1,9 +1,3 @@
-# Gomez-Diel-Niche-comparison
-
-#### Author: Brian D. Gerber
-
-#### Date: 2023-09-25
-
 ``` r
 # Load Libraries and Data
   library(ggplot2)
@@ -18,15 +12,19 @@ phenotypes within the $\texttt{Diel.Niche}$ package and apply it to data
 from Haysom et al. 2023 (Supplementary material, Table S2; the modified
 csv file located at /inst/extdata/haysom.data.supp.table.modified.csv
 and stored in /vignettes/HaysomData.rda”). We can then compare results
-between the Traditional and General hypothesis sets with that of the
-Gomez hypothesis set.
+between the hypothesis sets from the $\texttt{Diel.Niche}$ package
+(i.e., Traditional and General) with that of the Gomez hypothesis set.
+To review the hypothesis sets from the $\texttt{Diel.Niche}$ please see
+the [Main package
+vignette](https://github.com/diel-project/Diel-Niche-Modeling/blob/main/GitHub_vignettes/Diel-Niche-vignette.md).
 
 *Objectives*
 
 - Demonstrate how to implement phenotypes from other sources in the
   $\texttt{Diel.Niche}$ package
 - Demonstrate how to visualize and use a new hypothesis set
-- Compare phenotype results
+- Compare phenotype results across hypothesis sets from Haysom et
+  al. 2023.
 
 Note that $p_{tw}$, $p_d$, and $p_n$ are the probabilities of activity
 during the twilight, daytime, and nighttime.
@@ -45,7 +43,7 @@ descriptions of Haysom et al. 2023 these are defined as:
   $p_d < 0.70$
 
 The one difference between Gomez et al. 2005 and Haysom et al. 2023 is
-that Haysom and colleagues defined the Cathemeral phenotype with
+that Haysom et al. 2023 defined the Cathemeral phenotype with
 constraints (above), while Gomez et al. 2005 defined it as all
 combinations that were not nocturnal, diurnal, or crepuscular. We will
 use the Haysom et al. 2023 definition of Cathemeral.
@@ -74,14 +72,12 @@ $\mathbf{A} \boldsymbol{\theta} \leq \mathbf{b}$.
 $$
 \begin{equation} 
 \begin{aligned}
- p_{\text{tw}} &\geq 0.50 \\
- -p_{\text{tw}} &\leq -0.50 \\
- (-1) \times p_{\text{tw}} + (0)\times p_{\text{d}} &\leq -0.50 \\
+ p_{\text{tw}} & \geq 0.50 \\
+ -p_{\text{tw}} & \leq -0.50 \\
+ (-1) \times p_{\text{tw}} + (0)\times p_{\text{d}} & \leq -0.50 \\
 \end{aligned}
 \end{equation}
-$$ 
-
-Putting it together, we take the constants in parentheses left of the
+$$ Putting it together, we take the constants in parentheses left of the
 equal sign and package it into matrix $\mathbf{A}$ and take the
 constants on the right of the equal sign and package it into vector
 $\mathbf{b}$ as,
@@ -135,9 +131,7 @@ $$
  (0) \times p_{\text{tw}} + (1)\times p_{\text{d}} &\leq 0.90 - \epsilon \\
 \end{split}
 \end{equation}
-$$ 
-
-Putting it together, we take the constants in parentheses left of the
+$$ Putting it together, we take the constants in parentheses left of the
 equal sign and package it into matrix $\mathbf{A}$ and take the
 constants on the right of the equal sign and package it into vector
 $\mathbf{b}$ as,
@@ -289,19 +283,20 @@ twilight period. Another important thing to notice is that the
 crepuscular and cathemeral definitions are not mutually exclusive
 parameter spaces, which makes differentiating between them difficult
 (you may not be able to see this in the figure above, but you can turn
-each hypothesis off by clicking on it’s assocaited label at the bottom
-of the figure). Lastly, we can see two areas of empty parameter space
-that are left undefined.
+each hypothesis off by clicking on it’s associated label at the bottom
+of the figure; does not work in the .md file on Github, only in the .Rmd
+file). Lastly, we can see two areas of empty parameter space that are
+left undefined.
 
 # Modifications to Gomez et al. 2005
 
-To address the issues we identified, we could consider a few
-modifications to the crepuscular and cathemeral hypotheses. First, we
-could make the equivalent crepuscular hypotheses of strictly and mostly
-with the same constraints. This would make it a fair comparison between
-crepuscular and diurnal and crepuscular and nocturnal. Second, we could
-modify the cathemeral hypothesis to fill out the rest of the parameter
-space so there is no overlap or missing parameter space that is left
+We could consider a modified set of hypotheses with a few changes to the
+crepuscular and cathemeral hypotheses. First, we could make the
+equivalent crepuscular hypotheses of strictly and mostly with the same
+constraints. This would make it a fair comparison between crepuscular
+and diurnal and crepuscular and nocturnal. Second, we could modify the
+cathemeral hypothesis to fill out the rest of the parameter space so
+there are no overlapping or missing parameter spaces that are left
 undefined.
 
 ``` r
@@ -363,19 +358,18 @@ undefined.
 ```
 
 ![](Gomez-Diel-Niche-comparison_files/figure-gfm/Rplot2.png)<!-- -->
-
 This modified hypothesis set is now similar to the Traditional
-hypothesis set, but more specificity in ‘strictly’ and ‘mostly’ singular
-phenotypes. The threshold is a little bit smaller, 0.70 or more to be
-called diurnal/nocturnal/crepuscular, while in the Traditional
-hypothesis set this threshold probability is 0.80.
+hypothesis set of the $\texttt{Diel.Niche}$ package, but more
+specificity in ‘strictly’ and ‘mostly’ singular phenotypes. The
+threshold is a little bit smaller, 0.70 or more to be called
+diurnal/nocturnal/crepuscular, while in the Traditional hypothesis set
+this threshold probability is pre-set at 0.80.
 
 ``` r
 triplot(hyp=hyp.sets("Traditional"))
 ```
 
 ![](Gomez-Diel-Niche-comparison_files/figure-gfm/Rplot3.png)<!-- -->
-
 # Haysom et al. 2023 Results Comparison (Gomez)
 
 Lets see if our hypothesis set results in agreement with that of the
@@ -391,10 +385,11 @@ primary activity identified by Haysom et al. 2023.
 
   haysom$sample.size  <- haysom$twilight+haysom$daylight+haysom$darkness
     
-# Note that in Haysom et al. 2023 supplementary table S2 the Muntiacus  atherodes (Bornean  yellow  muntjac) 
-# for the unlogged dataset was defined with a Primary activity pattern as 'Diurnal'. This is not the same 
-# labels as other hypotheses; we interpreted this to mean 'mostly diurnal' and have changed this result in 
-# our modified csv file for Table S2. 
+# Note that in Haysom et al. 2023 supplementary table S2 the Muntiacus  
+# atherodes (Bornean  yellow  muntjac) for the unlogged dataset was defined 
+# with a Primary activity pattern as 'Diurnal'. This is not the same labels as
+# other hypotheses; we interpreted this to mean 'mostly diurnal' and have 
+#  changed this result in our modified csv file for Table S2. 
   
 # Model Fitting Function
   multi.fit.fun <- function(y,hyp.set){
@@ -409,7 +404,7 @@ primary activity identified by Haysom et al. 2023.
       n.mcmc = 5000,
       burnin  = 1000
     )
-    # Get the Bayes factors for each hypothesis 
+# Get the Bayes factors for each hypothesis 
     list(
       ms.model = out$ms.model,
       prob = out$bf.table
@@ -468,7 +463,7 @@ primary activity identified by Haysom et al. 2023.
     ## 26    G.mostly.N        mostly nocturnal                144
     ## 27    G.mostly.N        mostly nocturnal                132
     ## 28        G.cath              cathemeral                 93
-    ## 29        G.crep             crepuscular                 46
+    ## 29        G.cath             crepuscular                 46
     ## 30        G.cath              cathemeral                 47
     ## 31        G.cath              cathemeral                608
     ## 32        G.cath          mostly diurnal                224
@@ -510,7 +505,7 @@ primary activity identified by Haysom et al. 2023.
     ## 68    G.mostly.D          mostly diurnal                 18
     ## 69    G.mostly.N        mostly nocturnal                 17
     ## 70    G.mostly.N        mostly nocturnal                 10
-    ## 71    G.strict.N        mostly nocturnal                  7
+    ## 71    G.mostly.N        mostly nocturnal                  7
     ## 72    G.strict.N        mostly nocturnal                 59
     ## 73    G.mostly.D          mostly diurnal                 13
     ## 74    G.mostly.D          mostly diurnal                326
@@ -564,8 +559,10 @@ al. 2005 hypotheses. These appear to be largely due to small sample size
 leading to higher model uncertainty between models in a set. In a few
 cases (e.g., 37 and 38), it looks like the threshold to meet the ‘mostly
 nocturnal’ phenotype for Greater mousedeer in unlogged and logged may
-not have been actually been met (53% and 61%, respectively), and thus is
-more appropriately Cathemeral.
+not have been actually been met (53% and 61%, respectively), and may be
+more appropriately Cathemeral. However, most detections outside of
+nighttime were during twilight which is not considered as part of
+Cathemeral under the definitions from Haysom et al. 2023 (Table 1).
 
 # Haysom et al. 2023 Results Comparison (Traditional)
 
@@ -573,7 +570,6 @@ Let’s now use the Gomez hypothesis set (unmodified) and compare it to
 the Traditional hypothesis set with the data from Haysom et al. 2023.
 
 ``` r
-#
 # Apply the function to the data, y
   out.multi.trad <- apply(
     y,
@@ -608,21 +604,23 @@ ggplot(
 
 ![](Gomez-Diel-Niche-comparison_files/figure-gfm/plotting%20hyps-1.png)<!-- -->
 
-The strictly nocturnal and cathemeral results correspond the same to
-Traditional Cathemeral and Traditional Nocturnal. We see the biggest
-difference in what the Gomez hypotheses called ‘mostly diurnal’ or
-mostly ‘nocturnal’, the Traditional hypothesis set defines as
-Traditional Cathemeral. Why is that? That is because to be Traditional
-Cathemeral only two diel periods need to be used more than a probability
-of 0.10. This occurs under the ‘mostly’ phenotype definitions when the
-probability threshold for the dominant activity to be between 0.70 and
-0.90, which means between 0.3 and 0.10 probability could be within one
-or two of the other diel periods and thus more than the 0.10 probability
-threshold. Another notable difference is that because the Gomez
-hypotheses have an unequal definition of Crepuscular with overlapping
-probability space with Cathemeral, most species and data analysis units
-defined as crepuscular are defined as Traditional Cathemeral in the
-Traditional hypothesis set.
+In this plot, the Gomez hypotheses are on the x-axis and the frequency
+they are defined by hypotheses from the Traditional hypothesis set
+(legend) is on the y-axis. We see that the strictly nocturnal and
+cathemeral results (x-axis) correspond the same to Traditional
+Cathemeral and Traditional Nocturnal. The biggest difference is in what
+the Gomez hypotheses called ‘mostly diurnal’ or mostly ‘nocturnal’, the
+Traditional hypothesis set defined as Traditional Cathemeral. Why is
+that? That is because to be Traditional Cathemeral only two diel periods
+need to be used more than a probability of 0.10. This occurs under the
+‘mostly’ phenotype definitions when the probability threshold for the
+dominant activity to be between 0.70 and 0.90, which means between 0.3
+and 0.10 probability could be within one or two of the other diel
+periods and thus more than the 0.10 probability threshold. Another
+notable difference is that because the Gomez hypotheses have an unequal
+definition of Crepuscular with overlapping probability space with
+Cathemeral, most species and data analysis units defined as crepuscular
+are defined as Traditional Cathemeral in the Traditional hypothesis set.
 
 # Haysom et al. 2023 Results Comparison (General)
 
@@ -682,26 +680,28 @@ ggplot(
 
 ![](Gomez-Diel-Niche-comparison_files/figure-gfm/plot%20general-1.png)<!-- -->
 
-The General hypothesis set does not have a binomial hypothesis of
-cathemeral and another activity period, so those aren’t directly
-comparable. We see there is strong agreement of crepuscular diurnal and
-mostly diurnal crepuscular with that of the Diurnal-Crepsucular
-hypothesis. There is also strong agreement with the mostly nocturnal
-crepuscular combination with that of the Crepuscular-Nocturnal
-hypothesis. There are also disagreements with many combinations because
-of the different thresholds used.
+In this plot, the Gomez hypotheses defining the primary activity and the
+secondary activity are combined as hypotheses on the x-axis and the
+frequency they are defined by hypotheses from the Traditional hypothesis
+set (legend) is on the y-axis. The General hypothesis set does not have
+a binomial hypothesis of cathemeral and another activity period as are
+on the x-axis, so those aren’t directly comparable. We see there is
+strong agreement of crepuscular diurnal and mostly diurnal crepuscular
+with that of the Diurnal-Crepsucular hypothesis. There is also strong
+agreement with the mostly nocturnal crepuscular combination with that of
+the Crepuscular-Nocturnal hypothesis. There are also disagreements with
+many combinations because of the different thresholds used.
 
 # Conclusion
 
 We implemented the Gomez et al. 2005 phenotypes to be provide another
-hypothesis set for researchers to consider. The walk through
-hopefully helped demonstrate how to implement a set of hypotheses and
-how to visualize hypotheses to match one’s expectation. We found some
-important differences in how the Traditional hypothesis set defined
-Cathemeral compared to Gomez’s ‘mostly’ diurnal and nocturnal. There
-were more difference when comparing the primary and secondary
-activity pattern results from Haysom et al. 2023 with the General
-hypothesis set.
+hypothesis set for researchers to consider. The walk through hopefully
+helped demonstrate how to implement a set of hypotheses and how to
+visualize hypotheses to match one’s expectation. We found some important
+differences in how the Traditional hypothesis set defined Cathemeral
+compared to Gomez’s ‘mostly’ diurnal and nocturnal. There were more
+difference when comparing the primary and secondary activity pattern
+results from Haysom et al. 2023 with the General hypothesis set.
 
 # References
 
