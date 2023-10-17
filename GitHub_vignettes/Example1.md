@@ -205,7 +205,8 @@ the hypothesis set.
 triplot(out)
 ```
 
-<img src="Example1_files/figure-gfm/example1.md.github.posteriors.png" width="6.5in" style="display: block; margin: auto;" />
+![](Example1_files/figure-gfm/example1.md.github.posteriors.png)<!-- -->
+
 
 The black dots are the entire posterior samples plotted within the
 Traditional Cathemeral hypothesis. This point cloud shows us that the
