@@ -366,6 +366,7 @@ undefined.
 ```
 
 ![](Gomez-Diel-Niche-comparison_files/figure-gfm/Rplot2.png)<!-- -->
+
 This modified hypothesis set is now similar to the Traditional
 hypothesis set of the $\texttt{Diel.Niche}$ package, but more
 specificity in ‘strictly’ and ‘mostly’ singular phenotypes. The
