@@ -8,7 +8,7 @@ functions to gibbs MCMC algorithms provided by the R package $\texttt{multinomin
 
 ## Updates 
 
-News and updates regarding this package can be found [here](./NEWS.md)
+News and updates regarding this package can be found [here](./NEWS.md).
 
 ## Vignettes 
 
