@@ -8,6 +8,8 @@ functions to gibbs MCMC algorithms provided by the R package $\texttt{multinomin
 
 ## Updates 
 
+![](https://komarev.com/ghpvc/?username=diel-project&color=green)
+
 News and updates regarding this package can be found [here](./NEWS.md).
 
 ## Vignettes 
