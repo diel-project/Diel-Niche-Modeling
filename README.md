@@ -1,4 +1,5 @@
 # Diel.Niche
+![](https://komarev.com/ghpvc/?username=diel-project&color=green)
 
 An R package to evaluate hypotheses of diel phenotypes based on empirical
 data and estimate the probabilitiy of activity during the twilight,
@@ -7,8 +8,6 @@ statements among the these three probabilities of activity. The core modeling an
 functions to gibbs MCMC algorithms provided by the R package $\texttt{multinomineq}$: [https://www.dwheck.de/software/multinomineq/](https://www.dwheck.de/software/multinomineq/).
 
 ## Updates 
-
-![](https://komarev.com/ghpvc/?username=diel-project&color=green)
 
 News and updates regarding this package can be found [here](./NEWS.md).
 
