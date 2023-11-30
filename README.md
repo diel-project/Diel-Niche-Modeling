@@ -1,6 +1,5 @@
 # Diel.Niche
-As of Novemeber 2023,
-[](https://komarev.com/ghpvc/?username=diel-project&color=green)
+[](https://komarev.com/ghpvc/?username=diel-project&color=green) as Nov. 2023
 
 
 
