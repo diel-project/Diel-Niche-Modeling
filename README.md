@@ -1,5 +1,5 @@
 # Diel.Niche
- [](https://komarev.com/ghpvc/?username=diel-project&color=green)
+[](https://komarev.com/ghpvc/?username=diel-project&color=green)
 
 An R package to evaluate hypotheses of diel phenotypes based on empirical
 data and estimate the probabilitiy of activity during the twilight,
