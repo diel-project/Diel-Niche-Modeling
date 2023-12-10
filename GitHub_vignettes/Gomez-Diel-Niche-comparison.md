@@ -74,8 +74,7 @@ $$
 \end{equation}
 $$
 
-Next, we need to translate the inequality into the framework of
-$\mathbf{A} \boldsymbol{\theta} \leq \mathbf{b}$.
+Next, we need to translate the inequality into the framework of $\mathbf{A} \boldsymbol{\theta} \leq \mathbf{b}$.
 
 $$
 \begin{equation} 
@@ -85,7 +84,9 @@ $$
  (-1) \times p_{\text{tw}} + (0)\times p_{\text{d}} & \leq -0.50 \\
 \end{aligned}
 \end{equation}
-$$ Putting it together, we take the constants in parentheses left of the
+$$ 
+
+Putting it together, we take the constants in parentheses left of the
 equal sign and package it into matrix $\mathbf{A}$ and take the
 constants on the right of the equal sign and package it into vector
 $\mathbf{b}$ as,
