@@ -134,9 +134,9 @@ $$
 \begin{equation} 
 \begin{split}
  p_{\text{d}} & < 0.90 \\
- p_{\text{d}} &\leq 0.90 - \epsilon \\
- -p_{\text{d}} &\leq 0.90 \\
- (0) \times p_{\text{tw}} + (1)\times p_{\text{d}} &\leq 0.90 - \epsilon \\
+ p_{\text{d}} & \leq 0.90 - \epsilon \\
+ -p_{\text{d}} & \leq 0.90 \\
+ (0) \times p_{\text{tw}} + (1) \times p_{\text{d}} & \leq 0.90 - \epsilon \\
 \end{split}
 \end{equation}
 
