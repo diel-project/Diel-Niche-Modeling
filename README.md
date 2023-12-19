@@ -1,7 +1,7 @@
 # Diel.Niche
 
 ![](https://komarev.com/ghpvc/?username=diel-project&color=green) as of 11/2023
-[![Github All Releases](https://img.shields.io/github/downloads/diel-project/Diel-Niche-Modeling/total.svg)]()
+[![Github Downloads (total)](https://img.shields.io/github/downloads/diel-project/Diel-Niche-Modeling/total.svg)]()
 An R package to evaluate hypotheses of diel phenotypes based on empirical
 data and estimate the probabilitiy of activity during the twilight,
 daytime, and nighttime periods. 
