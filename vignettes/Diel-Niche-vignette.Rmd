@@ -1,5 +1,5 @@
 ---
-title: "Diel.Niche Vignette"
+title: "Diel.Niche.Vignette"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Diel.Niche Vignette}
