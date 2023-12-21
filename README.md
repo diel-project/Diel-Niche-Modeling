@@ -60,14 +60,17 @@ First, install Diel.Niche using the devtools package:
  )
 ```
 
+For a faster build, change to dependencies = FALSE, but the below vignettes will not be part of the package (still accessible on Github).
+
 Check out the availble vignettes:
 
 ``` r
 # Load the pacakge
   library(Diel.Niche)
 
-# You can view the main vignette as
+# You can view the main or secondary additional vignette as
   vignette("Diel-Niche-Vignette")
+  vignette("Diel-Niche-Additional")
 
 # Or other vignettes
   vignette("Example1")
