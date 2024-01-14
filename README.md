@@ -7,7 +7,7 @@ data and estimate the probabilitiy of activity during the twilight,
 daytime, and nighttime periods. 
 
 The main idea of evaluating diel phenotypes as hypotheses is that they can be expressed as inequality
-statements among the these three probabilities of activity. The core modeling and estimation functions of this packages are wrapper 
+statements among the probabilities of activity during twilight, daytime, and nighttime. The core modeling and estimation functions of this packages are wrapper 
 functions to gibbs MCMC algorithms provided by the R package $\texttt{multinomineq}$: [https://www.dwheck.de/software/multinomineq/](https://www.dwheck.de/software/multinomineq/).
 
 ## Updates 
