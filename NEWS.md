@@ -6,6 +6,8 @@
 
 ## News 
 
+- 01/17/24: The manuscript associated to Diel.Niche R Package was published online open access at [Journal of Animal Ecology](https://doi.org/10.1111/1365-2656.14035)
+
 - 06/24/23: The preprint describing the R package Diel.Niche was published online at [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.06.21.545898v1)
 
 

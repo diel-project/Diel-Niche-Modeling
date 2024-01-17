@@ -45,8 +45,8 @@ To cite this package, please use
 citation("Diel.Niche")
 ```
 
-Gerber BD, Devarajan K, Farris ZJ, Fidino M (2023). A model-based hypothesis framework to define and estimate the
-  diel niche via the Diel.Niche’ R package. bioRxiv. doi:10.1101/2023.06.21.545898  <https://doi.org/10.1101/2023.06.21.545898>.
+Gerber BD, Devarajan K, Farris ZJ, Fidino M (2024). A model-based hypothesis framework to define and estimate the
+  diel niche via the Diel.Niche’ R package. Journal of Animal ecology. doi:10.1111/1365-2656.14035  <https://doi.org/10.1111/1365-2656.14035>.
 
 ## Install
 
