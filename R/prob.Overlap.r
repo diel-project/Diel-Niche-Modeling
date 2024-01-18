@@ -1,7 +1,7 @@
 #' Kernel Overlap density integration
 #'
 #' @description Integrate kernel density to derive probability of twilight, daytime, nighttime
-#' @param densityplot a densityPlot object from package overlap. See details for
+#' @param densityplot a densityPlot object from package overlap or a fitact object from the package activity. See details for
 #' additional information.
 #' @param dawn beginning and end numeric (0-24) times for dawn. This is in
 #' proportional hours such that 12.5 would be 12:30. See details for additional
@@ -11,13 +11,16 @@
 #' information.
 #' @return A matrix of three probabilities.
 #' @details
-#' When creating the density plot, it is important to increase the \code{n.grid}
+#' When creating the density plot from overlap, it is important to increase the \code{n.grid}
 #' argument, because to this function integrates the area under the curve to
 #' compute the associated probabilities. We suggest to start setting \code{n.grid}
 #'  in \code{overlap::densityPlot} to at least 10000, but you may be able to do
 #'  less. Essentially, if the outputted sum is within about a thousandth from one
 #'  (e.g., 0.999) then the output from this function can be used in 
-#'  \code{\link{posthoc.niche}}.
+#'  \code{\link{posthoc.niche}}. There is no control over the grid used from \code{activity::fitact}
+#'  and thus there may be some error in that the three probabilities do not sum
+#'  to one. A patch would be to equally add the missing probability amount to each
+#'  of the three probabilities.
 #'  
 #'  To compute proportional hours, you will need to start with a time object.
 #'  Changing that time to a numeric should convert it to
