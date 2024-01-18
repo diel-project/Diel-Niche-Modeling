@@ -48,7 +48,7 @@ prob.overlap=function(densityplot,
 #########################
 #Checks
   denom=1
-  if(class(densityplot)=="actmod"){
+  if(is(densityplot)=="actmod"){
     x.new <- seq(0,24,length.out=length(densityplot@pdf[,1]))
     densityplot=data.frame(x=x.new,y=densityplot@pdf[,2])
     denom=integrate.xy(densityplot$x,densityplot$y)
