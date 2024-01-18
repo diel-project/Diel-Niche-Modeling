@@ -44,7 +44,12 @@ prob.overlap=function(densityplot,
 
 #########################
 #Checks
-
+  
+  if(class(densityplot)=="actmod"){
+    x.new <- seq(0,24,length.out=length(densityplot@pdf[,1]))
+    densityplot=data.frame(x=x.new,y=densityplot@pdf[,2])
+  }
+  
   if(!is.data.frame(densityplot)  | ncol(densityplot)!=2 | any(colnames(densityplot)!=c("x","y"))| !is.numeric(densityplot$x) |  !is.numeric(densityplot$y)){
    stop("densityplot needs to be a dataframe with numeric values organized into two columns labled 'x' and 'y'") 
   }
