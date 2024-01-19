@@ -1,7 +1,7 @@
 #' Kernel Overlap density integration
 #'
 #' @description Integrate kernel density to derive probability of twilight, daytime, nighttime
-#' @param densityplot a densityPlot object from package overlap. See details for
+#' @param densityplot a densityPlot object from package overlap or a fitact object from the package activity. See details for
 #' additional information.
 #' @param dawn beginning and end numeric (0-24) times for dawn. This is in
 #' proportional hours such that 12.5 would be 12:30. See details for additional
@@ -11,13 +11,16 @@
 #' information.
 #' @return A matrix of three probabilities.
 #' @details
-#' When creating the density plot, it is important to increase the \code{n.grid}
+#' When creating the density plot from overlap, it is important to increase the \code{n.grid}
 #' argument, because to this function integrates the area under the curve to
 #' compute the associated probabilities. We suggest to start setting \code{n.grid}
 #'  in \code{overlap::densityPlot} to at least 10000, but you may be able to do
 #'  less. Essentially, if the outputted sum is within about a thousandth from one
 #'  (e.g., 0.999) then the output from this function can be used in 
-#'  \code{\link{posthoc.niche}}.
+#'  \code{\link{posthoc.niche}}. There is no control over the grid used from \code{activity::fitact}
+#'  and thus there may be some error in that the three probabilities do not sum
+#'  to one. A patch would be to equally add the missing probability amount to each
+#'  of the three probabilities.
 #'  
 #'  To compute proportional hours, you will need to start with a time object.
 #'  Changing that time to a numeric should convert it to
@@ -44,7 +47,13 @@ prob.overlap=function(densityplot,
 
 #########################
 #Checks
-
+  denom=1
+  if(inherits(densityplot,"actmod")){
+    x.new <- seq(0,24,length.out=length(densityplot@pdf[,1]))
+    densityplot=data.frame(x=x.new,y=densityplot@pdf[,2])
+    denom=integrate.xy(densityplot$x,densityplot$y)
+  }
+  
   if(!is.data.frame(densityplot)  | ncol(densityplot)!=2 | any(colnames(densityplot)!=c("x","y"))| !is.numeric(densityplot$x) |  !is.numeric(densityplot$y)){
    stop("densityplot needs to be a dataframe with numeric values organized into two columns labled 'x' and 'y'") 
   }
@@ -62,21 +71,22 @@ prob.overlap=function(densityplot,
 #########################
   densityplot=densityplot[which(densityplot$x>=0 & densityplot$x<=24),]
   
-  
   index.dawn=which(densityplot$x >= dawn[1] & densityplot$x<=dawn[2])
   index.dusk=which(densityplot$x>=dusk[1] & densityplot$x<=dusk[2])
   index.day=which(densityplot$x>dawn[2] & densityplot$x<dusk[1])
   index.night1=which(densityplot$x<dawn[1])
   index.night2=which(densityplot$x>dusk[2])
  
-  if(length(index.dawn)==0){p.dawn=0}else{p.dawn=integrate.xy(densityplot$x[index.dawn],densityplot$y[index.dawn])}
   
-  if(length(index.dusk)==0){p.dusk=0}else{p.dusk=integrate.xy(densityplot$x[index.dusk],densityplot$y[index.dusk])}
   
-  if(length(index.day)==0){p.day=0}else{p.day=integrate.xy(densityplot$x[index.day],densityplot$y[index.day])}
+  if(length(index.dawn)==0){p.dawn=0}else{p.dawn=integrate.xy(densityplot$x[index.dawn],densityplot$y[index.dawn])/denom}
   
-  if(length(index.night1)==0){p.night1=0}else{p.night1=integrate.xy(densityplot$x[index.night1],densityplot$y[index.night1])}
-  if(length(index.night2)==0){p.night2=0}else{p.night2=integrate.xy(densityplot$x[index.night2],densityplot$y[index.night2])}
+  if(length(index.dusk)==0){p.dusk=0}else{p.dusk=integrate.xy(densityplot$x[index.dusk],densityplot$y[index.dusk])/denom}
+  
+  if(length(index.day)==0){p.day=0}else{p.day=integrate.xy(densityplot$x[index.day],densityplot$y[index.day])/denom}
+  
+  if(length(index.night1)==0){p.night1=0}else{p.night1=integrate.xy(densityplot$x[index.night1],densityplot$y[index.night1])/denom}
+  if(length(index.night2)==0){p.night2=0}else{p.night2=integrate.xy(densityplot$x[index.night2],densityplot$y[index.night2])/denom}
   
   twi=p.dawn+p.dusk
   daytime=p.day
