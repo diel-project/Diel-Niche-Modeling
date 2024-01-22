@@ -501,7 +501,7 @@ less data during the spring and winter.
 
 <div class="figure">
 
-<img src="img/opossum_nocturnal_time.png" alt=" Figure 3.1. Opossum are predominately nocturnal during the middle of the year, but this precipitously drops off at the start and end of a year. The solid black line represents the median probability of nocturnality while the shaded ribbon is the 95% credible interval." width="70%" />
+<img src="Example3_files/figure-gfm/plot_results-1.png" alt=" Figure 3.1. Opossum are predominately nocturnal during the middle of the year, but this precipitously drops off at the start and end of a year. The solid black line represents the median probability of nocturnality while the shaded ribbon is the 95% credible interval." width="70%" />
 <p class="caption">
 Figure 3.1. Opossum are predominately nocturnal during the middle of the
 year, but this precipitously drops off at the start and end of a year.
