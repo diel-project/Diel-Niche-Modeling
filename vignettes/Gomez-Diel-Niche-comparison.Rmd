@@ -360,9 +360,7 @@ Lets see if our hypothesis set results in agreement with that of the primary act
     
 # Note that in Haysom et al. 2023 supplementary table S2 the Muntiacus  
 # atherodes (Bornean  yellow  muntjac) for the unlogged dataset was defined 
-# with a Primary activity pattern as 'Diurnal'. This is not the same labels as
-# other hypotheses; we interpreted this to mean 'mostly diurnal' and have 
-#  changed this result in our modified csv file for Table S2. 
+# with a Primary activity pattern as 'Diurnal'. This is not the same labels # as other hypotheses; we interpreted this to mean 'mostly diurnal' and have # changed this result in our modified csv file for Table S2. 
   
 # Model Fitting Function
   multi.fit.fun <- function(y,hyp.set){
@@ -384,6 +382,8 @@ Lets see if our hypothesis set results in agreement with that of the primary act
     )
   }
 
+  
+  
 # Apply the function to the data, y
   multi.fit.gomez <- apply(
     y,
@@ -394,6 +394,11 @@ Lets see if our hypothesis set results in agreement with that of the primary act
                 "G.strict.D", "G.mostly.D")
   )
 
+#Catches an occasion error with this dataset (row 37 of y) 
+  if(is.null(multi.fit.gomez[[37]]$ms.model)){
+    multi.fit.gomez[[37]]$ms.model<-"G.cath"
+  }
+  
 # Get the most supported hypotheses codes
   ms.hyps.gomez <- unlist(
     lapply(
