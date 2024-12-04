@@ -1,10 +1,3 @@
----
-title: ""
-output: 
-      html_document:
-        keep_md: yes
-        code_folding: show
----
 # Hierarchical models to estimate animal diel activity, diel phenotype, and activity overlap between species
 #### Authors: Brian D. Gerber, Fabiola Iannarilli, and John Fieberg
 #### Data provided by Fabiola Iannarilli, John Fieberg, and John Erb
