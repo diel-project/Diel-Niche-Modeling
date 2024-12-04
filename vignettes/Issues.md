@@ -1,6 +1,5 @@
----
-title: "Common Issues"
----
+
+# Common Issues
 
 #### Author: Brian D. Gerber
 #### Date: 2024-12-04
