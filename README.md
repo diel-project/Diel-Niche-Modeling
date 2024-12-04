@@ -14,6 +14,10 @@ functions to gibbs MCMC algorithms provided by the R package $\texttt{multinomin
 
 News and updates regarding this package can be found [here](./NEWS.md).
 
+## Issues
+
+Please see here for [Common Issues](./vignettes/Issues.html).
+
 ## Vignettes 
 
 The main package vignettes can be found on Github here: [Main Vignette](./GitHub_vignettes/Diel-Niche-vignette.md) and [Additional Vignette](./GitHub_vignettes/Diel-Niche-Additional.md)

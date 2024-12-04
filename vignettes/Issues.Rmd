@@ -1,0 +1,89 @@
+---
+title: "Common Issues"
+output: html_document
+---
+
+#### Author: Brian D. Gerber
+#### Date: 2024-12-04
+
+
+
+## 1. Large Sample Size
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+A common error occurs when using the `diel.fit` function when the sample size of the number of detections ($y$) is large and setting the argument `post.fit=TRUE` and the `hyp.set` argument to include multiple models (e.g., `hyp = hyp.set = hyp.sets("Traditional")`).
+
+For example, lets say you are studying a common species and you have lots of spatial sampling (e.g., many unique camera trap sites). If the goal is to estimate the diel niche of the species across all camera sites for a given season, you would aggregate the independent detections into counts of twilight, daylight, and nighttime. This may lead to many detections per diel period and overall.
+
+```{r data}
+# Load packages
+  library(Diel.Niche)
+# Data
+  y = t(matrix(c(542, 0, 2834)))
+```
+
+Note that there are large number of detections in the twilight and nighttime periods. We can expect to be highly certain when determining the diel phenotype.
+
+If you fit these data with default settings there should be no errors.
+
+```{r fit default}
+out <- diel.fit(
+                y,
+                hyp.set = hyp.sets("Traditional"),
+)
+```
+
+However, if you ask the function to sample from the posterior distributions for all diel phenotype models, `post.fit = TRUE`, we encounter an error. 
+
+```{r fit error,error=TRUE}
+diel.fit(
+         y,
+         hyp.set = hyp.sets("Traditional"),
+         post.fit = TRUE
+)
+```
+
+The reason for the error is that the function is attempting to sample from a posterior distribution in which the model constraints and the data are in contradiction. Simply, there is no support for the model and thus estimating posterior samples with the given constraints does not work. In other words, there is so much support for a single model that the other models being fit by default are not supported and thus there are issues with sampling from the posterior distributions. 
+
+**What to do about this issue?**
+
+We need to separate the process in determining the most supported model and that of estimating the posterior distributions. First, fit the model with `post.fit = TRUE` and `bf.fit = FALSE` (default settings). 
+
+```{r fit}
+out <- diel.fit(
+                  y,
+                  bf.fit = TRUE,
+                  hyp.set = hyp.sets("Traditional"),  
+                  n.chains = 3,
+                  post.fit = FALSE,
+)
+```
+
+We determined the most supported model to be "Nocturnal (Traditional)". The model name is stored in the object `out$ms.model`, which we can be used in the `diel.fit` function to sample from the posterior distributions of only this model and not all models within the Traditional hypothesis set.
+
+```{r fit.post}
+out.post <- diel.fit(
+                     y,
+                     bf.fit = FALSE,
+                     hyp.set = out$ms.model,  
+                     n.chains = 3,
+                     post.fit = TRUE,
+)
+
+# posterior samples (first chain)
+  head(out.post$post.samp$N[[1]])
+
+```
+And we can also plot our posterior samples on top of the defined parameter space for all the traditional hypothesis phenotypes as..
+
+```{r plot}
+triplot(hyp = hyp.sets("Traditional"),
+        posteriors = out.post$post.samp$N[[1]],
+        )
+```
