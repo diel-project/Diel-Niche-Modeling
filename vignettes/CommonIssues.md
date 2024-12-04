@@ -12,7 +12,7 @@
 
 A common error occurs when using the `diel.fit` function when the sample size of the number of detections ($y$) is large and setting the argument `post.fit=TRUE` and the `hyp.set` argument to include multiple models (e.g., `hyp = hyp.set = hyp.sets("Traditional")`).
 
-For example, lets say you are studying a common species and you have lots of spatial sampling (e.g., many unique camera trap sites). If the goal is to estimate the diel niche of the species across all camera sites for a given season, you would aggregate the independent detections into counts of twilight, daylight, and nighttime. This may lead to many detections per diel period and overall.
+Lets say you are studying a common species and you have lots of spatial sampling (e.g., many unique camera trap sites). If the goal is to estimate the diel niche of the species across all camera sites for a given season, you would aggregate the independent detections into counts of twilight, daylight, and nighttime. This may lead to many detections per diel period and overall.
 
 
 ``` r

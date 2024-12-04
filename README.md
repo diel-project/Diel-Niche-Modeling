@@ -16,7 +16,7 @@ News and updates regarding this package can be found [here](./NEWS.md).
 
 ## Issues
 
-Please see here for [Common Issues](./vignettes/Issues.md).
+Please see here for [Common Issues](./vignettes/CommonIssues.md.md).
 
 ## Vignettes 
 
