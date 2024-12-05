@@ -20,7 +20,7 @@
 
 ## Setup
 
-We start with already compiled data relevant for fitting hierarchical activity models. The camera-trapping data and code used here are modified from Chapter 7 of the tutorial for [A ‘How-to’ Guide for Estimating Animal Diel Activity Using Hierarchical Model](https://hms-activity.netlify.app/). Specifically, the data we use are from summer (May, June, July) of 2016, 2017,and 2018 on coyotes and wolves detected in Minnesota, USA. 
+We start with already compiled data relevant for fitting hierarchical activity models. The camera-trapping data and code used here are modified from Chapter 7 of the tutorial for [A ‘How-to’ Guide for Estimating Animal Diel Activity Using Hierarchical Model](https://hms-activity.netlify.app/). Specifically, the data we use are from summer (May, June, July) of 2016, 2017, and 2018 on coyotes and wolves detected in Minnesota, USA. 
 
 
 **Load libraries and data object**
