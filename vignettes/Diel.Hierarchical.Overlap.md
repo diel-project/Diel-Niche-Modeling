@@ -436,6 +436,6 @@ We see that the two modeling approaches generally agree with near 0.82 probabili
 
 ## Uncertainty
 
-We reccomend bootstrapping to get measures of uncertainty in the diel phenotype classification and measures of overlap when using the hierarchical model predictions. The procedure to do so are: 1) resample the coyote and wolf data separately, fit each to a model, predict overlap and diel phenotype, and repeat many times. Once this is done, find the quantiles of the predicted overlap to be used as confidence intervals.
+We recommend bootstrapping to get measures of uncertainty in the diel phenotype classification and measures of overlap when using the hierarchical model predictions. The procedure to do so are: 1) resample the coyote and wolf data separately, fit each to a model, predict overlap and diel phenotype, and repeat many times. Once this is done, find the quantiles of the predicted overlap to be used as confidence intervals.
 
 <br>
