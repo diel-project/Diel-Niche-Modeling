@@ -40,7 +40,7 @@ We start with already compiled data relevant for fitting hierarchical activity m
   load("coywolf.data.summer.RData")
 ```
 
-The data objects we will work with are `occasions_Co_cbind` (coyote data) and  `occasions_Wo_cbind` (wolf data), which include the *site*, *time* (by hour), and whether the species was detected (*success*) or not (*failure*) summarized across many days. Lastly, the *oth_sp* column indicate whether the other species was observed to be present at that site or not. So for the data set `occasions_Co_cbind`, the detections are of coyotes and the *oth_sp* indicates whether a wolf was observed at each site.
+The data objects we will work with are `occasions_Co_cbind` (coyote data) and  `occasions_Wo_cbind` (wolf data), which include the *site*, *time* (by hour), and whether the species was detected (*success*) or not (*failure*) summarized across many days. Lastly, the *oth_sp* column indicate whether the other species was observed to be present at that site or not during a specific sampling session. So for the data set `occasions_Co_cbind`, the detections are of coyotes and the *oth_sp* indicates whether a wolf was observed at a site during a specific sampling season.
 
 
 ### Coyote Data
@@ -136,11 +136,11 @@ We will first fit hierarchical trigonometric models to the coyote and wolf data 
                              ) 
 ```
 
-We can now predict the temporal activity for both coyotes and wolves in the presence and absence of the other species. We focus on estimating marginal mean activity patterns because our aim is to compare between two groups that differ in their characteristics (i.e. site-sessions with and without the other species). This is done bet setting the argument `marginal` in the `effectPlotData` function equal to `TRUE`.
+We can now predict the temporal activity for both coyotes and wolves in the presence and absence of the other species. We focus on estimating marginal mean activity patterns because our aim is to compare between two groups that differ in their characteristics (i.e. site-sessions with and without the other species). This is done by setting the argument `marginal` in the `effectPlotData` function equal to `TRUE`.
 
 
 ``` r
-# We want many prediction points within the 24-hr period so that we can summarizing 
+# We want many prediction points within the 24-hr period so that we can summarize 
 # probabilities within twilight, daytime, and nightime well. This will be used by the
 # Diel.Niche package
   num.pred.points=24*500
