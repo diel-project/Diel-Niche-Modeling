@@ -38,6 +38,7 @@ Case study example vignette's can be found on Github here:
 
 * [Example 7: Implementing Gomez et al. 2005 diel phenotypes in Diel.Niche](./GitHub_vignettes/Gomez-Diel-Niche-comparison.md)
 
+* [Hierarchical Models and Species Overlap](./vignettes/Diel.Hierarchical.Overlap.md)
 
 The package manual can be found on Github here: [Manual PDF](./man/Diel.Niche.pdf)
 

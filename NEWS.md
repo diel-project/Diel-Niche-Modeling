@@ -2,6 +2,10 @@
 
 ## Updates
 
+- 12/10/2024: a [new vignette](./vignettes/Diel.Hierarchical.Overlap.md) on connecting hierarchical models to the Diel.Niche package and estiamting diel overlap.
+
+## Updates
+
 - 01/19/24: The function prob.overlap has been updated to evaluate outputs from the R package 'activity'. For example,
 
 ``` r
