@@ -1,6 +1,6 @@
 #' @title Camera trap data for Diel.Niche
 #' @description 2012 camera trap data of Virginia opossum (Didelphis virginiana) from urban greenspace throughout Chicago, Illinois, USA
-#' @format A data frame with 2494 rows and 4 variables:
+#' @format A data frame with 2441 rows and 4 variables:
 #' \describe{
 #'   \item{species}{The common name of the species data.}
 #'   \item{surveyID}{The site and season code for the respective opossum detection. The site is denoted by the first 8 characters and the season is the last four. WI12 = winter 2012, SP12 = spring 2012, SU12 = summer 2012, and FA12 = fall 2012.}
