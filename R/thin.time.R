@@ -284,10 +284,5 @@ thin.time <- function(data, datetime.column, site.column, species.column = NULL,
   return(to_return)
 }
 
-longshot <- thin.time(
-  data = data,
-  "datetime",
-  "surveyID"
-)
 
 
