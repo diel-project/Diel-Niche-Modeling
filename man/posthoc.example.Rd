@@ -8,7 +8,7 @@
 A list object with three components
 \describe{
   \item{tiger.kde}{the outputted matrix from \code{overlap::densityPlot()} when fit to the tiger data subset from their \code{kerinci} data object.}
-   \itemize{
+   \describe{
      \item{x: }{a column vector of length 10000 that ranges from 0 to 24, which represents time in a day}
      \item{y: }{a column vector of length 10000 that is the kernel density estimate for each respective data point of \code{x}}
    }

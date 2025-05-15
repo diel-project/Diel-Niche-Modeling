@@ -48,7 +48,7 @@
 #' )
 #' # Species column not needed as this dataset
 #' #  has one species
-#' response <- thin.time(
+#' response <- trim.time(
 #'   dat,
 #'   datetime.column = "datetime",
 #'   site.column = "site",
@@ -73,7 +73,7 @@
 #' )
 #' # Species solumn needed as this dataset
 #' #  has more than one species.
-#' response <- thin.time(
+#' response <- trim.time(
 #'   dat,
 #'   datetime.column = "datetime",
 #'   species.column = "species",
@@ -85,7 +85,7 @@
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #' @export
 
-thin.time <- function(data, datetime.column, site.column, species.column = NULL, minutes.between = 15,
+trim.time <- function(data, datetime.column, site.column, species.column = NULL, minutes.between = 15,
                       progress.bar = TRUE){
   ## input checks
   if(!inherits(data, "data.frame")){

@@ -1,8 +1,12 @@
 ---
 title: "Common Issues"
-output: 
-    html_document:
-      keep_md: yes
+output: rmarkdown::html_vignette
+always_allow_html: true
+vignette: >
+  %\VignetteIndexEntry{Issues}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{Diel.Niche}
 ---
 
 #### Author: Brian D. Gerber

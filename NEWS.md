@@ -1,34 +1,28 @@
-# Diel.Niche News and Updates
+# Diel.Niche 0.1.3
 
-## Updates
+## 2025-05-15
 
-- 12/10/2024: a [new vignette](./vignettes/Diel.Hierarchical.Overlap.md) on connecting hierarchical models to the Diel.Niche package and estiamting diel overlap.
+- Added some new functionality.
 
-## Updates
+# Diel.Niche 0.1.2
 
-- 01/19/24: The function prob.overlap has been updated to evaluate outputs from the R package 'activity'. For example,
+## 2024-12-10
 
-``` r
-#Sample data
-  y=c(6.25753965, 0.56420439, 0.17951958, 0.97453486, 5.64204395, 6.23189400, 
-      0.28210220, 5.92414615, 0.92324356, 5.71898091, 0.43597612)
+- Added a [new vignette](./vignettes/Diel.Hierarchical.Overlap.md) on connecting hierarchical models to the Diel.Niche package and estimating diel overlap.
 
-#fit model
-  mod1<-activity::fitact(y) 
+# Diel.Niche 0.1.1
 
-#Get probabilities and defin using Traditional hypotheis set
-  probs=prob.overlap(densityplot=mod1,dawn=c(6,7),dusk=c(17,18))
-  posthoc.niche(probs,hyp.sets("Traditional"))
-``` 
+## 2024-01-19
 
-- 10/01/23: A [new vignette](./GitHub_vignettes/Gomez-Diel-Niche-comparison.md) was created that implements diel phenotypes from [Gomez et al. 2005](https://doi.org/10.1080/01650520500129638), demonstrating how to create your own phenotypes in Diel.Niche. These phenotypes are implemented using data from [Haysom et al. 2023](https://doi.org/10.1111/btp.13248)
+- Updated `prob.overlap()` to evaluate outputs from the R package `activity`.
 
-## News 
+```r
+# Sample data
+y <- c(6.26, 0.56, 0.18, 0.97, 5.64, 6.23, 0.28, 5.92, 0.92, 5.71, 0.44)
 
-- 01/17/24: The manuscript associated to Diel.Niche R Package was published online open access at [Journal of Animal Ecology](https://doi.org/10.1111/1365-2656.14035)
+# Fit model
+mod1 <- activity::fitact(y)
 
-- 06/24/23: The preprint describing the R package Diel.Niche was published online at [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.06.21.545898v1)
-
-
-
-
+# Get probabilities and define using Traditional hypothesis set
+probs <- prob.overlap(densityplot = mod1, dawn = c(6, 7), dusk = c(17, 18))
+posthoc.niche(probs, hyp.sets("Traditional"))
