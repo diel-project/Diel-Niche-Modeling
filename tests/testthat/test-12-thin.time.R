@@ -10,7 +10,7 @@ test_that("thin.time() retains one observation per interval", {
   expect_s3_class(thinned, "data.frame")
   
   # Check that no two records are within 30 minutes of each other
-  deltas <- diff(sort(thinned$datetime)) / 60  # convert seconds to minutes
+  deltas <- diff(sort(thinned$datetime))
   expect_true(all(deltas >= 30))
 })
 
@@ -42,10 +42,11 @@ test_that("thin.time() errors on incorrect input types", {
   expect_error(thin.time(1:5, "datetime", "site"), "data must be a data.frame")
   expect_error(thin.time(dat, "missing_column", "site"), "datetime.column not found in data")
   expect_error(thin.time(dat, "datetime", "missing_site"), "site.column not found in data")
-  expect_error(thin.time(dat, "datetime", "site", progress.bar = "yes"), "progress.bar must be either TRUE or FALSE")
-  expect_error(thin.time(dat, "datetime", "site", minutes.between = -5), "`minutes.between` must be a single positive number")
+
   expect_error(thin.time(dat, "datetime", "site"), "datetime.column must be a POSIXct or POSIXt object")
 })
+
+
 
 test_that("thin.time() works with species.column = NULL", {
   dat <- data.frame(
@@ -55,7 +56,22 @@ test_that("thin.time() works with species.column = NULL", {
   out <- thin.time(dat, datetime.column = "datetime", site.column = "site", minutes.between = 15, progress.bar = FALSE)
   
   expect_s3_class(out, "data.frame")
-  expect_true(all(diff(out$datetime) >= 15 * 60))
+  expect_true(all(diff(out$datetime) >= 15))
+})
+
+test_that("thin.time() errors with wrong inputs on progress.bar", {
+  dat <- data.frame(
+    datetime = as.POSIXct("2023-01-01 00:00:00") + c(0, 60, 1200, 2000),
+    site = rep("A", 4)
+  )
+  expect_error(thin.time(dat, "datetime", "site", progress.bar = "yes"), "progress.bar must be either TRUE or FALSE")
+})
+test_that("thin.time() errors with negative minutes", {
+  dat <- data.frame(
+    datetime = as.POSIXct("2023-01-01 00:00:00") + c(0, 60, 1200, 2000),
+    site = rep("A", 4)
+  )
+  expect_error(thin.time(dat, "datetime", "site", minutes.between = -5), "`minutes.between` must be a single positive number")
 })
 
 test_that("thin.time() returns expected result with repeated timestamps", {

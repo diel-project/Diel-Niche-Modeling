@@ -93,9 +93,6 @@ thin.time <- function(data, datetime.column, site.column, species.column = NULL,
   }
   
   # add checks here
-    if(any(is.na(data[datetime.column]))){
-      data <- data[-which(is.na(data[datetime.column])),]
-    }
   if (!datetime.column %in% colnames(data)) {
     stop("datetime.column not found in data.")
   }
