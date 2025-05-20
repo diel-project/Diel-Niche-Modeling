@@ -1,14 +1,14 @@
-library(Diel.Niche)
-
-data("camera.data")
-data <- camera.data
-datetime.column <- "datetime"
-lat.column = "lat"
-lon.column = "lon"
-species.column = "species"
-species.column = NULL
-bin.type.list = make.diel.bin.list(plot.bins = FALSE)
-na_vals = c("remove", "error")
+# library(Diel.Niche)
+# 
+# data("camera.data")
+# data <- camera.data
+# datetime.column <- "datetime"
+# lat.column = "lat"
+# lon.column = "lon"
+# species.column = "species"
+# species.column = NULL
+# bin.type.list = make.diel.bin.list(plot.bins = FALSE)
+# na_vals = c("remove", "error")
 bin.diel.times <- function(
     data,
     datetime.column,
