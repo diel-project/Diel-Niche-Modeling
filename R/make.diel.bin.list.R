@@ -271,8 +271,8 @@ make.diel.bin.list <- function(
   }
 
   # Check to ensure
-  
+  class(bin.type.list) <- "diel.bin.list"
   return(bin.type.list)
 }
 
-test <- make.diel.bin.list(twilight = TRUE)
+
