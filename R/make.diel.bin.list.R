@@ -137,14 +137,7 @@ make.diel.bin.list <- function(
     lon = -87.6298,
     tz = "US/Central"
 ) {
-  if(twilight){
-    warning(
-      paste(
-      "twilight set to FALSE. If you are planning on using Diel.Niche::diel.fit()",
-      "to classify a species diel phenotype, then twilight must be TRUE."
-      )
-    )
-  }
+
   # Check day, night, dawn, dusk: must be character if not NULL and contain "x"
   for (arg_name in c("day", "night", "dawn", "dusk")) {
     expr <- get(arg_name)
@@ -161,6 +154,14 @@ make.diel.bin.list <- function(
   # Check twilight and plot.bins: must be logical scalars
   if (!inherits(twilight, "logical") || length(twilight) != 1) {
     stop("`twilight` must be a logical (TRUE or FALSE).")
+  }
+  if(!twilight){
+    warning(
+      paste(
+        "twilight set to FALSE. If you are planning on using Diel.Niche::diel.fit()",
+        "to classify a species diel phenotype, then twilight must be TRUE."
+      )
+    )
   }
   if (!inherits(plot.bins, "logical") || length(plot.bins) != 1) {
     stop("`plot.bins` must be a logical (TRUE or FALSE).")
