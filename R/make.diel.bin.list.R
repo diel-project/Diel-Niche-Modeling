@@ -10,21 +10,26 @@
 #'   using sunlight transition times (e.g., \code{"x >= sunriseEnd & x < sunset"}). Default is \code{NULL}.
 #'   See details for more information.
 #' @param night A character string representing the logical expression for the "night" period.
-#'   Default is \code{NULL}. 
+#'   Default is \code{NULL}. See details for more information.
 #' @param dawn A character string representing the logical expression for the "dawn" period.
-#'   Only used if \code{twilight = FALSE}.
+#'   Only used if \code{twilight = FALSE}. See details for more information.
 #' @param dusk A character string representing the logical expression for the "dusk" period.
-#'   Only used if \code{twilight = FALSE}.
+#'   Only used if \code{twilight = FALSE}. See details for more information.
 #' @param twilight Logical; if \code{TRUE}, defines a combined "twilight" bin using default
 #'   rules inferred from the difference between day and night. If \code{FALSE}, expects
-#'   separate "dawn" and "dusk" periods. Default is \code{TRUE}.
+#'   separate "dawn" and "dusk" periods. Default is \code{TRUE}. If \code{TRUE} and the
+#'   user is including their own equality statements, then only \code{day} and \code{night}
+#'   should be defined (\code{twilight} is inferred as the remainder of time).
 #' @param plot.bins Logical; if \code{TRUE}, produces a diagnostic plot showing how seconds
 #'   over a 24-hour period are categorized into diel bins. Default is \code{TRUE}.
-#' @param date Character; date string in \code{"YYYY-MM-DD"} format for which to compute
-#'   solar transitions. Default is \code{"2020-03-12"}.
-#' @param lat Numeric; latitude of the location. Default is \code{41.8781}.
-#' @param lon Numeric; longitude of the location. Default is \code{-87.6298}.
+#' @param date Character; date string in \code{"YYYY-MM-DD"} or \code{"YYYY/MM/DD"}format for which to test
+#'   solar transitions provided by the user. Default is \code{"2020-03-12"}.
+#' @param lat Numeric; latitude of the location. Default is \code{41.8781}. Used to test
+#'   solar transitions provided by the user.
+#' @param lon Numeric; longitude of the location. Default is \code{-87.6298}. Used to test
+#'   solar transitions provided by the user.
 #' @param tz Character string specifying the time zone (e.g., \code{"US/Central"}). Default is \code{"US/Central"}.
+#' to test solar transitions provided by the user.
 #'
 #' @return A named list of character strings representing logical expressions that define
 #'   each diel period. The object is assigned the S3 class \code{"diel.bin.list"}.
@@ -33,7 +38,24 @@
 #' If no expressions are provided for \code{day}, \code{night}, \code{dawn}, or \code{dusk},
 #' the function uses default logic based on common sun transition events. The expressions
 #' must refer to column names returned by \code{suncalc::getSunlightTimes()}, such as
-#' \code{"sunriseEnd"}, \code{"sunset"}, \code{"night"}, etc.
+#' \code{"sunriseEnd"}, \code{"sunset"}, \code{"night"}, etc. 
+#' 
+#' If \code{twilight = TRUE}, the default \code{diel.bin.list} is:
+#' \preformatted{
+#'     list(
+#'       night = "x <= nightEnd | x > night",
+#'       day   = "x >= sunriseEnd & x < sunset"
+#'     )
+#'    }
+#' 
+#' If \code{twilight = FALSE}, the default \code{diel.bin.list} is:
+#' \preformatted{
+#'      list(
+#'       night = "x <= nightEnd | x > night",
+#'       dawn  = "x > nightEnd & x < sunriseEnd",
+#'       day   = "x >= sunriseEnd & x < sunset"
+#'     )
+#'  }
 #'
 #' The function verifies that all referenced transition variables exist and that the logic
 #' results in valid, non-overlapping diel bins over a 24-hour period. If twilight is enabled,
@@ -72,14 +94,16 @@
 #'   and \code{sunriseEnd}, and between \code{sunset} and \code{night}.
 #'
 #' - If \code{twilight = FALSE}, you must define three bins (e.g., \code{day}, \code{night}, and either
-#'   \code{dawn} or \code{dusk}) using explicit expressions.
+#'   \code{dawn} or \code{dusk}) using explicit expressions. Note that when \code{twilight = FALSE} you
+#'   likely will not need \code{>=} or \code{<=} in one of the three defined bins. This is because
+#'   you are defining diel bins that are adjacent to one another.
 #'
 #' The function will raise an error if:
 #' - Any expressions reference unavailable solar transitions.
 #' - Bins overlap (i.e., a time is assigned to more than one bin).
 #' - Bins are discontinuous or missing (e.g., some seconds remain unassigned).
 #'
-#' @seealso [suncalc::getSunlightTimes()]
+#' @seealso [suncalc::getSunlightTimes()] to get a list of the available sun times.
 #'
 #' @examples
 #' # Use default twilight bin definition
@@ -93,11 +117,13 @@
 #'   day = "x >= sunriseEnd & x < sunset",
 #'   night = "x < nightEnd | x >= night",
 #'   dawn = "x >= nightEnd & x < sunriseEnd",
-#'   dusk = "x >= sunset & x < night",
 #'   twilight = FALSE,
 #'   plot.bins = FALSE
 #' )
+#' @author Mason Fidino
 #' @import suncalc
+#' @importFrom graphics legend rect
+#' @importFrom utils head
 #' @export
 make.diel.bin.list <- function(
     day = NULL,
@@ -162,14 +188,14 @@ make.diel.bin.list <- function(
   if (all(sapply(list(day, night, dawn, dusk), is.null))) {
     bin.type.list <- if(twilight){
       list(
-        night = "x < nightEnd | x >= night",
+        night = "x <= nightEnd | x > night",
         day   = "x >= sunriseEnd & x < sunset"
         # twilight is inferred as: x >= nightEnd & x < sunriseEnd OR x >= sunset & x < night
       )
     } else {
       list(
-        night = "x < nightEnd | x >= night",
-        dawn  = "x >= nightEnd & x < sunriseEnd",
+        night = "x <= nightEnd | x >= night",
+        dawn  = "x > nightEnd & x < sunriseEnd",
         day   = "x >= sunriseEnd & x < sunset"
       )
     }
@@ -372,7 +398,7 @@ make.diel.bin.list <- function(
     stop(
       paste0(
         "Expected 4 transitions across diel bins over a 24-hour period: ",
-        "night → dawn, dawn → day, day → dusk, dusk → night.",
+        "night -> dawn, dawn -> day, day -> dusk, dusk -> night.",
         "However, ", length(arle$values) - 1, " transitions were detected. ",
         "\n\nThis was determined by identifying runs of consecutive seconds assigned to the same diel bin. ",
         "Unexpected transitions suggest issues in the bin definitions or logic. ",

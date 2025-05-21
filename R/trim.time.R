@@ -82,6 +82,8 @@
 #' )
 #' 
 #' }
+#' @author Mason Fidino
+#' 
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #' @export
 

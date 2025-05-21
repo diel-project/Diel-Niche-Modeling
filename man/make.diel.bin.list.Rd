@@ -23,29 +23,34 @@ using sunlight transition times (e.g., \code{"x >= sunriseEnd & x < sunset"}). D
 See details for more information.}
 
 \item{night}{A character string representing the logical expression for the "night" period.
-Default is \code{NULL}.}
+Default is \code{NULL}. See details for more information.}
 
 \item{dawn}{A character string representing the logical expression for the "dawn" period.
-Only used if \code{twilight = FALSE}.}
+Only used if \code{twilight = FALSE}. See details for more information.}
 
 \item{dusk}{A character string representing the logical expression for the "dusk" period.
-Only used if \code{twilight = FALSE}.}
+Only used if \code{twilight = FALSE}. See details for more information.}
 
 \item{twilight}{Logical; if \code{TRUE}, defines a combined "twilight" bin using default
 rules inferred from the difference between day and night. If \code{FALSE}, expects
-separate "dawn" and "dusk" periods. Default is \code{TRUE}.}
+separate "dawn" and "dusk" periods. Default is \code{TRUE}. If \code{TRUE} and the
+user is including their own equality statements, then only \code{day} and \code{night}
+should be defined (\code{twilight} is inferred as the remainder of time).}
 
 \item{plot.bins}{Logical; if \code{TRUE}, produces a diagnostic plot showing how seconds
 over a 24-hour period are categorized into diel bins. Default is \code{TRUE}.}
 
-\item{date}{Character; date string in \code{"YYYY-MM-DD"} format for which to compute
-solar transitions. Default is \code{"2020-03-12"}.}
+\item{date}{Character; date string in \code{"YYYY-MM-DD"} or \code{"YYYY/MM/DD"}format for which to test
+solar transitions provided by the user. Default is \code{"2020-03-12"}.}
 
-\item{lat}{Numeric; latitude of the location. Default is \code{41.8781}.}
+\item{lat}{Numeric; latitude of the location. Default is \code{41.8781}. Used to test
+solar transitions provided by the user.}
 
-\item{lon}{Numeric; longitude of the location. Default is \code{-87.6298}.}
+\item{lon}{Numeric; longitude of the location. Default is \code{-87.6298}. Used to test
+solar transitions provided by the user.}
 
-\item{tz}{Character string specifying the time zone (e.g., \code{"US/Central"}). Default is \code{"US/Central"}.}
+\item{tz}{Character string specifying the time zone (e.g., \code{"US/Central"}). Default is \code{"US/Central"}.
+to test solar transitions provided by the user.}
 }
 \value{
 A named list of character strings representing logical expressions that define
@@ -62,7 +67,24 @@ event names, checks for logical consistency, and optionally visualizes the resul
 If no expressions are provided for \code{day}, \code{night}, \code{dawn}, or \code{dusk},
 the function uses default logic based on common sun transition events. The expressions
 must refer to column names returned by \code{suncalc::getSunlightTimes()}, such as
-\code{"sunriseEnd"}, \code{"sunset"}, \code{"night"}, etc.
+\code{"sunriseEnd"}, \code{"sunset"}, \code{"night"}, etc. 
+
+If \code{twilight = TRUE}, the default \code{diel.bin.list} is:
+\preformatted{
+    list(
+      night = "x <= nightEnd | x > night",
+      day   = "x >= sunriseEnd & x < sunset"
+    )
+   }
+
+If \code{twilight = FALSE}, the default \code{diel.bin.list} is:
+\preformatted{
+     list(
+      night = "x <= nightEnd | x > night",
+      dawn  = "x > nightEnd & x < sunriseEnd",
+      day   = "x >= sunriseEnd & x < sunset"
+    )
+ }
 
 The function verifies that all referenced transition variables exist and that the logic
 results in valid, non-overlapping diel bins over a 24-hour period. If twilight is enabled,
@@ -101,7 +123,9 @@ the "twilight" bin is inferred from the gaps between night and day.
   and \code{sunriseEnd}, and between \code{sunset} and \code{night}.
 
 - If \code{twilight = FALSE}, you must define three bins (e.g., \code{day}, \code{night}, and either
-  \code{dawn} or \code{dusk}) using explicit expressions.
+  \code{dawn} or \code{dusk}) using explicit expressions. Note that when \code{twilight = FALSE} you
+  likely will not need \code{>=} or \code{<=} in one of the three defined bins. This is because
+  you are defining diel bins that are adjacent to one another.
 
 The function will raise an error if:
 - Any expressions reference unavailable solar transitions.
@@ -120,11 +144,13 @@ diel_bins <- make.diel.bin.list(
   day = "x >= sunriseEnd & x < sunset",
   night = "x < nightEnd | x >= night",
   dawn = "x >= nightEnd & x < sunriseEnd",
-  dusk = "x >= sunset & x < night",
   twilight = FALSE,
   plot.bins = FALSE
 )
 }
 \seealso{
-[suncalc::getSunlightTimes()]
+[suncalc::getSunlightTimes()] to get a list of the available sun times.
+}
+\author{
+Mason Fidino
 }

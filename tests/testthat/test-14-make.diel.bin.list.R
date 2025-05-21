@@ -15,9 +15,9 @@ test_that("make.diel.bin.list() returns diel.bin.list with twilight = FALSE", {
   bin_list <- make.diel.bin.list(
     twilight = FALSE,
     plot.bins = FALSE,
-    night = "x < nightEnd | x >= night",
-    dawn = "x >= nightEnd & x < sunriseEnd",
-    day  = "x >= sunriseEnd & x < sunset",
+    night = "x <= nightEnd | x >= night",
+    dawn = "x > nightEnd & x <= sunriseEnd",
+    day  = "x > sunriseEnd & x <= sunset",
     date = "2020-06-21",
     lat = 41.8781,
     lon = -87.6298

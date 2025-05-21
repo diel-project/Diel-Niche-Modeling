@@ -38,7 +38,8 @@ Imports:
     coda (>= 0.19-4), 
     multinomineq (>= 0.2.3), 
     plotly (>= 4.10.0),
-    sfsmisc (>= 1.1)
+    sfsmisc (>= 1.1),
+    suncalc(>= 0.5.1)
 Suggests: 
     knitr (>= 1.39),
     rmarkdown (>= 2.14),
@@ -49,7 +50,6 @@ Suggests:
     activity (>= 1.3.4),
     lubridate(>= 1.9.2),
     ggthemes(>= 4.2.4),
-    suncalc(>= 0.5.1),
     devtools(>= 2.4.5),
     sf,
     momentuHMM,
