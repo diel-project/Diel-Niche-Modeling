@@ -44,7 +44,7 @@
 #'     "2023-01-01 00:20:00",
 #'     "2023-01-01 00:21:00",
 #'     "2023-01-01 00:40:00"
-#'   ))
+#'   ),tz = "US/Central")
 #' )
 #' # Species column not needed as this dataset
 #' #  has one species
@@ -69,7 +69,7 @@
 #'     "2023-01-01 00:20:00",
 #'     "2023-01-01 00:21:00",
 #'     "2023-01-01 00:40:00"
-#'   ))
+#'   ),tz = "US/Central")
 #' )
 #' # Species solumn needed as this dataset
 #' #  has more than one species.

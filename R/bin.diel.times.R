@@ -243,11 +243,13 @@ bin.diel.times <- function(
       c("night", "day", "twilight"),
       names(bin.type.list)
     )
+    my_levels <- c("twilight", "day", "night")
   } else {
     missing_cat <- setdiff(
       c("night", "day", "dawn", "dusk"),
       names(bin.type.list)
     )
+    my_levels <- c("night", "day", "dawn", "dusk")
   }
   colnames(assigned_matrix)[ncol(assigned_matrix)] <- missing_cat
   row_sums <- rowSums(assigned_matrix)
@@ -270,7 +272,11 @@ bin.diel.times <- function(
     ] <- colnames(assigned_matrix)[i]
   }
   
-  data$dielBin <- assigned
+  data$dielBin <- factor(
+    assigned,
+    levels = my_levels
+  )
+
   
   return(data)
 

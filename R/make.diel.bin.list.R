@@ -137,6 +137,14 @@ make.diel.bin.list <- function(
     lon = -87.6298,
     tz = "US/Central"
 ) {
+  if(twilight){
+    warning(
+      paste(
+      "twilight set to FALSE. If you are planning on using Diel.Niche::diel.fit()",
+      "to classify a species diel phenotype, then twilight must be TRUE."
+      )
+    )
+  }
   # Check day, night, dawn, dusk: must be character if not NULL and contain "x"
   for (arg_name in c("day", "night", "dawn", "dusk")) {
     expr <- get(arg_name)
