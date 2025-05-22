@@ -12,6 +12,10 @@ functions to gibbs MCMC algorithms provided by the R package $\texttt{multinomin
 
 ## Updates 
 
+The last update to the `Diel.Niche` package was on
+2025/05/22. This update brought a lot of quality of
+life improvements to prepare your data for analysis.
+
 News and updates regarding this package can be found [here](./NEWS.md).
 
 ## Issues
