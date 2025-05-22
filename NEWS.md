@@ -10,7 +10,7 @@
   available in the `Diel.Niche` package. Data came from
   this study [here](https://doi.org/10.1111/1365-2656.12967).
   
-  ```R
+```R
   
 # load packages
 library(Diel.Niche)
@@ -96,7 +96,7 @@ output <- Diel.Niche::diel.fit(
 Diel.Niche::triplot(
   output
 )
-  ```
+```
 
 # Diel.Niche 0.1.2
 
