@@ -10,8 +10,11 @@
 #' @param lat.column Character string giving the name of the latitude column (in decimal degrees).
 #' @param lon.column Character string giving the name of the longitude column (in decimal degrees).
 #' @param bin.type.list A list of logical expressions generated with [make.diel.bin.list()]. Must be of class `diel.bin.list`.
-#' @param na_vals Character; how to handle NA values returned by `suncalc::getSunlightTimes()`. Must be either `"remove"` (default) or `"error"`. See
+#' @param na.vals Character; how to handle NA values returned by `suncalc::getSunlightTimes()`. Must be either `"remove"` (default) or `"error"`. See
 #' details for more information.
+#' @param prop.time A logical to determine if you want to include the proportion
+#' of time of each diel period for a given sample. Can be helpful for some diel analyses.
+#' Defaults to `FALSE`.
 #'
 #' @return A copy of the input data frame with an additional `dielBin` column specifying the assigned diel bin for each observation.
 #'
@@ -26,7 +29,8 @@
 #' # Example Expression Format
 #'
 #' @importFrom suncalc getSunlightTimes
-#'
+#' @importFrom tools toTitleCase
+#' 
 #' @examples
 #' # Example with default bin.list
 #' data(camera.data)
@@ -71,7 +75,8 @@ bin.diel.times <- function(
     lat.column,
     lon.column,
     bin.type.list = make.diel.bin.list(plot.bins = FALSE),
-    na_vals = c("remove", "error")
+    na.vals = c("remove", "error"),
+    prop.time = FALSE
 ){
   if(nrow(data) == 1){
     stop("Cannot apply this function to a single data point")
@@ -104,14 +109,14 @@ bin.diel.times <- function(
   if(any(data[[lon.column]] < -180 | data[[lon.column]] > 180, na.rm = TRUE)){
     stop("Longitude values must be between -180 and 180 decimal degrees")
   }
-  # some quick checks on na_vals
-  if(is.null(na_vals)){
-    stop("na_vals cannot be NULL")
+  # some quick checks on na.vals
+  if(is.null(na.vals)){
+    stop("na.vals cannot be NULL")
   }
-  if(length(na_vals)>1){
-    na_vals <- "remove"
+  if(length(na.vals)>1){
+    na.vals <- "remove"
   }
-  na_vals <- match.arg(na_vals, choices = c("remove", "error"))
+  na.vals <- match.arg(na.vals, choices = c("remove", "error"))
 
   my_tz <- attr(data[[datetime.column]], "tzone")
   if(is.null(my_tz) || my_tz == ""){
@@ -131,6 +136,8 @@ bin.diel.times <- function(
  datetime_cols <- get.diel.vars(
    bin.type.list
   )
+ 
+
 
   time_frame <- suncalc::getSunlightTimes(
     data = data[,c("date",lat.column, lon.column)],
@@ -146,12 +153,12 @@ bin.diel.times <- function(
   )
   any_na <- rowSums(any_na)
   if(any(any_na>0)){
-    if(na_vals == "remove"){
+    if(na.vals == "remove"){
       remove_message <- paste(
         "NA values detected when calculating sunlight times.",
         "This often occurs with data from higher latitudes during certain times of the year.",
         sprintf("Of %d rows in data, %d have been removed.", nrow(data), sum(any_na > 0)),
-        "To investigate this, set na_vals = 'error' instead.",
+        "To investigate this, set na.vals = 'error' instead.",
         sep = " "
       )
       
@@ -159,22 +166,22 @@ bin.diel.times <- function(
       time_frame <- time_frame[-which(any_na>0),]
       if(nrow(time_frame) == 0){
         error_message <- paste(
-          "All the data was removed when na_vals was set to 'remove'",
+          "All the data was removed when na.vals was set to 'remove'",
           "This can occur with data from higher latitudes during certain times of the year.",
           "try applying suncalc::getSunlightTimes() to see what sunlight transition times",
           "are missing."
         )
         
-        stop("All the data was removed when na_vals was set to 'remove'")
+        stop("All the data was removed when na.vals was set to 'remove'")
       }
       warning(remove_message)
     }
-    if(na_vals == "error"){
+    if(na.vals == "error"){
       error_message <- paste(
         "NA values detected when calculating sunlight times.",
         sprintf("Problematic rows: \n\n%s", 
                 paste0("c(", paste(which(any_na>0), collapse = ", "),")")),
-        "\n\nset na_vals = 'remove' to drop these rows.",
+        "\n\nset na.vals = 'remove' to drop these rows.",
         sep = " "
       )
       stop(error_message)
@@ -264,6 +271,29 @@ bin.diel.times <- function(
       )
     )
   }
+  # also if we want to calculate the proportion of diel
+  #  times we need to do some additional parsing.
+  if(prop.time){
+    diel_props <- get_diel_proportions(
+      bin.type.list = bin.type.list,
+      times = time_frame
+    )
+    my_range <- range(
+      diel_props$night
+    )
+    if(diff(my_range)>0.05){
+      warning(
+        paste0(
+          "The proportion of night in this dataset ranges from ",
+          round(my_range[1],3), " to ", round(my_range[2],3),". ",
+          "For further analysis you may ",
+          "want to consider splitting your data up as you are either ",
+          "sampling across a large geographic region, throughout the year, ",
+          "or both. Splitting can happen after this function has been used." 
+        )
+      )
+    }
+  }
   # check to make sure the bins are continuous (save for twilight)
   assigned <- rep(NA, nrow(assigned_matrix))
   for(i in 1:ncol(assigned_matrix)){
@@ -276,6 +306,19 @@ bin.diel.times <- function(
     assigned,
     levels = my_levels
   )
+  # add on the prop columns if needed
+  if(prop.time){
+    colnames(diel_props) <- paste0(
+      "prop",
+      tools::toTitleCase(
+        colnames(diel_props)
+      )
+    )
+    data <- data.frame(
+      data,
+      diel_props
+    )
+  }
 
   
   return(data)

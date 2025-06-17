@@ -10,7 +10,8 @@ bin.diel.times(
   lat.column,
   lon.column,
   bin.type.list = make.diel.bin.list(plot.bins = FALSE),
-  na_vals = c("remove", "error")
+  na.vals = c("remove", "error"),
+  prop.time = FALSE
 )
 }
 \arguments{
@@ -25,8 +26,12 @@ dataset has multiple species.}
 
 \item{bin.type.list}{A list of logical expressions generated with [make.diel.bin.list()]. Must be of class `diel.bin.list`.}
 
-\item{na_vals}{Character; how to handle NA values returned by `suncalc::getSunlightTimes()`. Must be either `"remove"` (default) or `"error"`. See
+\item{na.vals}{Character; how to handle NA values returned by `suncalc::getSunlightTimes()`. Must be either `"remove"` (default) or `"error"`. See
 details for more information.}
+
+\item{prop.time}{A logical to determine if you want to include the proportion
+of time of each diel period for a given sample. Can be helpful for some diel analyses.
+Defaults to `FALSE`.}
 }
 \value{
 A copy of the input data frame with an additional `dielBin` column specifying the assigned diel bin for each observation.

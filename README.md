@@ -13,8 +13,10 @@ functions to gibbs MCMC algorithms provided by the R package $\texttt{multinomin
 ## Updates 
 
 The last update to the `Diel.Niche` package was on
-2025/05/22. This update brought a lot of quality of
-life improvements to prepare your data for analysis.
+2025/06/17. This update now allows you to calculate the proportion
+of time each diel period takes up during a day within the
+`bin.diel.times()` function. See update prior to this for
+details on `bin.diel.times()`.
 
 News and updates regarding this package can be found [here](./NEWS.md).
 
