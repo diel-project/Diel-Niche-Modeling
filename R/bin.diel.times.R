@@ -12,6 +12,9 @@
 #' @param bin.type.list A list of logical expressions generated with [make.diel.bin.list()]. Must be of class `diel.bin.list`.
 #' @param na.vals Character; how to handle NA values returned by `suncalc::getSunlightTimes()`. Must be either `"remove"` (default) or `"error"`. See
 #' details for more information.
+#' @param prop.time A logical to determine if you want to include the proportion
+#' of time of each diel period for a given sample. Can be helpful for some diel analyses.
+#' Defaults to `FALSE`.
 #'
 #' @return A copy of the input data frame with an additional `dielBin` column specifying the assigned diel bin for each observation.
 #'
@@ -26,7 +29,8 @@
 #' # Example Expression Format
 #'
 #' @importFrom suncalc getSunlightTimes
-#'
+#' @importFrom tools toTitleCase
+#' 
 #' @examples
 #' # Example with default bin.list
 #' data(camera.data)
@@ -72,7 +76,7 @@ bin.diel.times <- function(
     lon.column,
     bin.type.list = make.diel.bin.list(plot.bins = FALSE),
     na.vals = c("remove", "error"),
-    
+    prop.time = FALSE
 ){
   if(nrow(data) == 1){
     stop("Cannot apply this function to a single data point")
@@ -132,6 +136,8 @@ bin.diel.times <- function(
  datetime_cols <- get.diel.vars(
    bin.type.list
   )
+ 
+
 
   time_frame <- suncalc::getSunlightTimes(
     data = data[,c("date",lat.column, lon.column)],
@@ -265,6 +271,29 @@ bin.diel.times <- function(
       )
     )
   }
+  # also if we want to calculate the proportion of diel
+  #  times we need to do some additional parsing.
+  if(prop.time){
+    diel_props <- get_diel_proportions(
+      bin.type.list = bin.type.list,
+      times = time_frame
+    )
+    my_range <- range(
+      diel_props$night
+    )
+    if(diff(my_range)>0.05){
+      warning(
+        paste0(
+          "The proportion of night in this dataset ranges from ",
+          round(my_range[1],3), " to ", round(my_range[2],3),". ",
+          "For further analysis you may ",
+          "want to consider splitting your data up as you are either ",
+          "sampling across a large geographic region, throughout the year, ",
+          "or both. Splitting can happen after this function has been used." 
+        )
+      )
+    }
+  }
   # check to make sure the bins are continuous (save for twilight)
   assigned <- rep(NA, nrow(assigned_matrix))
   for(i in 1:ncol(assigned_matrix)){
@@ -277,6 +306,19 @@ bin.diel.times <- function(
     assigned,
     levels = my_levels
   )
+  # add on the prop columns if needed
+  if(prop.time){
+    colnames(diel_props) <- paste0(
+      "prop",
+      tools::toTitleCase(
+        colnames(diel_props)
+      )
+    )
+    data <- data.frame(
+      data,
+      diel_props
+    )
+  }
 
   
   return(data)

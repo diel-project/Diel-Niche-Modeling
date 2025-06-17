@@ -58,7 +58,7 @@ test_that("bin.diel.times() returns a data.frame with dielBin column", {
   expect_equal(nrow(result), 2)
 })
 
-test_that("bin.diel.times() removes rows with NAs if na_vals = 'remove'", {
+test_that("bin.diel.times() removes rows with NAs if na.vals = 'remove'", {
   bad_data <- data.frame(
     dt = as.POSIXct(c("2022-12-21 23:00:00","2022-12-21 23:00:00"), tz = "UTC"),
     lat = 89.0,  # extreme latitude, likely to cause NA in suncalc
@@ -71,12 +71,12 @@ test_that("bin.diel.times() removes rows with NAs if na_vals = 'remove'", {
       datetime.column = "dt",
       lat.column = "lat",
       lon.column = "lon",
-      na_vals = "remove"
+      na.vals = "remove"
     )
   )
 })
 
-test_that("bin.diel.times() errors on NA if na_vals = 'error'", {
+test_that("bin.diel.times() errors on NA if na.vals = 'error'", {
   bad_data <- data.frame(
     dt = as.POSIXct(c("2022-12-21 12:00:00", "2022-12-21 12:00:00"), tz = "UTC"),
     lat = 89.0,
@@ -88,7 +88,7 @@ test_that("bin.diel.times() errors on NA if na_vals = 'error'", {
       datetime.column = "dt",
       lat.column = "lat",
       lon.column = "lon",
-      na_vals = "error"
+      na.vals = "error"
     ),
     "NA values detected when calculating sunlight times"
   )
