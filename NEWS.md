@@ -1,5 +1,19 @@
 # Diel.Niche 0.1.3
 
+## 2025-06-17
+
+- Added the argument `prop.time` into the `bin.diel.times()`
+function. This will calculate the proportion of time in each
+diel period for a given sample (e.g., night, day, twilight),
+which could be used in downstream analyses. This argument
+defaults to `FALSE`, but if set to `TRUE` will add additional
+columns to the outputted `data.frame` that contain the 
+associated proportions. If the proportion of diel time of a given 
+category (specifically night) varies more than 5% across all
+of your samples, `bin.diel.times()` will provide a warning to
+consider that issue for downstream analyses.
+
+
 ## 2025-05-15
 
 - Added a suite of new functions to make it easier than every
